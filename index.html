@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayin — Compliance Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Archivo:wght@300;400;500;600&family=Archivo+Narrow:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a08;
+    --paper: #f4f0e8;
+    --ash: #c8c2b4;
+    --ember: #8b2500;
+    --ember-light: #c03a00;
+    --gold: #a07840;
+    --mid: #4a4540;
+    --rule: rgba(10,10,8,0.12);
+    --rule-strong: rgba(10,10,8,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Archivo', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 60px;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-cta {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .nav-cta:hover { color: var(--ember); border-color: var(--ember); }
+
+  /* ==============================
+     HERO
+  ============================== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 112px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards 0.5s;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--ember);
+  }
+
+  .hero-sub {
+    margin-top: 48px;
+    max-width: 480px;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.9s;
+  }
+
+  .hero-bottom {
+    position: absolute;
+    bottom: 48px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.3s;
+  }
+
+  .hero-scroll {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ash);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--ash);
+  }
+
+  .hero-latin {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ash);
+    text-align: right;
+  }
+
+  .hero-line {
+    position: absolute;
+    right: 60px;
+    top: 30%;
+    width: 1px;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--rule-strong), transparent);
+    opacity: 0;
+    animation: fadeIn 2s ease forwards 1.5s;
+  }
+
+  /* ==============================
+     CONSEQUENCE SECTION
+  ============================== */
+  .section-consequence {
+    padding: 120px 60px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .section-label {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--ash);
+  }
+
+  .consequence-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    max-width: 420px;
+  }
+
+  .consequence-title em { font-style: italic; color: var(--ember); }
+
+  .consequence-note {
+    margin-top: 40px;
+    font-size: 13px;
+    color: var(--mid);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    border-left: 1px solid var(--ember);
+    padding-left: 24px;
+  }
+
+  .cascade {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 48px;
+  }
+
+  .cascade-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .cascade-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .cascade-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    color: var(--ash);
+    min-width: 24px;
+    padding-top: 3px;
+    font-style: italic;
+  }
+
+  .cascade-text {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .cascade-text span {
+    display: block;
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  .cascade-warning {
+    margin-top: 32px;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ember);
+  }
+
+  /* ==============================
+     MIRROR / APPLICABILITY
+  ============================== */
+  .section-mirror {
+    padding: 120px 60px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .mirror-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+  }
+
+  .mirror-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 4.5vw, 68px);
+    font-weight: 300;
+    line-height: 1.05;
+    max-width: 560px;
+  }
+
+  .mirror-title em { font-style: italic; color: var(--ember-light); }
+
+  .mirror-sub {
+    max-width: 280px;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ash);
+    line-height: 1.8;
+    padding-top: 12px;
+  }
+
+  .applicability-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .apply-item {
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .apply-item:nth-child(odd) { padding-right: 60px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .apply-item:nth-child(even) { padding-left: 60px; }
+
+  .apply-item.visible { opacity: 1; transform: translateY(0); }
+
+  .apply-condition {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(244,240,232,0.6);
+  }
+
+  .apply-condition strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--paper);
+    margin-bottom: 4px;
+  }
+
+  .apply-law {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ember-light);
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .mirror-maxim {
+    margin-top: 80px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 64px;
+  }
+
+  .maxim-latin {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--paper);
+    margin-bottom: 16px;
+  }
+
+  .maxim-trans {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ash);
+    letter-spacing: 0.04em;
+  }
+
+  /* ==============================
+     MECHANISM / INTENT
+  ============================== */
+  .section-mechanism {
+    padding: 120px 60px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .mechanism-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 100px;
+  }
+
+  .mechanism-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-top: 24px;
+  }
+
+  .mechanism-title em { font-style: italic; color: var(--ember); }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 80px;
+  }
+
+  .pillar {
+    background: var(--paper);
+    padding: 56px 48px;
+    position: relative;
+    transition: background 0.4s ease;
+  }
+
+  .pillar:hover { background: #f0ebe0; }
+
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(10,10,8,0.06);
+    line-height: 1;
+    position: absolute;
+    top: 24px;
+    right: 32px;
+  }
+
+  .pillar-term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .pillar-def {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+
+  .pillar-legal {
+    margin-top: 24px;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ember);
+  }
+
+  .mechanism-verdict {
+    text-align: center;
+    padding: 60px;
+    border: 1px solid var(--rule-strong);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mechanism-verdict::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 70%, rgba(139,37,0,0.04));
+  }
+
+  .verdict-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 2.5vw, 34px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .verdict-text strong {
+    font-weight: 500;
+    font-style: normal;
+    color: var(--ember);
+  }
+
+  /* ==============================
+     CLOCK
+  ============================== */
+  .section-clock {
+    padding: 160px 60px;
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .clock-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(244,240,232,0.04);
+  }
+
+  .clock-ring-2 {
+    width: 400px;
+    height: 400px;
+    border-color: rgba(244,240,232,0.06);
+  }
+
+  .clock-ring-3 {
+    width: 200px;
+    height: 200px;
+    border-color: rgba(244,240,232,0.08);
+  }
+
+  .clock-content { position: relative; z-index: 2; }
+
+  .clock-label {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ember-light);
+    margin-bottom: 48px;
+  }
+
+  .clock-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .clock-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .clock-line.visible { opacity: 1; transform: translateY(0); }
+  .clock-line:nth-child(2) { transition-delay: 0.15s; }
+  .clock-line:nth-child(3) { transition-delay: 0.3s; color: rgba(244,240,232,0.5); font-style: italic; }
+
+  .clock-cta {
+    margin-top: 64px;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.5s;
+  }
+
+  .clock-cta.visible { opacity: 1; }
+
+  .btn-ghost {
+    display: inline-block;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    border: 1px solid rgba(244,240,232,0.3);
+    padding: 18px 48px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .btn-ghost:hover {
+    background: rgba(244,240,232,0.05);
+    border-color: rgba(244,240,232,0.6);
+  }
+
+  /* ==============================
+     THREE MOMENTS
+  ============================== */
+  .section-moments {
+    padding: 120px 60px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .moments-header {
+    margin-bottom: 80px;
+  }
+
+  .moments-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    max-width: 600px;
+    margin-top: 24px;
+  }
+
+  .moments-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule-strong);
+  }
+
+  .moment {
+    padding: 56px 48px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s ease;
+  }
+
+  .moment:last-child { border-right: none; }
+  .moment:hover { background: #f0ebe0; }
+
+  .moment.moment-danger {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .moment.moment-danger:hover { background: #161410; }
+
+  .moment-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ash);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .moment.moment-danger .moment-number { color: rgba(244,240,232,0.3); }
+
+  .moment-number::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .moment.moment-danger .moment-number::after { background: rgba(255,255,255,0.08); }
+
+  .moment-tag {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 20px;
+  }
+
+  .moment.moment-danger .moment-tag { color: var(--ember-light); }
+
+  .moment-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .moment-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+
+  .moment.moment-danger .moment-body { color: rgba(244,240,232,0.55); }
+
+  .moment-status {
+    margin-top: 40px;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .status-ideal { color: #4a8a4a; }
+  .status-late { color: #c07020; }
+  .status-critical { color: var(--ember-light); }
+
+  .moments-footer {
+    margin-top: 48px;
+    padding: 40px 48px;
+    border: 1px solid var(--rule);
+    border-top: none;
+    background: rgba(139,37,0,0.03);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .moments-footer-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .moments-footer-text strong { font-weight: 500; font-style: normal; color: var(--ember); }
+
+  /* ==============================
+     WHAT AYIN IS
+  ============================== */
+  .section-ayin {
+    padding: 120px 60px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: start;
+  }
+
+  .ayin-left {}
+
+  .ayin-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 4.5vw, 68px);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-top: 24px;
+  }
+
+  .ayin-title em { font-style: italic; color: var(--ember); }
+
+  .ayin-not {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .not-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .not-item::before {
+    content: '—';
+    color: var(--ash);
+    font-size: 12px;
+  }
+
+  .ayin-is {
+    margin-top: 40px;
+    padding: 32px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .ayin-is-label {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ember-light);
+    margin-bottom: 16px;
+  }
+
+  .ayin-is-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .ayin-right {}
+
+  .ayin-para {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.9;
+    margin-bottom: 28px;
+  }
+
+  .ayin-para strong { font-weight: 500; color: var(--ink); }
+
+  .ayin-statement {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--rule-strong);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2vw, 28px);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  /* ==============================
+     WHAT WE BUILD
+  ============================== */
+  .section-build {
+    padding: 120px 60px;
+    border-bottom: 1px solid var(--rule);
+    background: #f0ebe0;
+  }
+
+  .build-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 80px;
+  }
+
+  .build-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    max-width: 500px;
+    margin-top: 24px;
+  }
+
+  .build-sub {
+    max-width: 300px;
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  .build-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .build-item {
+    background: #f0ebe0;
+    padding: 48px 40px;
+    transition: background 0.3s ease;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s ease;
+  }
+
+  .build-item.visible { opacity: 1; transform: translateY(0); background: #f0ebe0; }
+  .build-item.visible:hover { background: var(--paper); }
+
+  .build-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--rule-strong);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .build-icon svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.5; }
+
+  .build-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  .build-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+
+  /* ==============================
+     AREAS
+  ============================== */
+  .section-areas {
+    padding: 120px 60px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .areas-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 120px;
+    align-items: start;
+  }
+
+  .areas-left {}
+
+  .areas-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-top: 24px;
+    margin-bottom: 32px;
+  }
+
+  .areas-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.9;
+  }
+
+  .areas-right {}
+
+  .area-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: default;
+    transition: padding-left 0.3s ease;
+  }
+
+  .area-row:hover { padding-left: 16px; }
+
+  .area-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+  }
+
+  .area-tag {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ember);
+    border: 1px solid rgba(139,37,0,0.3);
+    padding: 4px 12px;
+  }
+
+  .areas-note {
+    margin-top: 48px;
+    font-size: 13px;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--mid);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  /* ==============================
+     INCIDENTS / PROOF
+  ============================== */
+  .section-incidents {
+    padding: 120px 60px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .incidents-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 80px;
+  }
+
+  .incidents-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    max-width: 500px;
+    margin-top: 24px;
+  }
+
+  .incidents-note {
+    font-size: 13px;
+    color: rgba(244,240,232,0.4);
+    max-width: 260px;
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  .incident-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 64px;
+  }
+
+  .incident {
+    background: var(--ink);
+    padding: 48px 40px;
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .incident:hover { background: #141210; }
+
+  .incident-type {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember-light);
+    margin-bottom: 24px;
+  }
+
+  .incident-who {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: var(--paper);
+  }
+
+  .incident-what {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(244,240,232,0.5);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .incident-outcome {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(244,240,232,0.7);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    line-height: 1.5;
+  }
+
+  .incident-outcome strong { color: var(--ember-light); font-style: normal; }
+
+  .incidents-close {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(244,240,232,0.5);
+    padding: 48px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .incidents-close em { color: var(--paper); font-style: normal; }
+
+  /* ==============================
+     SECOND MAXIM
+  ============================== */
+  .section-maxim {
+    padding: 120px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .maxim-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(139,37,0,0.04) 0%, transparent 70%);
+  }
+
+  .maxim-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 72px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .maxim-translation {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--mid);
+    letter-spacing: 0.04em;
+    position: relative;
+    margin-bottom: 8px;
+  }
+
+  .maxim-application {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ash);
+    position: relative;
+    font-style: italic;
+  }
+
+  /* ==============================
+     ENTRY / CTA
+  ============================== */
+  .section-entry {
+    padding: 160px 60px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: center;
+  }
+
+  .entry-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 4.5vw, 68px);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-top: 24px;
+  }
+
+  .entry-title em { font-style: italic; color: var(--ember); }
+
+  .entry-right {}
+
+  .entry-body {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.9;
+    margin-bottom: 48px;
+  }
+
+  .entry-body strong { font-weight: 500; color: var(--ink); }
+
+  .entry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-field {
+    border: 1px solid var(--rule-strong);
+    border-bottom: none;
+    padding: 20px 24px;
+    font-family: 'Archivo', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    background: transparent;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    width: 100%;
+  }
+
+  .form-field:last-of-type { border-bottom: 1px solid var(--rule-strong); }
+  .form-field:focus { background: rgba(139,37,0,0.02); border-color: var(--ember); }
+  .form-field::placeholder { color: var(--ash); }
+
+  .form-submit {
+    margin-top: 24px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 20px 48px;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .form-submit:hover { background: var(--ember); }
+
+  .entry-assurance {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--ash);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ==============================
+     FOOTER
+  ============================== */
+  footer {
+    padding: 64px 60px 40px;
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-tagline {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 8px;
+  }
+
+  .footer-closing {
+    max-width: 500px;
+    text-align: right;
+  }
+
+  .footer-closing-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--mid);
+  }
+
+  .footer-closing-text em { font-style: normal; color: var(--ink); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--ash);
+    font-weight: 300;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+  }
+
+  .footer-links a {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ash);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE BASICS */
+  @media (max-width: 900px) {
+    nav { padding: 24px 32px; }
+    .hero { padding: 100px 32px 60px; }
+    .hero-bottom { left: 32px; right: 32px; }
+    .section-consequence,
+    .section-ayin,
+    .section-areas .areas-inner,
+    .section-entry { grid-template-columns: 1fr; gap: 60px; }
+    .section-consequence,
+    .section-mirror,
+    .section-mechanism,
+    .section-clock,
+    .section-moments,
+    .section-ayin,
+    .section-build,
+    .section-areas,
+    .section-incidents,
+    .section-maxim,
+    .section-entry { padding: 80px 32px; }
+    .pillars,
+    .moments-grid,
+    .build-grid,
+    .incident-grid { grid-template-columns: 1fr; }
+    .applicability-grid { grid-template-columns: 1fr; }
+    .apply-item:nth-child(odd) { padding-right: 0; border-right: none; }
+    .apply-item:nth-child(even) { padding-left: 0; }
+    .mirror-top { flex-direction: column; gap: 24px; }
+    .mirror-sub { max-width: 100%; text-align: left; }
+    .build-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .build-sub { text-align: left; }
+    .incidents-header { flex-direction: column; gap: 24px; }
+    .incidents-note { text-align: left; }
+    .footer-top { flex-direction: column; gap: 40px; }
+    .footer-closing { text-align: left; }
+    .footer-bottom { flex-direction: column; gap: 20px; align-items: flex-start; }
+    .moments-footer { flex-direction: column; gap: 24px; align-items: flex-start; }
+    .moment { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Ayin</a>
+  <a href="#entry" class="nav-cta">Begin Assessment</a>
+</nav>
+
+<!-- ==============================
+     HERO
+============================== -->
+<section class="hero">
+  <div class="hero-line"></div>
+  <p class="hero-eyebrow">Compliance Infrastructure</p>
+  <h1 class="hero-headline">
+    Most businesses meet compliance<br>
+    once. At the <em>worst possible</em><br>
+    time.
+  </h1>
+  <p class="hero-sub">
+    By then, the question is no longer whether you comply. 
+    It is whether you can prove you ever intended to. 
+    Ayin builds the infrastructure that answers that question — before it is ever asked.
+  </p>
+  <div class="hero-bottom">
+    <span class="hero-scroll">Scroll</span>
+    <span class="hero-latin">Ignorantia juris non excusat</span>
+  </div>
+</section>
+
+<!-- ==============================
+     CONSEQUENCE
+============================== -->
+<section class="section-consequence">
+  <div>
+    <p class="section-label">What follows</p>
+    <h2 class="consequence-title">
+      One incident.<br>
+      <em>Standard sequence.</em>
+    </h2>
+    <blockquote class="consequence-note">
+      This is not worst case. This is the routine progression of a compliance incident when no infrastructure exists to interrupt it.
+    </blockquote>
+  </div>
+  <div class="cascade">
+    <div class="cascade-item">
+      <span class="cascade-num">i.</span>
+      <div class="cascade-text">
+        Regulatory notice received
+        <span>Your business is now formally under scrutiny</span>
+      </div>
+    </div>
+    <div class="cascade-item">
+      <span class="cascade-num">ii.</span>
+      <div class="cascade-text">
+        Legal representation engaged
+        <span>Fees begin immediately. Clock runs regardless of outcome</span>
+      </div>
+    </div>
+    <div class="cascade-item">
+      <span class="cascade-num">iii.</span>
+      <div class="cascade-text">
+        Past behaviour examined
+        <span>Regulators look back. Everything becomes evidence</span>
+      </div>
+    </div>
+    <div class="cascade-item">
+      <span class="cascade-num">iv.</span>
+      <div class="cascade-text">
+        Investors and partners notified
+        <span>Confidence erodes. Relationships enter uncertainty</span>
+      </div>
+    </div>
+    <div class="cascade-item">
+      <span class="cascade-num">v.</span>
+      <div class="cascade-text">
+        Operations disrupted
+        <span>Focus shifts entirely. The business suffers in parallel</span>
+      </div>
+    </div>
+    <div class="cascade-item">
+      <span class="cascade-num">vi.</span>
+      <div class="cascade-text">
+        Reputational exposure surfaces
+        <span>Searches, press, industry networks — it travels</span>
+      </div>
+    </div>
+    <div class="cascade-item">
+      <span class="cascade-num">vii.</span>
+      <div class="cascade-text">
+        Court proceedings if escalated
+        <span>At this stage, what you cannot show defines you</span>
+      </div>
+    </div>
+    <p class="cascade-warning">↑ Every stage above is preventable. None are recoverable quietly.</p>
+  </div>
+</section>
+
+<!-- ==============================
+     MIRROR — APPLICABILITY
+============================== -->
+<section class="section-mirror">
+  <div class="mirror-top">
+    <h2 class="mirror-title">
+      You probably think<br>
+      this does <em>not</em><br>
+      apply to you.
+    </h2>
+    <p class="mirror-sub">
+      Most founders do. Not because they refuse compliance — but because no one has shown them where it begins. It begins closer than they think.
+    </p>
+  </div>
+
+  <div class="applicability-grid">
+    <div class="apply-item">
+      <div class="apply-condition">
+        <strong>You have a website</strong>
+        Data collection laws apply from the first visitor
+      </div>
+      <span class="apply-law">Privacy Law</span>
+    </div>
+    <div class="apply-item">
+      <div class="apply-condition">
+        <strong>You store customer information</strong>
+        Data protection obligations are active
+      </div>
+      <span class="apply-law">GDPR · PDPA</span>
+    </div>
+    <div class="apply-item">
+      <div class="apply-condition">
+        <strong>You use AI tools in your work</strong>
+        AI governance frameworks are emerging and apply
+      </div>
+      <span class="apply-law">AI Governance</span>
+    </div>
+    <div class="apply-item">
+      <div class="apply-condition">
+        <strong>You have international clients or vendors</strong>
+        Cross-border compliance extends your exposure
+      </div>
+      <span class="apply-law">Multi-Jurisdiction</span>
+    </div>
+    <div class="apply-item">
+      <div class="apply-condition">
+        <strong>You have employees or contractors</strong>
+        Labour regulations and conduct obligations apply
+      </div>
+      <span class="apply-law">Employment Law</span>
+    </div>
+    <div class="apply-item">
+      <div class="apply-condition">
+        <strong>Your business has any environmental footprint</strong>
+        Reporting and accountability obligations may apply
+      </div>
+      <span class="apply-law">Environmental</span>
+    </div>
+  </div>
+
+  <div class="mirror-maxim">
+    <p class="maxim-latin">Ignorantia juris non excusat.</p>
+    <p class="maxim-trans">The law is assumed known by all it governs. Not knowing is not a defence. It never has been.</p>
+  </div>
+</section>
+
+<!-- ==============================
+     MECHANISM
+============================== -->
+<section class="section-mechanism">
+  <div class="mechanism-header reveal">
+    <p class="section-label">How outcomes are decided</p>
+    <h2 class="mechanism-title">
+      When compliance arrives,<br>
+      it asks what you <em>showed</em> —<br>
+      not what you meant.
+    </h2>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar reveal">
+      <span class="pillar-num">I</span>
+      <h3 class="pillar-term">Intent</h3>
+      <p class="pillar-def">
+        Did your business behave as though compliance mattered? Regulators assess the posture of an organisation — whether systems existed, policies were maintained, decisions were documented. Intent is demonstrated, not declared.
+      </p>
+      <p class="pillar-legal">Demonstrated through infrastructure</p>
+    </div>
+    <div class="pillar reveal">
+      <span class="pillar-num">II</span>
+      <h3 class="pillar-term">Reasonable Steps</h3>
+      <p class="pillar-def">
+        Did you take the steps that a responsible organisation under the same obligations would have taken? This is an objective standard. Courts and regulators apply it to your actual conduct — not your intentions or awareness.
+      </p>
+      <p class="pillar-legal">Measured against industry standard</p>
+    </div>
+    <div class="pillar reveal">
+      <span class="pillar-num">III</span>
+      <h3 class="pillar-term">Willful Ignorance</h3>
+      <p class="pillar-def">
+        The most damaging finding. If evidence suggests you knew, or reasonably should have known, and took no action — this removes most legal protections. It converts an incident into a liability and a liability into an example.
+      </p>
+      <p class="pillar-legal" style="color: var(--ember);">The difference between a warning and a case</p>
+    </div>
+  </div>
+
+  <div class="mechanism-verdict reveal">
+    <p class="verdict-text">
+      The difference between a regulatory warning and a court case<br>
+      is almost always <strong>infrastructure</strong> —<br>
+      and whether there was any to show.
+    </p>
+  </div>
+</section>
+
+<!-- ==============================
+     CLOCK
+============================== -->
+<section class="section-clock">
+  <div class="clock-ring"></div>
+  <div class="clock-ring clock-ring-2"></div>
+  <div class="clock-ring clock-ring-3"></div>
+  <div class="clock-content">
+    <p class="clock-label">The compliance clock</p>
+    <div class="clock-lines">
+      <p class="clock-line">Compliance begins the day your business does.</p>
+      <p class="clock-line">Regulators examine present, past, and future.</p>
+      <p class="clock-line">Most businesses are already running late.</p>
+    </div>
+    <div class="clock-cta">
+      <a href="#entry" class="btn-ghost">Find out where you stand</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     THREE MOMENTS
+============================== -->
+<section class="section-moments">
+  <div class="moments-header reveal">
+    <p class="section-label">When compliance finds you</p>
+    <h2 class="moments-title">
+      Every business faces compliance<br>
+      at one of three moments.
+    </h2>
+  </div>
+
+  <div class="moments-grid">
+    <div class="moment reveal">
+      <p class="moment-number">01</p>
+      <p class="moment-tag">Ideal</p>
+      <h3 class="moment-heading">At inception.<br>Before exposure.</h3>
+      <p class="moment-body">
+        Infrastructure exists before scrutiny arrives. Policies are live. Systems are operational. The paper trail begins from day one. When a regulator or investor looks — there is something to show.
+      </p>
+      <p class="moment-status status-ideal">↑ This is where Ayin works best</p>
+    </div>
+    <div class="moment reveal">
+      <p class="moment-number">02</p>
+      <p class="moment-tag">Late but recoverable</p>
+      <h3 class="moment-heading">At investor or<br>third-party scrutiny.</h3>
+      <p class="moment-body">
+        Due diligence is underway. A partner needs assurance. A contract requires proof. What can you show? What does your trail look like right now? Late is better than never — if built seriously.
+      </p>
+      <p class="moment-status status-late">→ Ayin can build quickly under this pressure</p>
+    </div>
+    <div class="moment moment-danger reveal">
+      <p class="moment-number">03</p>
+      <p class="moment-tag">Critical</p>
+      <h3 class="moment-heading">At regulatory or<br>legal escalation.</h3>
+      <p class="moment-body">
+        A regulator investigates. A breach is reported. A dispute is filed. Past, present, and future behaviour is now under formal examination. What did not exist cannot be rebuilt retroactively with credibility.
+      </p>
+      <p class="moment-status status-critical">↓ At this stage, infrastructure is everything</p>
+    </div>
+  </div>
+
+  <div class="moments-footer reveal">
+    <p class="moments-footer-text">
+      Ayin exists for the <strong>first moment.</strong><br>
+      But it works at all three.
+    </p>
+    <a href="#entry" class="nav-cta">Begin your assessment →</a>
+  </div>
+</section>
+
+<!-- ==============================
+     WHAT AYIN IS
+============================== -->
+<section class="section-ayin">
+  <div class="ayin-left reveal">
+    <p class="section-label">What Ayin is</p>
+    <h2 class="ayin-title">
+      Not a law firm.<br>
+      Not a consultant.<br>
+      <em>Infrastructure.</em>
+    </h2>
+    <div class="ayin-not">
+      <p class="not-item">We do not represent you before regulators or courts</p>
+      <p class="not-item">We do not make your team compliant on your behalf</p>
+      <p class="not-item">We do not deliver reports that are never operationalised</p>
+      <p class="not-item">We do not disappear when the engagement ends</p>
+    </div>
+    <div class="ayin-is">
+      <p class="ayin-is-label">What we do</p>
+      <p class="ayin-is-text">We engineer the compliance infrastructure that your business operates through — and can demonstrate under any scrutiny.</p>
+    </div>
+  </div>
+  <div class="ayin-right reveal">
+    <p class="ayin-para">
+      Most compliance failures are not failures of intention. Founders are not malicious. They are unaware. They assumed compliance was for other industries, other sizes, other geographies. <strong>The law made no such assumption.</strong>
+    </p>
+    <p class="ayin-para">
+      What separates a regulatory warning from a court proceeding is almost always the same thing — whether the business can show it was serious. Systems existed. Policies were maintained. Decisions were documented. <strong>Intent was demonstrated through infrastructure, not words.</strong>
+    </p>
+    <p class="ayin-para">
+      Regulators understand this distinction and they use it. Businesses with structured compliance infrastructure — documented intent, operational systems, clear paper trails — are treated differently. Not because they are innocent but because they can show they were serious.
+    </p>
+    <p class="ayin-statement">
+      Ayin builds the compliance infrastructure that businesses should have had from the beginning.
+    </p>
+  </div>
+</section>
+
+<!-- ==============================
+     WHAT WE BUILD
+============================== -->
+<section class="section-build">
+  <div class="build-header reveal">
+    <div>
+      <p class="section-label">The infrastructure</p>
+      <h2 class="build-title">
+        Compliance infrastructure<br>
+        is not a document.<br>
+        It is a system.
+      </h2>
+    </div>
+    <p class="build-sub">
+      Your business lives inside it. It evolves with law. It is operational, not decorative — and it is what you show.
+    </p>
+  </div>
+
+  <div class="build-grid">
+    <div class="build-item">
+      <div class="build-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <h3 class="build-name">Policy Architecture</h3>
+      <p class="build-desc">Written, version-controlled, dated. Showing evolution over time. Policies that exist in operation — not filed and forgotten.</p>
+    </div>
+    <div class="build-item">
+      <div class="build-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3 class="build-name">Documented Processes</h3>
+      <p class="build-desc">How your business handles data, AI, environmental obligations, and governance. Operationally real. Examinable at any point.</p>
+    </div>
+    <div class="build-item">
+      <div class="build-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3 class="build-name">Audit-Ready Records</h3>
+      <p class="build-desc">A paper trail that survives scrutiny. Structured so that past behaviour can be presented clearly — not assembled under pressure.</p>
+    </div>
+    <div class="build-item">
+      <div class="build-icon">
+        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <h3 class="build-name">Disclosure Frameworks</h3>
+      <p class="build-desc">What you tell clients, partners, and regulators — and when. Structured disclosures that demonstrate transparency as standard practice.</p>
+    </div>
+    <div class="build-item">
+      <div class="build-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </div>
+      <h3 class="build-name">Governance Systems</h3>
+      <p class="build-desc">How decisions are made, escalated, and recorded within your business. The structure that proves decisions were deliberate — not accidental.</p>
+    </div>
+    <div class="build-item">
+      <div class="build-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      </div>
+      <h3 class="build-name">Compliance Roadmaps</h3>
+      <p class="build-desc">Where you are today. Where law is moving. What you need to build next. Compliance is not static — the infrastructure should not be either.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     AREAS
+============================== -->
+<section class="section-areas">
+  <div class="areas-inner">
+    <div class="areas-left reveal">
+      <p class="section-label">Areas of practice</p>
+      <h2 class="areas-title">
+        Where law<br>
+        is moving<br>
+        fastest.
+      </h2>
+      <p class="areas-desc">
+        Ayin operates in emerging compliance — the areas where most businesses have no infrastructure yet and regulators are beginning to look. These are not legacy obligations. They are the obligations being created now, for businesses exactly like yours.
+      </p>
+      <p class="areas-desc" style="margin-top: 20px;">
+        Enforcement in these areas is intensifying. Fines are being set at levels designed to make examples. The window for building infrastructure before scrutiny arrives is narrowing.
+      </p>
+    </div>
+    <div class="areas-right reveal">
+      <div class="area-row">
+        <span class="area-name">Data Privacy & Protection</span>
+        <span class="area-tag">Active</span>
+      </div>
+      <div class="area-row">
+        <span class="area-name">AI Use & Governance</span>
+        <span class="area-tag">Expanding</span>
+      </div>
+      <div class="area-row">
+        <span class="area-name">Environmental Compliance</span>
+        <span class="area-tag">Active</span>
+      </div>
+      <div class="area-row">
+        <span class="area-name">Cybersecurity Frameworks</span>
+        <span class="area-tag">Expanding</span>
+      </div>
+      <div class="area-row">
+        <span class="area-name">Corporate Governance</span>
+        <span class="area-tag">Active</span>
+      </div>
+      <div class="area-row">
+        <span class="area-name">Cross-border Exposure</span>
+        <span class="area-tag">Emerging</span>
+      </div>
+      <p class="areas-note">
+        Compliance is not linear. What applies to your business depends on what your business does, where it operates, and who it touches. Ayin begins every engagement by mapping your exposure — not by listing services.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     INCIDENTS
+============================== -->
+<section class="section-incidents">
+  <div class="incidents-header reveal">
+    <div>
+      <p class="section-label" style="color: rgba(244,240,232,0.3);">Pattern recognition</p>
+      <h2 class="incidents-title">
+        These are not<br>
+        rare events.
+      </h2>
+    </div>
+    <p class="incidents-note">
+      Incidents below are representative patterns — not isolated cases. Every founder who reads one will know someone this happened to.
+    </p>
+  </div>
+
+  <div class="incident-grid">
+    <div class="incident reveal">
+      <p class="incident-type">Data Privacy</p>
+      <h3 class="incident-who">E-commerce founder. No privacy policy.</h3>
+      <p class="incident-what">Customer data breach. Regulator investigation opened. No documented data handling practices. No evidence of any prior compliance steps taken.</p>
+      <p class="incident-outcome">Fine issued. Infrastructure built after: <strong>too late for this incident</strong> — used to demonstrate intent going forward. The fine stood.</p>
+    </div>
+    <div class="incident reveal">
+      <p class="incident-type">Investor Due Diligence</p>
+      <h3 class="incident-who">SaaS startup. International clients.</h3>
+      <p class="incident-what">Unaware GDPR applied to their operations. Investor due diligence initiated. No documentation of data practices. No compliance framework. No paper trail of any kind.</p>
+      <p class="incident-outcome">Deal <strong>delayed six months</strong>. Infrastructure scrambled under pressure. Terms revised. Trust never fully recovered.</p>
+    </div>
+    <div class="incident reveal">
+      <p class="incident-type">AI Governance</p>
+      <h3 class="incident-who">Consultancy using AI tools in client work.</h3>
+      <p class="incident-what">No AI use policy. No disclosure to clients. No documentation of how AI was applied to their deliverables. Client disputed outcome. No governance to point to.</p>
+      <p class="incident-outcome"><strong>Settlement reached</strong> outside court. Reputation in industry affected. A one-page AI governance document would have changed the entire posture.</p>
+    </div>
+  </div>
+
+  <p class="incidents-close">
+    These incidents share one thing. <em>None had infrastructure. All were avoidable.</em>
+  </p>
+</section>
+
+<!-- ==============================
+     SECOND MAXIM
+============================== -->
+<section class="section-maxim">
+  <div class="maxim-bg"></div>
+  <p class="maxim-main">Qui facit per alium facit per se.</p>
+  <p class="maxim-translation">He who acts through another acts through himself.</p>
+  <p class="maxim-application">Your vendors, your tools, your contractors, your AI systems — their compliance failures are yours. The infrastructure must extend across everything your business touches.</p>
+</section>
+
+<!-- ==============================
+     ENTRY / CTA
+============================== -->
+<section class="section-entry" id="entry">
+  <div class="reveal">
+    <p class="section-label">Begin</p>
+    <h2 class="entry-title">
+      Where does<br>
+      your business<br>
+      <em>stand?</em>
+    </h2>
+  </div>
+  <div class="entry-right reveal">
+    <p class="entry-body">
+      Most engagements begin the same way. A conversation about your business, your exposure, and what infrastructure exists today. From there, Ayin maps what you have, what you are missing, and what needs to be built. <strong>No obligation. No sales process.</strong> A compliance exposure assessment that gives you clarity regardless of what follows.
+    </p>
+    <div class="entry-form">
+      <input class="form-field" type="text" placeholder="Your name">
+      <input class="form-field" type="text" placeholder="Your business">
+      <input class="form-field" type="email" placeholder="Email address">
+      <textarea class="form-field" rows="3" placeholder="Brief description of your business and what brings you here" style="resize: none; border-bottom: 1px solid var(--rule-strong);"></textarea>
+      <button class="form-submit">Request Exposure Assessment</button>
+    </div>
+    <p class="entry-assurance">Your information is held in confidence. Ayin does not share client details.</p>
+  </div>
+</section>
+
+<!-- ==============================
+     FOOTER
+============================== -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <p class="footer-logo">Ayin</p>
+      <p class="footer-tagline">Engineering Compliance Infrastructure</p>
+    </div>
+    <div class="footer-closing">
+      <p class="footer-closing-text">
+        Compliance infrastructure is not preparation<br>
+        for worst case. <em>It is what separates worst case<br>
+        from everything else.</em>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Ayin. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#entry">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal, .cascade-item, .apply-item, .clock-line, .clock-cta, .build-item');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = el.dataset.delay || 0;
+        setTimeout(() => el.classList.add('visible'), delay);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  // Stagger cascade items
+  document.querySelectorAll('.cascade-item').forEach((el, i) => {
+    el.dataset.delay = i * 80;
+  });
+
+  // Stagger apply items
+  document.querySelectorAll('.apply-item').forEach((el, i) => {
+    el.dataset.delay = i * 60;
+  });
+
+  // Stagger build items
+  document.querySelectorAll('.build-item').forEach((el, i) => {
+    el.dataset.delay = i * 80;
+  });
+
+  // Stagger clock lines
+  document.querySelectorAll('.clock-line').forEach((el, i) => {
+    el.dataset.delay = i * 200;
+  });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth nav hide/show
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const nav = document.querySelector('nav');
+    if (y > lastY && y > 100) {
+      nav.style.opacity = '0';
+      nav.style.transform = 'translateY(-100%)';
+      nav.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    } else {
+      nav.style.opacity = '1';
+      nav.style.transform = 'translateY(0)';
+    }
+    lastY = y;
+  });
+</script>
+</body>
+</html>
