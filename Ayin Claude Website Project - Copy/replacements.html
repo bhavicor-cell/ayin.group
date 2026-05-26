@@ -1,0 +1,245 @@
+Replacements:
+
+Section 1:
+
+Old ----------------------------------------------
+<section id="hero" class="story on-light hero-orr" data-bg-opacity="0.033" data-bg-speed="0.28" aria-label="ORR — Strategic Execution Partners">
+  <style>
+    /* Scope to #hero.hero-orr */
+    #hero.hero-orr{
+      padding-block: clamp(10vh, 14vh, 16vh);
+      align-items: center;
+    }
+    #hero.hero-orr .hero-inner{
+      width: min(100%, 1060px);
+      margin-inline: clamp(6vw, 8vw, 10vw);
+      display: grid;
+      gap: 0; /* all vertical rhythm via margins below */
+      justify-items: start;
+    }
+
+    /* ——— Logo (external SVG; you’ll swap the src) ——— */
+    #hero.hero-orr .hero-logo{
+      width: clamp(150px, 17vw, 260px); /* larger, appropriate presence */
+      height: auto;
+      display: block;
+      margin: 0;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.26));
+      transition: transform .28s cubic-bezier(.22,.61,.36,1);
+    }
+    #hero.hero-orr .hero-logo:hover{ transform: translateY(-1px) }
+
+    /* ——— Typographic block ——— */
+    /* Slightly smaller main line per your note */
+    #hero.hero-orr .title{
+      font-family: var(--font-heading, serif);
+      font-weight: 400;
+      letter-spacing: .004em;
+      font-size: clamp(38px, 5.2vw, 84px); /* ↓ from previous */
+      line-height: 1.02;
+      color: var(--ink);
+      text-wrap: balance;
+      margin-top: clamp(16px, 1.6vw, 26px);   /* logo → title (tight) */
+    }
+
+    /* Larger, more substantive second line + longer copy */
+    #hero.hero-orr .sub{
+      max-width: 78ch;
+      font: 400 clamp(17px,1.35vw,21px)/1.48 Cotorisi; /* ↑ size */
+      color: var(--ink-soft);
+      letter-spacing: .0025em;
+      margin-top: clamp(6px, .55vw, 10px);  /* title → sub (tight) */
+    }
+
+    /* Tagline brought even closer */
+    #hero.hero-orr .tagline{
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: clamp(15px, 1.4vw, 26px);    /* sub → tagline (closer) */
+      font: 400 clamp(14px,1.1vw,17px)/1.38 var(--font-special, serif);
+      color: var(--ink);
+      letter-spacing: .006em;
+      white-space: pre-wrap;
+    }
+    #hero.hero-orr .tagline .line{
+      width: clamp(20px, 4vw, 56px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ink) 88%, #000 42%), transparent);
+      opacity: .42;
+      box-shadow: 0 0 10px color-mix(in srgb, var(--cta) 98%, #000 2%);
+    }
+    #hero.hero-orr .tagline em{ font-style: normal; opacity: .98 }
+
+    /* Subtle reveals so the block feels bonded, not floaty */
+    #hero.hero-orr [data-reveal]{ 
+      opacity: 0; transform: translateY(6px);
+      animation: heroBond .45s cubic-bezier(.22,.61,.36,1) forwards;
+    }
+    #hero.hero-orr [data-reveal="1"]{ animation-delay:.04s }
+    #hero.hero-orr [data-reveal="2"]{ animation-delay:.12s }
+    #hero.hero-orr [data-reveal="3"]{ animation-delay:.20s }
+
+    @keyframes heroBond{ to{ opacity:1; transform:none } }
+
+    @media (prefers-reduced-motion: reduce){
+      #hero.hero-orr [data-reveal]{ animation:none; opacity:1; transform:none }
+    }
+  </style>
+
+  <div class="hero-inner">
+    <!-- 1) LOGO: replace with your SVG file -->
+    <img class="hero-logo" src="./assets/re2.svg" alt="ORR" width="220" height="70" decoding="async" loading="eager" data-reveal="1" />
+
+    <!-- 2) Bonded three-line block -->
+    <h1 class="title" data-reveal="2">Strategic Execution Partners</h1>
+
+    <!-- Longer, “god-tier” technical line (kept precise and elegant) -->
+    <p class="sub" data-reveal="3">
+      We restore cadence, remove execution bottlenecks, and tighten decision-making——so teams ship reliably and operations don’t crack under growth. 
+    </p>
+
+    <p class="tagline" data-reveal="3">
+      <span class="line" aria-hidden="true"></span>
+      <em>You think. We make it move.</em>
+    </p>
+  </div>
+</section>
+
+
+
+NEW----------------------------------------
+<!-- SECTION 1 — HERO -->
+<section id="hero" class="story hero-orr" aria-label="ORR — Strategic Execution Partners">
+  <style>
+    #hero.hero-orr {
+      display: grid;
+      place-items: center;
+      min-height: var(--vh);
+      padding: 0 clamp(20px, 6vw, 60px);
+    }
+
+    #hero .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+      max-width: 900px;
+    }
+
+    /* Logo */
+    #hero .hero-logo {
+      width: clamp(80px, 10vw, 140px);
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+      animation: orr-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes orr-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.012); opacity: 0.92; }
+    }
+
+    /* Descriptor */
+    #hero .hero-descriptor {
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 52px;
+    }
+
+    /* Main statement */
+    #hero .hero-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(36px, 5.2vw, 76px);
+      line-height: 1.04;
+      color: var(--ink);
+      letter-spacing: 0.004em;
+      text-wrap: balance;
+      margin: 0 0 16px;
+    }
+
+    /* Secondary line */
+    #hero .hero-sub {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(15px, 1.4vw, 20px);
+      line-height: 1.5;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+      margin: 0 0 44px;
+    }
+
+    /* CTA button */
+    #hero .hero-cta {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1a1816;
+      background: var(--cta);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 0.75rem 1.6rem;
+      display: inline-block;
+      box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 14px 40px rgba(203,184,157,.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    #hero .hero-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 1px 0 rgba(255,255,255,.08), 0 18px 60px rgba(203,184,157,.35);
+    }
+
+    /* Staggered reveal */
+    #hero [data-reveal] {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: hero-enter 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    }
+    #hero [data-reveal="1"] { animation-delay: 0.10s; }
+    #hero [data-reveal="2"] { animation-delay: 0.24s; }
+    #hero [data-reveal="3"] { animation-delay: 0.38s; }
+    #hero [data-reveal="4"] { animation-delay: 0.52s; }
+    #hero [data-reveal="5"] { animation-delay: 0.66s; }
+
+    @keyframes hero-enter {
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #hero .hero-logo { animation: none; }
+      #hero [data-reveal] { animation: none; opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 640px) {
+      #hero .hero-descriptor { margin-bottom: 36px; }
+      #hero .hero-sub { margin-bottom: 36px; }
+    }
+  </style>
+
+  <div class="hero-inner">
+    <img
+      class="hero-logo"
+      src="./assets/re2.svg"
+      alt="ORR"
+      width="140"
+      height="140"
+      decoding="async"
+      loading="eager"
+      data-reveal="1"
+    />
+    <p class="hero-descriptor" data-reveal="2">Strategic Execution Partners</p>
+    <h1 class="hero-title" data-reveal="3">Your business outgrew its operating layer.</h1>
+    <p class="hero-sub" data-reveal="4">Most founders discover this too late.</p>
+    <a class="hero-cta" href="#section-7" data-reveal="5">Begin →</a>
+  </div>
+</section>
