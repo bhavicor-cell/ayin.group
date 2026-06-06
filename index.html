@@ -3,1945 +3,1427 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayin — Compliance Infrastructure</title>
+<title>Ayin — Engineering Compliance Infrastructure</title>
+<meta name="description" content="Most businesses are exposed to compliance obligations right now and don't know it. Ayin builds the standing record that answers the question before it is ever asked.">
+<meta name="theme-color" content="#0A0807">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Archivo:wght@300;400;500;600&family=Archivo+Narrow:wght@400;500&display=swap" rel="stylesheet">
-
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink: #0a0a08;
-    --paper: #f4f0e8;
-    --ash: #c8c2b4;
-    --ember: #8b2500;
-    --ember-light: #c03a00;
-    --gold: #a07840;
-    --mid: #4a4540;
-    --rule: rgba(10,10,8,0.12);
-    --rule-strong: rgba(10,10,8,0.25);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Archivo', sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-    cursor: default;
-  }
-
-  /* NOISE TEXTURE OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 28px 60px;
-    mix-blend-mode: multiply;
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-
-  .nav-cta {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 2px;
-    transition: color 0.3s, border-color 0.3s;
-  }
-
-  .nav-cta:hover { color: var(--ember); border-color: var(--ember); }
-
-  /* ==============================
-     HERO
-  ============================== */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 60px 80px;
-    position: relative;
-    border-bottom: 1px solid var(--rule-strong);
-  }
-
-  .hero-eyebrow {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 60px;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 0.3s;
-  }
-
-  .hero-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 7vw, 112px);
-    font-weight: 300;
-    line-height: 1.0;
-    letter-spacing: -0.01em;
-    max-width: 900px;
-    opacity: 0;
-    animation: fadeUp 1.2s ease forwards 0.5s;
-  }
-
-  .hero-headline em {
-    font-style: italic;
-    color: var(--ember);
-  }
-
-  .hero-sub {
-    margin-top: 48px;
-    max-width: 480px;
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.8;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 0.9s;
-  }
-
-  .hero-bottom {
-    position: absolute;
-    bottom: 48px;
-    left: 60px;
-    right: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 1.3s;
-  }
-
-  .hero-scroll {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ash);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .hero-scroll::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--ash);
-  }
-
-  .hero-latin {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ash);
-    text-align: right;
-  }
-
-  .hero-line {
-    position: absolute;
-    right: 60px;
-    top: 30%;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(to bottom, transparent, var(--rule-strong), transparent);
-    opacity: 0;
-    animation: fadeIn 2s ease forwards 1.5s;
-  }
-
-  /* ==============================
-     CONSEQUENCE SECTION
-  ============================== */
-  .section-consequence {
-    padding: 120px 60px;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .section-label {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--ash);
-    margin-bottom: 40px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--ash);
-  }
-
-  .consequence-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-    line-height: 1.1;
-    max-width: 420px;
-  }
-
-  .consequence-title em { font-style: italic; color: var(--ember); }
-
-  .consequence-note {
-    margin-top: 40px;
-    font-size: 13px;
-    color: var(--mid);
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    line-height: 1.5;
-    border-left: 1px solid var(--ember);
-    padding-left: 24px;
-  }
-
-  .cascade {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding-top: 48px;
-  }
-
-  .cascade-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--rule);
-    opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-
-  .cascade-item.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .cascade-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    color: var(--ash);
-    min-width: 24px;
-    padding-top: 3px;
-    font-style: italic;
-  }
-
-  .cascade-text {
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.5;
-  }
-
-  .cascade-text span {
-    display: block;
-    font-size: 12px;
-    color: var(--mid);
-    font-weight: 300;
-    margin-top: 2px;
-  }
-
-  .cascade-warning {
-    margin-top: 32px;
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ember);
-  }
-
-  /* ==============================
-     MIRROR / APPLICABILITY
-  ============================== */
-  .section-mirror {
-    padding: 120px 60px;
-    border-bottom: 1px solid var(--rule);
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .mirror-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 80px;
-  }
-
-  .mirror-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 4.5vw, 68px);
-    font-weight: 300;
-    line-height: 1.05;
-    max-width: 560px;
-  }
-
-  .mirror-title em { font-style: italic; color: var(--ember-light); }
-
-  .mirror-sub {
-    max-width: 280px;
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--ash);
-    line-height: 1.8;
-    padding-top: 12px;
-  }
-
-  .applicability-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .apply-item {
-    padding: 32px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 24px;
-    align-items: center;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-
-  .apply-item:nth-child(odd) { padding-right: 60px; border-right: 1px solid rgba(255,255,255,0.08); }
-  .apply-item:nth-child(even) { padding-left: 60px; }
-
-  .apply-item.visible { opacity: 1; transform: translateY(0); }
-
-  .apply-condition {
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(244,240,232,0.6);
-  }
-
-  .apply-condition strong {
-    display: block;
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--paper);
-    margin-bottom: 4px;
-  }
-
-  .apply-law {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 12px;
-    color: var(--ember-light);
-    white-space: nowrap;
-    text-align: right;
-  }
-
-  .mirror-maxim {
-    margin-top: 80px;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 64px;
-  }
-
-  .maxim-latin {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 3.5vw, 48px);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--paper);
-    margin-bottom: 16px;
-  }
-
-  .maxim-trans {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ash);
-    letter-spacing: 0.04em;
-  }
-
-  /* ==============================
-     MECHANISM / INTENT
-  ============================== */
-  .section-mechanism {
-    padding: 120px 60px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .mechanism-header {
-    text-align: center;
-    max-width: 680px;
-    margin: 0 auto 100px;
-  }
-
-  .mechanism-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 58px);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-top: 24px;
-  }
-
-  .mechanism-title em { font-style: italic; color: var(--ember); }
-
-  .pillars {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    margin-bottom: 80px;
-  }
-
-  .pillar {
-    background: var(--paper);
-    padding: 56px 48px;
-    position: relative;
-    transition: background 0.4s ease;
-  }
-
-  .pillar:hover { background: #f0ebe0; }
-
-  .pillar-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 80px;
-    font-weight: 300;
-    font-style: italic;
-    color: rgba(10,10,8,0.06);
-    line-height: 1;
-    position: absolute;
-    top: 24px;
-    right: 32px;
-  }
-
-  .pillar-term {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 400;
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  .pillar-def {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.8;
-  }
-
-  .pillar-legal {
-    margin-top: 24px;
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ember);
-  }
-
-  .mechanism-verdict {
-    text-align: center;
-    padding: 60px;
-    border: 1px solid var(--rule-strong);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .mechanism-verdict::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 70%, rgba(139,37,0,0.04));
-  }
-
-  .verdict-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(22px, 2.5vw, 34px);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.4;
-    max-width: 700px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .verdict-text strong {
-    font-weight: 500;
-    font-style: normal;
-    color: var(--ember);
-  }
-
-  /* ==============================
-     CLOCK
-  ============================== */
-  .section-clock {
-    padding: 160px 60px;
-    background: var(--ink);
-    color: var(--paper);
-    text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .clock-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    border: 1px solid rgba(244,240,232,0.04);
-  }
-
-  .clock-ring-2 {
-    width: 400px;
-    height: 400px;
-    border-color: rgba(244,240,232,0.06);
-  }
-
-  .clock-ring-3 {
-    width: 200px;
-    height: 200px;
-    border-color: rgba(244,240,232,0.08);
-  }
-
-  .clock-content { position: relative; z-index: 2; }
-
-  .clock-label {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--ember-light);
-    margin-bottom: 48px;
-  }
-
-  .clock-lines {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .clock-line {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 4vw, 60px);
-    font-weight: 300;
-    line-height: 1.1;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .clock-line.visible { opacity: 1; transform: translateY(0); }
-  .clock-line:nth-child(2) { transition-delay: 0.15s; }
-  .clock-line:nth-child(3) { transition-delay: 0.3s; color: rgba(244,240,232,0.5); font-style: italic; }
-
-  .clock-cta {
-    margin-top: 64px;
-    opacity: 0;
-    transition: opacity 0.8s ease 0.5s;
-  }
-
-  .clock-cta.visible { opacity: 1; }
-
-  .btn-ghost {
-    display: inline-block;
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--paper);
-    text-decoration: none;
-    border: 1px solid rgba(244,240,232,0.3);
-    padding: 18px 48px;
-    transition: background 0.3s ease, border-color 0.3s ease;
-  }
-
-  .btn-ghost:hover {
-    background: rgba(244,240,232,0.05);
-    border-color: rgba(244,240,232,0.6);
-  }
-
-  /* ==============================
-     THREE MOMENTS
-  ============================== */
-  .section-moments {
-    padding: 120px 60px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .moments-header {
-    margin-bottom: 80px;
-  }
-
-  .moments-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 58px);
-    font-weight: 300;
-    line-height: 1.1;
-    max-width: 600px;
-    margin-top: 24px;
-  }
-
-  .moments-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
-    border: 1px solid var(--rule-strong);
-  }
-
-  .moment {
-    padding: 56px 48px;
-    border-right: 1px solid var(--rule);
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s ease;
-  }
-
-  .moment:last-child { border-right: none; }
-  .moment:hover { background: #f0ebe0; }
-
-  .moment.moment-danger {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .moment.moment-danger:hover { background: #161410; }
-
-  .moment-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-style: italic;
-    color: var(--ash);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .moment.moment-danger .moment-number { color: rgba(244,240,232,0.3); }
-
-  .moment-number::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--rule);
-  }
-
-  .moment.moment-danger .moment-number::after { background: rgba(255,255,255,0.08); }
-
-  .moment-tag {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--ember);
-    margin-bottom: 20px;
-  }
-
-  .moment.moment-danger .moment-tag { color: var(--ember-light); }
-
-  .moment-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 20px;
-  }
-
-  .moment-body {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.8;
-  }
-
-  .moment.moment-danger .moment-body { color: rgba(244,240,232,0.55); }
-
-  .moment-status {
-    margin-top: 40px;
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  .status-ideal { color: #4a8a4a; }
-  .status-late { color: #c07020; }
-  .status-critical { color: var(--ember-light); }
-
-  .moments-footer {
-    margin-top: 48px;
-    padding: 40px 48px;
-    border: 1px solid var(--rule);
-    border-top: none;
-    background: rgba(139,37,0,0.03);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .moments-footer-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 300;
-    font-style: italic;
-  }
-
-  .moments-footer-text strong { font-weight: 500; font-style: normal; color: var(--ember); }
-
-  /* ==============================
-     WHAT AYIN IS
-  ============================== */
-  .section-ayin {
-    padding: 120px 60px;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 120px;
-    align-items: start;
-  }
-
-  .ayin-left {}
-
-  .ayin-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 4.5vw, 68px);
-    font-weight: 300;
-    line-height: 1.05;
-    margin-top: 24px;
-  }
-
-  .ayin-title em { font-style: italic; color: var(--ember); }
-
-  .ayin-not {
-    margin-top: 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .not-item {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--rule);
-    font-size: 14px;
-    color: var(--mid);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .not-item::before {
-    content: '—';
-    color: var(--ash);
-    font-size: 12px;
-  }
-
-  .ayin-is {
-    margin-top: 40px;
-    padding: 32px;
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .ayin-is-label {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--ember-light);
-    margin-bottom: 16px;
-  }
-
-  .ayin-is-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.5;
-  }
-
-  .ayin-right {}
-
-  .ayin-para {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.9;
-    margin-bottom: 28px;
-  }
-
-  .ayin-para strong { font-weight: 500; color: var(--ink); }
-
-  .ayin-statement {
-    margin-top: 48px;
-    padding-top: 48px;
-    border-top: 1px solid var(--rule-strong);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(20px, 2vw, 28px);
-    font-weight: 300;
-    line-height: 1.4;
-  }
-
-  /* ==============================
-     WHAT WE BUILD
-  ============================== */
-  .section-build {
-    padding: 120px 60px;
-    border-bottom: 1px solid var(--rule);
-    background: #f0ebe0;
-  }
-
-  .build-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 80px;
-  }
-
-  .build-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-    line-height: 1.1;
-    max-width: 500px;
-    margin-top: 24px;
-  }
-
-  .build-sub {
-    max-width: 300px;
-    font-size: 14px;
-    color: var(--mid);
-    line-height: 1.8;
-    text-align: right;
-  }
-
-  .build-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-  }
-
-  .build-item {
-    background: #f0ebe0;
-    padding: 48px 40px;
-    transition: background 0.3s ease;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s ease;
-  }
-
-  .build-item.visible { opacity: 1; transform: translateY(0); background: #f0ebe0; }
-  .build-item.visible:hover { background: var(--paper); }
-
-  .build-icon {
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--rule-strong);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .build-icon svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.5; }
-
-  .build-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 16px;
-  }
-
-  .build-desc {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.8;
-  }
-
-  /* ==============================
-     AREAS
-  ============================== */
-  .section-areas {
-    padding: 120px 60px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .areas-inner {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 120px;
-    align-items: start;
-  }
-
-  .areas-left {}
-
-  .areas-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 3.5vw, 52px);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-top: 24px;
-    margin-bottom: 32px;
-  }
-
-  .areas-desc {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.9;
-  }
-
-  .areas-right {}
-
-  .area-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--rule);
-    cursor: default;
-    transition: padding-left 0.3s ease;
-  }
-
-  .area-row:hover { padding-left: 16px; }
-
-  .area-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 300;
-  }
-
-  .area-tag {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ember);
-    border: 1px solid rgba(139,37,0,0.3);
-    padding: 4px 12px;
-  }
-
-  .areas-note {
-    margin-top: 48px;
-    font-size: 13px;
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--mid);
-    font-size: 17px;
-    line-height: 1.6;
-  }
-
-  /* ==============================
-     INCIDENTS / PROOF
-  ============================== */
-  .section-incidents {
-    padding: 120px 60px;
-    border-bottom: 1px solid var(--rule);
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .incidents-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 80px;
-  }
-
-  .incidents-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-    line-height: 1.1;
-    max-width: 500px;
-    margin-top: 24px;
-  }
-
-  .incidents-note {
-    font-size: 13px;
-    color: rgba(244,240,232,0.4);
-    max-width: 260px;
-    text-align: right;
-    line-height: 1.7;
-  }
-
-  .incident-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.06);
-    margin-bottom: 64px;
-  }
-
-  .incident {
-    background: var(--ink);
-    padding: 48px 40px;
-    position: relative;
-    transition: background 0.3s ease;
-  }
-
-  .incident:hover { background: #141210; }
-
-  .incident-type {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ember-light);
-    margin-bottom: 24px;
-  }
-
-  .incident-who {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 20px;
-    color: var(--paper);
-  }
-
-  .incident-what {
-    font-size: 13px;
-    font-weight: 300;
-    color: rgba(244,240,232,0.5);
-    line-height: 1.8;
-    margin-bottom: 32px;
-  }
-
-  .incident-outcome {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: rgba(244,240,232,0.7);
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 24px;
-    line-height: 1.5;
-  }
-
-  .incident-outcome strong { color: var(--ember-light); font-style: normal; }
-
-  .incidents-close {
-    text-align: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(18px, 2vw, 26px);
-    font-weight: 300;
-    font-style: italic;
-    color: rgba(244,240,232,0.5);
-    padding: 48px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .incidents-close em { color: var(--paper); font-style: normal; }
-
-  /* ==============================
-     SECOND MAXIM
-  ============================== */
-  .section-maxim {
-    padding: 120px 60px;
-    text-align: center;
-    border-bottom: 1px solid var(--rule);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .maxim-bg {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, rgba(139,37,0,0.04) 0%, transparent 70%);
-  }
-
-  .maxim-main {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 5vw, 72px);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.1;
-    position: relative;
-    margin-bottom: 24px;
-  }
-
-  .maxim-translation {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--mid);
-    letter-spacing: 0.04em;
-    position: relative;
-    margin-bottom: 8px;
-  }
-
-  .maxim-application {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ash);
-    position: relative;
-    font-style: italic;
-  }
-
-  /* ==============================
-     ENTRY / CTA
-  ============================== */
-  .section-entry {
-    padding: 160px 60px;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 120px;
-    align-items: center;
-  }
-
-  .entry-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 4.5vw, 68px);
-    font-weight: 300;
-    line-height: 1.05;
-    margin-top: 24px;
-  }
-
-  .entry-title em { font-style: italic; color: var(--ember); }
-
-  .entry-right {}
-
-  .entry-body {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.9;
-    margin-bottom: 48px;
-  }
-
-  .entry-body strong { font-weight: 500; color: var(--ink); }
-
-  .entry-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .form-field {
-    border: 1px solid var(--rule-strong);
-    border-bottom: none;
-    padding: 20px 24px;
-    font-family: 'Archivo', sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    background: transparent;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.3s ease, background 0.3s ease;
-    width: 100%;
-  }
-
-  .form-field:last-of-type { border-bottom: 1px solid var(--rule-strong); }
-  .form-field:focus { background: rgba(139,37,0,0.02); border-color: var(--ember); }
-  .form-field::placeholder { color: var(--ash); }
-
-  .form-submit {
-    margin-top: 24px;
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-    padding: 20px 48px;
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    align-self: flex-start;
-  }
-
-  .form-submit:hover { background: var(--ember); }
-
-  .entry-assurance {
-    margin-top: 24px;
-    font-size: 12px;
-    color: var(--ash);
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  /* ==============================
-     FOOTER
-  ============================== */
-  footer {
-    padding: 64px 60px 40px;
-    border-top: 1px solid var(--rule-strong);
-  }
-
-  .footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 80px;
-  }
-
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-  }
-
-  .footer-tagline {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-top: 8px;
-  }
-
-  .footer-closing {
-    max-width: 500px;
-    text-align: right;
-  }
-
-  .footer-closing-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.5;
-    color: var(--mid);
-  }
-
-  .footer-closing-text em { font-style: normal; color: var(--ink); }
-
-  .footer-bottom {
-    border-top: 1px solid var(--rule);
-    padding-top: 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-copy {
-    font-size: 12px;
-    color: var(--ash);
-    font-weight: 300;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 32px;
-  }
-
-  .footer-links a {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ash);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .footer-links a:hover { color: var(--ink); }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE BASICS */
-  @media (max-width: 900px) {
-    nav { padding: 24px 32px; }
-    .hero { padding: 100px 32px 60px; }
-    .hero-bottom { left: 32px; right: 32px; }
-    .section-consequence,
-    .section-ayin,
-    .section-areas .areas-inner,
-    .section-entry { grid-template-columns: 1fr; gap: 60px; }
-    .section-consequence,
-    .section-mirror,
-    .section-mechanism,
-    .section-clock,
-    .section-moments,
-    .section-ayin,
-    .section-build,
-    .section-areas,
-    .section-incidents,
-    .section-maxim,
-    .section-entry { padding: 80px 32px; }
-    .pillars,
-    .moments-grid,
-    .build-grid,
-    .incident-grid { grid-template-columns: 1fr; }
-    .applicability-grid { grid-template-columns: 1fr; }
-    .apply-item:nth-child(odd) { padding-right: 0; border-right: none; }
-    .apply-item:nth-child(even) { padding-left: 0; }
-    .mirror-top { flex-direction: column; gap: 24px; }
-    .mirror-sub { max-width: 100%; text-align: left; }
-    .build-header { flex-direction: column; align-items: flex-start; gap: 24px; }
-    .build-sub { text-align: left; }
-    .incidents-header { flex-direction: column; gap: 24px; }
-    .incidents-note { text-align: left; }
-    .footer-top { flex-direction: column; gap: 40px; }
-    .footer-closing { text-align: left; }
-    .footer-bottom { flex-direction: column; gap: 20px; align-items: flex-start; }
-    .moments-footer { flex-direction: column; gap: 24px; align-items: flex-start; }
-    .moment { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  }
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<noscript><style>#prologue{display:none!important}</style></noscript>
+
+<style id="tokens">
+/* ═══════════════════════════════════════════════
+   AYIN · V3 — WARM AUTHORITY
+   Ground: warm charcoal, not cold blue-black
+   Steel:  muted teal — vigilance, proof
+   Amber:  warm organic gold — escalation, the number
+   Two light breaks: parchment cream, the answer
+   ═══════════════════════════════════════════════ */
+:root{
+  --void:#0A0807;
+  --ink:#0E0C0A;
+  --ink-1:#131008;
+  --ink-2:#181408;
+  --ink-3:#1E1A0E;
+
+  --bone:#EDE8DC;
+  --bone-2:#D4CEBD;
+  --mute:rgba(237,232,220,.56);
+  --mute-2:rgba(237,232,220,.34);
+  --faint:rgba(237,232,220,.16);
+  --line:rgba(237,232,220,.10);
+  --line-2:rgba(237,232,220,.055);
+
+  /* steel — vigilance / proof — less clinical, more aged */
+  --steel:#7AABB0;
+  --steel-hi:#A5CACF;
+  --steel-dim:#527B82;
+  --steel-deep:#122830;
+  --steel-12:rgba(122,171,176,.12);
+  --steel-20:rgba(122,171,176,.22);
+  --steel-glow:rgba(122,171,176,.24);
+
+  /* amber — escalation / the number — warm, organic gold */
+  --brass:#C8963C;
+  --brass-hi:#E4B86A;
+  --brass-deep:#3C2808;
+  --brass-12:rgba(200,150,60,.13);
+  --brass-20:rgba(200,150,60,.22);
+  --brass-glow:rgba(200,150,60,.20);
+
+  /* light sections — warm parchment */
+  --lt:#F2EDE4;
+  --lt-2:#EAE3D8;
+  --lt-ink:#1A1510;
+  --lt-mute:rgba(26,21,16,.56);
+  --lt-mute-2:rgba(26,21,16,.34);
+  --lt-line:rgba(26,21,16,.12);
+  --lt-line-2:rgba(26,21,16,.055);
+  --lt-steel:#0F6860;
+  --lt-steel-12:rgba(15,104,96,.12);
+  --lt-brass:#9A6010;
+  --lt-brass-disp:#AA6E12;
+
+  --disp:'Spectral',Georgia,'Times New Roman',serif;
+  --body:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --e1:cubic-bezier(.2,.8,.2,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --eh:cubic-bezier(.65,0,.35,1);
+
+  --gut:clamp(22px,5vw,84px);
+  --maxw:1300px;
+  --pad:clamp(80px,12vh,158px);
+  --pad-s:clamp(48px,7vh,96px);
+}
+</style>
+
+<style id="base">
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);color:var(--bone);scroll-behavior:smooth;-webkit-text-size-adjust:100%;
+  scrollbar-width:thin;scrollbar-color:var(--steel-dim) var(--ink)}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--void)}
+::-webkit-scrollbar-thumb{background:var(--ink-3);border:2px solid var(--void)}
+::-webkit-scrollbar-thumb:hover{background:var(--steel-dim)}
+body{font-family:var(--body);font-weight:400;line-height:1.64;font-size:16px;
+  background:var(--ink);overflow-x:hidden;position:relative;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--steel);color:var(--ink)}
+.lt ::selection{background:var(--lt-steel);color:var(--lt)}
+a{color:inherit;text-decoration:none}svg{display:block}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+.atmos{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(130% 70% at 50% -5%,rgba(122,171,176,.04),transparent 55%),
+    radial-gradient(100% 100% at 50% 115%,rgba(10,8,7,.7),transparent 55%)}
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.042;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+
+#prog{position:fixed;top:0;left:0;right:0;height:2px;z-index:92;pointer-events:none}
+#pf{height:100%;width:0;background:linear-gradient(90deg,var(--steel-dim),var(--steel));transition:width .1s linear}
+
+/* type scale */
+.disp-xl{font-family:var(--disp);font-weight:300;font-size:clamp(48px,8vw,118px);line-height:.93;letter-spacing:-.035em}
+.disp-l {font-family:var(--disp);font-weight:300;font-size:clamp(34px,5.4vw,72px); line-height:.97;letter-spacing:-.025em}
+.disp   {font-family:var(--disp);font-weight:300;font-size:clamp(27px,4vw,54px);   line-height:1.05;letter-spacing:-.02em}
+.disp-s {font-family:var(--disp);font-weight:300;font-size:clamp(20px,2.6vw,32px); line-height:1.14;letter-spacing:-.015em}
+.disp em,.disp-xl em,.disp-l em,.disp-s em{font-style:italic;color:var(--steel)}
+.lt .disp em,.lt .disp-xl em,.lt .disp-l em,.lt .disp-s em{color:var(--lt-steel)}
+
+/* shared atoms */
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--steel);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--steel);opacity:.6;flex-shrink:0}
+.lt .eyebrow{color:var(--lt-steel)}.lt .eyebrow::before{background:var(--lt-steel)}
+.wrap{max-width:var(--maxw);margin:0 auto}
+.sec{position:relative;z-index:1}
+.lead{font-size:clamp(14px,1.4vw,18px);line-height:1.72;color:var(--mute);font-weight:300}
+.lead b{color:var(--bone);font-weight:500}
+
+/* reveal */
+.r{opacity:0;transform:translateY(22px);transition:opacity 1s var(--e2),transform 1s var(--e2)}
+.r.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.42s}
+.lift>*{opacity:0;transform:translateY(16px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
+.lift.in>*{opacity:1;transform:none}
+.lift.in>*:nth-child(2){transition-delay:.1s}
+.lift.in>*:nth-child(3){transition-delay:.2s}
+.lift.in>*:nth-child(4){transition-delay:.3s}
+.lift.in>*:nth-child(5){transition-delay:.4s}
+
+/* CTA */
+.cta{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;
+  font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+  background:var(--steel);padding:17px 30px;cursor:pointer;position:relative;
+  overflow:hidden;isolation:isolate;transition:gap .35s var(--e1)}
+.cta::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--steel-hi);
+  transform:translateY(101%);transition:transform .4s var(--e1)}
+.cta:hover{gap:18px}.cta:hover::before{transform:translateY(0)}
+.cta .arr{transition:transform .35s var(--e1)}.cta:hover .arr{transform:translateX(5px)}
+.cta-ghost{display:inline-flex;align-items:center;gap:11px;font-family:var(--mono);font-size:12px;
+  font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);
+  padding-bottom:5px;border-bottom:1px solid var(--faint);
+  transition:color .35s,border-color .35s,gap .3s var(--e1)}
+.cta-ghost:hover{color:var(--steel);border-color:var(--steel);gap:15px}
+
+/* logo placeholder mark */
+.mark{width:28px;height:28px;flex-shrink:0}
+.mark .m-rim{fill:none;stroke:var(--bone);stroke-width:2;opacity:.48}
+.mark .m-iris{fill:none;stroke:var(--steel);stroke-width:2}
+.mark .m-pupil{fill:var(--steel)}
+</style>
+
+<style id="prologue-css">
+/* ─── PROLOGUE: one question at a time, full screen ─── */
+#prologue{
+  position:fixed;inset:0;z-index:999;
+  background:var(--void);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:var(--gut);cursor:pointer;
+  transition:opacity .7s var(--e1)
+}
+#prologue.out{opacity:0;pointer-events:none}
+
+.pl-inner{
+  position:relative;width:100%;max-width:760px;
+  display:flex;flex-direction:column;align-items:center;
+  min-height:clamp(80px,14vh,140px)
+}
+
+/* the question — single element, swaps content */
+#plQ{
+  font-family:var(--disp);font-weight:400;
+  font-size:clamp(24px,5vw,60px);
+  line-height:1.15;letter-spacing:-.02em;
+  color:var(--bone-2);text-align:center;max-width:660px;
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) translateY(14px);
+  opacity:0;width:100%;
+  transition:opacity .42s var(--e2),transform .42s var(--e2)
+}
+#plQ.show{opacity:1;transform:translate(-50%,-50%)}
+
+/* verdict — fades in after questions */
+#plVerdict{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%) translateY(14px);
+  width:100%;text-align:center;
+  opacity:0;transition:opacity .55s var(--e2),transform .55s var(--e2)
+}
+#plVerdict.show{opacity:1;transform:translate(-50%,-50%)}
+#plVt{
+  font-family:var(--disp);font-weight:400;
+  font-size:clamp(28px,5.2vw,64px);
+  line-height:1.08;letter-spacing:-.025em;color:var(--bone)
+}
+#plVt em{font-style:italic;color:var(--steel)}
+#plVs{
+  margin-top:clamp(14px,2vh,22px);
+  font-family:var(--body);font-size:clamp(13px,1.3vw,16px);font-weight:300;
+  color:var(--mute);line-height:1.64;max-width:52ch;margin-left:auto;margin-right:auto
+}
+
+#plCue{
+  position:absolute;bottom:clamp(-80px,-10vh,-50px);left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--mute-2);display:flex;flex-direction:column;align-items:center;gap:9px;
+  opacity:0;transition:opacity .5s var(--e2)
+}
+#plCue.show{opacity:1}
+#plCue .ln{width:1px;height:28px;background:linear-gradient(var(--steel),transparent);
+  animation:cueAn 2.2s var(--e2) infinite}
+@keyframes cueAn{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* question counter — small, bottom-left */
+#plCount{
+  position:absolute;bottom:24px;left:var(--gut);
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute-2);opacity:0;transition:opacity .4s
+}
+#plCount.show{opacity:1}
+
+/* skip */
+#plSkip{
+  position:absolute;top:24px;right:var(--gut);
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute-2);transition:color .3s
+}
+#plSkip:hover{color:var(--bone)}
+</style>
+
+<style id="nav-css">
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:80;height:72px;
+  display:flex;align-items:center;padding:0 var(--gut);
+  transition:height .4s var(--e1),background .5s,border-color .5s,backdrop-filter .5s;
+  border-bottom:1px solid transparent
+}
+#nav.solid{height:60px;background:rgba(14,12,10,.85);backdrop-filter:blur(18px);border-color:var(--line)}
+.brand{display:flex;align-items:center;gap:12px;z-index:2}
+.brand .wm{font-family:var(--disp);font-weight:400;font-size:24px;letter-spacing:.02em;color:var(--bone)}
+.brand .wm .dot{color:var(--steel)}
+.nav-mid{position:absolute;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:26px;z-index:2}
+.nav-r a:not(.nav-btn){font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--mute);position:relative;transition:color .3s}
+.nav-r a:not(.nav-btn)::after{content:'';position:absolute;left:0;bottom:-4px;width:100%;height:1px;
+  background:var(--steel);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--e1)}
+.nav-r a:not(.nav-btn):hover{color:var(--bone)}
+.nav-r a:not(.nav-btn):hover::after{transform:scaleX(1);transform-origin:left}
+.nav-btn{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--steel);border:1px solid var(--steel-20);padding:10px 16px;transition:background .3s,color .3s,border-color .3s}
+.nav-btn:hover{background:var(--steel);color:var(--ink);border-color:var(--steel)}
+@media(max-width:900px){.nav-mid{display:none}.nav-r{gap:12px}.nav-r a:not(.nav-btn){display:none}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">Ayin</a>
-  <a href="#entry" class="nav-cta">Begin Assessment</a>
-</nav>
+<div class="atmos" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"><div id="pf"></div></div>
 
-<!-- ==============================
-     HERO
-============================== -->
-<section class="hero">
-  <div class="hero-line"></div>
-  <p class="hero-eyebrow">Compliance Infrastructure</p>
-  <h1 class="hero-headline">
-    Most businesses meet compliance<br>
-    once. At the <em>worst possible</em><br>
-    time.
-  </h1>
-  <p class="hero-sub">
-    By then, the question is no longer whether you comply. 
-    It is whether you can prove you ever intended to. 
-    Ayin builds the infrastructure that answers that question — before it is ever asked.
-  </p>
-  <div class="hero-bottom">
-    <span class="hero-scroll">Scroll</span>
-    <span class="hero-latin">Ignorantia juris non excusat</span>
-  </div>
-</section>
-
-<!-- ==============================
-     CONSEQUENCE
-============================== -->
-<section class="section-consequence">
-  <div>
-    <p class="section-label">What follows</p>
-    <h2 class="consequence-title">
-      One incident.<br>
-      <em>Standard sequence.</em>
-    </h2>
-    <blockquote class="consequence-note">
-      This is not worst case. This is the routine progression of a compliance incident when no infrastructure exists to interrupt it.
-    </blockquote>
-  </div>
-  <div class="cascade">
-    <div class="cascade-item">
-      <span class="cascade-num">i.</span>
-      <div class="cascade-text">
-        Regulatory notice received
-        <span>Your business is now formally under scrutiny</span>
-      </div>
-    </div>
-    <div class="cascade-item">
-      <span class="cascade-num">ii.</span>
-      <div class="cascade-text">
-        Legal representation engaged
-        <span>Fees begin immediately. Clock runs regardless of outcome</span>
-      </div>
-    </div>
-    <div class="cascade-item">
-      <span class="cascade-num">iii.</span>
-      <div class="cascade-text">
-        Past behaviour examined
-        <span>Regulators look back. Everything becomes evidence</span>
-      </div>
-    </div>
-    <div class="cascade-item">
-      <span class="cascade-num">iv.</span>
-      <div class="cascade-text">
-        Investors and partners notified
-        <span>Confidence erodes. Relationships enter uncertainty</span>
-      </div>
-    </div>
-    <div class="cascade-item">
-      <span class="cascade-num">v.</span>
-      <div class="cascade-text">
-        Operations disrupted
-        <span>Focus shifts entirely. The business suffers in parallel</span>
-      </div>
-    </div>
-    <div class="cascade-item">
-      <span class="cascade-num">vi.</span>
-      <div class="cascade-text">
-        Reputational exposure surfaces
-        <span>Searches, press, industry networks — it travels</span>
-      </div>
-    </div>
-    <div class="cascade-item">
-      <span class="cascade-num">vii.</span>
-      <div class="cascade-text">
-        Court proceedings if escalated
-        <span>At this stage, what you cannot show defines you</span>
-      </div>
-    </div>
-    <p class="cascade-warning">↑ Every stage above is preventable. None are recoverable quietly.</p>
-  </div>
-</section>
-
-<!-- ==============================
-     MIRROR — APPLICABILITY
-============================== -->
-<section class="section-mirror">
-  <div class="mirror-top">
-    <h2 class="mirror-title">
-      You probably think<br>
-      this does <em>not</em><br>
-      apply to you.
-    </h2>
-    <p class="mirror-sub">
-      Most founders do. Not because they refuse compliance — but because no one has shown them where it begins. It begins closer than they think.
-    </p>
-  </div>
-
-  <div class="applicability-grid">
-    <div class="apply-item">
-      <div class="apply-condition">
-        <strong>You have a website</strong>
-        Data collection laws apply from the first visitor
-      </div>
-      <span class="apply-law">Privacy Law</span>
-    </div>
-    <div class="apply-item">
-      <div class="apply-condition">
-        <strong>You store customer information</strong>
-        Data protection obligations are active
-      </div>
-      <span class="apply-law">GDPR · PDPA</span>
-    </div>
-    <div class="apply-item">
-      <div class="apply-condition">
-        <strong>You use AI tools in your work</strong>
-        AI governance frameworks are emerging and apply
-      </div>
-      <span class="apply-law">AI Governance</span>
-    </div>
-    <div class="apply-item">
-      <div class="apply-condition">
-        <strong>You have international clients or vendors</strong>
-        Cross-border compliance extends your exposure
-      </div>
-      <span class="apply-law">Multi-Jurisdiction</span>
-    </div>
-    <div class="apply-item">
-      <div class="apply-condition">
-        <strong>You have employees or contractors</strong>
-        Labour regulations and conduct obligations apply
-      </div>
-      <span class="apply-law">Employment Law</span>
-    </div>
-    <div class="apply-item">
-      <div class="apply-condition">
-        <strong>Your business has any environmental footprint</strong>
-        Reporting and accountability obligations may apply
-      </div>
-      <span class="apply-law">Environmental</span>
+<!-- ══════════ PROLOGUE ══════════ -->
+<div id="prologue" role="presentation" aria-hidden="true">
+  <span id="plSkip">Skip →</span>
+  <div class="pl-inner">
+    <p id="plQ"></p>
+    <div id="plVerdict">
+      <p id="plVt">Your business is <em>most likely exposed.</em></p>
+      <p id="plVs">Almost every business is. Most don't know what they're exposed to, or what proof of compliance actually looks like.</p>
     </div>
   </div>
+  <div id="plCue"><span>Continue</span><span class="ln"></span></div>
+  <span id="plCount"></span>
+</div>
 
-  <div class="mirror-maxim">
-    <p class="maxim-latin">Ignorantia juris non excusat.</p>
-    <p class="maxim-trans">The law is assumed known by all it governs. Not knowing is not a defence. It never has been.</p>
-  </div>
-</section>
+<!-- ══════════ NAV ══════════ -->
+<header id="nav">
+  <a class="brand" href="#diagnostic" aria-label="Ayin home">
+    <!-- LOGO PLACEHOLDER: replace this svg with your logo -->
+    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+      <ellipse class="m-rim" cx="20" cy="20" rx="18" ry="12"/>
+      <circle class="m-iris" cx="20" cy="20" r="7.5"/>
+      <circle class="m-pupil" cx="20" cy="20" r="3"/>
+    </svg>
+    <span class="wm">Ayin<span class="dot">.</span></span>
+  </a>
+  <span class="nav-mid">Engineering Compliance Infrastructure</span>
+  <nav class="nav-r" aria-label="Site navigation">
+    <a href="#evidence">The Record</a>
+    <a href="#outcomes">How It's Decided</a>
+    <a href="#builds">What We Build</a>
+    <a href="#cta" class="nav-btn">Know where you stand</a>
+  </nav>
+</header>
 
-<!-- ==============================
-     MECHANISM
-============================== -->
-<section class="section-mechanism">
-  <div class="mechanism-header reveal">
-    <p class="section-label">How outcomes are decided</p>
-    <h2 class="mechanism-title">
-      When compliance arrives,<br>
-      it asks what you <em>showed</em> —<br>
-      not what you meant.
-    </h2>
-  </div>
-
-  <div class="pillars">
-    <div class="pillar reveal">
-      <span class="pillar-num">I</span>
-      <h3 class="pillar-term">Intent</h3>
-      <p class="pillar-def">
-        Did your business behave as though compliance mattered? Regulators assess the posture of an organisation — whether systems existed, policies were maintained, decisions were documented. Intent is demonstrated, not declared.
-      </p>
-      <p class="pillar-legal">Demonstrated through infrastructure</p>
+<!-- ══════════ §1 DIAGNOSTIC — SPLIT SCREEN ══════════ -->
+<style>
+#diagnostic{
+  position:relative;z-index:1;
+  background:var(--ink);
+  min-height:100svh;
+  display:grid;
+  grid-template-columns:2fr 3fr;
+  border-top:1px solid var(--line)
+}
+/* left: framing */
+.dx-left{
+  border-right:1px solid var(--line);
+  padding:clamp(96px,14vh,148px) var(--gut) clamp(60px,8vh,96px);
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative
+}
+.dx-left .eyebrow{margin-bottom:28px}
+.dx-h1{
+  font-family:var(--disp);font-weight:400;
+  font-size:clamp(26px,3.2vw,44px);
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--bone);margin-bottom:18px
+}
+.dx-h1 em{font-style:italic;color:var(--steel)}
+.dx-sub{
+  font-size:clamp(13px,1.2vw,15.5px);line-height:1.72;
+  color:var(--mute);font-weight:300;
+  max-width:38ch;margin-bottom:clamp(26px,4vh,38px)
+}
+.dx-sub b{color:var(--bone);font-weight:500}
+/* what the result shows */
+.dx-what{
+  border-top:1px solid var(--line);
+  padding-top:22px;display:flex;flex-direction:column;gap:11px
+}
+.dx-wi{
+  display:flex;gap:11px;align-items:center;
+  font-size:13px;color:var(--mute);line-height:1.4
+}
+.dx-wi::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--steel);flex-shrink:0;opacity:.7
+}
+/* right: console */
+.dx-right{
+  padding:clamp(80px,12vh,120px) clamp(28px,3.5vw,60px) clamp(60px,8vh,96px);
+  display:flex;flex-direction:column;justify-content:center
+}
+/* console */
+.console{
+  border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--ink-1),var(--ink))
+}
+.console-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;border-bottom:1px solid var(--line)
+}
+.cbar-l{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bone);display:flex;align-items:center;gap:10px}
+.cbar-l .dot{width:7px;height:7px;border-radius:50%;background:var(--steel);
+  box-shadow:0 0 9px var(--steel-glow);animation:cpulse 2.6s var(--e2) infinite}
+@keyframes cpulse{0%,100%{opacity:1}50%{opacity:.3}}
+.cbar-r{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2)}
+/* questionnaire stage */
+.xp-stage{padding:clamp(24px,3.5vw,42px) clamp(20px,3vw,40px)}
+.xp-prog{display:flex;gap:6px;margin-bottom:32px}
+.xp-pip{flex:1;height:2px;background:var(--line);overflow:hidden}
+.xp-pip span{display:block;height:100%;width:0;background:var(--steel);transition:width .45s var(--e1)}
+.xp-pip.done span{width:100%}
+.xp-qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);margin-bottom:14px;display:block}
+.xp-qt{font-family:var(--disp);font-weight:400;font-size:clamp(18px,2.2vw,28px);line-height:1.2;letter-spacing:-.015em;margin-bottom:7px;color:var(--bone)}
+.xp-hint{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--mute-2);margin-bottom:26px}
+.xp-opts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:32px}
+.xp-opt{font-family:var(--body);font-size:14px;color:var(--mute);border:1px solid var(--line);
+  padding:12px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;
+  line-height:1.3;text-align:left;transition:border-color .3s,color .3s,background .3s}
+.xp-opt .sw{width:10px;height:10px;border:1px solid var(--mute-2);flex-shrink:0;transition:background .3s,border-color .3s}
+.xp-opt:hover{border-color:var(--steel-dim);color:var(--bone)}
+.xp-opt.on{border-color:var(--steel);color:var(--bone);background:var(--steel-12)}
+.xp-opt.on .sw{background:var(--steel);border-color:var(--steel);box-shadow:0 0 7px var(--steel-glow)}
+.xp-nav{display:flex;align-items:center;justify-content:space-between;padding-top:22px;border-top:1px solid var(--line)}
+.xp-back{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2);cursor:pointer;transition:color .3s}
+.xp-back:hover{color:var(--bone)}.xp-back[disabled]{opacity:0;pointer-events:none}
+.xp-next{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--steel);padding:12px 22px;cursor:pointer;transition:gap .3s var(--e1),opacity .3s,background .3s}
+.xp-next:hover:not([disabled]){gap:14px;background:var(--steel-hi)}
+.xp-next[disabled]{opacity:.28;cursor:not-allowed;background:var(--ink-3);color:var(--mute)}
+/* result */
+.xp-result{display:none}
+.xp-result.show{display:block;animation:rFade .55s var(--e2)}
+@keyframes rFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.xpr-bar{display:flex;align-items:center;justify-content:space-between;padding:13px 22px}
+.xpr-bar.t-material{background:var(--steel);color:var(--ink)}
+.xpr-bar.t-acute{background:var(--brass);color:var(--ink)}
+.xpr-bar.t-critical{background:var(--brass-hi);color:var(--brass-deep)}
+.xpr-bl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.xpr-br{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em}
+.xpr-body{padding:clamp(24px,3.5vw,42px) clamp(20px,3vw,40px)}
+.xpr-grid{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 44px}
+.xpr-div{background:var(--line)}
+.m-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute-2);margin-bottom:12px;display:block}
+.meter{height:6px;background:var(--ink-2);overflow:hidden;margin-bottom:11px}
+.mfill{height:100%;width:0;background:linear-gradient(90deg,var(--steel),var(--brass));transition:width 1.1s var(--e2)}
+.m-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute-2)}
+.xpr-tier{font-family:var(--disp);font-weight:300;font-size:clamp(44px,5.8vw,72px);line-height:1;letter-spacing:-.03em;margin:22px 0 10px}
+.xpr-tier.t-material{color:var(--steel)}.xpr-tier.t-acute,.xpr-tier.t-critical{color:var(--brass)}
+.xpr-read{font-size:13.5px;line-height:1.76;color:var(--mute)}
+.xpr-read b{color:var(--bone);font-weight:500}
+.rg-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);margin-bottom:14px;display:block}
+.regime{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--line-2)}
+.regime:last-child{border-bottom:none}
+.regime-n{font-size:13.5px;color:var(--bone);font-weight:500}
+.regime-c{font-family:var(--mono);font-size:9.5px;color:var(--mute);white-space:nowrap}
+.xpr-prec{margin-top:22px;border:1px solid var(--brass-20);background:var(--brass-12);padding:18px 20px}
+.xpr-prec .pp-l{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:9px;display:block}
+.xpr-prec .pp-t{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.6vw,18px);line-height:1.44;color:var(--bone)}
+.xpr-prec .pp-t b{font-style:normal;font-family:var(--mono);font-weight:600;color:var(--brass)}
+.xpr-cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:28px;padding-top:22px;border-top:1px solid var(--line)}
+.xp-restart{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2);cursor:pointer;transition:color .3s}
+.xp-restart:hover{color:var(--bone)}
+@media(max-width:960px){
+  #diagnostic{grid-template-columns:1fr;min-height:auto}
+  .dx-left{border-right:none;border-bottom:1px solid var(--line);padding:clamp(100px,14vh,130px) var(--gut) 40px}
+  .dx-right{padding:36px var(--gut) clamp(60px,8vh,96px)}
+  .xpr-grid{grid-template-columns:1fr;gap:28px}.xpr-div{display:none}
+}
+</style>
+<section id="diagnostic" class="sec">
+  <div class="dx-left r">
+    <span class="eyebrow">The Exposure Instrument</span>
+    <h1 class="dx-h1">Find out exactly what<br>you're <em>exposed to.</em></h1>
+    <p class="dx-sub">Five questions. Result in under a minute. <b>No email required to see it.</b></p>
+    <div class="dx-what">
+      <div class="dx-wi">Which compliance regimes apply to you — by name</div>
+      <div class="dx-wi">The penalty ceiling for each one</div>
+      <div class="dx-wi">What a business with your profile has already paid</div>
     </div>
-    <div class="pillar reveal">
-      <span class="pillar-num">II</span>
-      <h3 class="pillar-term">Reasonable Steps</h3>
-      <p class="pillar-def">
-        Did you take the steps that a responsible organisation under the same obligations would have taken? This is an objective standard. Courts and regulators apply it to your actual conduct — not your intentions or awareness.
-      </p>
-      <p class="pillar-legal">Measured against industry standard</p>
-    </div>
-    <div class="pillar reveal">
-      <span class="pillar-num">III</span>
-      <h3 class="pillar-term">Willful Ignorance</h3>
-      <p class="pillar-def">
-        The most damaging finding. If evidence suggests you knew, or reasonably should have known, and took no action — this removes most legal protections. It converts an incident into a liability and a liability into an example.
-      </p>
-      <p class="pillar-legal" style="color: var(--ember);">The difference between a warning and a case</p>
-    </div>
   </div>
-
-  <div class="mechanism-verdict reveal">
-    <p class="verdict-text">
-      The difference between a regulatory warning and a court case<br>
-      is almost always <strong>infrastructure</strong> —<br>
-      and whether there was any to show.
-    </p>
-  </div>
-</section>
-
-<!-- ==============================
-     CLOCK
-============================== -->
-<section class="section-clock">
-  <div class="clock-ring"></div>
-  <div class="clock-ring clock-ring-2"></div>
-  <div class="clock-ring clock-ring-3"></div>
-  <div class="clock-content">
-    <p class="clock-label">The compliance clock</p>
-    <div class="clock-lines">
-      <p class="clock-line">Compliance begins the day your business does.</p>
-      <p class="clock-line">Regulators examine present, past, and future.</p>
-      <p class="clock-line">Most businesses are already running late.</p>
-    </div>
-    <div class="clock-cta">
-      <a href="#entry" class="btn-ghost">Find out where you stand</a>
+  <div class="dx-right r d1">
+    <div class="console">
+      <div class="console-bar">
+        <span class="cbar-l"><span class="dot"></span>Exposure Instrument</span>
+        <span class="cbar-r">AYIN / EXP · CONFIDENTIAL</span>
+      </div>
+      <div class="xp-stage" id="xpStage">
+        <div class="xp-prog" id="xpProg"></div>
+        <span class="xp-qn" id="xpQn">Question 01 / 05</span>
+        <h2 class="xp-qt" id="xpQt"></h2>
+        <p class="xp-hint" id="xpHint"></p>
+        <div class="xp-opts" id="xpOpts"></div>
+        <div class="xp-nav">
+          <span class="xp-back" id="xpBack" disabled>← Back</span>
+          <button class="xp-next" id="xpNext" disabled>Next →</button>
+        </div>
+      </div>
+      <div class="xp-result" id="xpResult">
+        <div class="xpr-bar" id="xprBar"><span class="xpr-bl">Exposure readout</span><span class="xpr-br" id="xprConf">ANALYSIS COMPLETE</span></div>
+        <div class="xpr-body">
+          <div class="xpr-grid">
+            <div>
+              <span class="m-lbl">Exposure index</span>
+              <div class="meter"><div class="mfill" id="mFill"></div></div>
+              <div class="m-scale"><span>Contained</span><span>Material</span><span>Acute</span><span>Critical</span></div>
+              <div class="xpr-tier" id="xprTier"></div>
+              <p class="xpr-read" id="xprRead"></p>
+            </div>
+            <div class="xpr-div"></div>
+            <div>
+              <span class="rg-lbl">Regimes you fall under</span>
+              <div id="xprRegimes"></div>
+              <div class="xpr-prec"><span class="pp-l">Precedent · public record</span><p class="pp-t" id="xprPrec"></p></div>
+            </div>
+          </div>
+          <div class="xpr-cta">
+            <a href="#cta" class="cta">Know where you stand <span class="arr">→</span></a>
+            <span class="xp-restart" id="xpRestart">↺ Run again</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ==============================
-     THREE MOMENTS
-============================== -->
-<section class="section-moments">
-  <div class="moments-header reveal">
-    <p class="section-label">When compliance finds you</p>
-    <h2 class="moments-title">
-      Every business faces compliance<br>
-      at one of three moments.
-    </h2>
-  </div>
+<!-- ══════════ MAXIM BAND ══════════ -->
+<style>
+.maxim-band{position:relative;z-index:1;background:var(--void);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(50px,8vh,76px) var(--gut);text-align:center}
+.mb-t{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(17px,1.8vw,23px);line-height:1.34;letter-spacing:-.01em;color:var(--bone-2)}
+.mb-s{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel-dim);margin-top:13px}
+</style>
+<div class="maxim-band">
+  <p class="mb-t r">Vigilantibus non dormientibus jura subveniunt.</p>
+  <p class="mb-s r d1">The law assists the vigilant — not those who sleep on their rights.</p>
+</div>
 
-  <div class="moments-grid">
-    <div class="moment reveal">
-      <p class="moment-number">01</p>
-      <p class="moment-tag">Ideal</p>
-      <h3 class="moment-heading">At inception.<br>Before exposure.</h3>
-      <p class="moment-body">
-        Infrastructure exists before scrutiny arrives. Policies are live. Systems are operational. The paper trail begins from day one. When a regulator or investor looks — there is something to show.
-      </p>
-      <p class="moment-status status-ideal">↑ This is where Ayin works best</p>
-    </div>
-    <div class="moment reveal">
-      <p class="moment-number">02</p>
-      <p class="moment-tag">Late but recoverable</p>
-      <h3 class="moment-heading">At investor or<br>third-party scrutiny.</h3>
-      <p class="moment-body">
-        Due diligence is underway. A partner needs assurance. A contract requires proof. What can you show? What does your trail look like right now? Late is better than never — if built seriously.
-      </p>
-      <p class="moment-status status-late">→ Ayin can build quickly under this pressure</p>
-    </div>
-    <div class="moment moment-danger reveal">
-      <p class="moment-number">03</p>
-      <p class="moment-tag">Critical</p>
-      <h3 class="moment-heading">At regulatory or<br>legal escalation.</h3>
-      <p class="moment-body">
-        A regulator investigates. A breach is reported. A dispute is filed. Past, present, and future behaviour is now under formal examination. What did not exist cannot be rebuilt retroactively with credibility.
-      </p>
-      <p class="moment-status status-critical">↓ At this stage, infrastructure is everything</p>
-    </div>
-  </div>
+<!-- ══════════ §2 EVIDENCE ROOM — FIGURE FIRST ══════════ -->
+<style>
+#evidence{position:relative;z-index:1;background:var(--void);border-top:1px solid var(--line)}
+.ev-wrap{max-width:var(--maxw);margin:0 auto}
+.ev-head{padding:var(--pad) var(--gut) 0;display:grid;grid-template-columns:1.2fr .8fr;gap:0 56px;align-items:end}
+.ev-h2{color:var(--bone)}
+.ev-intro{color:var(--mute);font-size:15px;line-height:1.74;font-weight:300;border-left:1px solid var(--line);padding-left:24px}
+.ev-intro b{color:var(--bone);font-weight:500}
+.ev-meta{padding:34px var(--gut) 0;display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute-2)}
+.docket{padding:14px var(--gut) var(--pad)}
 
-  <div class="moments-footer reveal">
-    <p class="moments-footer-text">
-      Ayin exists for the <strong>first moment.</strong><br>
-      But it works at all three.
-    </p>
-    <a href="#entry" class="nav-cta">Begin your assessment →</a>
+/* ─── FIGURE-FIRST ROW REDESIGN ─── */
+.exh{border-top:1px solid var(--line)}
+.exh:last-child{border-bottom:1px solid var(--line)}
+.exh-head{
+  display:grid;
+  grid-template-columns:clamp(180px,26%,300px) 1fr auto;
+  gap:0 clamp(20px,3vw,44px);
+  align-items:center;
+  padding:clamp(20px,3vh,30px) 0;
+  cursor:pointer;
+  position:relative;
+  transition:padding-left .4s var(--e1)
+}
+.exh-head::before{content:'';position:absolute;left:-26px;top:0;bottom:0;width:2px;background:var(--brass);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--e1)}
+.exh-head:hover{padding-left:12px}
+.exh-head:hover::before,.exh.open .exh-head::before{transform:scaleY(1)}
+
+/* THE DOMINANT ELEMENT: the figure */
+.exh-fig{
+  font-family:var(--mono);font-weight:600;
+  font-size:clamp(44px,6.5vw,90px);
+  letter-spacing:-.04em;color:var(--bone-2);
+  line-height:.88;white-space:nowrap;
+  transition:color .4s,text-shadow .4s
+}
+.exh.open .exh-fig,.exh-head:hover .exh-fig{
+  color:var(--brass);
+  text-shadow:0 0 50px var(--brass-glow)
+}
+.exh-cur{font-size:.44em;color:var(--mute-2);font-weight:400;vertical-align:.3em;margin-right:.06em;transition:color .4s}
+.exh.open .exh-cur,.exh-head:hover .exh-cur{color:var(--brass)}
+
+/* info column */
+.exh-info{display:flex;flex-direction:column;gap:6px}
+.exh-co{font-family:var(--disp);font-weight:400;font-size:clamp(17px,1.8vw,24px);letter-spacing:-.01em;color:var(--bone);line-height:1.1}
+.exh-juris{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute-2)}
+.exh-charge{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(13px,1.3vw,15.5px);line-height:1.42;color:var(--mute)}
+
+/* expand cue */
+.exh-cue{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2);white-space:nowrap;transition:color .3s}
+.exh-head:hover .exh-cue,.exh.open .exh-cue{color:var(--brass)}
+
+/* detail panel */
+.exh-panel{max-height:0;overflow:hidden;transition:max-height .65s var(--e2)}
+.exh-pin{padding:4px 0 36px clamp(0px,calc(26% + 44px),344px);display:grid;grid-template-columns:1fr 1fr;gap:0 52px}
+.ep-l{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);margin-bottom:13px;display:block}
+.ep-what{font-size:14px;line-height:1.8;color:var(--bone-2)}
+.ep-rec{border-left:1px solid var(--line);padding-left:26px}
+/* COULDNT SHOW — the headline of each detail */
+.ep-couldnt{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(17px,1.9vw,23px);line-height:1.4;color:var(--bone)}
+.ep-cite{margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--mute);line-height:1.7}
+.ep-cite span{color:var(--steel)}
+
+@media(max-width:900px){
+  .ev-head{grid-template-columns:1fr;gap:20px}.ev-intro{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:18px}
+  .ev-meta{flex-direction:column;gap:5px}
+  .exh-head{grid-template-columns:clamp(100px,35vw,180px) 1fr;grid-template-areas:"fig info" "fig cue";gap:8px clamp(14px,3vw,28px);align-items:start}
+  .exh-fig{grid-area:fig;font-size:clamp(36px,9vw,64px)}.exh-info{grid-area:info}.exh-cue{grid-area:cue;align-self:end}
+  .exh-pin{grid-template-columns:1fr;gap:24px;padding-left:0}.ep-rec{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:20px}
+}
+</style>
+<section id="evidence" class="sec">
+  <div class="ev-wrap">
+    <div class="ev-head">
+      <h2 class="ev-h2 disp r">These businesses<br>shared your exposure.<br><em>The record is public.</em></h2>
+      <p class="ev-intro r d2">Not warnings. Not hypotheticals. Closed enforcement actions — each issued by a regulator, each in the public ledger. Each business had lawyers. Each believed it was compliant. What none of them could do, <b>at the moment it was asked</b>, was show it.</p>
+    </div>
+    <div class="ev-meta r d2"><span>Exhibits · 01–06</span><span>Open any line</span></div>
+    <div class="docket" id="docket"></div>
   </div>
 </section>
 
-<!-- ==============================
-     WHAT AYIN IS
-============================== -->
-<section class="section-ayin">
-  <div class="ayin-left reveal">
-    <p class="section-label">What Ayin is</p>
-    <h2 class="ayin-title">
-      Not a law firm.<br>
-      Not a consultant.<br>
-      <em>Infrastructure.</em>
-    </h2>
-    <div class="ayin-not">
-      <p class="not-item">We do not represent you before regulators or courts</p>
-      <p class="not-item">We do not make your team compliant on your behalf</p>
-      <p class="not-item">We do not deliver reports that are never operationalised</p>
-      <p class="not-item">We do not disappear when the engagement ends</p>
-    </div>
-    <div class="ayin-is">
-      <p class="ayin-is-label">What we do</p>
-      <p class="ayin-is-text">We engineer the compliance infrastructure that your business operates through — and can demonstrate under any scrutiny.</p>
-    </div>
-  </div>
-  <div class="ayin-right reveal">
-    <p class="ayin-para">
-      Most compliance failures are not failures of intention. Founders are not malicious. They are unaware. They assumed compliance was for other industries, other sizes, other geographies. <strong>The law made no such assumption.</strong>
-    </p>
-    <p class="ayin-para">
-      What separates a regulatory warning from a court proceeding is almost always the same thing — whether the business can show it was serious. Systems existed. Policies were maintained. Decisions were documented. <strong>Intent was demonstrated through infrastructure, not words.</strong>
-    </p>
-    <p class="ayin-para">
-      Regulators understand this distinction and they use it. Businesses with structured compliance infrastructure — documented intent, operational systems, clear paper trails — are treated differently. Not because they are innocent but because they can show they were serious.
-    </p>
-    <p class="ayin-statement">
-      Ayin builds the compliance infrastructure that businesses should have had from the beginning.
-    </p>
-  </div>
-</section>
+<!-- ══════════ §3 OUTCOMES — PROGRESSIVE SIZING ══════════ -->
+<style>
+#outcomes{position:relative;z-index:1;background:var(--ink);border-top:1px solid var(--line)}
+.oc-wrap{max-width:var(--maxw);margin:0 auto;padding:var(--pad) var(--gut)}
+/* HEADING — two parts: small setup, large landing */
+.oc-head{margin-bottom:clamp(50px,7vh,82px)}
+.oc-pre{font-size:clamp(14px,1.4vw,17px);line-height:1.5;color:var(--mute);font-weight:300;font-family:var(--body);margin-bottom:12px}
+.oc-h2{color:var(--bone)}
+.oc-h2 em{color:var(--steel)}
 
-<!-- ==============================
-     WHAT WE BUILD
-============================== -->
-<section class="section-build">
-  <div class="build-header reveal">
-    <div>
-      <p class="section-label">The infrastructure</p>
-      <h2 class="build-title">
-        Compliance infrastructure<br>
-        is not a document.<br>
-        It is a system.
-      </h2>
-    </div>
-    <p class="build-sub">
-      Your business lives inside it. It evolves with law. It is operational, not decorative — and it is what you show.
-    </p>
-  </div>
+/* PROGRESSIVE COLUMNS — height, size and presence all escalate */
+.oc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.oc-col{border-right:1px solid var(--line);position:relative;overflow:hidden;transition:background .4s}
+.oc-col:last-child{border-right:none}
+.oc-col:hover{background:var(--ink-1)}
+/* escalating padding */
+.oc-col:nth-child(1){padding:36px 28px 44px}
+.oc-col:nth-child(2){padding:44px 32px 54px}
+.oc-col:nth-child(3){padding:54px 36px 64px}
 
-  <div class="build-grid">
-    <div class="build-item">
-      <div class="build-icon">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <h3 class="build-name">Policy Architecture</h3>
-      <p class="build-desc">Written, version-controlled, dated. Showing evolution over time. Policies that exist in operation — not filed and forgotten.</p>
-    </div>
-    <div class="build-item">
-      <div class="build-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      </div>
-      <h3 class="build-name">Documented Processes</h3>
-      <p class="build-desc">How your business handles data, AI, environmental obligations, and governance. Operationally real. Examinable at any point.</p>
-    </div>
-    <div class="build-item">
-      <div class="build-icon">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <h3 class="build-name">Audit-Ready Records</h3>
-      <p class="build-desc">A paper trail that survives scrutiny. Structured so that past behaviour can be presented clearly — not assembled under pressure.</p>
-    </div>
-    <div class="build-item">
-      <div class="build-icon">
-        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-      </div>
-      <h3 class="build-name">Disclosure Frameworks</h3>
-      <p class="build-desc">What you tell clients, partners, and regulators — and when. Structured disclosures that demonstrate transparency as standard practice.</p>
-    </div>
-    <div class="build-item">
-      <div class="build-icon">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      </div>
-      <h3 class="build-name">Governance Systems</h3>
-      <p class="build-desc">How decisions are made, escalated, and recorded within your business. The structure that proves decisions were deliberate — not accidental.</p>
-    </div>
-    <div class="build-item">
-      <div class="build-icon">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-      </div>
-      <h3 class="build-name">Compliance Roadmaps</h3>
-      <p class="build-desc">Where you are today. Where law is moving. What you need to build next. Compliance is not static — the infrastructure should not be either.</p>
-    </div>
-  </div>
-</section>
+/* decorative bg numeral — grows with column */
+.oc-col::before{content:attr(data-num);position:absolute;top:-4px;right:-6px;
+  font-family:var(--disp);font-weight:300;font-style:italic;
+  color:var(--bone);pointer-events:none;user-select:none;
+  letter-spacing:-.03em;line-height:1}
+.oc-col:nth-child(1)::before{font-size:90px;opacity:.038}
+.oc-col:nth-child(2)::before{font-size:114px;opacity:.044}
+.oc-col:nth-child(3)::before{font-size:142px;opacity:.05;color:var(--brass)}
 
-<!-- ==============================
-     AREAS
-============================== -->
-<section class="section-areas">
-  <div class="areas-inner">
-    <div class="areas-left reveal">
-      <p class="section-label">Areas of practice</p>
-      <h2 class="areas-title">
-        Where law<br>
-        is moving<br>
-        fastest.
-      </h2>
-      <p class="areas-desc">
-        Ayin operates in emerging compliance — the areas where most businesses have no infrastructure yet and regulators are beginning to look. These are not legacy obligations. They are the obligations being created now, for businesses exactly like yours.
-      </p>
-      <p class="areas-desc" style="margin-top: 20px;">
-        Enforcement in these areas is intensifying. Fines are being set at levels designed to make examples. The window for building infrastructure before scrutiny arrives is narrowing.
-      </p>
+.oc-n{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--steel);margin-bottom:20px;display:block}
+.oc-col:nth-child(3) .oc-n{color:var(--brass)}
+
+/* ESCALATING NAME SIZES */
+.oc-col:nth-child(1) .oc-name{font-size:clamp(18px,1.8vw,22px)}
+.oc-col:nth-child(2) .oc-name{font-size:clamp(22px,2.3vw,28px)}
+.oc-col:nth-child(3) .oc-name{font-size:clamp(27px,2.9vw,36px)}
+.oc-name{font-family:var(--disp);font-weight:400;letter-spacing:-.01em;color:var(--bone);margin-bottom:7px;line-height:1.12}
+.oc-sub{font-family:var(--disp);font-style:italic;font-weight:300;color:var(--steel);margin-bottom:18px;line-height:1.3}
+.oc-col:nth-child(1) .oc-sub{font-size:13.5px}
+.oc-col:nth-child(2) .oc-sub{font-size:14.5px}
+.oc-col:nth-child(3) .oc-sub{font-size:15.5px;color:var(--brass)}
+.oc-col:nth-child(3){background:linear-gradient(160deg,var(--brass-12) 0%,transparent 55%)}
+.oc-col:nth-child(3):hover{background:linear-gradient(160deg,var(--brass-12),var(--ink-1))}
+
+/* escalating body text */
+.oc-col:nth-child(1) .oc-body{font-size:13px;line-height:1.78}
+.oc-col:nth-child(2) .oc-body{font-size:13.5px;line-height:1.8}
+.oc-col:nth-child(3) .oc-body{font-size:14px;line-height:1.82}
+.oc-body{color:var(--mute)}
+.oc-tag{margin-top:24px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2);display:flex;align-items:center;gap:9px}
+.oc-tag::before{content:'';width:14px;height:1px;background:var(--steel-dim)}
+.oc-col:nth-child(3) .oc-tag::before{background:var(--brass)}
+
+/* maxim — second one, isolated italic line */
+.oc-maxim{margin-top:clamp(48px,7vh,76px);text-align:center;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,1.8vw,23px);line-height:1.4;letter-spacing:-.01em;color:var(--steel)}
+
+/* coda */
+.oc-coda{margin-top:clamp(28px,4vh,44px);text-align:center;max-width:62ch;margin-left:auto;margin-right:auto;padding:clamp(24px,3.5vh,38px) 0;border-top:1px solid var(--line)}
+.oc-coda p{font-family:var(--disp);font-weight:300;font-size:clamp(19px,2.4vw,30px);line-height:1.34;letter-spacing:-.015em;color:var(--bone-2)}
+.oc-coda em{font-style:italic;color:var(--steel)}
+@media(max-width:900px){
+  .oc-grid{grid-template-columns:1fr}
+  .oc-col:nth-child(1),.oc-col:nth-child(2),.oc-col:nth-child(3){border-right:none;border-bottom:1px solid var(--line);padding:34px 0}
+  .oc-col:last-child{border-bottom:none}
+  .oc-col:nth-child(1)::before,.oc-col:nth-child(2)::before,.oc-col:nth-child(3)::before{font-size:80px}
+}
+</style>
+<section id="outcomes" class="sec">
+  <div class="oc-wrap">
+    <div class="oc-head r">
+      <p class="oc-pre">Compliance doesn't only look at the incident.</p>
+      <h2 class="oc-h2 disp-l">It looks at your past, your present, <em>and your future.</em></h2>
     </div>
-    <div class="areas-right reveal">
-      <div class="area-row">
-        <span class="area-name">Data Privacy & Protection</span>
-        <span class="area-tag">Active</span>
+    <div class="oc-grid lift">
+      <div class="oc-col" data-num="i">
+        <span class="oc-n">i.</span>
+        <h3 class="oc-name">Intent</h3>
+        <p class="oc-sub">Demonstrated, never declared.</p>
+        <p class="oc-body">Documented systems, maintained policies, recorded decisions — read as evidence that compliance mattered to you. Their absence is read as evidence that it did not.</p>
+        <span class="oc-tag">Read from what you built</span>
       </div>
-      <div class="area-row">
-        <span class="area-name">AI Use & Governance</span>
-        <span class="area-tag">Expanding</span>
+      <div class="oc-col" data-num="ii">
+        <span class="oc-n">ii.</span>
+        <h3 class="oc-name">Reasonable Steps</h3>
+        <p class="oc-sub">What a responsible business would have done.</p>
+        <p class="oc-body">An objective standard applied to your actual conduct — not your intentions, not your awareness. A question with an answer if infrastructure exists, and none at all if it does not.</p>
+        <span class="oc-tag">Measured against the standard</span>
       </div>
-      <div class="area-row">
-        <span class="area-name">Environmental Compliance</span>
-        <span class="area-tag">Active</span>
+      <div class="oc-col" data-num="iii">
+        <span class="oc-n">iii.</span>
+        <h3 class="oc-name">Willful Ignorance</h3>
+        <p class="oc-sub">The finding that removes your protections.</p>
+        <p class="oc-body">Evidence that you knew — or should have known — and did nothing turns an incident into a liability, a liability into a case, and a case into the example made of your business. Not malice. Inaction. The law treats them the same.</p>
+        <span class="oc-tag">Warning, or courtroom</span>
       </div>
-      <div class="area-row">
-        <span class="area-name">Cybersecurity Frameworks</span>
-        <span class="area-tag">Expanding</span>
-      </div>
-      <div class="area-row">
-        <span class="area-name">Corporate Governance</span>
-        <span class="area-tag">Active</span>
-      </div>
-      <div class="area-row">
-        <span class="area-name">Cross-border Exposure</span>
-        <span class="area-tag">Emerging</span>
-      </div>
-      <p class="areas-note">
-        Compliance is not linear. What applies to your business depends on what your business does, where it operates, and who it touches. Ayin begins every engagement by mapping your exposure — not by listing services.
-      </p>
+    </div>
+    <p class="oc-maxim r">We are not your lawyers. We are the layer beneath them.</p>
+    <div class="oc-coda r">
+      <p>The distance between a warning and a courtroom is almost always <em>infrastructure</em> — and whether there was any to show.</p>
     </div>
   </div>
 </section>
 
-<!-- ==============================
-     INCIDENTS
-============================== -->
-<section class="section-incidents">
-  <div class="incidents-header reveal">
-    <div>
-      <p class="section-label" style="color: rgba(244,240,232,0.3);">Pattern recognition</p>
-      <h2 class="incidents-title">
-        These are not<br>
-        rare events.
-      </h2>
-    </div>
-    <p class="incidents-note">
-      Incidents below are representative patterns — not isolated cases. Every founder who reads one will know someone this happened to.
-    </p>
-  </div>
+<!-- ══════════ §4 CAN YOU PROVE IT? — STRIPPED ══════════ -->
+<style>
+#proveit{position:relative;z-index:1;background:var(--void);border-top:1px solid var(--line)}
+.pi-wrap{max-width:var(--maxw);margin:0 auto;padding:var(--pad) var(--gut)}
+.pi-eyebrow{margin-bottom:clamp(22px,3.5vh,36px)}
+/* THE MASSIVE QUESTION */
+.pi-h2{
+  font-family:var(--disp);font-weight:300;
+  font-size:clamp(52px,9.5vw,130px);
+  line-height:.93;letter-spacing:-.04em;
+  color:var(--bone);
+  margin-bottom:clamp(26px,4vh,42px)
+}
+.pi-h2 em{font-style:italic;color:var(--steel)}
+/* one short paragraph — no sub-questions */
+.pi-sub{
+  max-width:58ch;
+  font-size:clamp(15px,1.5vw,19px);
+  line-height:1.72;color:var(--mute);font-weight:300;
+  margin-bottom:clamp(64px,10vh,108px)
+}
+.pi-sub b{color:var(--bone);font-weight:500}
 
-  <div class="incident-grid">
-    <div class="incident reveal">
-      <p class="incident-type">Data Privacy</p>
-      <h3 class="incident-who">E-commerce founder. No privacy policy.</h3>
-      <p class="incident-what">Customer data breach. Regulator investigation opened. No documented data handling practices. No evidence of any prior compliance steps taken.</p>
-      <p class="incident-outcome">Fine issued. Infrastructure built after: <strong>too late for this incident</strong> — used to demonstrate intent going forward. The fine stood.</p>
+/* timing triad */
+.pi-timing-h{font-family:var(--disp);font-weight:300;font-size:clamp(24px,3.2vw,42px);line-height:1.06;letter-spacing:-.02em;color:var(--bone);margin-bottom:clamp(32px,5vh,52px)}
+.pi-timing-h em{font-style:italic;color:var(--steel)}
+.timing{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:2px solid;
+  border-image:linear-gradient(90deg,var(--steel),var(--brass)) 1
+}
+.t-stage{padding:36px 26px 42px;border-right:1px solid var(--line);transition:background .4s;position:relative}
+.t-stage:last-child{border-right:none}
+.t-stage:hover{background:var(--ink-1)}
+.t-when{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-bottom:9px;display:block}
+.t-stage.late .t-when{color:var(--brass)}
+.t-name{font-family:var(--disp);font-weight:400;font-size:clamp(18px,2vw,25px);letter-spacing:-.01em;color:var(--bone);margin-bottom:7px;line-height:1.1}
+.t-line{font-family:var(--disp);font-style:italic;font-weight:300;font-size:14px;color:var(--mute);margin-bottom:18px;line-height:1.3}
+.t-body{font-size:13.5px;line-height:1.78;color:var(--mute)}
+.t-body b{color:var(--bone);font-weight:500}
+.t-flag{margin-top:22px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--steel)}
+.t-flag::before{content:'';width:6px;height:6px;background:var(--steel)}
+.t-stage.late .t-flag{color:var(--brass)}.t-stage.late .t-flag::before{background:var(--brass)}
+.pi-coda{margin-top:clamp(40px,6vh,64px);text-align:center}
+.pi-coda p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(16px,1.7vw,21px);line-height:1.44;letter-spacing:-.01em;color:var(--mute)}
+.pi-coda span{color:var(--steel);font-style:normal}
+@media(max-width:900px){
+  .timing{grid-template-columns:1fr}.t-stage{border-right:none;border-bottom:1px solid var(--line)}.t-stage:last-child{border-bottom:none}
+}
+</style>
+<section id="proveit" class="sec">
+  <div class="pi-wrap">
+    <span class="pi-eyebrow eyebrow r">Intent · Reasonable steps · Willful ignorance</span>
+    <h2 class="pi-h2 r d1">Can you<br><em>prove it?</em></h2>
+    <p class="pi-sub r d2">Not whether you comply. Whether you have a record that shows you <b>meant to</b> — written, dated, operational, continuous. Most businesses don't. Most have never been asked what that record looks like, or thought about what it's supposed to contain.</p>
+    <h3 class="pi-timing-h r">Where you build it <em>changes everything.</em></h3>
+    <div class="timing lift">
+      <div class="t-stage">
+        <span class="t-when">At inception</span>
+        <h4 class="t-name">Before anyone asks.</h4>
+        <p class="t-line">The calmest, cheapest, strongest posture.</p>
+        <p class="t-body">Policies live, systems operational, the trail begins day one — <b>an asset compounding quietly beneath the business.</b></p>
+        <span class="t-flag">Where Ayin works best</span>
+      </div>
+      <div class="t-stage">
+        <span class="t-when">At diligence</span>
+        <h4 class="t-name">The question is sudden. The answer is overdue.</h4>
+        <p class="t-line">The express lane — the clock is real.</p>
+        <p class="t-body">A round is underway. A client demands proof. It can still be built — <b>if built seriously, and fast.</b></p>
+        <span class="t-flag">Begin now</span>
+      </div>
+      <div class="t-stage late">
+        <span class="t-when">After escalation</span>
+        <h4 class="t-name">The examination has begun.</h4>
+        <p class="t-line">Infrastructure cannot rebuild a past that was never there.</p>
+        <p class="t-body">What did not exist cannot be conjured with credibility. <b>This stage does not recover.</b></p>
+        <span class="t-flag">Too late to build the past</span>
+      </div>
     </div>
-    <div class="incident reveal">
-      <p class="incident-type">Investor Due Diligence</p>
-      <h3 class="incident-who">SaaS startup. International clients.</h3>
-      <p class="incident-what">Unaware GDPR applied to their operations. Investor due diligence initiated. No documentation of data practices. No compliance framework. No paper trail of any kind.</p>
-      <p class="incident-outcome">Deal <strong>delayed six months</strong>. Infrastructure scrambled under pressure. Terms revised. Trust never fully recovered.</p>
-    </div>
-    <div class="incident reveal">
-      <p class="incident-type">AI Governance</p>
-      <h3 class="incident-who">Consultancy using AI tools in client work.</h3>
-      <p class="incident-what">No AI use policy. No disclosure to clients. No documentation of how AI was applied to their deliverables. Client disputed outcome. No governance to point to.</p>
-      <p class="incident-outcome"><strong>Settlement reached</strong> outside court. Reputation in industry affected. A one-page AI governance document would have changed the entire posture.</p>
+    <div class="pi-coda r">
+      <p>Vigilance is not rewarded with praise. It is rewarded with <span>leniency</span> — when it matters most.</p>
     </div>
   </div>
-
-  <p class="incidents-close">
-    These incidents share one thing. <em>None had infrastructure. All were avoidable.</em>
-  </p>
 </section>
 
-<!-- ==============================
-     SECOND MAXIM
-============================== -->
-<section class="section-maxim">
-  <div class="maxim-bg"></div>
-  <p class="maxim-main">Qui facit per alium facit per se.</p>
-  <p class="maxim-translation">He who acts through another acts through himself.</p>
-  <p class="maxim-application">Your vendors, your tools, your contractors, your AI systems — their compliance failures are yours. The infrastructure must extend across everything your business touches.</p>
-</section>
-
-<!-- ==============================
-     ENTRY / CTA
-============================== -->
-<section class="section-entry" id="entry">
-  <div class="reveal">
-    <p class="section-label">Begin</p>
-    <h2 class="entry-title">
-      Where does<br>
-      your business<br>
-      <em>stand?</em>
-    </h2>
+<!-- ══════════ POSITIONING BAND — inspired by Image 3 (014.png) ══════════ -->
+<style>
+.pos-band{
+  position:relative;z-index:1;
+  background:var(--void);border-top:1px solid var(--line);
+  padding:clamp(64px,10vh,108px) var(--gut)
+}
+.pos-lines{max-width:var(--maxw);margin:0 auto}
+.pos-l{
+  font-family:var(--disp);font-weight:400;
+  font-size:clamp(26px,3.6vw,54px);
+  line-height:1.18;letter-spacing:-.02em;color:var(--bone);
+  display:block
+}
+.pos-l.accent{font-style:italic;color:var(--brass)}
+</style>
+<div class="pos-band">
+  <div class="pos-lines r">
+    <span class="pos-l">Not a law firm.</span>
+    <span class="pos-l">Not a consultant.</span>
+    <span class="pos-l accent">Infrastructure.</span>
   </div>
-  <div class="entry-right reveal">
-    <p class="entry-body">
-      Most engagements begin the same way. A conversation about your business, your exposure, and what infrastructure exists today. From there, Ayin maps what you have, what you are missing, and what needs to be built. <strong>No obligation. No sales process.</strong> A compliance exposure assessment that gives you clarity regardless of what follows.
-    </p>
-    <div class="entry-form">
-      <input class="form-field" type="text" placeholder="Your name">
-      <input class="form-field" type="text" placeholder="Your business">
-      <input class="form-field" type="email" placeholder="Email address">
-      <textarea class="form-field" rows="3" placeholder="Brief description of your business and what brings you here" style="resize: none; border-bottom: 1px solid var(--rule-strong);"></textarea>
-      <button class="form-submit">Request Exposure Assessment</button>
+</div>
+
+<!-- ══════════ §5 WHAT AYIN BUILDS — LIGHT / PARCHMENT ══════════ -->
+<style>
+#builds{position:relative;z-index:1;background:var(--lt);border-top:1px solid rgba(26,21,16,.15)}
+.lt-grain{position:absolute;inset:0;pointer-events:none;opacity:.025;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.bd-wrap{max-width:var(--maxw);margin:0 auto;padding:var(--pad) var(--gut)}
+/* NOT items */
+.bd-nots{margin-bottom:clamp(48px,7vh,76px);border-bottom:1px solid var(--lt-line);padding-bottom:clamp(40px,6vh,64px)}
+.bd-nots-pre{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--lt-mute-2);margin-bottom:20px}
+.bd-not{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(18px,1.9vw,24px);line-height:1.36;letter-spacing:-.01em;color:var(--lt-ink);padding:13px 0;border-bottom:1px solid var(--lt-line-2);display:flex;align-items:baseline;gap:14px}
+.bd-not:last-child{border-bottom:none}
+.bd-not .nw{font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--lt-mute-2);flex-shrink:0;width:24px}
+.bd-not p{font-family:var(--body);font-style:normal;font-size:13px;color:var(--lt-mute);line-height:1.68;font-weight:300;margin-top:3px}
+/* heading */
+.bd-h2{color:var(--lt-ink);margin-bottom:clamp(34px,5vh,54px)}
+.bd-h2 em{color:var(--lt-steel)}
+/* layers — Spectral 400 for names */
+.layers{border-top:1px solid var(--lt-line)}
+.layer{display:grid;grid-template-columns:64px 1fr 1.3fr auto;gap:0 32px;align-items:start;padding:34px 0;border-bottom:1px solid var(--lt-line);position:relative;transition:background .4s,padding-left .4s var(--e1)}
+.layer::before{content:'';position:absolute;left:-22px;top:0;bottom:0;width:2px;background:var(--lt-steel);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--e1)}
+.layer:hover{background:rgba(26,21,16,.03);padding-left:10px}
+.layer:hover::before{transform:scaleY(1)}
+.layer-n{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--lt-steel);padding-top:4px}
+.layer-name{font-family:var(--disp);font-weight:400;font-size:clamp(19px,2vw,25px);line-height:1.12;letter-spacing:-.01em;color:var(--lt-ink)}
+.layer-desc{font-size:13.5px;line-height:1.74;font-weight:300;color:var(--lt-mute)}
+.layer-desc b{color:var(--lt-ink);font-weight:500}
+.layer-tags{justify-self:end;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.layer-tag{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--lt-mute-2);border:1px solid var(--lt-line);padding:5px 9px;transition:border-color .3s,color .3s}
+.layer:hover .layer-tag{border-color:var(--lt-steel-12);color:var(--lt-steel)}
+/* rooms */
+.rooms{margin-top:clamp(48px,7vh,76px)}
+.rooms-h{color:var(--lt-ink);margin-bottom:6px}
+.rooms-h em{color:var(--lt-steel)}
+.rooms-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--lt-mute-2);margin-bottom:32px}
+.rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--lt-line)}
+.room{padding:28px 26px 32px;border-right:1px solid var(--lt-line);transition:background .4s}
+.room:last-child{border-right:none}
+.room:hover{background:rgba(26,21,16,.03)}
+.room-n{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--lt-steel);margin-bottom:12px;display:block}
+.room-name{font-family:var(--disp);font-weight:400;font-size:clamp(20px,2.2vw,26px);letter-spacing:-.01em;color:var(--lt-ink);margin-bottom:9px}
+.room-desc{font-size:13.5px;line-height:1.72;color:var(--lt-mute)}
+/* anchor */
+.bd-anchor{margin-top:clamp(38px,6vh,58px);padding-top:24px;border-top:1px solid var(--lt-line);font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(16px,1.7vw,20px);line-height:1.5;letter-spacing:-.01em;color:var(--lt-mute);max-width:52ch}
+.bd-anchor b{font-style:normal;font-weight:500;color:var(--lt-ink);font-family:var(--body)}
+.bd-coda{margin-top:clamp(34px,5vh,52px);text-align:center;max-width:54ch;margin-left:auto;margin-right:auto}
+.bd-coda p{font-family:var(--disp);font-weight:300;font-size:clamp(20px,2.8vw,36px);line-height:1.24;letter-spacing:-.02em;color:var(--lt-ink)}
+.bd-coda em{font-style:italic;color:var(--lt-steel)}
+@media(max-width:960px){
+  .bd-nots .bd-not{flex-direction:column;gap:4px}
+  .layer{grid-template-columns:52px 1fr;grid-template-areas:"n name" "n desc" ". tags";gap:7px 16px;padding:28px 0}
+  .layer-n{grid-area:n}.layer-name{grid-area:name}.layer-desc{grid-area:desc}
+  .layer-tags{grid-area:tags;flex-direction:row;flex-wrap:wrap;align-items:flex-start;justify-self:start;margin-top:8px}
+  .layer:hover{padding-left:0}
+  .rooms-grid{grid-template-columns:1fr}.room{border-right:none;border-bottom:1px solid var(--lt-line)}.room:last-child{border-bottom:none}
+}
+</style>
+<section id="builds" class="sec lt">
+  <div class="lt-grain" aria-hidden="true"></div>
+  <div class="bd-wrap">
+    <div class="bd-nots r">
+      <p class="bd-nots-pre">Before anything else — what Ayin is not</p>
+      <div class="bd-not"><span class="nw">—</span><div><em>Not legal advice.</em><p>Advice is given once and forgotten. Infrastructure runs continuously and keeps the record.</p></div></div>
+      <div class="bd-not"><span class="nw">—</span><div><em>Not a one-time audit.</em><p>An audit is a photograph of one moment. Your obligations change with every new jurisdiction, product, hire, and regulation. The record keeps pace.</p></div></div>
+      <div class="bd-not"><span class="nw">—</span><div><em>Not a policy in a folder.</em><p>A written policy no one follows answers the regulator the same way silence does.</p></div></div>
+      <div class="bd-not"><span class="nw">—</span><div><em>Not a retainer.</em><p>This is a build — and once it exists, it exists.</p></div></div>
     </div>
-    <p class="entry-assurance">Your information is held in confidence. Ayin does not share client details.</p>
+    <h2 class="bd-h2 disp r"><em>Four layers.</em> One standing record.</h2>
+    <div class="layers lift">
+      <div class="layer"><span class="layer-n">01</span><h3 class="layer-name">Exposure Mapping</h3><p class="layer-desc">Every regime you fall under, <b>before you fall under scrutiny</b> — by jurisdiction, data, product, and the way you actually operate.</p><div class="layer-tags"><span class="layer-tag">Jurisdiction Matrix</span><span class="layer-tag">Regime Inventory</span><span class="layer-tag">Data Mapping</span></div></div>
+      <div class="layer"><span class="layer-n">02</span><h3 class="layer-name">Control &amp; Policy Architecture</h3><p class="layer-desc">Policies, controls, and processes that make compliance <b>the default state of the business</b> — built into how work happens, not bolted on after.</p><div class="layer-tags"><span class="layer-tag">Policy Architecture</span><span class="layer-tag">Control Design</span><span class="layer-tag">Process Embedding</span></div></div>
+      <div class="layer"><span class="layer-n">03</span><h3 class="layer-name">The Standing Record</h3><p class="layer-desc">Audit-ready documentation, kept continuously and dated — so the answer to <b>"show me"</b> already exists the moment it is asked.</p><div class="layer-tags"><span class="layer-tag">Evidence Trail</span><span class="layer-tag">Audit Readiness</span><span class="layer-tag">Continuous Record</span></div></div>
+      <div class="layer"><span class="layer-n">04</span><h3 class="layer-name">Governance &amp; Director Cover</h3><p class="layer-desc">Board-ready governance for an era where directors are <b>personally liable</b> — NIS2 and a widening field means accountability now reaches the individual.</p><div class="layer-tags"><span class="layer-tag">Board Reporting</span><span class="layer-tag">Director Liability</span><span class="layer-tag">Accountability Map</span></div></div>
+    </div>
+    <div class="rooms r">
+      <h3 class="rooms-h disp-s">Built once, it answers <em>three different rooms.</em></h3>
+      <p class="rooms-lbl">The same record · three audiences · one source of truth</p>
+      <div class="rooms-grid lift">
+        <div class="room"><span class="room-n">The Regulator</span><div class="room-name">"Show us."</div><p class="room-desc">The record answers in the past tense, dated and complete — before the deadline, not after it.</p></div>
+        <div class="room"><span class="room-n">The Investor</span><div class="room-name">Diligence.</div><p class="room-desc">Everything they ask for already exists — so the questions slow nothing down.</p></div>
+        <div class="room"><span class="room-n">The Client</span><div class="room-name">Procurement.</div><p class="room-desc">The infrastructure is the difference between a signature and a stall.</p></div>
+      </div>
+    </div>
+    <p class="bd-anchor r">This is not a retainer. It is a build — and once it exists, it exists. <b>Your lawyers have something real to argue with, not verbal intent.</b></p>
+    <div class="bd-coda r"><p>The same infrastructure that protects your worst day is what <em>wins you your best ones.</em></p></div>
   </div>
 </section>
 
-<!-- ==============================
-     FOOTER
-============================== -->
+<!-- ══════════ §6 TESTIMONIALS — LIGHT ══════════ -->
+<style>
+#testimonials{position:relative;z-index:1;background:var(--lt-2);border-top:1px solid rgba(26,21,16,.12)}
+.ts-wrap{max-width:var(--maxw);margin:0 auto;padding:var(--pad) var(--gut);text-align:center}
+.ts-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--lt-mute-2);margin-bottom:26px}
+.ts-h2{font-family:var(--disp);font-weight:300;font-size:clamp(44px,7.5vw,100px);line-height:.94;letter-spacing:-.04em;color:var(--lt-ink);margin-bottom:16px}
+.ts-h2 em{font-style:italic;color:var(--lt-brass-disp)}
+.ts-sub{max-width:52ch;margin:0 auto clamp(46px,7vh,76px);font-size:15px;line-height:1.72;color:var(--lt-mute);font-weight:300}
+.ts-sub b{color:var(--lt-ink);font-weight:500}
+.ts-carousel{max-width:680px;margin:0 auto;min-height:clamp(110px,15vh,150px);position:relative}
+.ts-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .7s var(--e2)}
+.ts-slide.active{opacity:1;position:relative}
+.ts-quote{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,1.8vw,21px);line-height:1.54;letter-spacing:-.01em;color:var(--lt-ink);margin-bottom:14px}
+.ts-attr{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--lt-mute-2)}
+.ts-dots{display:flex;justify-content:center;gap:8px;margin-top:clamp(24px,4vh,40px)}
+.ts-dot{width:5px;height:5px;border-radius:50%;background:var(--lt-line);cursor:pointer;transition:background .3s}
+.ts-dot.on{background:var(--lt-steel)}
+</style>
+<section id="testimonials" class="sec lt">
+  <div class="ts-wrap">
+    <p class="ts-lbl r">What our clients say</p>
+    <h2 class="ts-h2 r d1">Our testimonials are:<br><em>nothing happened.</em></h2>
+    <p class="ts-sub r d2">No breach disclosed. No fine published. No round that stalled in diligence. <b>The work succeeds precisely when there is nothing to point to.</b></p>
+    <div class="ts-carousel" id="tsCarousel">
+      <div class="ts-slide active"><p class="ts-quote">"We didn't realise the round would turn on it. When diligence opened, everything they asked for already existed. It closed on time."</p><span class="ts-attr">Founder · SaaS</span></div>
+      <div class="ts-slide"><p class="ts-quote">"The enterprise contract needed proof we'd never have been able to assemble in the window. We had it. We signed."</p><span class="ts-attr">Founder · Services</span></div>
+      <div class="ts-slide"><p class="ts-quote">"A client disputed an AI deliverable. We pointed to the governance record. The conversation ended there."</p><span class="ts-attr">Principal · Consultancy</span></div>
+      <div class="ts-slide"><p class="ts-quote">"The inquiry came. What unsettled them was that we could show every step. It went quiet very fast."</p><span class="ts-attr">Founder · E-commerce</span></div>
+    </div>
+    <div class="ts-dots" id="tsDots"></div>
+  </div>
+</section>
+
+<!-- ══════════ §7 WHY MOST FAILS ══════════ -->
+<style>
+#fails{position:relative;z-index:1;background:var(--ink);border-top:1px solid rgba(26,21,16,.15)}
+.fl-wrap{max-width:var(--maxw);margin:0 auto;padding:var(--pad) var(--gut)}
+.fl-head{max-width:58ch;margin-bottom:clamp(46px,7vh,76px)}
+.fl-h2{color:var(--bone)}
+.fail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fail-col{padding:36px 28px 42px;border-right:1px solid var(--line);transition:background .4s;position:relative;opacity:.88}
+.fail-col:last-child{border-right:none}
+.fail-col:hover{background:var(--ink-1);opacity:1}
+.fail-n{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-2);margin-bottom:16px;display:inline-block;position:relative}
+.fail-n::after{content:'';position:absolute;top:50%;left:-2px;right:-2px;height:1px;background:var(--mute-2);transform:rotate(-7deg);opacity:.65}
+.fail-t{font-family:var(--disp);font-weight:300;font-size:clamp(18px,1.9vw,24px);line-height:1.22;letter-spacing:-.01em;color:var(--bone);margin-bottom:13px}
+.fail-b{font-size:13.5px;line-height:1.78;color:var(--mute)}
+.fl-pivot{margin-top:clamp(54px,8vh,90px);display:grid;grid-template-columns:1fr 1fr;gap:0 68px;align-items:start}
+.fl-pivot-h{color:var(--bone)}
+.fl-pivot-h em{color:var(--steel)}
+.fl-pivot-body{border-left:1px solid var(--line);padding-left:28px;color:var(--mute);font-size:15px;line-height:1.76;font-weight:300;align-self:end}
+.fl-pivot-body b{color:var(--bone);font-weight:500}
+.fl-pivot-body em{font-style:italic;color:var(--steel)}
+.fl-pivot-body p+p{margin-top:16px}
+.fl-found{grid-column:1/-1;margin-top:clamp(24px,4vh,38px);padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2);display:flex;flex-wrap:wrap;line-height:2}
+.fl-found .ft{color:var(--steel)}.fl-found .pc{color:var(--mute-2);margin:0 11px}
+@media(max-width:900px){
+  .fail-grid{grid-template-columns:1fr}.fail-col{border-right:none;border-bottom:1px solid var(--line)}.fail-col:last-child{border-bottom:none}
+  .fl-pivot{grid-template-columns:1fr;gap:26px}.fl-pivot-body{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:20px}
+  .fl-found{grid-column:1}
+}
+</style>
+<section id="fails" class="sec">
+  <div class="fl-wrap">
+    <div class="fl-head r">
+      <span class="eyebrow" style="margin-bottom:20px">Why most compliance infrastructure fails</span>
+      <h2 class="fl-h2 disp">It usually fails <em>long before the regulator ever sees it.</em></h2>
+    </div>
+    <div class="fail-grid lift">
+      <div class="fail-col"><span class="fail-n">Failure 01</span><h3 class="fail-t">Built by the legal mind.</h3><p class="fail-b">Someone who can read the statute but has never run an operation — so the policy is correct on paper and impossible in practice. It is never followed. A policy that isn't followed is the same as having none.</p></div>
+      <div class="fail-col"><span class="fail-n">Failure 02</span><h3 class="fail-t">Built by the operator.</h3><p class="fail-b">Someone who can run the business but cannot read the law — so the system is practical and operational, and quietly misses the obligation that actually mattered until it surfaces as a finding.</p></div>
+      <div class="fail-col"><span class="fail-n">Failure 03</span><h3 class="fail-t">And when science enters.</h3><p class="fail-b">Environmental, data, AI — neither the lawyer nor the operator truly understands the technical substance, so the infrastructure is built around a gap precisely where the newest, sharpest scrutiny is aimed.</p></div>
+    </div>
+    <div class="fl-pivot">
+      <h2 class="fl-pivot-h disp-l r">Ayin is built<br>on <em>all three.</em></h2>
+      <div class="fl-pivot-body r d2">
+        <p>Infrastructure that holds under scrutiny has to be <b>legally literate, operationally real, and technically informed</b> — at the same time. Ayin is founded on that intersection: a foundation across the sciences, regulatory affairs, environmental compliance and law, paired with years spent <em>running</em> real operations rather than advising on them from a distance.</p>
+        <p>Emerging compliance has no thirty-year veterans. The credible figure here is the builder who can read the law, run the operation, and understand the technology — <b>without handing any of the three to someone else.</b></p>
+      </div>
+      <div class="fl-found r">
+        <span class="ft">Foundation across</span><span class="pc">·</span>Sciences<span class="pc">·</span>Regulatory Affairs<span class="pc">·</span>Environmental Management &amp; Assessment<span class="pc">·</span>Law<span class="pc">·</span>Years running real operations
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ §8 CTA — THE FINAL PUSH ══════════ -->
+<style>
+#cta{position:relative;z-index:1;background:var(--void);border-top:1px solid var(--line)}
+.ct-wrap{max-width:var(--maxw);margin:0 auto;padding:var(--pad) var(--gut);display:grid;grid-template-columns:1fr 1px 1fr;gap:0 80px;align-items:start}
+.ct-div{background:var(--line);align-self:stretch}
+.ct-seen{margin-bottom:clamp(22px,3.5vh,36px)}
+.ct-seen p{font-family:var(--disp);font-weight:300;font-size:clamp(16px,1.8vw,22px);line-height:1.44;letter-spacing:-.01em;color:var(--mute);margin-bottom:10px}
+.ct-seen p:last-child{margin-bottom:0}
+.ct-decision{font-family:var(--disp);font-weight:300;font-size:clamp(30px,4.6vw,58px);line-height:1.04;letter-spacing:-.025em;color:var(--bone);margin-bottom:clamp(22px,3.5vh,34px)}
+.ct-decision em{font-style:italic;color:var(--steel)}
+.ct-binary{margin-top:clamp(26px,4vh,42px);padding-top:22px;border-top:1px solid var(--line)}
+.ct-opt{padding:15px 0;border-bottom:1px solid var(--line-2);display:flex;align-items:baseline;gap:14px}
+.ct-opt:last-child{border-bottom:none}
+.ct-opt-lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0;width:52px}
+.ct-opt.risk .ct-opt-lbl{color:var(--mute-2)}
+.ct-opt.prot .ct-opt-lbl{color:var(--steel)}
+.ct-opt.risk .ct-opt-txt{font-size:13px;line-height:1.6;color:var(--mute-2);font-weight:300}
+.ct-opt.prot .ct-opt-txt{font-family:var(--disp);font-size:clamp(16px,1.7vw,20px);line-height:1.3;color:var(--bone);letter-spacing:-.01em;font-weight:400}
+.ct-assure{margin-top:22px;display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid var(--line)}
+.ct-as{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:var(--mute);line-height:1.56}
+.ct-as svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;color:var(--steel)}
+.form-shell{border:1px solid var(--line);background:linear-gradient(160deg,var(--ink-1),var(--ink))}
+.form-bar{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;border-bottom:1px solid var(--line)}
+.fbar-l{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--bone);display:flex;align-items:center;gap:10px}
+.fbar-l .dot{width:6px;height:6px;border-radius:50%;background:var(--steel)}
+.fbar-r{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2)}
+.form-in{padding:26px clamp(18px,2.6vw,30px) 24px}
+.field{position:relative;padding-top:24px;margin-bottom:7px}
+.field::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--line)}
+.field::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--steel);transition:width .5s var(--e1)}
+.field:focus-within::after{width:100%}
+.flabel{position:absolute;bottom:9px;left:0;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--mute-2);pointer-events:none;transition:bottom .3s var(--e1),font-size .3s,color .3s}
+.field:focus-within .flabel,.field.filled .flabel{bottom:calc(100% - 16px);font-size:9px;color:var(--steel)}
+.ctrl{display:block;width:100%;background:transparent;border:none;outline:none;appearance:none;padding:0 0 9px;resize:none;font-family:var(--disp);font-size:clamp(15px,1.3vw,18px);font-weight:400;color:var(--bone);line-height:1.5;caret-color:var(--steel)}
+.ctrl[rows]{min-height:calc(1.5em + 18px);overflow-y:hidden}
+.consent{display:flex;gap:12px;align-items:flex-start;margin-top:22px;cursor:pointer}
+.consent input{position:absolute;opacity:0;width:0;height:0}
+.consent .cb{width:16px;height:16px;border:1px solid var(--mute-2);flex-shrink:0;margin-top:2px;display:grid;place-items:center;transition:border-color .3s,background .3s}
+.consent .cb svg{width:9px;height:9px;color:var(--ink);opacity:0;transform:scale(.5);transition:opacity .22s,transform .22s var(--e1)}
+.consent input:checked+.cb{background:var(--steel);border-color:var(--steel)}
+.consent input:checked+.cb svg{opacity:1;transform:none}
+.consent .ctext{font-size:12.5px;line-height:1.55;color:var(--mute)}
+.consent .ctext b{color:var(--bone);font-weight:500;font-style:italic;font-family:var(--disp)}
+.ct-submit{margin-top:24px;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:11px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--steel);padding:16px 24px;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:gap .35s var(--e1),opacity .3s}
+.ct-submit::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--steel-hi);transform:translateY(101%);transition:transform .4s var(--e1)}
+.ct-submit:hover:not([disabled]){gap:15px}.ct-submit:hover:not([disabled])::before{transform:translateY(0)}
+.ct-submit[disabled]{opacity:.30;cursor:not-allowed}
+.ct-status{font-family:var(--disp);font-style:italic;font-size:13.5px;color:var(--steel);min-height:15px;margin-top:13px;text-align:center}
+.ct-hp{position:absolute;left:-9999px}
+@media(max-width:900px){.ct-wrap{grid-template-columns:1fr;gap:48px}.ct-div{display:none}}
+</style>
+<section id="cta" class="sec">
+  <div class="ct-wrap">
+    <div class="ct-left r">
+      <div class="ct-seen"><p>You've seen what you're exposed to.</p><p>You've seen how the outcome is decided.</p><p>You know what proof looks like now.</p></div>
+      <h2 class="ct-decision">What happens next<br>is <em>your decision.</em></h2>
+      <div class="ct-binary">
+        <div class="ct-opt risk"><span class="ct-opt-lbl">Risk</span><span class="ct-opt-txt">Exposed, without the infrastructure to prove otherwise — relying on the question never being asked.</span></div>
+        <div class="ct-opt prot"><span class="ct-opt-lbl">Protect</span><span class="ct-opt-txt">The standing record in place — so when the question is asked, the answer already exists.</span></div>
+      </div>
+      <div class="ct-assure">
+        <div class="ct-as"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg><span>Everything you share is held in confidence from the first message.</span></div>
+        <div class="ct-as"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>We reply within one business day, with a person.</span></div>
+      </div>
+    </div>
+    <div class="ct-div" aria-hidden="true"></div>
+    <div class="ct-right r d2">
+      <div class="form-shell">
+        <div class="form-bar"><span class="fbar-l"><span class="dot"></span>New Engagement</span><span class="fbar-r">AYIN / IN-01</span></div>
+        <div class="form-in">
+          <!-- TODO: replace with your Formspree or other endpoint -->
+          <form id="ayinForm" action="https://formspree.io/f/your-endpoint" method="POST" novalidate>
+            <div class="ct-hp" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+            <input type="hidden" name="_subject" value="Ayin — new exposure enquiry">
+            <input type="hidden" name="exposure" id="fExp" value="">
+            <div class="field"><label class="flabel" for="i-name">Your name</label><input class="ctrl" id="i-name" name="name" type="text" placeholder=" " autocomplete="name" required></div>
+            <div class="field"><label class="flabel" for="i-biz">Business</label><input class="ctrl" id="i-biz" name="business" type="text" placeholder=" " autocomplete="organization" required></div>
+            <div class="field"><label class="flabel" for="i-email">Email</label><input class="ctrl" id="i-email" name="email" type="email" placeholder=" " autocomplete="email" required></div>
+            <div class="field"><label class="flabel" for="i-note">Where do you operate, and what brings you here?</label><textarea class="ctrl" id="i-note" name="note" rows="2" placeholder=" " required></textarea></div>
+            <label class="consent"><input type="checkbox" id="i-consent" name="consent" value="acknowledged"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg></span><span class="ctext">I understand this is <b>not legal advice — it is infrastructure</b>, and the first conversation is to establish where I stand.</span></label>
+            <button type="submit" class="ct-submit" id="ayinSubmit" disabled>Find out where I stand <span class="arr">→</span></button>
+            <p class="ct-status" id="ayinStatus" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<style>
+footer{position:relative;z-index:1;background:var(--ink);border-top:1px solid var(--line);padding:64px var(--gut) 36px}
+.ft-wrap{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;align-items:start}
+.ft-brand{display:flex;flex-direction:column;gap:14px}
+.ft-bw{display:flex;align-items:center;gap:11px}
+.ft-wm{font-family:var(--disp);font-weight:400;font-size:25px;letter-spacing:.02em;color:var(--bone)}
+.ft-wm .dot{color:var(--steel)}
+.ft-tag{color:var(--mute);font-size:13px;line-height:1.58;max-width:36ch}
+.ft-col{display:flex;flex-direction:column;gap:11px}
+.ft-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mute-2);margin-bottom:3px}
+.ft-col a,.ft-col span.lnk{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--mute);transition:color .3s;width:fit-content;cursor:pointer}
+.ft-col a:hover{color:var(--steel)}
+.ft-base{max-width:var(--maxw);margin:44px auto 0;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.ft-copy{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2)}
+.ft-disc{font-size:11px;line-height:1.62;color:var(--mute-2);max-width:76ch;margin-top:11px}
+@media(max-width:820px){.ft-wrap{grid-template-columns:1fr;gap:32px}.ft-base{flex-direction:column;align-items:flex-start}}
+</style>
 <footer>
-  <div class="footer-top">
-    <div>
-      <p class="footer-logo">Ayin</p>
-      <p class="footer-tagline">Engineering Compliance Infrastructure</p>
+  <div class="ft-wrap">
+    <div class="ft-brand">
+      <div class="ft-bw">
+        <!-- LOGO PLACEHOLDER: replace with your logo -->
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+          <ellipse class="m-rim" cx="20" cy="20" rx="18" ry="12"/><circle class="m-iris" cx="20" cy="20" r="7.5"/><circle class="m-pupil" cx="20" cy="20" r="3"/>
+        </svg>
+        <span class="ft-wm">Ayin<span class="dot">.</span></span>
+      </div>
+      <span class="ft-tag">Engineering Compliance Infrastructure — the standing record that answers a regulator, an investor, or an acquirer before the question is ever asked.</span>
     </div>
-    <div class="footer-closing">
-      <p class="footer-closing-text">
-        Compliance infrastructure is not preparation<br>
-        for worst case. <em>It is what separates worst case<br>
-        from everything else.</em>
-      </p>
-    </div>
+    <nav class="ft-col"><span class="ft-l">The Firm</span><a href="#evidence">The Record</a><a href="#outcomes">How It's Decided</a><a href="#builds">What We Build</a><a href="#fails">Why We're Different</a></nav>
+    <nav class="ft-col"><span class="ft-l">Begin</span><a href="#diagnostic">Check your exposure</a><a href="#cta">Find out where you stand</a><span class="lnk">ayin.group</span></nav>
   </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Ayin. All rights reserved.</p>
-    <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#entry">Contact</a>
-    </div>
+  <div class="ft-base">
+    <span class="ft-copy">© <span id="yr"></span> Ayin · Engineering Compliance Infrastructure</span>
+    <span class="ft-copy">Confidential · Built to leave nothing to point to</span>
   </div>
+  <p class="ft-disc">Ayin provides compliance infrastructure, governance systems, and audit-readiness services, and does not represent clients before regulators or courts. Nothing on this site constitutes legal advice. Enforcement actions and regulatory standards cited are matters of public record, cited for illustration only. Your circumstances are your own — which is what the first conversation is for.</p>
 </footer>
 
+<!-- ══════════ RUNTIME ══════════ -->
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal, .cascade-item, .apply-item, .clock-line, .clock-cta, .build-item');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const delay = el.dataset.delay || 0;
-        setTimeout(() => el.classList.add('visible'), delay);
-        observer.unobserve(el);
-      }
+'use strict';
+
+/* ─── PROLOGUE: full-screen single-question cycling ─── */
+(function(){
+  const pl = document.getElementById('prologue');
+  if (!pl) return;
+  if (sessionStorage.getItem('ayin_seen')) { pl.style.display = 'none'; return; }
+
+  const QUESTIONS = [
+    'Have a website?',
+    'Collect visitor data?',
+    'Have clients or vendors abroad?',
+    'Use AI tools in your operations?',
+    'Process employee or customer information?'
+  ];
+
+  const qEl    = document.getElementById('plQ');
+  const verdict= document.getElementById('plVerdict');
+  const cue    = document.getElementById('plCue');
+  const count  = document.getElementById('plCount');
+  const skip   = document.getElementById('plSkip');
+
+  let dismissed = false;
+  let autoTimer;
+
+  function dismiss() {
+    if (dismissed) return;
+    dismissed = true;
+    clearTimeout(autoTimer);
+    sessionStorage.setItem('ayin_seen', '1');
+    pl.classList.add('out');
+    setTimeout(() => { pl.style.display = 'none'; }, 750);
+  }
+
+  pl.addEventListener('click', dismiss);
+  skip.addEventListener('click', e => { e.stopPropagation(); dismiss(); });
+
+  function showQ(idx) {
+    if (idx >= QUESTIONS.length) { showVerdict(); return; }
+    count.textContent = (idx + 1) + ' / ' + QUESTIONS.length;
+    count.classList.add('show');
+    qEl.textContent = QUESTIONS[idx];
+    // slight delay then fade in
+    requestAnimationFrame(() => requestAnimationFrame(() => qEl.classList.add('show')));
+    setTimeout(() => {
+      qEl.classList.remove('show');
+      setTimeout(() => showQ(idx + 1), 400);
+    }, 2000);
+  }
+
+  function showVerdict() {
+    count.classList.remove('show');
+    qEl.style.display = 'none';
+    setTimeout(() => {
+      verdict.classList.add('show');
+      setTimeout(() => {
+        cue.classList.add('show');
+        autoTimer = setTimeout(dismiss, 3600);
+      }, 900);
+    }, 200);
+  }
+
+  setTimeout(() => showQ(0), 350);
+})();
+
+/* ─── PROGRESS + NAV ─── */
+const pf  = document.getElementById('pf');
+const nav = document.getElementById('nav');
+function onScroll() {
+  const H = document.body.scrollHeight - innerHeight;
+  pf.style.width = (H > 0 ? Math.min(scrollY / H, 1) : 0) * 100 + '%';
+  nav.classList.toggle('solid', scrollY > 40);
+}
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+/* ─── REVEAL SYSTEM ─── */
+const ro = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+}), { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+document.querySelectorAll('.r, .lift').forEach(el => ro.observe(el));
+
+/* ─── EVIDENCE DOCKET: figure-first ─── */
+const EXHIBITS = [
+  { co:'Meta Platforms', juris:'Ireland · Data Protection Commission', cur:'€', val:1.2, dec:1, suf:'B',
+    charge:'It moved European data across the Atlantic for years.',
+    what:'Meta transferred personal data of European users to the United States under standard contractual clauses that regulators had already warned were insufficient. The transfers continued regardless. In May 2023 the Irish DPC issued the largest GDPR fine in history.',
+    couldnt:'It could not show a lawful basis for transfers it had been making, at scale, every single day.',
+    reg:'GDPR — Article 46(1)', when:'May 2023' },
+  { co:'Amazon Europe', juris:'Luxembourg · CNPD', cur:'€', val:746, dec:0, suf:'M',
+    charge:'It personalised advertising on consent it never truly held.',
+    what:'Luxembourg\'s data authority found Amazon\'s advertising system processed personal data without consent that was freely given. The penalty stood as the largest under the regulation until Meta surpassed it two years later.',
+    couldnt:'It could not show the consent it had been relying on was ever real.',
+    reg:'GDPR — lawful basis & consent', when:'July 2021' },
+  { co:'Didi Global', juris:'China · Cyberspace Administration', cur:'¥', val:8.0, dec:1, suf:'B',
+    charge:'It collected far more than it could ever justify.',
+    what:'Months after its New York listing, China\'s cyberspace regulator found Didi had illegally collected millions of pieces of user data — clipboard contents, facial recognition, precise location — far beyond operational need.',
+    couldnt:'It could not show why it held the data it had quietly been collecting.',
+    reg:'PIPL & Data Security Law', when:'July 2022' },
+  { co:'TikTok', juris:'Ireland · Data Protection Commission', cur:'€', val:345, dec:0, suf:'M',
+    charge:'Its defaults exposed the accounts of children.',
+    what:'The Irish DPC found TikTok\'s default settings made children\'s accounts public and nudged minors toward the least protective options. The €345M penalty in 2023 was specifically about the youngest users.',
+    couldnt:'It could not defend the default settings it had chosen for children.',
+    reg:'GDPR — children\'s data & design', when:'September 2023' },
+  { co:'H&M', juris:'Germany · Hamburg Commissioner', cur:'€', val:35.3, dec:1, suf:'M',
+    charge:'It kept a private file on the lives of its staff.',
+    what:'A configuration error exposed that H&M had recorded intimate details of employees\' private lives and used them in decisions. Hamburg\'s regulator called it a serious disregard for employee data.',
+    couldnt:'It could not show any lawful reason for records it should never have created.',
+    reg:'GDPR — employee data', when:'October 2020' },
+  { co:'Interserve Group', juris:'United Kingdom · ICO', cur:'£', val:4.4, dec:1, suf:'M',
+    charge:'Its policies existed only on paper.',
+    what:'A phishing email led to malware and the exposure of up to 113,000 employees\' data. Interserve had extensive security policies — they simply were not implemented or overseen. An alert went unactioned.',
+    couldnt:'It could not show that the policies it had written were ever actually operating.',
+    reg:'GDPR — security of processing', when:'October 2022' }
+];
+
+const docket = document.getElementById('docket');
+EXHIBITS.forEach((e, i) => {
+  const row = document.createElement('div');
+  row.className = 'exh' + (i === 0 ? ' open' : '');
+  const id = 'EX·' + String(i + 1).padStart(2, '0');
+  row.innerHTML =
+    '<div class="exh-head">' +
+      '<div class="exh-fig" data-v="' + e.val + '" data-d="' + e.dec + '">' +
+        '<span class="exh-cur">' + e.cur + '</span><span class="fv">0</span>' + e.suf +
+      '</div>' +
+      '<div class="exh-info">' +
+        '<div class="exh-co">' + e.co + '</div>' +
+        '<div class="exh-juris">' + id + ' · ' + e.juris + '</div>' +
+        '<div class="exh-charge">' + e.charge + '</div>' +
+      '</div>' +
+      '<span class="exh-cue">Open ↓</span>' +
+    '</div>' +
+    '<div class="exh-panel"><div class="exh-pin">' +
+      '<div><span class="ep-l">What happened</span><p class="ep-what">' + e.what + '</p></div>' +
+      '<div class="ep-rec"><span class="ep-l">What they could not show</span>' +
+        '<p class="ep-couldnt">' + e.couldnt + '</p>' +
+        '<p class="ep-cite">Regulation — <span>' + e.reg + '</span><br>Finding — ' + e.when + ' · public record</p></div>' +
+    '</div></div>';
+  docket.appendChild(row);
+});
+
+const exhs = [...docket.querySelectorAll('.exh')];
+function setExh(row, open) {
+  const p = row.querySelector('.exh-panel');
+  p.style.maxHeight = open ? p.querySelector('.exh-pin').scrollHeight + 'px' : '0';
+}
+exhs.forEach(row => {
+  row.querySelector('.exh-head').addEventListener('click', () => {
+    const isOpen = row.classList.contains('open');
+    exhs.forEach(r => { r.classList.remove('open'); setExh(r, false); });
+    if (!isOpen) { row.classList.add('open'); setExh(row, true); }
+  });
+});
+
+// count-up figures
+const figObs = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; figObs.unobserve(e.target);
+  const el = e.target, v = parseFloat(el.dataset.v), d = parseInt(el.dataset.d);
+  const out = el.querySelector('.fv'), t0 = performance.now(), dur = 1400;
+  const ez = x => 1 - Math.pow(1 - x, 3);
+  (function s(n) {
+    const t = Math.min((n - t0) / dur, 1), cur = ez(t) * v;
+    out.textContent = d > 0 ? cur.toFixed(1) : Math.round(cur).toLocaleString('en-US');
+    if (t < 1) requestAnimationFrame(s);
+  })(t0);
+}), { threshold: 0.5 });
+document.querySelectorAll('.exh-fig').forEach(el => figObs.observe(el));
+
+/* ─── EXPOSURE DIAGNOSTIC ─── */
+const XQ = [
+  { q:'Where are your customers, users, or staff?', hint:'Select every territory — exposure is cumulative.', multi:true,
+    opts:[{t:'European Union',v:'eu'},{t:'United Kingdom',v:'uk'},{t:'United States (California)',v:'us'},{t:'India',v:'in'},{t:'China',v:'cn'},{t:'Rest of world',v:'row'}] },
+  { q:'What kind of data passes through your business?', hint:'The category of data is the single largest driver of penalty size.', multi:true,
+    opts:[{t:'Personal data (names, emails, behaviour)',v:'personal'},{t:'Sensitive (health, biometric, financial)',v:'sensitive'},{t:'Children\'s data',v:'children'},{t:'Employee monitoring',v:'employee'}] },
+  { q:'Do you build or deploy AI or automated decisions?', hint:'The EU AI Act carries up to 7% of global turnover.', multi:false,
+    opts:[{t:'No',v:'ai_no'},{t:'Exploring it',v:'ai_exp'},{t:'Yes, in production',v:'ai_yes'}] },
+  { q:'Which best describes your sector?', hint:'Some sectors carry their own regimes on top of data law.', multi:false,
+    opts:[{t:'Software / Technology',v:'saas'},{t:'Healthcare',v:'health'},{t:'Financial services',v:'fin'},{t:'E-commerce / Consumer',v:'ecom'},{t:'Industrial / Other',v:'other'}] },
+  { q:'What is your scale?', hint:'Above a threshold, accountability reaches directors personally.', multi:false,
+    opts:[{t:'Under 50 people',v:'s1'},{t:'50 – 250',v:'s2'},{t:'250 +',v:'s3'},{t:'Enterprise / regulated',v:'s4'}] }
+];
+const REGIME = {
+  eu:{n:'GDPR (EU)',c:'€20M / 4% turnover'}, uk:{n:'UK GDPR & DPA 2018',c:'£17.5M / 4% turnover'},
+  us:{n:'CCPA / CPRA (California)',c:'$7,500 per record'}, in:{n:'DPDP Act 2023 (India)',c:'₹250 crore'},
+  cn:{n:'PIPL (China)',c:'5% of turnover'}, aiact:{n:'EU AI Act',c:'€35M / 7% turnover'},
+  nis2:{n:'NIS2 — director liability',c:'personal accountability'}, hipaa:{n:'HIPAA (US health)',c:'$1.9M per violation/yr'},
+  dora:{n:'DORA (EU financial)',c:'operational resilience'}
+};
+let xi = 0, ans = XQ.map(q => q.multi ? [] : null);
+const $id = id => document.getElementById(id);
+const prog = $id('xpProg');
+XQ.forEach(() => { const p = document.createElement('div'); p.className = 'xp-pip'; p.innerHTML = '<span></span>'; prog.appendChild(p); });
+const pips = [...prog.children];
+
+function renderQ() {
+  const q = XQ[xi];
+  $id('xpQn').textContent = 'Question ' + String(xi + 1).padStart(2, '0') + ' / 05';
+  $id('xpQt').textContent = q.q; $id('xpHint').textContent = q.hint;
+  const wrap = $id('xpOpts'); wrap.innerHTML = '';
+  q.opts.forEach(o => {
+    const sel = q.multi ? ans[xi].includes(o.v) : ans[xi] === o.v;
+    const b = document.createElement('button'); b.className = 'xp-opt' + (sel ? ' on' : ''); b.type = 'button';
+    b.innerHTML = '<span class="sw"></span>' + o.t;
+    b.addEventListener('click', () => {
+      if (q.multi) { const a = ans[xi]; const k = a.indexOf(o.v); k >= 0 ? a.splice(k, 1) : a.push(o.v); }
+      else { ans[xi] = o.v; }
+      renderQ();
     });
-  }, { threshold: 0.12 });
-
-  // Stagger cascade items
-  document.querySelectorAll('.cascade-item').forEach((el, i) => {
-    el.dataset.delay = i * 80;
+    wrap.appendChild(b);
   });
+  pips.forEach((p, i) => p.classList.toggle('done', i < xi));
+  pips[xi].querySelector('span').style.width = (answered() ? 100 : 40) + '%';
+  $id('xpBack').disabled = xi === 0;
+  $id('xpNext').disabled = !answered();
+  $id('xpNext').textContent = xi === XQ.length - 1 ? 'Reveal exposure →' : 'Next →';
+}
+function answered() { const q = XQ[xi]; return q.multi ? ans[xi].length > 0 : ans[xi] != null; }
+$id('xpNext').addEventListener('click', () => { if (!answered()) return; xi < XQ.length - 1 ? (xi++, renderQ()) : compute(); });
+$id('xpBack').addEventListener('click', () => { if (xi > 0) { xi--; renderQ(); } });
 
-  // Stagger apply items
-  document.querySelectorAll('.apply-item').forEach((el, i) => {
-    el.dataset.delay = i * 60;
+function compute() {
+  const J=ans[0],D=ans[1],AI=ans[2],SEC=ans[3],SC=ans[4];
+  const regimes = new Set();
+  if(J.includes('eu'))regimes.add('eu'); if(J.includes('uk'))regimes.add('uk');
+  if(J.includes('us'))regimes.add('us'); if(J.includes('in'))regimes.add('in'); if(J.includes('cn'))regimes.add('cn');
+  let score = regimes.size;
+  score += J.includes('row') ? 0.5 : 0;
+  if(D.includes('personal'))score+=1; if(D.includes('sensitive'))score+=3;
+  if(D.includes('children'))score+=3; if(D.includes('employee'))score+=2;
+  if(AI==='ai_yes'){score+=3;regimes.add('aiact');}else if(AI==='ai_exp')score+=1;
+  if(SEC==='health'){score+=2;regimes.add('hipaa');} if(SEC==='fin'){score+=2;if(regimes.has('eu'))regimes.add('dora');}
+  if(SC==='s2')score+=1; if(SC==='s3')score+=2; if(SC==='s4')score+=3;
+  if((SC==='s3'||SC==='s4')&&regimes.has('eu'))regimes.add('nis2');
+
+  const max=14, pct=Math.max(8,Math.min(100,Math.round(score/max*100)));
+  let tier,tk,read;
+  if(score<=3){tier='Contained';tk='material';read='Your exposure is real but bounded. Every new market, product, or hire widens the surface — most businesses only notice once it has already moved.';}
+  else if(score<=6){tier='Material';tk='material';read='You are squarely inside multiple regimes. This is the band where enforcement actually happens — large enough to be worth a regulator\'s attention, often without the infrastructure to <b>show intent</b> when asked.';}
+  else if(score<=9){tier='Acute';tk='acute';read='Several high-penalty regimes apply at once, and the categories of data you hold are the ones regulators fine most heavily. The question is not <b>if</b> you will be asked to demonstrate compliance, but <b>when</b>.';}
+  else{tier='Critical';tk='critical';read='You carry close to the maximum exposure surface — multiple jurisdictions, the most sensitive data categories, accountability reaching directors personally. This is precisely the profile that appears in the enforcement record.';}
+
+  let prec;
+  if(regimes.has('cn'))prec='A business with your exposure profile has already paid <b>¥8.0B</b> — Didi Global, 2022.';
+  else if(D.includes('children'))prec='A business with your exposure profile has already paid <b>€345M</b> — TikTok, 2023.';
+  else if(regimes.has('eu')&&(D.includes('sensitive')||SC==='s3'||SC==='s4'))prec='A business with your exposure profile has already paid <b>€1.2B</b> — Meta, 2023.';
+  else if(D.includes('employee'))prec='A business with your exposure profile has already paid <b>€35.3M</b> — H&M, 2020.';
+  else if(regimes.has('eu'))prec='A business with your exposure profile has already paid <b>€746M</b> — Amazon, 2021.';
+  else prec='A business with your exposure profile has already paid <b>£4.4M</b> — Interserve, 2022.';
+
+  $id('xpStage').style.display = 'none';
+  const res = $id('xpResult'); res.classList.add('show');
+  $id('xprBar').className = 'xpr-bar t-' + tk;
+  $id('xprConf').textContent = 'EXPOSURE INDEX — ' + pct + '%';
+  const tierEl = $id('xprTier'); tierEl.className = 'xpr-tier t-' + tk; tierEl.textContent = tier;
+  $id('xprRead').innerHTML = read;
+  setTimeout(() => { $id('mFill').style.width = pct + '%'; }, 100);
+  const rg = $id('xprRegimes'); rg.innerHTML = '';
+  const order=['eu','uk','us','in','cn','aiact','nis2','hipaa','dora'];
+  const list = order.filter(k => regimes.has(k)); if(!list.length) list.push('eu');
+  list.forEach(k => {
+    const r = REGIME[k], d = document.createElement('div'); d.className = 'regime';
+    d.innerHTML = '<span class="regime-n">' + r.n + '</span><span class="regime-c">ceiling — ' + r.c + '</span>';
+    rg.appendChild(d);
   });
+  $id('xprPrec').innerHTML = prec;
+  const profile = 'Exposure profile — ' + tier + ' (' + pct + '%). Regimes: ' + list.map(k => REGIME[k].n).join('; ') + '.';
+  const fExp = $id('fExp'); if (fExp) fExp.value = profile;
+  const note = $id('i-note');
+  if (note && !note.value) { note.value = 'Ran the exposure instrument — result: ' + tier + '. I\'d like to know where I actually stand.'; note.dispatchEvent(new Event('input')); }
+}
+$id('xpRestart').addEventListener('click', () => {
+  xi = 0; ans = XQ.map(q => q.multi ? [] : null);
+  $id('xpResult').classList.remove('show'); $id('xpStage').style.display = ''; renderQ();
+});
+renderQ();
 
-  // Stagger build items
-  document.querySelectorAll('.build-item').forEach((el, i) => {
-    el.dataset.delay = i * 80;
+/* ─── TESTIMONIAL CAROUSEL ─── */
+(function(){
+  const slides = [...document.querySelectorAll('.ts-slide')];
+  const dotsEl = document.getElementById('tsDots');
+  if (!slides.length || !dotsEl) return;
+  let cur = 0;
+  slides.forEach((_, i) => {
+    const d = document.createElement('span'); d.className = 'ts-dot' + (i===0?' on':'');
+    d.addEventListener('click', () => { go(i); clearInterval(timer); timer = setInterval(next, 5000); });
+    dotsEl.appendChild(d);
   });
+  const dots = [...dotsEl.querySelectorAll('.ts-dot')];
+  function go(n) { slides[cur].classList.remove('active'); dots[cur].classList.remove('on'); cur=(n+slides.length)%slides.length; slides[cur].classList.add('active'); dots[cur].classList.add('on'); }
+  function next() { go(cur + 1); }
+  let timer = setInterval(next, 5000);
+})();
 
-  // Stagger clock lines
-  document.querySelectorAll('.clock-line').forEach((el, i) => {
-    el.dataset.delay = i * 200;
+/* ─── FORM ─── */
+(function(){
+  const form=$id('ayinForm'), sub=$id('ayinSubmit'), st=$id('ayinStatus'), consent=$id('i-consent');
+  if(!form) return;
+  ['i-name','i-biz','i-email','i-note'].forEach(id=>{
+    const el=$id(id), f=el.closest('.field');
+    const c=()=>f.classList.toggle('filled',el.value.length>0);
+    el.addEventListener('input',c); el.addEventListener('change',c);
+    if(el.tagName==='TEXTAREA') el.addEventListener('input',()=>{el.style.height='auto';el.style.height=el.scrollHeight+'px';});
   });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // Smooth nav hide/show
-  let lastY = 0;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    const nav = document.querySelector('nav');
-    if (y > lastY && y > 100) {
-      nav.style.opacity = '0';
-      nav.style.transform = 'translateY(-100%)';
-      nav.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-    } else {
-      nav.style.opacity = '1';
-      nav.style.transform = 'translateY(0)';
-    }
-    lastY = y;
+  const gate=()=>{sub.disabled=!consent.checked;}; consent.addEventListener('change',gate); gate();
+  const isEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v||'');
+  form.addEventListener('submit',async e=>{
+    e.preventDefault(); if(form.querySelector('[name=_gotcha]').value) return;
+    const n=$id('i-name'),b=$id('i-biz'),em=$id('i-email'),nt=$id('i-note'); let ok=true;
+    [[n,v=>v.trim()],[b,v=>v.trim()],[em,v=>isEmail(v)],[nt,v=>v.trim()]].forEach(([el,fn])=>{const good=fn(el.value);el.setAttribute('aria-invalid',!good);if(!good)ok=false;});
+    if(!ok){st.textContent='Please complete every field.';return;}
+    sub.disabled=true; sub.querySelector('.arr').textContent='…'; st.textContent='';
+    try{
+      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+      if(res.ok){form.reset();document.querySelectorAll('.field').forEach(f=>f.classList.remove('filled'));st.textContent='Received. We will be in touch within one business day.';sub.childNodes[0].textContent='Sent ';sub.querySelector('.arr').textContent='✓';}
+      else{st.textContent='Something went wrong — please try again.';sub.disabled=false;sub.querySelector('.arr').textContent='→';}
+    }catch(_){st.textContent='Network issue — please try again.';sub.disabled=false;sub.querySelector('.arr').textContent='→';}
   });
+})();
+
+/* ─── UTILS ─── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const t=document.querySelector(a.getAttribute('href')); if(!t) return; e.preventDefault();
+  scrollTo({top:t.getBoundingClientRect().top+scrollY,behavior:'smooth'});
+}));
+document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
+
+<style id="reduced-motion">
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.001ms!important}
+  #prologue{display:none!important}
+  .r,.lift>*{opacity:1!important;transform:none!important}
+}
+</style>
 </body>
 </html>
