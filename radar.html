@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0C1F1A">
+<title>The Regulatory Radar — Ayin</title>
+<meta name="description" content="What changed, when, and where we read it. A dated record of regime and platform changes across Ayin's working jurisdictions.">
+<link rel="canonical" href="https://ayin.group/radar.html">
+<link rel="icon" type="image/svg+xml" href="assets/dark.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ayin">
+<meta property="og:title" content="The Regulatory Radar — Ayin">
+<meta property="og:description" content="What changed, when, and where we read it — across EU, UK, US, and marketplace regimes.">
+<meta property="og:url" content="https://ayin.group/radar.html">
+<meta property="og:image" content="https://ayin.group/assets/og-radar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Regulatory Radar — Ayin">
+<meta name="twitter:description" content="What changed, when, and where we read it.">
+<meta name="twitter:image" content="https://ayin.group/assets/og-radar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0C1F1A; --g1:#102822; --g2:#16332B; --abyss:#071512;
+  --ivory:#EFE9DB; --ivory-2:#D8D1C0;
+  --mute:rgba(239,233,219,.74); --mute-2:rgba(239,233,219,.46); --line:rgba(239,233,219,.10); --line-2:rgba(239,233,219,.05);
+  --jade:#7FC0A0; --jade-hi:#A8DCC2; --jade-dim:#4E8870; --jade-ink:#15614A;
+  --jade-12:rgba(127,192,160,.12); --jade-20:rgba(127,192,160,.20); --jade-glow:rgba(127,192,160,.24);
+  --brass:#9A6010; --brass-hi:#C8963C; --brass-12:rgba(200,150,60,.13);
+  --verm:#C2402A; --verm-hi:#E0654A; --verm-12:rgba(194,64,42,.12); --verm-20:rgba(194,64,42,.20);
+  --disp:'Spectral',Georgia,serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --e1:cubic-bezier(.2,.8,.2,1); --e2:cubic-bezier(.16,1,.3,1);
+  --gut:clamp(24px,5vw,84px); --maxw:1100px; --navh:70px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ground);scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--jade-dim) var(--ground)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--abyss)}::-webkit-scrollbar-thumb{background:var(--g2)}
+body{font-family:var(--body);font-weight:300;line-height:1.66;font-size:16px;background:var(--ground);color:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer} svg{display:block}
+:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.r{opacity:0;transform:translateY(18px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
+.r.in{opacity:1;transform:none}
+#prog{position:fixed;top:0;left:0;right:0;height:1px;z-index:200;pointer-events:none}
+#pf{height:100%;width:0;background:var(--jade);transition:width .08s linear}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--navh);display:flex;align-items:center;gap:18px;padding:0 var(--gut);background:rgba(8,16,9,.86);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.nav-back{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);display:flex;align-items:center;gap:8px}
+.nav-back:hover{color:var(--jade-hi)}
+.nav-right{margin-left:auto;display:flex;gap:14px}
+.nav-right a{font-family:var(--mono);font-size:10px;color:var(--mute-2);transition:color .22s}
+.nav-right a:hover{color:var(--jade)}
+
+#hero{padding:clamp(110px,16vh,150px) var(--gut) clamp(48px,7vh,64px);position:relative;overflow:hidden;
+  background-image:radial-gradient(ellipse 55% 60% at 18% 18%,rgba(127,192,160,.06) 0%,transparent 62%)}
+.hero-ghost{position:absolute;right:calc(var(--gut) - 10px);top:8%;font-family:var(--disp);font-weight:800;font-size:clamp(160px,26vw,420px);line-height:.86;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(127,192,160,.06);user-select:none;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--jade);display:inline-flex;align-items:center;gap:12px;margin-bottom:20px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--jade);opacity:.6}
+.hero-h{font-family:var(--disp);font-weight:300;font-size:clamp(38px,6vw,76px);letter-spacing:-.036em;line-height:.98;color:var(--ivory);max-width:18ch}
+.hero-h em{font-style:italic;color:var(--jade)}
+.hero-sub{margin-top:20px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.6vw,19px);line-height:1.55;color:var(--mute);max-width:62ch}
+.hero-meta{display:flex;flex-wrap:wrap;gap:clamp(22px,3.4vw,46px);margin-top:clamp(32px,5vh,44px);padding-top:18px;border-top:1px solid var(--line)}
+.hm{display:flex;flex-direction:column;gap:5px}
+.hml{font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2)}
+.hmv{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+
+#facets{padding:0 var(--gut) clamp(28px,4vh,38px)}
+.fc-inner{max-width:var(--maxw);margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.fc-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.fc-label{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2);min-width:88px}
+.fc-pills{display:flex;flex-wrap:wrap;gap:7px}
+.fc-pill{font-family:var(--mono);font-size:10.5px;color:var(--mute);border:1px solid var(--line);padding:7px 13px;transition:border-color .22s,color .22s,background .22s}
+.fc-pill:hover{border-color:var(--jade-dim);color:var(--ivory)}
+.fc-pill.active{border-color:var(--jade);color:var(--abyss);background:var(--jade)}
+
+#timeline{padding:0 var(--gut) clamp(70px,10vh,100px)}
+.tl-inner{max-width:var(--maxw);margin:0 auto}
+.tl-year{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--jade);margin:clamp(32px,5vh,44px) 0 clamp(14px,2.2vh,18px);display:flex;align-items:center;gap:12px}
+.tl-year:first-child{margin-top:0}
+.tl-year::after{content:'';flex:1;height:1px;background:var(--line)}
+.entry{border:1px solid var(--line);border-top:none;padding:clamp(20px,3vw,28px);display:grid;grid-template-columns:120px 1fr;gap:clamp(16px,2.4vw,28px);scroll-margin-top:100px;transition:background .2s}
+.entry:hover{background:rgba(127,192,160,.025)}
+.tl-year + .entry, .entries-group:first-child{border-top:1px solid var(--line)}
+.entry-date-col{display:flex;flex-direction:column;gap:8px}
+.entry-date{font-family:var(--mono);font-size:11px;color:var(--jade-dim);line-height:1.4}
+.entry-status{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;width:fit-content}
+.entry-status.confirmed{color:var(--jade);border:1px solid var(--jade-20);background:var(--jade-12)}
+.entry-status.planned{color:var(--brass-hi);border:1px solid var(--brass-12);background:var(--brass-12)}
+.entry-anchor{font-family:var(--mono);font-size:9px;color:var(--mute-2);opacity:0;transition:opacity .2s;background:none;border:none;cursor:pointer;text-align:left;padding:0;width:fit-content}
+.entry:hover .entry-anchor,.entry-anchor:focus-visible{opacity:1}
+.entry-anchor.copied{opacity:1;color:var(--jade)}
+.entry-body h3{font-family:var(--disp);font-weight:400;font-size:clamp(16px,1.7vw,20px);line-height:1.3;color:var(--ivory);margin-bottom:8px}
+.entry-body p{font-size:13.5px;line-height:1.72;color:var(--mute);max-width:68ch}
+.entry-body p b{color:var(--ivory-2);font-weight:500}
+.entry-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px}
+.entry-tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.04em;color:var(--mute-2);border:1px solid var(--line-2);padding:4px 9px}
+.entry-src{font-family:var(--mono);font-size:9px;color:var(--mute-2);margin-left:auto}
+.entry-codex{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--jade);border-bottom:1px solid var(--jade-20)}
+.entry-codex:hover{color:var(--jade-hi);border-color:var(--jade)}
+@media(max-width:620px){ .entry{grid-template-columns:1fr;gap:10px} .entry-src{margin-left:0} }
+.tl-empty{padding:60px 20px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--mute-2);border:1px solid var(--line)}
+
+#note{padding:0 var(--gut) clamp(60px,9vh,84px)}
+.note-inner{max-width:var(--maxw);margin:0 auto;border:1px solid var(--jade-20);background:rgba(127,192,160,.04);padding:clamp(22px,3.2vw,30px);display:flex;gap:18px;align-items:flex-start}
+.note-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade);display:block;margin-bottom:8px}
+.note-inner p{font-size:13.5px;line-height:1.7;color:var(--mute);max-width:64ch}
+.note-inner p b{color:var(--ivory);font-weight:500}
+
+footer{background:var(--ground);color:var(--ivory);padding:32px var(--gut);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ft-copy{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2)}
+.ft-legal{display:flex;gap:16px}
+.ft-legal a{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2)}
+.ft-legal a:hover{color:var(--jade)}
+@media(prefers-reduced-motion:reduce){.r{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<div id="prog" aria-hidden="true"><div id="pf"></div></div>
+
+<header id="nav">
+  <a class="nav-back" href="codex.html">← The Codex</a>
+  <div class="nav-right">
+    <a href="index.html">Ayin home</a>
+  </div>
+</header>
+
+<section id="hero">
+  <span class="hero-ghost" aria-hidden="true">◷</span>
+  <div class="hero-inner r">
+    <span class="eyebrow">The Regulatory Radar</span>
+    <h1 class="hero-h">What changed,<br><em>when, and where<br>we read it.</em></h1>
+    <p class="hero-sub">A dated record of regime and platform changes across the jurisdictions Ayin works in. The Codex stays current because this does. Confirmed changes and planned ones are marked separately — we don't blur the two.</p>
+    <div class="hero-meta">
+      <div class="hm"><span class="hml">Entries</span><span class="hmv" id="metaCount">—</span></div>
+      <div class="hm"><span class="hml">Span</span><span class="hmv">Oct 2024 → Q3 2026 (planned)</span></div>
+      <div class="hm"><span class="hml">Jurisdictions tracked</span><span class="hmv">EU · UK · US · Marketplace</span></div>
+      <div class="hm"><span class="hml">Last reviewed</span><span class="hmv">23 Jun 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="facets">
+  <div class="fc-inner r">
+    <div class="fc-row">
+      <span class="fc-label">Jurisdiction</span>
+      <div class="fc-pills" data-facet="jur">
+        <button class="fc-pill active" data-val="all">All</button>
+        <button class="fc-pill" data-val="EU">EU</button>
+        <button class="fc-pill" data-val="UK">UK</button>
+        <button class="fc-pill" data-val="US">US</button>
+        <button class="fc-pill" data-val="Marketplace">Marketplace</button>
+      </div>
+    </div>
+    <div class="fc-row">
+      <span class="fc-label">Status</span>
+      <div class="fc-pills" data-facet="status">
+        <button class="fc-pill active" data-val="all">All</button>
+        <button class="fc-pill" data-val="confirmed">Confirmed</button>
+        <button class="fc-pill" data-val="planned">Planned</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="tl-inner r" id="tlInner"></div>
+</section>
+
+<section id="note">
+  <div class="note-inner r">
+    <div>
+      <span class="note-l">How this is maintained</span>
+      <p>Every entry here links to a primary or named secondary source — an official decision, a government consultation, a regulator's own data release, or closely-tracked practitioner reporting where no official figure exists yet (marketplace enforcement, for instance, publishes no public docket). <b>Planned</b> items are dated to when something is expected, not when it has happened — we don't let the two blur together. Click a date to copy a permalink to that entry.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-copy">© <span id="ftYear"></span> Ayin — The Regulatory Radar</span>
+  <div class="ft-legal">
+    <a href="index.html">Home</a>
+    <a href="codex.html">The Codex</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="accessibility.html">Accessibility</a>
+  </div>
+</footer>
+
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+
+/* ═══ DATA — reverse chronological, newest first ═══ */
+const ENTRIES = [
+  { date:'23 Jun 2026', year:'2026', status:'confirmed', jur:['UK'],
+    title:'UK closes parallel consultations on a new product-safety framework',
+    body:'The Department for Business and Trade and OPSS close two linked consultations: a new core product safety framework replacing the 2005 GPSR regime, and a consolidated market-surveillance and enforcement toolkit introducing civil monetary penalties consistently across all product sectors — both made under the Product Regulation and Metrology Act 2025.',
+    tags:['UKCA','Enforcement reform'], src:'DBT / OPSS, gov.uk', codex:'codex-ukca.html', codexLabel:'UKCA Marking' },
+  { date:'Q3 2026', year:'2026', status:'planned', jur:['EU'],
+    title:'European Product Act expected for adoption',
+    body:'The European Commission is expected to adopt a European Product Act, reforming the New Legislative Framework and the Market Surveillance Regulation (EU) 2019/1020 — moving on a broadly similar timeline and direction to the UK\u2019s own overhaul.',
+    tags:['Product safety','EU reform'], src:'European Commission', codex:null },
+  { date:'Ongoing 2026', year:'2026', status:'confirmed', jur:['UK'],
+    title:'MHRA consults on indefinite CE recognition for medical devices',
+    body:'Unlike most consumer categories, CE recognition for medical devices in Great Britain remains transitional rather than permanent. The MHRA opened a 2026 consultation on whether to make that recognition indefinite; the outcome — and the future GB medical-device regime — is not yet finalised.',
+    tags:['Medical devices','UKCA'], src:'MHRA consultation, 2026', codex:'codex-ukca.html', codexLabel:'UKCA Marking' },
+  { date:'Mar 2026', year:'2026', status:'confirmed', jur:['UK'],
+    title:'UKCA\u2013CE recognition confirmed permanent for most categories',
+    body:'Reporting and guidance reconfirm that the Product Safety and Metrology etc. (Amendment) Regulations 2024 made indefinite recognition of CE marking permanent for 21 product regulations in Great Britain — a fact a meaningful share of online compliance guidance still has not caught up with.',
+    tags:['UKCA','CE marking'], src:'Complir, UKCA practical guide, 2026', codex:'codex-ukca.html', codexLabel:'UKCA Marking' },
+  { date:'Jan 2026', year:'2026', status:'confirmed', jur:['US'],
+    title:'Active MoCRA facility registrations reach 14,299',
+    body:'FDA data shows active cosmetic facility registrations grew from 9,528 to 14,299, and product listings from 589,762 to 992,907, year over year. The agency\u2019s visibility into who manufactures what — and where — is compounding faster than many brands have adjusted to.',
+    tags:['MoCRA','Facility registration'], src:'Foley & Lardner, "How MoCRA Is Reshaping FDA Oversight," Mar 2026', codex:'codex-mocra.html', codexLabel:'FDA MoCRA' },
+  { date:'May 2026', year:'2026', status:'planned', jur:['US'],
+    title:'FDA expected to propose fragrance-allergen labelling rule',
+    body:'Under MoCRA, FDA is expected to publish a proposed rule requiring cosmetics to identify specific fragrance allergens on the label, rather than the generic word "fragrance" — a labelling change brands should be tracking ahead of any comment period.',
+    tags:['MoCRA','Labelling'], src:'Bustos Law Group, MoCRA timeline update, Dec 2025', codex:'codex-mocra.html', codexLabel:'FDA MoCRA' },
+  { date:'Dec 2025 (deadline passed)', year:'2025', status:'confirmed', jur:['US'],
+    title:'FDA cosmetics GMP final rule still pending past its statutory deadline',
+    body:'MoCRA required FDA to finalise a Good Manufacturing Practice rule for cosmetics by 29 December 2025. As of early 2026 the final rule has not been issued; FDA has signalled via warning letters that it expects strict compliance once it lands, so the delay does not relax the direction of travel.',
+    tags:['MoCRA','GMP'], src:'Cosmetic Industry Regulations 2025 guide; Foley & Lardner, 2026', codex:'codex-mocra.html', codexLabel:'FDA MoCRA' },
+  { date:'12 Sep 2025', year:'2025', status:'confirmed', jur:['US'],
+    title:'FDA launches public adverse-event dashboard for cosmetics',
+    body:'FDA opened the FAERS Public Dashboard for Cosmetic Products, giving consumers, salon professionals, and healthcare providers real-time access to cosmetic adverse-event data — a meaningful increase in public visibility for any safety issue tied to a registered product.',
+    tags:['MoCRA','Transparency'], src:'Foley & Lardner, "How MoCRA Is Reshaping FDA Oversight," 2026', codex:'codex-mocra.html', codexLabel:'FDA MoCRA' },
+  { date:'Jul 2025', year:'2025', status:'confirmed', jur:['UK'],
+    title:'Product Regulation and Metrology Act 2025 receives Royal Assent',
+    body:'The Act that hands the UK government power to update or diverge from retained EU product rules — including the choice to keep recognising CE marking or end that recognition — became law. It is the statutory basis for the 2026 reform consultations now underway.',
+    tags:['UKCA','Legislation'], src:'CMS Law, "UK Product Safety Framework Overhaul," Apr 2026', codex:'codex-ukca.html', codexLabel:'UKCA Marking' },
+  { date:'mid-2025 \u2013 mid-2026', year:'2025', status:'confirmed', jur:['EU'],
+    title:'European Commission opens first full evaluation of the Cosmetics Regulation',
+    body:'The Commission announced a full evaluation of Regulation (EC) No 1223/2009, running from mid-2025 to mid-2026, to assess the regime\u2019s continued relevance and effectiveness — the first review of this scale since the regulation\u2019s 2009 recast.',
+    tags:['EU 1223/2009','Review'], src:'Schlafender Hase, EU cosmetic regulation guide, 2026', codex:'codex-eu-cosmetics.html', codexLabel:'EU Cosmetics Reg. 1223/2009' },
+  { date:'Apr 2025', year:'2025', status:'confirmed', jur:['US'],
+    title:'FDA flags undeclared methylene chloride in imported nail-polish removers',
+    body:'FDA testing of imported gel nail-polish removers in 2024\u20132025 detected methylene chloride — often hidden under names like dichloromethane — despite a clear prohibition. The agency issued a public notice naming the issue directly rather than waiting for a recall request.',
+    tags:['MoCRA','Restricted ingredients'], src:'FDA public notice, Apr 2025', codex:'codex-mocra.html', codexLabel:'FDA MoCRA' },
+  { date:'Jan\u2013Mar 2025', year:'2025', status:'confirmed', jur:['US'],
+    title:'FDA issues MoCRA warning letters to drug manufacturers',
+    body:'In the first two months of a new administration, FDA issued warning letters to three drug manufacturers, reminding them that some of their marketed products are regulated as cosmetics and therefore subject to MoCRA in full — regardless of how the company had classified them internally.',
+    tags:['MoCRA','Enforcement'], src:'Crowell & Moring, "MoCRA Under the Trump Era," Mar 2025', codex:'codex-mocra.html', codexLabel:'FDA MoCRA' },
+  { date:'Nov 2024', year:'2024', status:'confirmed', jur:['US'],
+    title:'Analysis finds 48% of imported cosmetics non-compliant with MoCRA',
+    body:'A Registrar Corp analysis of cosmetics sold at America\u2019s top 25 retailers found 48% were not compliant with MoCRA registration and listing requirements, spanning more than 135,000 products — concrete evidence that the compliance gap MoCRA was built to close is still wide open.',
+    tags:['MoCRA','Compliance gap'], src:'Registrar Corp analysis, cited Nov 2024', codex:'codex-mocra.html', codexLabel:'FDA MoCRA' },
+  { date:'1 Oct 2024', year:'2024', status:'confirmed', jur:['UK'],
+    title:'CE recognition in Great Britain made indefinite for most categories',
+    body:'The Product Safety and Metrology etc. (Amendment) Regulations 2024 came into force, extending recognition of CE marking (and goods meeting EU requirements) in Great Britain indefinitely for the large majority of consumer product categories — the foundational change behind "CE still works" guidance today.',
+    tags:['UKCA','CE marking'], src:'IIMS, "Rules without enforcement are no rules at all," 2026', codex:'codex-ukca.html', codexLabel:'UKCA Marking' }
+];
+
+const facetState = { jur:'all', status:'all' };
+function matches(e){
+  return (facetState.jur==='all' || e.jur.includes(facetState.jur)) &&
+         (facetState.status==='all' || e.status===facetState.status);
+}
+
+function slug(e){
+  return 'r-' + e.date.replace(/[^a-z0-9]+/gi,'-').toLowerCase() + '-' + e.title.split(' ').slice(0,3).join('-').replace(/[^a-z0-9]+/gi,'-').toLowerCase();
+}
+
+function render(){
+  const filtered = ENTRIES.filter(matches);
+  $('metaCount').textContent = filtered.length + ' of ' + ENTRIES.length;
+  const wrap = $('tlInner');
+  if(!filtered.length){ wrap.innerHTML = '<div class="tl-empty">Nothing in that combination yet — try widening a filter.</div>'; return; }
+  let html = '', lastYear = null;
+  filtered.forEach(e=>{
+    if(e.year !== lastYear){ html += `<div class="tl-year">${e.year}</div>`; lastYear = e.year; }
+    const id = slug(e);
+    const tagsHtml = e.tags.map(t=>`<span class="entry-tag">${t}</span>`).join('');
+    const codexHtml = e.codex ? `<a class="entry-codex" href="${e.codex}">${e.codexLabel} — the Codex →</a>` : '';
+    html += `
+      <article class="entry" id="${id}">
+        <div class="entry-date-col">
+          <span class="entry-status ${e.status}">${e.status==='planned'?'Planned':'Confirmed'}</span>
+          <span class="entry-date">${e.date}</span>
+          <button class="entry-anchor" data-id="${id}">¶ copy link</button>
+        </div>
+        <div class="entry-body">
+          <h3>${e.title}</h3>
+          <p>${e.body}</p>
+          <div class="entry-foot">${tagsHtml}${codexHtml}<span class="entry-src">${e.src}</span></div>
+        </div>
+      </article>`;
+  });
+  wrap.innerHTML = html;
+  wrap.querySelectorAll('.entry-anchor').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const url = location.origin + location.pathname + '#' + btn.dataset.id;
+      try { await navigator.clipboard.writeText(url); } catch(e){}
+      history.replaceState(null,'','#'+btn.dataset.id);
+      btn.textContent = '¶ link copied'; btn.classList.add('copied');
+      setTimeout(()=>{ btn.textContent='¶ copy link'; btn.classList.remove('copied'); }, 1600);
+    });
+  });
+}
+render();
+
+document.querySelectorAll('.fc-pills').forEach(group=>{
+  const facet = group.dataset.facet;
+  group.querySelectorAll('.fc-pill').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      group.querySelectorAll('.fc-pill').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      facetState[facet] = btn.dataset.val;
+      render();
+    });
+  });
+});
+
+const pf = $('pf');
+addEventListener('scroll', () => {
+  const H = document.body.scrollHeight - innerHeight;
+  pf.style.width = (H > 0 ? Math.min(scrollY / H, 1) : 0) * 100 + '%';
+}, { passive:true });
+const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }), { threshold:.06, rootMargin:'0px 0px -24px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+
+$('ftYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

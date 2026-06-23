@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071512">
+<title>Disclaimer — Ayin</title>
+<meta name="description" content="What Ayin is, what it is not, and what the figures on this site mean. Read before drawing conclusions.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   AYIN — DISCLAIMER
+   Signature: the Enforcement Ledger + the Standing Positions console.
+═══════════════════════════════════════════════════════ */
+:root {
+  --paper:   #F2EDE4; --paper-2: #EAE3D8; --paper-3: #DDD5C8;
+  --ground:  #0C1F1A; --g1:#102822; --g2:#16332B; --g3:#1C3C32; --abyss:#071512;
+  --ivory:   #EFE9DB; --ivory-2: #D8D1C0;
+  --mute:    rgba(239,233,219,.74); --mute-2: rgba(239,233,219,.46); --mute-3: rgba(239,233,219,.28);
+  --faint:   rgba(239,233,219,.16); --line: rgba(239,233,219,.10); --line-2: rgba(239,233,219,.05);
+  --ink:      #16120B; --ink-soft: rgba(22,18,11,.66); --ink-faint:rgba(22,18,11,.38);
+  --ink-line: rgba(22,18,11,.13); --ink-line2:rgba(22,18,11,.065);
+  --jade:     #7FC0A0; --jade-hi:  #A8DCC2; --jade-dim: #4E8870; --jade-ink: #15614A;
+  --jade-12:  rgba(127,192,160,.12); --jade-20:  rgba(127,192,160,.20); --jade-glow:rgba(127,192,160,.24);
+  --verm:    #C2402A; --verm-hi: #E0654A; --verm-08: rgba(194,64,42,.08); --verm-25: rgba(194,64,42,.26); --verm-12: rgba(194,64,42,.12);
+  --brass:    #9A6010; --brass-hi: #C8963C; --brass-12: rgba(200,150,60,.13); --brass-glow:rgba(200,150,60,.20);
+  --disp: 'Spectral', Georgia, serif; --body: 'Hanken Grotesk', system-ui, sans-serif; --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --e1: cubic-bezier(.2,.8,.2,1); --e2: cubic-bezier(.16,1,.3,1);
+  --gut: clamp(24px,5vw,84px); --maxw: 1100px; --pad: clamp(80px,11vh,140px); --navh:85px;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html { background:var(--abyss); scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:var(--jade-dim) var(--ground) }
+::-webkit-scrollbar { width:6px } ::-webkit-scrollbar-track { background:var(--abyss) } ::-webkit-scrollbar-thumb { background:var(--g3) }
+body { font-family:var(--body); font-weight:300; line-height:1.66; font-size:16px; background:var(--abyss); color:var(--ivory); overflow-x:hidden; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility }
+::selection { background:var(--jade); color:var(--abyss) }
+a { color:inherit; text-decoration:none } button { font-family:inherit; color:inherit; background:none; border:none; cursor:pointer } svg { display:block }
+:focus-visible { outline:2px solid var(--jade); outline-offset:3px; border-radius:1px }
+
+.grain { position:fixed; inset:-50%; width:200%; height:200%; z-index:1000; pointer-events:none; opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+#prog { position:fixed; top:0; left:0; right:0; height:1px; z-index:200; pointer-events:none }
+#pf { height:100%; width:0; background:var(--verm); transition:width .08s linear }
+.wrap { max-width:var(--maxw); margin:0 auto; padding:0 var(--gut) }
+.folio { position:absolute; top:clamp(74px,9vh,96px); right:var(--gut); font-family:var(--mono); font-size:9px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--mute-2); pointer-events:none; z-index:3 }
+.folio.on-paper { color:var(--ink-faint) }
+.r { opacity:0; transform:translateY(20px); transition:opacity 1s var(--e2), transform 1s var(--e2) }
+.r.in { opacity:1; transform:none }
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.32s}
+
+/* ── NAV ── */
+#nav { position:fixed; top:0; left:0; right:0; z-index:100; height:var(--navh); display:flex; align-items:center; padding:0 var(--gut) 0 clamp(12px,1.2vw,18px); transition:background .5s, border-color .5s; border-bottom:1px solid transparent }
+#nav.on-dark  .nav-logo-light { display:none } #nav.on-dark  .nav-logo-dark  { display:block }
+#nav.on-paper .nav-logo-light { display:block } #nav.on-paper .nav-logo-dark  { display:none }
+.nav-brand { display:flex; align-items:center; gap:10px; z-index:2 }
+.nav-wm { font-family:var(--disp); font-weight:400; font-size:23px; letter-spacing:.03em; transition:color .5s }
+.nav-wm .dot { transition:color .5s }
+.nav-right { margin-left:auto; display:flex; align-items:center; gap:10px }
+.nav-back, .nav-print { font-family:var(--mono); font-size:10.5px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; padding:10px 16px; transition:background .3s, color .3s, border-color .5s; border:1px solid transparent; display:inline-flex; align-items:center; gap:7px }
+#nav.on-paper .nav-wm { color:var(--ink) } #nav.on-paper .nav-wm .dot { color:var(--jade-ink) }
+#nav.on-paper .nav-back, #nav.on-paper .nav-print { color:var(--jade-ink); border-color:rgba(29,91,69,.3) }
+#nav.on-paper .nav-back:hover, #nav.on-paper .nav-print:hover { background:var(--jade-ink); color:var(--paper) }
+#nav.on-dark { background:rgba(8,16,9,.86); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-color:var(--line) }
+#nav.on-dark .nav-wm { color:var(--ivory) } #nav.on-dark .nav-wm .dot { color:var(--jade) }
+#nav.on-dark .nav-back, #nav.on-dark .nav-print { color:var(--jade); border-color:var(--jade-20) }
+#nav.on-dark .nav-back:hover, #nav.on-dark .nav-print:hover { background:var(--jade); color:var(--abyss) }
+#nav.on-dark .eye-lid{stroke:rgba(239,233,216,.28)}
+
+/* ════════ HEADER ════════ */
+#doc-head { position:relative; background:var(--abyss); min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 var(--gut) clamp(56px,9vh,96px); overflow:hidden }
+#doc-head::before { content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 55% 65% at 10% 70%, rgba(194,64,42,.07) 0%, transparent 58%), radial-gradient(ellipse 40% 50% at 88% 30%, rgba(127,192,160,.03) 0%, transparent 55%); }
+.dh-ghost { position:absolute; right:calc(var(--gut) - 20px); top:50%; transform:translateY(-50%); font-family:var(--disp); font-weight:800; font-size:clamp(200px,32vw,560px); line-height:.86; letter-spacing:-.06em; color:transparent; -webkit-text-stroke:1px rgba(194,64,42,.06); user-select:none; pointer-events:none; animation:gh-rise 1.8s var(--e2) .2s both }
+@keyframes gh-rise { from{opacity:0;transform:translateY(-44%) scale(.94)} to{opacity:1;transform:translateY(-50%) scale(1)} }
+.dh-body { display:grid; grid-template-columns:1fr clamp(260px,32%,420px); gap:clamp(44px,6vw,96px); align-items:end; position:relative; z-index:2 }
+.dh-title-area {}
+.dh-kicker { font-family:var(--mono); font-size:9.5px; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--verm); display:flex; align-items:center; gap:14px; margin-bottom:clamp(22px,3.5vh,36px); animation:dh-k-rise .9s var(--e2) .7s both }
+.dh-kicker::before { content:''; width:22px; height:1px; background:var(--verm) }
+@keyframes dh-k-rise { from{opacity:0;transform:translateX(-12px)} to{opacity:1;transform:none} }
+.dh-title { font-family:var(--disp); font-weight:300; font-optical-sizing:auto; font-size:clamp(48px,7.5vw,112px); line-height:.9; letter-spacing:-.044em; color:var(--ivory); animation:dh-t-rise 1.2s var(--e2) .9s both }
+.dh-title em { font-style:italic; color:var(--verm) }
+@keyframes dh-t-rise { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+.dh-rule { width:100%; height:1px; background:linear-gradient(90deg, var(--line) 0%, transparent 70%); margin:clamp(24px,3.8vh,36px) 0; animation:dh-t-rise .7s var(--e2) 1.3s both }
+.dh-sub { font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(15px,1.6vw,20px); letter-spacing:-.012em; color:var(--mute); line-height:1.44; max-width:44ch; animation:dh-t-rise .8s var(--e2) 1.45s both }
+
+.positions-console { border:1px solid rgba(194,64,42,.28); background:linear-gradient(160deg, rgba(14,8,6,.98), rgba(7,10,6,.99));
+  box-shadow:0 0 0 1px rgba(194,64,42,.06), 0 30px 76px rgba(0,0,0,.62), 0 0 100px rgba(194,64,42,.06);
+  position:relative; isolation:isolate; animation:dh-t-rise 1s var(--e2) 1.1s both; align-self:end }
+.positions-console::before { content:''; position:absolute; top:-1px; left:-1px; width:68%; height:1px; background:linear-gradient(90deg, var(--verm) 0%, rgba(194,64,42,.28) 52%, transparent 100%); pointer-events:none; z-index:1 }
+.positions-console::after { content:''; position:absolute; top:-1px; left:-1px; width:1px; height:62%; background:linear-gradient(180deg, var(--verm) 0%, rgba(194,64,42,.15) 68%, transparent 100%); pointer-events:none; z-index:1 }
+.pos-bar { display:flex; align-items:center; gap:10px; padding:11px 18px; border-bottom:1px solid rgba(194,64,42,.14); background:rgba(194,64,42,.05) }
+.pos-bar-pulse { width:5px; height:5px; border-radius:50%; background:var(--verm); animation:vpulse 3s ease-in-out infinite; flex-shrink:0 }
+@keyframes vpulse { 0%,100%{opacity:1} 50%{opacity:.28} }
+.pos-bar-l { font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ivory) }
+.pos-item { display:flex; align-items:flex-start; gap:13px; padding:clamp(10px,1.6vh,14px) 18px; border-bottom:1px solid rgba(239,233,219,.06) }
+.pos-item:last-child { border-bottom:none }
+.pos-ico { width:16px; height:16px; flex-shrink:0; margin-top:1px; position:relative }
+.pos-text { font-family:var(--mono); font-size:9.5px; letter-spacing:.03em; line-height:1.55; color:var(--mute) }
+.pos-text b { font-weight:600 }
+.pos-text.yes b { color:var(--jade) } .pos-text.no b { color:var(--verm) }
+
+.dh-meta { display:flex; flex-wrap:wrap; gap:clamp(28px,4vw,60px); margin-top:clamp(44px,7vh,80px); padding-top:clamp(22px,3.5vh,32px); border-top:1px solid var(--line); animation:dh-t-rise .7s var(--e2) 1.7s both; position:relative; z-index:2 }
+.dh-meta-item { display:flex; flex-direction:column; gap:6px }
+.dh-meta-label { font-family:var(--mono); font-size:8px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--mute-2) }
+.dh-meta-val { font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--mute) }
+.dh-meta-val.tag { color:var(--verm); display:inline-flex; align-items:center; gap:7px }
+.dh-meta-val.tag::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--verm); box-shadow:0 0 6px var(--verm-25) }
+@media(max-width:900px){ .dh-body { grid-template-columns:1fr } .positions-console { max-width:460px } }
+
+/* ════════ TOC ════════ */
+#doc-toc { background:var(--ground); padding:clamp(60px,9vh,100px) var(--gut); border-top:1px solid var(--line); position:relative }
+#doc-toc::before { content:''; position:absolute; top:0; left:var(--gut); right:var(--gut); height:1px; background:linear-gradient(90deg, var(--verm) 0%, rgba(194,64,42,.22) 38%, transparent 65%) }
+.toc-inner { max-width:var(--maxw); margin:0 auto; display:grid; grid-template-columns:auto 1fr; gap:0 clamp(52px,7vw,110px); align-items:start }
+.toc-aside-label { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--jade); display:block; margin-bottom:clamp(16px,2.5vh,24px) }
+.toc-aside-h { font-family:var(--disp); font-weight:300; font-optical-sizing:auto; font-size:clamp(28px,3.4vw,52px); letter-spacing:-.028em; line-height:1.0; color:var(--ivory); white-space:nowrap }
+.toc-aside-h em { font-style:italic; color:var(--verm) }
+.toc-aside-note { margin-top:clamp(18px,2.8vh,26px); font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(13px,1.1vw,15px); line-height:1.6; color:var(--mute-2); max-width:20ch; border-left:1px solid var(--verm-25); padding-left:14px }
+.toc-printbtn { margin-top:clamp(20px,3vh,28px); display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--jade); border:1px solid var(--jade-20); padding:11px 17px; transition:background .25s,color .25s }
+.toc-printbtn:hover { background:var(--jade); color:var(--abyss) }
+.toc-list { list-style:none; border-top:1px solid var(--line) }
+.toc-item { border-bottom:1px solid var(--line) }
+.toc-link { display:flex; align-items:baseline; gap:clamp(14px,2vw,32px); padding:clamp(12px,1.8vh,17px) 0; font-family:var(--mono); font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--mute-2); transition:color .28s }
+.toc-link:hover { color:var(--jade) }
+.toc-n { color:var(--jade); font-weight:600; font-size:9px; letter-spacing:.18em; flex-shrink:0; min-width:28px }
+.toc-t { flex:1 } .toc-arr { color:var(--faint); flex-shrink:0; transition:color .28s, transform .28s }
+.toc-link:hover .toc-arr { color:var(--jade); transform:translateX(4px) }
+@media(max-width:760px){ .toc-inner { grid-template-columns:1fr } .toc-aside { margin-bottom:clamp(32px,5vh,48px) } .toc-aside-h { white-space:normal } }
+
+/* ════════ BODY ════════ */
+#doc-body { background:var(--paper); color:var(--ink); padding:clamp(72px,11vh,120px) var(--gut) clamp(96px,15vh,160px); position:relative }
+#doc-body::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--verm) 0%, rgba(194,64,42,.3) 28%, transparent 55%) }
+.body-inner { max-width:var(--maxw); margin:0 auto }
+
+.cl { display:grid; grid-template-columns:clamp(60px,8vw,110px) 1fr; gap:0 clamp(32px,4vw,64px); margin-bottom:clamp(56px,9vh,88px); padding-bottom:clamp(56px,9vh,88px); border-bottom:1px solid var(--ink-line); position:relative; scroll-margin-top:110px }
+.cl:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0 }
+.cl-num-col { padding-top:clamp(32px,5vh,52px) }
+.cl-num { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--jade-ink); display:block; margin-bottom:14px; white-space:nowrap }
+.cl-num-large { font-family:var(--disp); font-weight:300; font-size:clamp(42px,5.5vw,80px); line-height:.84; letter-spacing:-.044em; color:transparent; -webkit-text-stroke:1px rgba(21,97,74,.18); display:block; user-select:none }
+.cl-content { padding-top:clamp(32px,5vh,52px); border-top:1px solid var(--ink-line) }
+.cl-title-row { display:flex; align-items:baseline; gap:11px; margin-bottom:clamp(20px,3.2vh,30px) }
+.cl-title { font-family:var(--disp); font-weight:400; font-optical-sizing:auto; font-size:clamp(22px,2.8vw,36px); letter-spacing:-.022em; line-height:1.04; color:var(--ink) }
+.cl-anchor { flex-shrink:0; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; color:var(--ink-faint); opacity:0; transition:opacity .22s, color .22s; position:relative; top:-2px }
+.cl:hover .cl-anchor, .cl-anchor:focus-visible { opacity:1 } .cl-anchor:hover { color:var(--jade-ink) } .cl-anchor.copied { opacity:1; color:var(--jade-ink) }
+.cl-anchor-tip { position:absolute; top:-26px; left:50%; transform:translateX(-50%) translateY(4px); font-family:var(--mono); font-size:8.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ivory); background:var(--ink); padding:4px 8px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s }
+.cl-anchor.copied .cl-anchor-tip { opacity:1; transform:translateX(-50%) translateY(0) }
+.cl-content p { font-size:clamp(14px,1.1vw,15.5px); line-height:1.88; color:var(--ink-soft); font-weight:300; margin-bottom:clamp(16px,2.5vh,22px); max-width:68ch }
+.cl-content p:last-child { margin-bottom:0 } .cl-content p b { color:var(--ink); font-weight:500 } .cl-content p em { font-style:italic }
+.cl-content ul { margin:clamp(14px,2.2vh,20px) 0 clamp(16px,2.5vh,24px) 0; display:flex; flex-direction:column; gap:0 }
+.cl-content li { font-size:clamp(13.5px,1.1vw,15px); line-height:1.82; color:var(--ink-soft); font-weight:300; padding:clamp(9px,1.4vh,13px) 0 clamp(9px,1.4vh,13px) clamp(20px,2.5vw,30px); border-bottom:1px solid var(--ink-line2); position:relative }
+.cl-content li:first-child { border-top:1px solid var(--ink-line2) }
+.cl-content li::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:5px; height:1px; background:var(--jade-ink); opacity:.5 }
+.cl-content li b { color:var(--ink); font-weight:500 }
+
+.sub-cl { margin:clamp(22px,3.5vh,32px) 0; padding:clamp(18px,2.8vh,26px) clamp(20px,2.8vw,30px); border-left:2px solid var(--jade-ink); background:rgba(21,97,74,.03) }
+.sub-cl.warn { border-left-color:var(--verm); background:var(--verm-08) }
+.sub-cl-title { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--jade-ink); display:block; margin-bottom:clamp(10px,1.6vh,14px) }
+.sub-cl.warn .sub-cl-title { color:var(--verm) }
+.sub-cl p { margin-bottom:clamp(10px,1.5vh,14px) !important } .sub-cl p:last-child { margin-bottom:0 !important }
+
+.em-block { margin:clamp(20px,3.2vh,30px) 0; padding:clamp(18px,2.8vh,26px) clamp(20px,2.8vw,30px); background:var(--jade-12); border-left:2px solid var(--jade-ink) }
+.em-block.warn { background:var(--verm-08); border-left-color:var(--verm) }
+.em-block p { font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(14.5px,1.35vw,17px); line-height:1.62; color:var(--ink); margin-bottom:0 !important }
+.em-block p b { font-style:normal; font-family:var(--mono); font-weight:600; font-size:.88em; color:var(--jade-ink) }
+.em-block.warn p b { color:var(--verm) }
+
+/* ═══ ENFORCEMENT LEDGER ═══ */
+.ledger { margin:clamp(28px,4.5vh,44px) 0; border:1px solid var(--ink-line); overflow:hidden }
+.ledger-caption { display:flex; align-items:center; gap:12px; padding:clamp(12px,1.8vh,18px) 0 clamp(12px,1.8vh,16px); font-family:var(--mono); font-size:9px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint); border-bottom:1px solid var(--ink-line) }
+.ledger-caption::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--brass-hi); flex-shrink:0 }
+.ledger-head { display:grid; grid-template-columns:2fr 1fr 2fr; background:var(--ground) }
+.ledger-head span { font-family:var(--mono); font-size:8px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--jade); padding:10px 18px; border-right:1px solid var(--line) }
+.ledger-head span:last-child { border-right:none }
+.ledger-row { display:grid; grid-template-columns:2fr 1fr 2fr; border-bottom:1px solid var(--ink-line2); transition:background .22s }
+.ledger-row:last-child { border-bottom:none }
+.ledger-row:hover { background:rgba(21,97,74,.025) }
+.ledger-row:nth-child(even) { background:var(--paper-2) }
+.ledger-row:nth-child(even):hover { background:rgba(21,97,74,.04) }
+.lc { padding:clamp(12px,1.8vh,18px) 18px; border-right:1px solid var(--ink-line2); font-size:12.5px; line-height:1.65; color:var(--ink-soft); vertical-align:top }
+.lc:last-child { border-right:none }
+.lc.name { font-weight:400; color:var(--ink) }
+.lc.name span { display:block; font-size:11px; color:var(--ink-faint); margin-top:2px }
+.lc.fine { font-family:var(--mono); font-size:clamp(12px,1.2vw,15px); font-weight:600; color:var(--brass); white-space:nowrap; display:flex; align-items:center }
+.lc.src { font-family:var(--mono); font-size:9px; letter-spacing:.03em; color:var(--ink-faint); line-height:1.65 }
+.ledger-close { margin-top:clamp(14px,2.2vh,20px); font-family:var(--mono); font-size:10px; letter-spacing:.05em; color:var(--ink-faint); font-style:italic }
+.ledger-close a { color:var(--jade-ink); border-bottom:1px solid rgba(21,97,74,.28); transition:border-color .25s }
+.ledger-close a:hover { border-color:var(--jade-ink) }
+
+.cl-contact-note { margin-top:clamp(32px,5vh,48px); padding-top:clamp(20px,3.2vh,28px); border-top:1px solid var(--ink-line2); font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:var(--ink-faint) }
+.cl-contact-note a { color:var(--jade-ink); border-bottom:1px solid rgba(21,97,74,.28); transition:border-color .25s }
+.cl-contact-note a:hover { border-color:var(--jade-ink) }
+
+@media(max-width:760px){ .ledger-head, .ledger-row { grid-template-columns:1fr } .lc { border-right:none; border-bottom:1px solid var(--ink-line2) } .lc:last-child { border-bottom:none } .ledger-head span { border-right:none; border-bottom:1px solid var(--line) } .ledger-head span:last-child { border-bottom:none } }
+@media(max-width:680px){ .cl { grid-template-columns:1fr; gap:0 } .cl-num-col { padding-top:clamp(32px,5vh,52px); display:flex; align-items:baseline; gap:16px } .cl-num-large { font-size:clamp(32px,8vw,48px) } .cl-content { padding-top:16px; border-top:none } }
+
+/* ═══ CLAUSE RAIL ═══ */
+.clause-rail { position:fixed; right:18px; top:50%; transform:translateY(-50%); z-index:60; display:flex; flex-direction:column; align-items:flex-end; gap:5px; opacity:0; pointer-events:none; transition:opacity .4s var(--e2) }
+.clause-rail.show { opacity:1; pointer-events:auto }
+.cr-dot { width:14px; height:2px; background:var(--ink-line); position:relative; transition:width .25s var(--e1), background .25s }
+.cr-dot:hover, .cr-dot.active { width:26px; background:var(--jade-ink) }
+.cr-tip { position:absolute; right:calc(100% + 10px); top:50%; transform:translateY(-50%) translateX(4px); font-family:var(--mono); font-size:9px; letter-spacing:.04em; white-space:nowrap; color:var(--ivory); background:var(--ink); padding:5px 10px; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s }
+.cr-dot:hover .cr-tip { opacity:1; transform:translateY(-50%) translateX(0) }
+@media(max-width:1180px){ .clause-rail { display:none } }
+
+/* ── FOOTER ── */
+footer { position:relative; z-index:1; background:var(--ground); color:var(--ivory); padding:0 var(--gut); overflow:hidden }
+footer::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 50% 80% at 0% 100%, rgba(127,192,160,.06) 0%, transparent 58%) }
+.ft-maxim { max-width:var(--maxw); margin:0 auto; padding:clamp(36px,5.5vh,56px) 0 clamp(28px,4vh,40px); border-bottom:1px solid var(--line); text-align:center; position:relative; z-index:1 }
+.ft-lat { display:block; font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(22px,3.2vw,44px); letter-spacing:-.012em; line-height:1.3; color:var(--ivory) }
+.ft-trn { display:block; margin-top:9px; font-family:var(--mono); font-size:8px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--jade); opacity:.7 }
+.ft-body { max-width:var(--maxw); margin:0 auto; display:grid; grid-template-columns:1fr 1px 1fr; gap:0 clamp(44px,6vw,88px); padding:clamp(36px,5.5vh,56px) 0; border-bottom:1px solid var(--line); position:relative; z-index:1 }
+.ft-col-div { background:linear-gradient(180deg, transparent 0%, var(--line) 15%, var(--line) 85%, transparent 100%) }
+.ft-left { display:flex; flex-direction:column; gap:clamp(20px,3.2vh,30px) }
+.ft-brand { display:flex; align-items:center; gap:11px }
+.ft-logo-img { width:250px; height:250px; flex-shrink:0; opacity:1 }
+.ft-wordmark { font-family:var(--disp); font-weight:400; font-size:18px; letter-spacing:.03em; color:var(--ivory) }
+.ft-wordmark .dot { color:var(--jade) }
+.ft-nav { display:flex; flex-wrap:wrap; gap:4px clamp(16px,2.2vw,28px); border-top:1px solid var(--line); padding-top:clamp(12px,1.8vh,18px) }
+.ft-nav a { font-family:var(--mono); font-size:9px; font-weight:400; letter-spacing:.08em; text-transform:uppercase; color:var(--mute-2); transition:color .22s }
+.ft-nav a:hover { color:var(--jade) }
+.ft-right { display:flex; flex-direction:column; justify-content:space-between; gap:clamp(24px,4vh,40px) }
+.ft-thought { font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(14px,1.45vw,18px); letter-spacing:-.010em; line-height:1.56; color:var(--mute); border-left:1px solid rgba(127,192,160,.35); padding-left:clamp(14px,1.8vw,20px) }
+.ft-thought em { color:var(--jade-hi) }
+.ft-cta { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--abyss); background:var(--jade); padding:12px 20px; align-self:flex-start; position:relative; overflow:hidden; isolation:isolate; transition:gap .28s var(--e1) }
+.ft-cta::before { content:''; position:absolute; inset:0; z-index:-1; background:var(--jade-hi); transform:translateY(101%); transition:transform .34s var(--e1) }
+.ft-cta:hover { gap:13px } .ft-cta:hover::before { transform:translateY(0) }
+.ft-base { max-width:var(--maxw); margin:0 auto; display:flex; align-items:baseline; justify-content:space-between; gap:clamp(16px,3vw,40px); flex-wrap:wrap; padding:clamp(16px,2.5vh,24px) 0 clamp(24px,3.8vh,36px); position:relative; z-index:1 }
+.ft-copy { font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--mute-2); white-space:nowrap; flex-shrink:0 }
+.ft-disc { font-size:10px; line-height:1.6; color:var(--mute-2); font-weight:300; max-width:52ch }
+.ft-legal { display:flex; gap:clamp(12px,1.8vw,20px); flex-shrink:0 }
+.ft-legal a { font-family:var(--mono); font-size:8px; letter-spacing:.09em; text-transform:uppercase; color:var(--mute-2); transition:color .22s; white-space:nowrap }
+.ft-legal a:hover { color:var(--jade) }
+@media(max-width:820px){ .ft-body { grid-template-columns:1fr; gap:clamp(30px,5vh,44px) 0 } .ft-col-div { display:none } }
+@media(max-width:560px){ .ft-base { flex-direction:column; gap:10px } }
+@media(prefers-reduced-motion:reduce){ *,*::before,*::after { animation:none!important; transition-duration:.001ms!important } .grain { display:none!important } .r { opacity:1!important; transform:none!important } .dh-ghost,.dh-strip,.dh-kicker,.dh-title,.dh-rule,.dh-sub,.dh-meta,.positions-console { animation:none!important; opacity:1!important; transform:none!important } }
+
+/* ── PRINT ── */
+@media print {
+  .grain, #prog, #nav, .clause-rail, footer, .cl-anchor, .toc-printbtn { display:none !important }
+  html, body { background:#fff !important; color:#111 !important }
+  #doc-head { min-height:0; padding:24px 0; background:#fff !important; color:#111; display:block }
+  #doc-head::before, .dh-ghost { display:none !important }
+  .dh-body { grid-template-columns:1fr !important; gap:12px !important }
+  .positions-console { background:#fff !important; border-color:#999 !important }
+  .pos-bar-l, .pos-text { color:#111 !important }
+  .dh-kicker, .dh-meta-label { color:#555 !important }
+  .dh-title { color:#111 !important; font-size:34px } .dh-title em { color:#111 !important }
+  .dh-sub, .dh-meta-val { color:#333 !important }
+  #doc-toc { background:#fff !important; padding:18px 0 }
+  .toc-aside-h, .toc-aside-label { color:#111 !important }
+  .toc-link, .toc-n, .toc-arr { color:#333 !important }
+  #doc-body { background:#fff !important; padding:0 !important }
+  #doc-body::before { display:none }
+  .cl { break-inside:avoid; border-bottom:1px solid #ccc; padding:18px 0 }
+  .cl-num-large { -webkit-text-stroke:1px #ccc !important }
+  .cl-title, .cl-content p, .cl-content li { color:#111 !important }
+  .sub-cl, .em-block, .ledger { background:#f4f4f4 !important; border-color:#999 !important }
+  .wrap, .body-inner, .toc-inner { max-width:100% !important }
+  a { color:#111 !important }
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"><div id="pf"></div></div>
+
+<header id="nav" class="on-dark">
+  <a class="nav-brand" href="index.html" aria-label="Ayin">
+    <img src="assets/dark.svg" alt="" class="nav-logo-light" style="width:70px; height:70px; object-fit:contain;">
+    <img src="assets/light.svg" alt="" class="nav-logo-dark" style="width:70px; height:70px; object-fit:contain;">
+    <span class="nav-wm"><span class="dot"></span></span>
+  </a>
+  <div class="nav-right">
+    <button class="nav-print" id="navPrint" type="button" aria-label="Print this document">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6V2h8v4M4 11H2.5A1.5 1.5 0 0 1 1 9.5v-2A1.5 1.5 0 0 1 2.5 6h11A1.5 1.5 0 0 1 15 7.5v2a1.5 1.5 0 0 1-1.5 1.5H12M4 9h8v5H4V9Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+      Print
+    </button>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </div>
+</header>
+
+<!-- ════════ HEADER ════════ -->
+<section id="doc-head">
+  <span class="dh-ghost" aria-hidden="true">D</span>
+  <div class="dh-body">
+    <div class="dh-title-area">
+      <div class="dh-kicker">Scope and limitations</div>
+      <h1 class="dh-title">What Ayin<br>is — and<br><em>is not.</em></h1>
+      <div class="dh-rule" aria-hidden="true"></div>
+      <p class="dh-sub">Plainly stated, before any misreading takes hold.</p>
+    </div>
+
+    <div class="positions-console">
+      <div class="pos-bar"><span class="pos-bar-pulse" aria-hidden="true"></span><span class="pos-bar-l">Standing positions</span></div>
+      <div class="pos-item"><svg class="pos-ico ok" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#7FC0A0" stroke-width="1.2"/><path d="M4.5 8.2 7 10.6 11.5 5.6" stroke="#7FC0A0" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pos-text yes"><b>Advisory and compliance practice</b> — market access, platform standing, cross-border work</span></div>
+      <div class="pos-item"><svg class="pos-ico no" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C2402A" stroke-width="1.2"/><path d="M5 5 11 11M11 5 5 11" stroke="#C2402A" stroke-width="1.4" stroke-linecap="round"/></svg><span class="pos-text no"><b>Not a law firm</b> — no legal advice, ever</span></div>
+      <div class="pos-item"><svg class="pos-ico no" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C2402A" stroke-width="1.2"/><path d="M5 5 11 11M11 5 5 11" stroke="#C2402A" stroke-width="1.4" stroke-linecap="round"/></svg><span class="pos-text no"><b>No outcome guarantee</b> — no regulator or platform speaks for us</span></div>
+      <div class="pos-item"><svg class="pos-ico ok" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#7FC0A0" stroke-width="1.2"/><path d="M4.5 8.2 7 10.6 11.5 5.6" stroke="#7FC0A0" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pos-text yes"><b>Enforcement figures</b> — public record, illustration only</span></div>
+      <div class="pos-item"><svg class="pos-ico ok" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#7FC0A0" stroke-width="1.2"/><path d="M4.5 8.2 7 10.6 11.5 5.6" stroke="#7FC0A0" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pos-text yes"><b>The Exposure Instrument</b> — a heuristic, not an assessment</span></div>
+    </div>
+  </div>
+
+  <div class="dh-meta r">
+    <div class="dh-meta-item"><span class="dh-meta-label">Entity</span><span class="dh-meta-val">Ayin (ayin.group)</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-label">Nature</span><span class="dh-meta-val">Advisory &amp; compliance practice — not a law firm</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-label">Contact</span><span class="dh-meta-val">hello@ayin.group</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-label">Status</span><span class="dh-meta-val tag">In force — last reviewed 23 Jun 2026</span></div>
+  </div>
+</section>
+
+<!-- ════════ TOC ════════ -->
+<nav id="doc-toc" aria-label="Document contents">
+  <span class="folio">§ Disclaimer · DOC-003</span>
+  <div class="toc-inner r">
+    <div class="toc-aside">
+      <span class="toc-aside-label">Contents</span>
+      <h2 class="toc-aside-h">The<br><em>limits,</em><br>indexed.</h2>
+      <p class="toc-aside-note">10 clauses. Read before drawing conclusions.</p>
+      <button class="toc-printbtn" id="tocPrint" type="button">
+        <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M4 6V2h8v4M4 11H2.5A1.5 1.5 0 0 1 1 9.5v-2A1.5 1.5 0 0 1 2.5 6h11A1.5 1.5 0 0 1 15 7.5v2a1.5 1.5 0 0 1-1.5 1.5H12M4 9h8v5H4V9Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+        Print or save as PDF
+      </button>
+    </div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#d-1" class="toc-link"><span class="toc-n">01</span><span class="toc-t">Ayin is not a law firm</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-2" class="toc-link"><span class="toc-n">02</span><span class="toc-t">No compliance or outcome guarantee</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-3" class="toc-link"><span class="toc-n">03</span><span class="toc-t">Enforcement figures — public record, for illustration</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-4" class="toc-link"><span class="toc-n">04</span><span class="toc-t">The regulatory and platform landscape is live</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-5" class="toc-link"><span class="toc-n">05</span><span class="toc-t">No reliance — independent verification required</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-6" class="toc-link"><span class="toc-n">06</span><span class="toc-t">Forward-looking statements</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-7" class="toc-link"><span class="toc-n">07</span><span class="toc-t">Third-party content and links</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-8" class="toc-link"><span class="toc-n">08</span><span class="toc-t">Accessibility and technical limitations</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-9" class="toc-link"><span class="toc-n">09</span><span class="toc-t">Assumption of risk and indemnification</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#d-10" class="toc-link"><span class="toc-n">10</span><span class="toc-t">Site accuracy and updates</span><span class="toc-arr">→</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<aside class="clause-rail" id="clauseRail" aria-hidden="true"></aside>
+
+<!-- ════════ BODY ════════ -->
+<section id="doc-body">
+  <span class="folio on-paper">§ Disclaimer · DOC-003</span>
+  <div class="body-inner">
+
+    <div class="cl r" id="d-1">
+      <div class="cl-num-col"><span class="cl-num">01</span><span class="cl-num-large" aria-hidden="true">01</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Ayin is not a law firm</h2><button class="cl-anchor" data-clause="d-1" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <div class="em-block warn">
+          <p><b>Nothing on this site, in any engagement, or in any Deliverable produced by Ayin constitutes legal advice.</b> Ayin does not provide legal advice. Ayin does not provide legal representation in court or formal legal proceedings. No solicitor-client or attorney-client relationship is created by visiting this site, submitting an enquiry, or engaging Ayin's services — and none is created retroactively by anything said in conversation, by email, or in a Deliverable.</p>
+        </div>
+        <p>Ayin maps, clears, and holds standing across regulated markets and platforms — the regime mapping, documentation, filings, and Authority-facing representation that move a product, an account, or a person into and through a regulated environment. That is a distinct and specific discipline, and it is the only thing Ayin does.</p>
+        <p>Where legal advice is required — on whether your practices comply with applicable law, on the interpretation of a specific regulatory obligation, on the conduct of formal legal proceedings, or on any other question of law — you must engage qualified legal counsel. Ayin can work alongside your legal advisers, but it does not replace them.</p>
+        <div class="sub-cl warn">
+          <span class="sub-cl-title">The distinction matters</span>
+          <p>Standing and legal advice are different things. Standing gives you something to show an Authority. Legal advice tells you what your position means and what to do if it's challenged. Both have their place. Conflating them — in either direction — is a mistake Ayin will not make on your behalf, and asks you not to make on your own.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-2">
+      <div class="cl-num-col"><span class="cl-num">02</span><span class="cl-num-large" aria-hidden="true">02</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">No compliance or outcome guarantee</h2><button class="cl-anchor" data-clause="d-2" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Ayin does not guarantee, warrant, or represent that any business, product, or account engaging its services is — or will be found to be — compliant with any law, regulation, regulatory guidance, or platform policy. Nor does Ayin guarantee that any application, filing, appeal, or Plan of Action will be approved.</p>
+        <p>Compliance and standing are ultimately questions answered by regulators, courts, customs authorities, platforms, and the legal advisers who argue before them. Ayin builds the record and presents the case. What any Authority concludes about that record in any specific proceeding is outside Ayin's control and outside the scope of anything Ayin can promise.</p>
+        <div class="sub-cl">
+          <span class="sub-cl-title">What Ayin can say</span>
+          <p>The standing Ayin builds is designed to present the strongest accurate case the facts support — the right regime named, the right documents assembled, the right Authority addressed in the right way. A strong case does not guarantee a favourable outcome. It changes where the conversation starts.</p>
+        </div>
+        <div class="sub-cl warn">
+          <span class="sub-cl-title">What Ayin cannot say</span>
+          <p>That you are compliant. That a regulator will not find against you. That a platform will reinstate an account or approve a listing. That any Deliverable will satisfy a specific Authority's requirements in a specific proceeding. These are determinations Ayin does not make.</p>
+        </div>
+        <p>Ayin recommends that all businesses with material regulatory exposure take qualified legal advice on the adequacy of their compliance posture — and that they do so on a regular basis as the regulatory and platform landscape develops.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-3">
+      <div class="cl-num-col"><span class="cl-num">03</span><span class="cl-num-large" aria-hidden="true">03</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Enforcement figures — public record, for illustration</h2><button class="cl-anchor" data-clause="d-3" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>This site references enforcement actions, statutory penalty figures, and operational consequences relevant to the regimes and platforms Ayin actually works in. Where a single official decision or notice exists — an FDA public notice, a statutory civil-penalty cap — we cite it directly. Where no public decision document exists, which is the normal state of affairs for marketplace enforcement (Amazon publishes no public docket of suspensions), we cite closely tracked practitioner or industry-analysis reporting instead, and say so plainly rather than dressing it up as an official record.</p>
+        <p><b>None of this is cited as a prediction, a benchmark, or a guarantee of any outcome for any business.</b> What a business actually faces — a fine, a recall, a held shipment, a suspended listing — depends on a large number of case-specific factors, none of which Ayin controls or can predict.</p>
+
+        <div class="ledger">
+          <div class="ledger-caption">Enforcement ledger — every figure cited on this site, sourced</div>
+          <div class="ledger-head"><span>Case</span><span>Figure cited</span><span>Primary source</span></div>
+          <div class="ledger-row"><div class="lc name">Cosmetics importers (US)<span>MoCRA registration &amp; listing non-compliance</span></div><div class="lc fine">48% non-compliant</div><div class="lc src">Registrar Corp analysis<br>November 2024 · 135,000+ products reviewed<br>industry-tracked</div></div>
+          <div class="ledger-row"><div class="lc name">Imported nail-polish removers (US)<span>Undeclared methylene chloride</span></div><div class="lc fine">Public notice issued</div><div class="lc src">U.S. Food &amp; Drug Administration<br>April 2025<br>fda.gov · public record</div></div>
+          <div class="ledger-row"><div class="lc name">Weighing &amp; measuring instruments (UK)<span>Non-compliance with NAWI Regulations</span></div><div class="lc fine">Up to £50,000</div><div class="lc src">Office for Product Safety &amp; Standards<br>Statutory civil penalty cap<br>gov.uk · public record</div></div>
+          <div class="ledger-row"><div class="lc name">Cosmetics labelling (EU &amp; UK)<span>Non-compliant or untranslated labels</span></div><div class="lc fine">Low thousands – €millions (EU)</div><div class="lc src">CIRS Group, EU/UK labelling guide<br>2026<br>industry-tracked</div></div>
+          <div class="ledger-row"><div class="lc name">Non-UKCA / non-CE goods (cross-border)<span>Import without conformity marking</span></div><div class="lc fine">~£10,000 per violation</div><div class="lc src">Cross-border compliance guidance<br>2026<br>practitioner-reported</div></div>
+          <div class="ledger-row"><div class="lc name">Amazon seller accounts<span>Suspension pending Plan of Action review</span></div><div class="lc fine">Funds held up to 90 days</div><div class="lc src">Amazon Seller Central policy<br>Account Health Rating, 0–1,000 scale<br>ongoing · platform record</div></div>
+        </div>
+
+        <p class="ledger-close">This ledger is reviewed periodically; we do not claim it is exhaustive of every enforcement action in any regime, only that what we cite is accurately sourced. If you believe any figure or attribution on this site is inaccurate, contact us at <a href="mailto:hello@ayin.group">hello@ayin.group</a>. The site about records cannot carry a wrong one.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-4">
+      <div class="cl-num-col"><span class="cl-num">04</span><span class="cl-num-large" aria-hidden="true">04</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">The regulatory and platform landscape is live</h2><button class="cl-anchor" data-clause="d-4" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>The cosmetics, food and supplement, electronics, customs, tax-residency, and other regimes referenced on this site — together with marketplace enforcement policies such as Amazon's — are all live instruments. They are amended, interpreted, and extended by regulators, courts, legislators, and platforms on an ongoing, often unannounced, basis.</p>
+        <p>Ayin makes every effort to keep the information on this site current and accurate. However, this site does not constitute a definitive statement of the law or of any platform's policy in any jurisdiction, and <b>you should not rely on it as such without independent verification.</b></p>
+        <div class="sub-cl">
+          <span class="sub-cl-title">Regime summaries and the Codex</span>
+          <p>The penalty ceilings, regime names, and compliance requirements described on this site — including in the Codex — represent Ayin's current understanding of the applicable frameworks. They are written for operators, not lawyers, and are designed for orientation rather than precision. For authoritative guidance on any specific obligation, consult the text of the relevant legislation, the issuing authority's official guidance, the platform's current policy, and qualified legal counsel.</p>
+        </div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">The Exposure Instrument</span>
+          <p>The Exposure Instrument on this site is a heuristic tool designed to provide a broad orientation to a business's regulatory and platform exposure. It is not a legal assessment, a formal risk evaluation, or a substitute for professional advice. The output it produces is indicative, not definitive — a starting point for a conversation, not a conclusion.</p>
+        </div>
+        <div class="em-block">
+          <p>A readout from the Exposure Instrument that names a "Light" complexity tier does not mean you are clear. A readout that names a "Specialist" tier does not mean enforcement or rejection is imminent. It means the heuristic suggests your surface is broad. What that means for your specific business requires more than a short, self-serve tool.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-5">
+      <div class="cl-num-col"><span class="cl-num">05</span><span class="cl-num-large" aria-hidden="true">05</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">No reliance — independent verification required</h2><button class="cl-anchor" data-clause="d-5" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Nothing on this site — including the Exposure Instrument's output, the Codex, the enforcement ledger, or any general description of "how we work" — is intended to be relied upon as a substitute for advice tailored to your specific facts.</p>
+        <p>No fiduciary relationship is created by your use of this site or by an exchange of general information before a Scope of Work is signed. Ayin owes no duty of care to a visitor who has not engaged it under a written Scope of Work, beyond the duty not to mislead deliberately.</p>
+        <p>Before acting on anything described here, verify it against the primary source — the legislation, the Authority's own guidance, the platform's current policy — or through your own qualified adviser. Where Ayin is formally engaged, the applicable <a href="terms.html" style="color:var(--jade-ink);border-bottom:1px solid rgba(21,97,74,.28)">Terms of Service</a> and Scope of Work govern, and this Disclaimer is read alongside them, not instead of them.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-6">
+      <div class="cl-num-col"><span class="cl-num">06</span><span class="cl-num-large" aria-hidden="true">06</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Forward-looking statements</h2><button class="cl-anchor" data-clause="d-6" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Where this site or a Deliverable describes typical timelines, likely Authority behaviour, anticipated regulatory direction, or the probable effect of a documented step, those statements are Ayin's professional estimate based on current practice and publicly available information — not a representation of fact about the future.</p>
+        <p>Authorities and platforms can and do change practice, sometimes without notice. A statement that an appeal "typically" succeeds within a given window, or that a regime is "unlikely" to extend to a given product category, is an estimate, not a commitment, and should be read as such.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-7">
+      <div class="cl-num-col"><span class="cl-num">07</span><span class="cl-num-large" aria-hidden="true">07</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Third-party content and links</h2><button class="cl-anchor" data-clause="d-7" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Where this site links to external sources — regulatory authority websites, official decision documents, legislation, platform policy pages — those sources are provided for reference. Ayin does not control their content and is not responsible for their accuracy, availability, or continued publication.</p>
+        <p>Links to external sites do not constitute endorsement of those sites or any content on them beyond the specific document or page referenced.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-8">
+      <div class="cl-num-col"><span class="cl-num">08</span><span class="cl-num-large" aria-hidden="true">08</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Accessibility and technical limitations</h2><button class="cl-anchor" data-clause="d-8" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>We aim to make this site usable across modern browsers and assistive technologies, including keyboard navigation and visible focus states throughout the interactive tools. We do not warrant that the site will be free of errors, uninterrupted, or fully compatible with every browser, device, or assistive technology in use.</p>
+        <p>If you encounter an access barrier on this site, tell us at <a href="mailto:hello@ayin.group" style="color:var(--jade-ink);border-bottom:1px solid rgba(21,97,74,.28)">hello@ayin.group</a> and we will address it as a priority.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-9">
+      <div class="cl-num-col"><span class="cl-num">09</span><span class="cl-num-large" aria-hidden="true">09</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Assumption of risk and indemnification</h2><button class="cl-anchor" data-clause="d-9" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Use of this site, and any decision made in reliance on its general content rather than a formal engagement, is at your own risk. To the fullest extent permitted by applicable law, you agree to indemnify Ayin against any claim, loss, or expense arising from your reliance on general site content in place of independent advice or a formal engagement.</p>
+        <p>Nothing in this Clause 9 limits or replaces the liability allocation set out in Ayin's <a href="terms.html" style="color:var(--jade-ink);border-bottom:1px solid rgba(21,97,74,.28)">Terms of Service</a> for matters under a formal engagement; where the Terms and this Disclaimer overlap for an engaged Client, the Terms govern.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="d-10">
+      <div class="cl-num-col"><span class="cl-num">10</span><span class="cl-num-large" aria-hidden="true">10</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Site accuracy and updates</h2><button class="cl-anchor" data-clause="d-10" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Ayin maintains this site in good faith and updates it as the regulatory landscape, platform policy, and Ayin's services develop. Despite this, Ayin makes no warranty — express or implied — as to the completeness, accuracy, or fitness for purpose of any information on this site.</p>
+        <p>Use of this site and reliance on its content is at your own risk. Nothing on this site creates any obligation on Ayin's part beyond what is expressly agreed in a written engagement governed by the <a href="terms.html" style="color:var(--jade-ink);border-bottom:1px solid rgba(21,97,74,.28)">Terms of Service</a>.</p>
+        <p>If you identify an error — a figure, a date, an attribution — contact us. The standard we hold ourselves to here is the same one we build into client standing: <b>the record should be accurate, and where it is not, it should be corrected promptly.</b></p>
+        <div class="cl-contact-note">Corrections and queries: <a href="mailto:hello@ayin.group">hello@ayin.group</a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="ft-maxim">
+    <span class="ft-lat">Praemonitus, praemunitus</span>
+    <span class="ft-trn">Forewarned is forearmed</span>
+  </div>
+  <div class="ft-body">
+    <div class="ft-left">
+      <div class="ft-brand">
+        <img src="assets/footer.svg" alt="Ayin" class="ft-logo-img">
+        <span class="ft-wordmark"><span class="dot"></span></span>
+      </div>
+      <nav class="ft-nav" aria-label="Footer">
+        <a href="index.html#instrument">The instrument</a>
+        <a href="index.html#have">Do you have it</a>
+        <a href="index.html#ayin">The apparatus</a>
+        <a href="index.html#work">How we work</a>
+        <a href="codex.html">The Codex</a>
+      </nav>
+    </div>
+    <div class="ft-col-div" aria-hidden="true"></div>
+    <div class="ft-right">
+      <p class="ft-thought">Vigilance is not rewarded with praise. It is rewarded with <em>leniency,</em> with closed inquiries, and with deals that don't fall through.</p>
+      <a href="index.html#intake" class="ft-cta">Begin the mapping →</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <span class="ft-copy">© <span id="ftYear"></span> Ayin</span>
+    <p class="ft-disc">Ayin is an advisory and compliance practice, not a law firm. Nothing on this site constitutes legal advice. Enforcement figures are matters of public record or closely tracked industry reporting, cited for illustration only.</p>
+    <div class="ft-legal">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+
+const pf = $('pf');
+addEventListener('scroll', () => {
+  const H = document.body.scrollHeight - innerHeight;
+  pf.style.width = (H > 0 ? Math.min(scrollY / H, 1) : 0) * 100 + '%';
+}, { passive:true });
+
+const nav = $('nav');
+function navRegister(){
+  const docBody = $('doc-body');
+  if (!docBody) return;
+  const r = docBody.getBoundingClientRect();
+  const inPaper = r.top < 80 && r.bottom > 0;
+  if (inPaper){ nav.classList.add('on-paper'); nav.classList.remove('on-dark'); }
+  else        { nav.classList.add('on-dark');  nav.classList.remove('on-paper'); }
+}
+addEventListener('scroll', navRegister, { passive:true });
+navRegister();
+
+const ro = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+}), { threshold:.06, rootMargin:'0px 0px -28px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+
+function doPrint(){ window.print(); }
+$('navPrint')?.addEventListener('click', doPrint);
+$('tocPrint')?.addEventListener('click', doPrint);
+
+document.querySelectorAll('.cl-anchor').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const id = btn.dataset.clause;
+    const url = location.origin + location.pathname + '#' + id;
+    try { await navigator.clipboard.writeText(url); } catch(e){}
+    history.replaceState(null,'','#'+id);
+    btn.classList.add('copied');
+    setTimeout(()=>btn.classList.remove('copied'), 1600);
+  });
+});
+
+(function(){
+  const rail = $('clauseRail');
+  const clauses = [...document.querySelectorAll('#doc-body .cl')];
+  if (!rail || !clauses.length) return;
+  clauses.forEach(cl=>{
+    const num = cl.id.split('-')[1];
+    const title = cl.querySelector('.cl-title')?.textContent || '';
+    const dot = document.createElement('button');
+    dot.className = 'cr-dot';
+    dot.setAttribute('aria-label', 'Jump to clause ' + num);
+    dot.innerHTML = '<span class="cr-tip">' + num.padStart(2,'0') + ' · ' + title + '</span>';
+    dot.addEventListener('click', ()=>{
+      scrollTo({ top: cl.getBoundingClientRect().top + scrollY - 96, behavior:'smooth' });
+    });
+    rail.appendChild(dot);
+  });
+  const dots = [...rail.children];
+  const spy = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      const idx = clauses.indexOf(e.target);
+      if (e.isIntersecting) dots[idx]?.classList.add('active');
+      else dots[idx]?.classList.remove('active');
+    });
+  }, { rootMargin:'-45% 0px -45% 0px' });
+  clauses.forEach(cl=>spy.observe(cl));
+
+  const docBody = $('doc-body');
+  function railVis(){
+    const r = docBody.getBoundingClientRect();
+    rail.classList.toggle('show', r.top < innerHeight*0.6 && r.bottom > innerHeight*0.3);
+  }
+  addEventListener('scroll', railVis, { passive:true });
+  railVis();
+})();
+
+$('ftYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

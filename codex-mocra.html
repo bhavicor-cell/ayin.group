@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071512">
+<title>FDA MoCRA & the US Cosmetics Shelf — The Codex — Ayin</title>
+<meta name="description" content="What the Modernization of Cosmetics Regulation Act actually requires, who enforces it, and what it costs to get wrong — explained in plain language.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE4; --paper-2:#EAE3D8; --ground:#0C1F1A; --g1:#102822; --abyss:#071512;
+  --ivory:#EFE9DB; --ivory-2:#D8D1C0; --mute:rgba(239,233,219,.74); --mute-2:rgba(239,233,219,.46); --line:rgba(239,233,219,.10);
+  --ink:#16120B; --ink-soft:rgba(22,18,11,.66); --ink-faint:rgba(22,18,11,.38); --ink-line:rgba(22,18,11,.13); --ink-line2:rgba(22,18,11,.065);
+  --jade:#7FC0A0; --jade-hi:#A8DCC2; --jade-ink:#15614A; --jade-12:rgba(127,192,160,.12); --jade-20:rgba(127,192,160,.20); --jade-glow:rgba(127,192,160,.24);
+  --brass:#9A6010; --brass-hi:#C8963C;
+  --disp:'Spectral',Georgia,serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --e1:cubic-bezier(.2,.8,.2,1); --e2:cubic-bezier(.16,1,.3,1); --gut:clamp(24px,5vw,84px); --maxw:980px; --navh:70px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--abyss);scroll-behavior:smooth}
+body{font-family:var(--body);font-weight:300;line-height:1.7;font-size:16px;background:var(--abyss);color:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.r{opacity:0;transform:translateY(18px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
+.r.in{opacity:1;transform:none}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--navh);display:flex;align-items:center;padding:0 var(--gut);background:rgba(8,16,9,.86);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.nav-back{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);display:flex;align-items:center;gap:8px}
+.nav-back:hover{color:var(--jade-hi)}
+.nav-right{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--mute-2)}
+
+#hero{background:var(--abyss);padding:clamp(110px,16vh,150px) var(--gut) clamp(50px,7vh,70px);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 80% 20%,rgba(127,192,160,.06) 0%,transparent 60%)}
+.hero-inner{max-width:var(--maxw);margin:0 auto;position:relative;z-index:1}
+.hcode{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--jade);background:var(--jade-12);border:1px solid var(--jade-20);padding:6px 12px;display:inline-block;margin-bottom:20px}
+.htitle{font-family:var(--disp);font-weight:300;font-size:clamp(32px,5vw,56px);letter-spacing:-.03em;line-height:1.04;color:var(--ivory)}
+.htitle em{font-style:italic;color:var(--jade)}
+.hsub{margin-top:18px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.6vw,19px);color:var(--mute);max-width:62ch;line-height:1.5}
+.hmeta{display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);margin-top:clamp(32px,5vh,44px);padding-top:20px;border-top:1px solid var(--line)}
+.hm{display:flex;flex-direction:column;gap:5px}
+.hml{font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2)}
+.hmv{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+
+#body{background:var(--paper);color:var(--ink);padding:clamp(56px,8vh,84px) var(--gut) clamp(80px,12vh,120px)}
+.body-inner{max-width:var(--maxw);margin:0 auto}
+section.sec{margin-bottom:clamp(44px,6.5vh,64px)}
+.sec-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:16px;display:block}
+.sec-h{font-family:var(--disp);font-weight:400;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.018em;color:var(--ink);margin-bottom:18px}
+.sec p{font-size:15px;line-height:1.85;color:var(--ink-soft);margin-bottom:16px;max-width:68ch}
+.sec p:last-child{margin-bottom:0}
+.sec p b{color:var(--ink);font-weight:500}
+.sec ul{display:flex;flex-direction:column;gap:0;margin:8px 0}
+.sec li{font-size:14.5px;line-height:1.75;color:var(--ink-soft);padding:11px 0 11px 22px;border-bottom:1px solid var(--ink-line2);position:relative}
+.sec li:first-child{border-top:1px solid var(--ink-line2)}
+.sec li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:1px;background:var(--jade-ink);opacity:.55}
+.sec li b{color:var(--ink);font-weight:500}
+
+.qbox{border:1px solid var(--ink-line);background:var(--paper-2);padding:clamp(22px,3.2vw,30px)}
+.qbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:14px;display:block}
+.qbox ul{margin:0}
+.qbox li{font-size:14px;border-bottom:1px solid var(--ink-line2)}
+
+.authbox{display:flex;gap:16px;align-items:flex-start;border-left:2px solid var(--jade-ink);background:rgba(21,97,74,.04);padding:18px 22px}
+.authbox b{display:block;color:var(--ink);font-weight:500;margin-bottom:4px}
+.authbox p{margin:0;font-size:13.5px}
+
+.ledger{border:1px solid var(--ink-line);overflow:hidden;margin-top:6px}
+.ledger-cap{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);padding:14px 20px;border-bottom:1px solid var(--ink-line);background:var(--paper-2);display:flex;align-items:center;gap:10px}
+.ledger-cap::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--brass-hi)}
+.ledger-row{padding:16px 20px;border-bottom:1px solid var(--ink-line2);font-size:13.5px;line-height:1.7;color:var(--ink-soft)}
+.ledger-row:last-child{border-bottom:none}
+.ledger-row b{color:var(--ink);font-weight:500}
+.ledger-src{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--ink-faint)}
+
+.fitbox{background:var(--ground);color:var(--ivory);padding:clamp(26px,3.6vw,34px);position:relative;overflow:hidden}
+.fitbox::before{content:'';position:absolute;top:-1px;left:-1px;width:50%;height:1px;background:linear-gradient(90deg,var(--jade),transparent)}
+.fitbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade);margin-bottom:12px;display:block}
+.fitbox p{color:var(--mute);font-size:14.5px;line-height:1.75;margin-bottom:18px;max-width:62ch}
+.fitbox p b{color:var(--ivory);font-weight:500}
+.fit-cta{display:inline-flex;gap:14px;flex-wrap:wrap}
+.cta-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:13px 20px;transition:background .25s}
+.cta-btn:hover{background:var(--jade-hi)}
+.cta-link{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);border-bottom:1px solid var(--jade-20);align-self:center;padding-bottom:2px}
+
+.srcfoot{margin-top:clamp(40px,6vh,56px);padding-top:24px;border-top:1px solid var(--ink-line);display:flex;flex-direction:column;gap:10px}
+.srcfoot-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.srcfoot ol{padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.srcfoot li{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);line-height:1.6}
+.crosslinks{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+.xlink{font-family:var(--mono);font-size:10px;color:var(--jade-ink);border:1px solid rgba(21,97,74,.25);padding:8px 13px;transition:background .22s,color .22s}
+.xlink:hover{background:var(--jade-ink);color:var(--paper)}
+
+footer{background:var(--ground);color:var(--ivory);padding:32px var(--gut);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ft-copy{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2)}
+.ft-legal{display:flex;gap:16px}
+.ft-legal a{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2)}
+.ft-legal a:hover{color:var(--jade)}
+@media(prefers-reduced-motion:reduce){.r{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<header id="nav">
+  <a class="nav-back" href="codex.html">← The Codex</a>
+  <span class="nav-right">US · MoCRA</span>
+</header>
+
+<section id="hero">
+  <div class="hero-inner r">
+    <span class="hcode">US · MoCRA (2022) · COSMETICS &amp; SUPPLEMENTS</span>
+    <h1 class="htitle">FDA MoCRA & the<br><em>US cosmetics shelf.</em></h1>
+    <p class="hsub">The first time in eighty years the FDA has had the power to order a cosmetic recall — and registration is no longer voluntary for anyone.</p>
+    <div class="hmeta">
+      <div class="hm"><span class="hml">Jurisdiction</span><span class="hmv">United States</span></div>
+      <div class="hm"><span class="hml">Vertical</span><span class="hmv">Cosmetics, adjacent to supplements</span></div>
+      <div class="hm"><span class="hml">Stage</span><span class="hmv">Map → Clear → Hold</span></div>
+      <div class="hm"><span class="hml">Last reviewed</span><span class="hmv">23 Jun 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="body">
+  <div class="body-inner">
+
+    <section class="sec r">
+      <span class="sec-l">In thirty seconds</span>
+      <div class="qbox">
+        <span class="qbox-l">The plain version</span>
+        <ul>
+          <li>The Modernization of Cosmetics Regulation Act of 2022 (MoCRA) is the biggest change to US cosmetics law since 1938 — it converted a voluntary registration program into a mandatory one with real enforcement teeth.</li>
+          <li><b>Facility registration</b> (Form FDA 5066) and <b>product listing</b> (Form FDA 5067) have been mandatory and actively enforced since July 1, 2024 — there is no grace period left to claim.</li>
+          <li>For the first time, the FDA can <b>mandate a recall</b> of a misbranded or adulterated cosmetic, rather than relying on a manufacturer to do it voluntarily.</li>
+          <li>A binding cosmetics GMP rule is still in development; FDA has already signalled — via warning letters — that it expects strict compliance once it lands.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What it actually requires</span>
+      <h2 class="sec-h">Two filings, one identifier, and a clock that doesn't pause.</h2>
+      <ul>
+        <li><b>An FDA Establishment Identifier (FEI)</b> — obtained before any registration can be submitted; required across multiple FDA-regulated industries, not unique to cosmetics.</li>
+        <li><b>Facility registration (Form 5066)</b> — mandatory for manufacturers, renewed every two years, filed through the Cosmetics Direct portal. New facilities must register within 60 days of starting operations.</li>
+        <li><b>Product listing (Form 5067)</b> — the Responsible Person's obligation, updated annually, including the facility's FEI and a full ingredient list in SPL format.</li>
+        <li><b>Foreign facilities</b> must designate a US agent who can respond to FDA and assist with inspection scheduling.</li>
+        <li><b>Safety substantiation</b> — the Responsible Person must maintain adequate substantiation that the product is safe, available to FDA on request.</li>
+      </ul>
+      <p>Missing registration or listing doesn't just risk a warning — it makes the product <b>misbranded or adulterated by definition</b>, which is what opens the door to border holds, recalls, and listing removal independent of whether anything is actually wrong with the formula.</p>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Who enforces it</span>
+      <div class="authbox">
+        <div>
+          <b>U.S. Food and Drug Administration (FDA), Office of Cosmetics and Colors</b>
+          <p>FDA enforcement runs through warning letters, mandatory recall authority (new under MoCRA), facility registration suspension, and import holds at the border via Customs and Border Protection, which increasingly cross-references FDA's own product-listing data during screening.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What it costs to get wrong</span>
+      <h2 class="sec-h">The exposure compounds because the data is now public and growing fast.</h2>
+      <p>As of January 2025, FDA had logged <b>9,528 active facility registrations</b> and <b>589,762 product listings</b>. A year later, in January 2026, that had grown to <b>14,299 facilities</b> and <b>992,907 listings</b> — FDA's visibility into who is manufacturing what, and where, is compounding faster than most brands have adjusted to. A November 2024 analysis by Registrar Corp found that <b>48% of imported cosmetics sold at America's top 25 retailers were not compliant</b> with MoCRA registration and listing requirements — at the time, spanning more than 135,000 products.</p>
+      <div class="ledger">
+        <div class="ledger-cap">What actually happens when it's missed</div>
+        <div class="ledger-row"><b>Unregistered facility or unlisted product</b> — the product is misbranded/adulterated as a matter of law; FDA can suspend the registration entirely, and Customs can hold the shipment at the border on import screening.<span class="ledger-src">FD&C Act §607; Foley &amp; Lardner, "How MoCRA Is Reshaping FDA Oversight," 2026</span></div>
+        <div class="ledger-row"><b>Drug-adjacent product mislabelled as cosmetic, or vice versa</b> — FDA has issued warning letters to drug manufacturers reminding them that some of their products are regulated as cosmetics and subject to MoCRA in full, regardless of how the company classified them internally.<span class="ledger-src">Crowell &amp; Moring, "MoCRA Under the Trump Era," March 2025</span></div>
+        <div class="ledger-row"><b>Undisclosed restricted ingredient</b> — FDA's 2024–2025 testing of imported gel nail-polish removers found undeclared methylene chloride in several products, despite a clear prohibition; the agency issued a public notice naming the issue directly.<span class="ledger-src">FDA public notice, April 2025</span></div>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Where Ayin fits</span>
+      <div class="fitbox">
+        <span class="fitbox-l">Map → Clear → Hold</span>
+        <p>Registration and listing are mechanical once you know the sequence — Ayin maps your FEI and filing status first, clears any gap, and can hold the listing current through the two-year renewal cycle so it never lapses quietly. <b>The GMP rule is still moving</b>; this is exactly the kind of regime where a Hold engagement earns its fee.</p>
+        <div class="fit-cta">
+          <a href="index.html#intake" class="cta-btn">Send this to Ayin →</a>
+          <a href="index.html#instrument" class="cta-link">Map your own crossing first →</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="crosslinks">
+      <a class="xlink" href="codex-eu-cosmetics.html">→ The EU equivalent: Cosmetics Regulation 1223/2009</a>
+      <a class="xlink" href="codex-amazon-poa.html">→ Selling on Amazon: the Plan of Action</a>
+      <a class="xlink" href="codex.html">→ Back to the full Codex</a>
+    </div>
+
+    <div class="srcfoot">
+      <span class="srcfoot-l">Sources</span>
+      <ol>
+        <li>Modernization of Cosmetics Regulation Act of 2022, FDA.gov.</li>
+        <li>Foley &amp; Lardner, "How MoCRA Is Reshaping FDA Oversight of Cosmetics in 2026," March 2026.</li>
+        <li>Crowell &amp; Moring LLP, "MoCRA Under the Trump Era: FDA's Monitoring and Enforcement," March 2025.</li>
+        <li>Registrar Corp non-compliance analysis, cited in industry MoCRA compliance guides, November 2024.</li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span class="ft-copy">© <span id="ftYear"></span> Ayin — The Codex</span>
+  <div class="ft-legal">
+    <a href="index.html">Home</a>
+    <a href="codex.html">The Codex</a>
+    <a href="disclaimer.html">Disclaimer</a>
+  </div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }), { threshold:.06, rootMargin:'0px 0px -24px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+document.getElementById('ftYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

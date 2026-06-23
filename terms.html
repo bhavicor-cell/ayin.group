@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071512">
+<title>Terms of Service — Ayin</title>
+<meta name="description" content="The terms under which Ayin provides international advisory and compliance services. Read before engaging.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   AYIN — TERMS OF SERVICE
+   The record stands in the ground. Paper is evidence.
+   Signature: the Liability Map — what is capped, what is not.
+═══════════════════════════════════════════════════════ */
+:root {
+  --paper:   #F2EDE4;
+  --paper-2: #EAE3D8;
+  --paper-3: #DDD5C8;
+  --ground:  #0C1F1A;
+  --g1:      #102822;
+  --g2:      #16332B;
+  --g3:      #1C3C32;
+  --abyss:   #071512;
+
+  --ivory:   #EFE9DB;
+  --ivory-2: #D8D1C0;
+  --mute:    rgba(239,233,219,.74);
+  --mute-2:  rgba(239,233,219,.46);
+  --mute-3:  rgba(239,233,219,.28);
+  --faint:   rgba(239,233,219,.16);
+  --line:    rgba(239,233,219,.10);
+  --line-2:  rgba(239,233,219,.05);
+
+  --ink:      #16120B;
+  --ink-soft: rgba(22,18,11,.66);
+  --ink-faint:rgba(22,18,11,.38);
+  --ink-line: rgba(22,18,11,.13);
+  --ink-line2:rgba(22,18,11,.065);
+
+  --jade:     #7FC0A0;
+  --jade-hi:  #A8DCC2;
+  --jade-dim: #4E8870;
+  --jade-ink: #15614A;
+  --jade-deep:#0C271A;
+  --jade-12:  rgba(127,192,160,.12);
+  --jade-20:  rgba(127,192,160,.20);
+  --jade-glow:rgba(127,192,160,.24);
+
+  --verm:    #C2402A;
+  --verm-hi: #E0654A;
+  --verm-08: rgba(194,64,42,.08);
+  --verm-25: rgba(194,64,42,.26);
+  --verm-12: rgba(194,64,42,.12);
+
+  --brass:    #9A6010;
+  --brass-hi: #C8963C;
+  --brass-12: rgba(200,150,60,.13);
+  --brass-glow:rgba(200,150,60,.20);
+
+  --disp: 'Spectral', Georgia, serif;
+  --body: 'Hanken Grotesk', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --e1: cubic-bezier(.2,.8,.2,1);
+  --e2: cubic-bezier(.16,1,.3,1);
+  --gut: clamp(24px,5vw,84px);
+  --maxw: 1100px;
+  --pad: clamp(80px,11vh,140px);
+  --navh: 85px;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html {
+  background:var(--abyss);
+  scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:var(--jade-dim) var(--ground);
+}
+::-webkit-scrollbar { width:6px }
+::-webkit-scrollbar-track { background:var(--abyss) }
+::-webkit-scrollbar-thumb { background:var(--g3) }
+body {
+  font-family:var(--body); font-weight:300;
+  line-height:1.66; font-size:16px;
+  background:var(--abyss); color:var(--ivory);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection { background:var(--jade); color:var(--abyss) }
+a { color:inherit; text-decoration:none }
+button { font-family:inherit; color:inherit; background:none; border:none; cursor:pointer }
+svg { display:block }
+:focus-visible { outline:2px solid var(--jade); outline-offset:3px; border-radius:1px }
+
+.grain {
+  position:fixed; inset:-50%; width:200%; height:200%;
+  z-index:1000; pointer-events:none; opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+#prog { position:fixed; top:0; left:0; right:0; height:1px; z-index:200; pointer-events:none }
+#pf { height:100%; width:0; background:var(--jade); transition:width .08s linear }
+
+.wrap { max-width:var(--maxw); margin:0 auto; padding:0 var(--gut) }
+.folio {
+  position:absolute; top:clamp(74px,9vh,96px); right:var(--gut);
+  font-family:var(--mono); font-size:9px; font-weight:500;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--mute-2); pointer-events:none; z-index:3;
+}
+.folio.on-paper { color:var(--ink-faint) }
+.r { opacity:0; transform:translateY(20px); transition:opacity 1s var(--e2), transform 1s var(--e2) }
+.r.in { opacity:1; transform:none }
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.32s}
+
+/* ── NAV ── */
+#nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:var(--navh); display:flex; align-items:center;
+  padding:0 var(--gut) 0 clamp(12px,1.2vw,18px);
+  transition:background .5s, border-color .5s;
+  border-bottom:1px solid transparent;
+}
+#nav.on-dark  .nav-logo-light { display:none }
+#nav.on-dark  .nav-logo-dark  { display:block }
+#nav.on-paper .nav-logo-light { display:block }
+#nav.on-paper .nav-logo-dark  { display:none }
+.nav-brand { display:flex; align-items:center; gap:10px; z-index:2 }
+.nav-wm { font-family:var(--disp); font-weight:400; font-size:23px; letter-spacing:.03em; transition:color .5s }
+.nav-wm .dot { transition:color .5s }
+.nav-right { margin-left:auto; display:flex; align-items:center; gap:10px }
+.nav-back, .nav-print {
+  font-family:var(--mono); font-size:10.5px; font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:10px 16px; transition:background .3s, color .3s, border-color .5s;
+  border:1px solid transparent; display:inline-flex; align-items:center; gap:7px;
+}
+#nav.on-paper .nav-wm { color:var(--ink) }
+#nav.on-paper .nav-wm .dot { color:var(--jade-ink) }
+#nav.on-paper .nav-back, #nav.on-paper .nav-print { color:var(--jade-ink); border-color:rgba(29,91,69,.3) }
+#nav.on-paper .nav-back:hover, #nav.on-paper .nav-print:hover { background:var(--jade-ink); color:var(--paper) }
+#nav.on-dark {
+  background:rgba(8,16,9,.86);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-color:var(--line);
+}
+#nav.on-dark .nav-wm { color:var(--ivory) }
+#nav.on-dark .nav-wm .dot { color:var(--jade) }
+#nav.on-dark .nav-back, #nav.on-dark .nav-print { color:var(--jade); border-color:var(--jade-20) }
+#nav.on-dark .nav-back:hover, #nav.on-dark .nav-print:hover { background:var(--jade); color:var(--abyss) }
+
+/* ════════ HEADER ════════ */
+#doc-head {
+  position:relative; background:var(--abyss);
+  min-height:100svh; display:flex; flex-direction:column;
+  justify-content:flex-end;
+  padding:0 var(--gut) clamp(56px,9vh,96px); overflow:hidden;
+}
+#doc-head::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 70% at 15% 60%, rgba(194,64,42,.06) 0%, transparent 62%),
+    radial-gradient(ellipse 40% 50% at 85% 30%, rgba(127,192,160,.04) 0%, transparent 58%);
+}
+.dh-ghost {
+  position:absolute; right:calc(var(--gut) - 20px);
+  top:50%; transform:translateY(-50%);
+  font-family:var(--disp); font-weight:800;
+  font-size:clamp(200px,32vw,560px);
+  line-height:.86; letter-spacing:-.06em;
+  color:transparent; -webkit-text-stroke:1px rgba(127,192,160,.06);
+  user-select:none; pointer-events:none;
+  animation:gh-rise 1.8s var(--e2) .2s both;
+}
+@keyframes gh-rise { from{opacity:0;transform:translateY(-44%) scale(.94)} to{opacity:1;transform:translateY(-50%) scale(1)} }
+.dh-title-area { position:relative; z-index:2 }
+.dh-kicker {
+  font-family:var(--mono); font-size:9.5px; font-weight:500;
+  letter-spacing:.3em; text-transform:uppercase; color:var(--verm);
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:clamp(22px,3.5vh,36px);
+  animation:dh-k-rise .9s var(--e2) .7s both;
+}
+.dh-kicker::before { content:''; width:22px; height:1px; background:var(--verm) }
+@keyframes dh-k-rise { from{opacity:0;transform:translateX(-12px)} to{opacity:1;transform:none} }
+.dh-title {
+  font-family:var(--disp); font-weight:300; font-optical-sizing:auto;
+  font-size:clamp(52px,8.5vw,128px);
+  line-height:.9; letter-spacing:-.044em; color:var(--ivory);
+  animation:dh-t-rise 1.2s var(--e2) .9s both;
+}
+.dh-title em { font-style:italic; color:var(--jade) }
+@keyframes dh-t-rise { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+.dh-rule {
+  width:100%; height:1px;
+  background:linear-gradient(90deg, var(--line) 0%, transparent 70%);
+  margin:clamp(24px,3.8vh,36px) 0;
+  animation:dh-t-rise .7s var(--e2) 1.3s both;
+}
+.dh-sub {
+  font-family:var(--disp); font-style:italic; font-weight:300;
+  font-size:clamp(16px,1.8vw,23px); letter-spacing:-.012em;
+  color:var(--mute); line-height:1.42; max-width:56ch;
+  animation:dh-t-rise .8s var(--e2) 1.45s both;
+}
+.dh-meta {
+  display:flex; flex-wrap:wrap; gap:clamp(28px,4vw,60px);
+  margin-top:clamp(44px,7vh,80px);
+  padding-top:clamp(22px,3.5vh,32px);
+  border-top:1px solid var(--line);
+  animation:dh-t-rise .7s var(--e2) 1.6s both;
+  position:relative; z-index:2;
+}
+.dh-meta-item { display:flex; flex-direction:column; gap:6px }
+.dh-meta-label { font-family:var(--mono); font-size:8px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--mute-2) }
+.dh-meta-val { font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--mute) }
+.dh-meta-val.tag { color:var(--jade); display:inline-flex; align-items:center; gap:7px }
+.dh-meta-val.tag::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--jade); box-shadow:0 0 6px var(--jade-glow) }
+
+/* ════════ NOTICE ════════ */
+#doc-notice {
+  background:var(--ground); border-top:1px solid var(--line);
+  padding:clamp(52px,8vh,88px) var(--gut); position:relative;
+}
+#doc-notice::before {
+  content:''; position:absolute; top:0; left:var(--gut); right:var(--gut); height:1px;
+  background:linear-gradient(90deg, var(--verm) 0%, rgba(194,64,42,.3) 40%, transparent 70%);
+}
+.nt-inner { max-width:var(--maxw); margin:0 auto; display:grid; grid-template-columns:auto 1fr; gap:clamp(36px,5vw,80px); align-items:center }
+.nt-mark { font-family:var(--disp); font-weight:800; font-size:clamp(72px,10vw,140px); line-height:.84; letter-spacing:-.06em; color:transparent; -webkit-text-stroke:1px var(--verm-25); flex-shrink:0; user-select:none }
+.nt-label { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--verm); display:flex; align-items:center; gap:12px; margin-bottom:clamp(14px,2.2vh,20px) }
+.nt-label::before { content:''; width:18px; height:1px; background:var(--verm) }
+.nt-text { font-family:var(--disp); font-weight:300; font-style:italic; font-size:clamp(15px,1.55vw,20px); line-height:1.56; color:var(--mute); max-width:58ch }
+.nt-text b { font-style:normal; font-weight:600; color:var(--ivory) }
+@media(max-width:720px){ .nt-inner { grid-template-columns:1fr } .nt-mark { display:none } }
+
+/* ════════ AT A GLANCE — six questions, the short version ════════ */
+#glance {
+  background:var(--g1); border-top:1px solid var(--line);
+  padding:clamp(60px,9vh,100px) var(--gut); position:relative;
+}
+#glance::before {
+  content:''; position:absolute; top:0; left:var(--gut); right:var(--gut); height:1px;
+  background:linear-gradient(90deg, var(--jade) 0%, rgba(127,192,160,.28) 40%, transparent 68%);
+}
+.gl-inner { max-width:var(--maxw); margin:0 auto }
+.gl-head { display:grid; grid-template-columns:1fr auto; gap:clamp(28px,4vw,64px); align-items:end; margin-bottom:clamp(40px,6vh,64px) }
+.gl-eyebrow { font-family:var(--mono); font-size:9.5px; font-weight:500; letter-spacing:.28em; text-transform:uppercase; color:var(--jade); display:flex; align-items:center; gap:14px; margin-bottom:clamp(16px,2.5vh,22px) }
+.gl-eyebrow::before { content:''; width:22px; height:1px; background:var(--jade) }
+.gl-h { font-family:var(--disp); font-weight:300; font-size:clamp(32px,4.5vw,64px); letter-spacing:-.034em; line-height:.96; color:var(--ivory) }
+.gl-h em { font-style:italic; color:var(--jade) }
+.gl-note { font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(13px,1.2vw,15.5px); line-height:1.6; color:var(--mute-2); max-width:24ch; border-left:1px solid var(--jade-20); padding-left:16px; align-self:flex-end }
+@media(max-width:680px){ .gl-head { grid-template-columns:1fr } .gl-note { display:none } }
+.gl-rows { border-top:1px solid var(--line) }
+.gl-row { display:grid; grid-template-columns:1fr 2fr; border-bottom:1px solid var(--line); transition:background .28s }
+.gl-row:hover { background:rgba(127,192,160,.03) }
+.gl-q { padding:clamp(18px,2.8vh,28px) clamp(20px,2.8vw,32px) clamp(18px,2.8vh,28px) 0; border-right:1px solid var(--line); font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.06em; color:var(--mute-2); display:flex; align-items:center }
+.gl-a { padding:clamp(18px,2.8vh,28px) 0 clamp(18px,2.8vh,28px) clamp(20px,2.8vw,32px); font-size:clamp(13.5px,1.1vw,15px); line-height:1.74; color:var(--mute); font-weight:300 }
+.gl-a b { color:var(--ivory); font-weight:500 }
+.gl-a .yes { color:var(--jade); font-weight:500 } .gl-a .no { color:var(--verm); font-weight:500 } .gl-a .em { color:var(--brass-hi); font-weight:500 }
+.gl-a a { color:var(--jade); border-bottom:1px solid var(--jade-20); transition:border-color .25s }
+.gl-a a:hover { border-color:var(--jade) }
+@media(max-width:680px){ .gl-row { grid-template-columns:1fr } .gl-q { border-right:none; border-bottom:1px solid var(--line); padding-right:0; padding-bottom:clamp(10px,1.5vh,14px) } .gl-a { padding-left:0 } }
+
+/* ════════ TOC ════════ */
+#doc-toc { background:var(--abyss); padding:clamp(60px,9vh,100px) var(--gut); border-top:1px solid var(--line); position:relative }
+.toc-inner { max-width:var(--maxw); margin:0 auto; display:grid; grid-template-columns:auto 1fr; gap:0 clamp(52px,7vw,110px); align-items:start }
+.toc-aside-label { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--jade); display:block; margin-bottom:clamp(16px,2.5vh,24px) }
+.toc-aside-h { font-family:var(--disp); font-weight:300; font-size:clamp(28px,3.4vw,52px); letter-spacing:-.028em; line-height:1.0; color:var(--ivory); white-space:nowrap }
+.toc-aside-h em { font-style:italic; color:var(--jade) }
+.toc-aside-note { margin-top:clamp(18px,2.8vh,26px); font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(13px,1.1vw,15px); line-height:1.6; color:var(--mute-2); max-width:22ch; border-left:1px solid var(--jade-20); padding-left:14px }
+.toc-printbtn {
+  margin-top:clamp(20px,3vh,28px); display:inline-flex; align-items:center; gap:9px;
+  font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--jade); border:1px solid var(--jade-20); padding:11px 17px; transition:background .25s,color .25s;
+}
+.toc-printbtn:hover { background:var(--jade); color:var(--abyss) }
+.toc-list { list-style:none; border-top:1px solid var(--line) }
+.toc-item { border-bottom:1px solid var(--line) }
+.toc-link { display:flex; align-items:baseline; gap:clamp(14px,2vw,32px); padding:clamp(12px,1.8vh,17px) 0; font-family:var(--mono); font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--mute-2); transition:color .28s }
+.toc-link:hover { color:var(--jade) }
+.toc-n { color:var(--jade); font-weight:600; font-size:9px; letter-spacing:.18em; flex-shrink:0; min-width:28px }
+.toc-t { flex:1 }
+.toc-arr { color:var(--faint); flex-shrink:0; transition:color .28s, transform .28s }
+.toc-link:hover .toc-arr { color:var(--jade); transform:translateX(4px) }
+@media(max-width:760px){ .toc-inner { grid-template-columns:1fr } .toc-aside { margin-bottom:clamp(32px,5vh,48px) } .toc-aside-h { white-space:normal } }
+
+/* ════════ BODY ════════ */
+#doc-body { background:var(--paper); color:var(--ink); padding:clamp(72px,11vh,120px) var(--gut) clamp(96px,15vh,160px); position:relative }
+#doc-body::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--jade-ink) 0%, rgba(21,97,74,.4) 30%, transparent 60%) }
+.body-inner { max-width:var(--maxw); margin:0 auto }
+
+.cl { display:grid; grid-template-columns:clamp(60px,8vw,110px) 1fr; gap:0 clamp(32px,4vw,64px); margin-bottom:clamp(56px,9vh,88px); padding-bottom:clamp(56px,9vh,88px); border-bottom:1px solid var(--ink-line); position:relative; scroll-margin-top:110px }
+.cl:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0 }
+.cl-num-col { padding-top:clamp(32px,5vh,52px) }
+.cl-num { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--jade-ink); display:block; margin-bottom:14px; white-space:nowrap }
+.cl-num-large { font-family:var(--disp); font-weight:300; font-size:clamp(42px,5.5vw,80px); line-height:.84; letter-spacing:-.044em; color:transparent; -webkit-text-stroke:1px rgba(21,97,74,.18); display:block; user-select:none }
+.cl-content { padding-top:clamp(32px,5vh,52px); border-top:1px solid var(--ink-line) }
+.cl-title-row { display:flex; align-items:baseline; gap:11px; margin-bottom:clamp(20px,3.2vh,30px) }
+.cl-title { font-family:var(--disp); font-weight:400; font-optical-sizing:auto; font-size:clamp(22px,2.8vw,36px); letter-spacing:-.022em; line-height:1.04; color:var(--ink) }
+.cl-anchor {
+  flex-shrink:0; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center;
+  color:var(--ink-faint); opacity:0; transition:opacity .22s, color .22s; position:relative; top:-2px;
+}
+.cl:hover .cl-anchor, .cl-anchor:focus-visible { opacity:1 }
+.cl-anchor:hover { color:var(--jade-ink) }
+.cl-anchor.copied { opacity:1; color:var(--jade-ink) }
+.cl-anchor-tip {
+  position:absolute; top:-26px; left:50%; transform:translateX(-50%) translateY(4px);
+  font-family:var(--mono); font-size:8.5px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ivory); background:var(--ink); padding:4px 8px; white-space:nowrap;
+  opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
+}
+.cl-anchor.copied .cl-anchor-tip { opacity:1; transform:translateX(-50%) translateY(0) }
+.cl-content p { font-size:clamp(14px,1.1vw,15.5px); line-height:1.88; color:var(--ink-soft); font-weight:300; margin-bottom:clamp(16px,2.5vh,22px); max-width:68ch }
+.cl-content p:last-child { margin-bottom:0 }
+.cl-content p b { color:var(--ink); font-weight:500 }
+.cl-content p em { font-style:italic }
+.cl-content p .xref { color:var(--jade-ink); border-bottom:1px solid rgba(21,97,74,.28); cursor:pointer; transition:border-color .22s }
+.cl-content p .xref:hover { border-color:var(--jade-ink) }
+.cl-content ul, .cl-content ol { margin:clamp(14px,2.2vh,20px) 0 clamp(16px,2.5vh,24px) 0; display:flex; flex-direction:column; gap:0 }
+.cl-content li { font-size:clamp(13.5px,1.1vw,15px); line-height:1.82; color:var(--ink-soft); font-weight:300; padding:clamp(9px,1.4vh,13px) 0 clamp(9px,1.4vh,13px) clamp(20px,2.5vw,30px); border-bottom:1px solid var(--ink-line2); position:relative }
+.cl-content li:first-child { border-top:1px solid var(--ink-line2) }
+.cl-content li::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:5px; height:1px; background:var(--jade-ink); opacity:.5 }
+.cl-content li b { color:var(--ink); font-weight:500 }
+
+.sub-cl { margin:clamp(22px,3.5vh,32px) 0; padding:clamp(18px,2.8vh,26px) clamp(20px,2.8vw,30px); border-left:2px solid var(--jade-ink); background:rgba(21,97,74,.03) }
+.sub-cl.warn { border-left-color:var(--verm); background:var(--verm-08) }
+.sub-cl-title { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--jade-ink); display:block; margin-bottom:clamp(10px,1.6vh,14px) }
+.sub-cl.warn .sub-cl-title { color:var(--verm) }
+.sub-cl p { margin-bottom:clamp(10px,1.5vh,14px) !important }
+.sub-cl p:last-child { margin-bottom:0 !important }
+
+.em-block { margin:clamp(20px,3.2vh,30px) 0; padding:clamp(18px,2.8vh,26px) clamp(20px,2.8vw,30px); background:var(--jade-12); border-left:2px solid var(--jade-ink) }
+.em-block p { font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(14.5px,1.35vw,17px); line-height:1.62; color:var(--ink); margin-bottom:0 !important }
+.em-block p b { font-style:normal; font-family:var(--mono); font-weight:600; font-size:.88em; color:var(--jade-ink) }
+
+.cl-contact-note { margin-top:clamp(32px,5vh,48px); padding-top:clamp(20px,3.2vh,28px); border-top:1px solid var(--ink-line2); font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:var(--ink-faint) }
+.cl-contact-note a { color:var(--jade-ink); border-bottom:1px solid rgba(21,97,74,.28); transition:border-color .25s }
+.cl-contact-note a:hover { border-color:var(--jade-ink) }
+
+/* ═══ THE LIABILITY MAP — signature element ═══
+   Two ledgers: what is capped, what is carved out (never capped). */
+.liab-map { margin:clamp(28px,4.5vh,44px) 0; border:1px solid var(--ink-line) }
+.liab-caption { display:flex; align-items:center; gap:12px; padding:clamp(12px,1.8vh,18px) clamp(18px,2.6vw,26px); font-family:var(--mono); font-size:9px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint); border-bottom:1px solid var(--ink-line); background:var(--paper-2) }
+.liab-caption::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--brass-hi); flex-shrink:0 }
+.liab-grid { display:grid; grid-template-columns:1fr 1fr }
+.liab-col { padding:clamp(20px,3vh,28px) clamp(18px,2.6vw,26px) }
+.liab-col + .liab-col { border-left:1px solid var(--ink-line) }
+.liab-col-h { display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; margin-bottom:clamp(14px,2.2vh,18px) }
+.liab-col.cap .liab-col-h { color:var(--jade-ink) }
+.liab-col.unc .liab-col-h { color:var(--verm) }
+.liab-col-h .dot { width:7px; height:7px; flex-shrink:0 }
+.liab-col.cap .liab-col-h .dot { background:var(--jade-ink) }
+.liab-col.unc .liab-col-h .dot { background:var(--verm) }
+.liab-fig { font-family:var(--disp); font-weight:300; font-size:clamp(20px,2.2vw,28px); letter-spacing:-.02em; margin-bottom:clamp(12px,2vh,16px) }
+.liab-col.cap .liab-fig { color:var(--jade-ink) }
+.liab-col.unc .liab-fig { color:var(--verm) }
+.liab-list { display:flex; flex-direction:column; gap:0; border-top:1px solid var(--ink-line2) }
+.liab-item { font-size:12.5px; line-height:1.6; color:var(--ink-soft); padding:9px 0; border-bottom:1px solid var(--ink-line2) }
+.liab-item:last-child { border-bottom:none }
+.liab-item b { color:var(--ink); font-weight:500 }
+@media(max-width:620px){ .liab-grid { grid-template-columns:1fr } .liab-col + .liab-col { border-left:none; border-top:1px solid var(--ink-line) } }
+
+@media(max-width:680px){
+  .cl { grid-template-columns:1fr; gap:0 }
+  .cl-num-col { padding-top:clamp(32px,5vh,52px); display:flex; align-items:baseline; gap:16px }
+  .cl-num-large { font-size:clamp(32px,8vw,48px) }
+  .cl-content { padding-top:16px; border-top:none }
+}
+
+/* ═══ CLAUSE RAIL — scrollspy, desktop only ═══ */
+.clause-rail {
+  position:fixed; right:18px; top:50%; transform:translateY(-50%);
+  z-index:60; display:flex; flex-direction:column; align-items:flex-end; gap:5px;
+  opacity:0; pointer-events:none; transition:opacity .4s var(--e2);
+}
+.clause-rail.show { opacity:1; pointer-events:auto }
+.cr-dot {
+  width:14px; height:2px; background:var(--ink-line); position:relative;
+  transition:width .25s var(--e1), background .25s;
+}
+.cr-dot:hover, .cr-dot.active { width:26px; background:var(--jade-ink) }
+.cr-tip {
+  position:absolute; right:calc(100% + 10px); top:50%; transform:translateY(-50%) translateX(4px);
+  font-family:var(--mono); font-size:9px; letter-spacing:.04em; white-space:nowrap;
+  color:var(--ivory); background:var(--ink); padding:5px 10px;
+  opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
+}
+.cr-dot:hover .cr-tip { opacity:1; transform:translateY(-50%) translateX(0) }
+@media(max-width:1180px){ .clause-rail { display:none } }
+
+/* ════════ FOOTER ════════ */
+footer { position:relative; z-index:1; background:var(--ground); color:var(--ivory); padding:0 var(--gut); overflow:hidden }
+footer::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 50% 80% at 0% 100%, rgba(127,192,160,.06) 0%, transparent 58%) }
+.ft-maxim { max-width:var(--maxw); margin:0 auto; padding:clamp(36px,5.5vh,56px) 0 clamp(28px,4vh,40px); border-bottom:1px solid var(--line); text-align:center; position:relative; z-index:1 }
+.ft-lat { display:block; font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(22px,3.2vw,44px); letter-spacing:-.012em; line-height:1.3; color:var(--ivory) }
+.ft-trn { display:block; margin-top:9px; font-family:var(--mono); font-size:8px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--jade); opacity:.7 }
+.ft-body { max-width:var(--maxw); margin:0 auto; display:grid; grid-template-columns:1fr 1px 1fr; gap:0 clamp(44px,6vw,88px); padding:clamp(36px,5.5vh,56px) 0; border-bottom:1px solid var(--line); position:relative; z-index:1 }
+.ft-col-div { background:linear-gradient(180deg, transparent 0%, var(--line) 15%, var(--line) 85%, transparent 100%) }
+.ft-left { display:flex; flex-direction:column; gap:clamp(20px,3.2vh,30px) }
+.ft-brand { display:flex; align-items:center; gap:11px }
+.ft-logo-img { width:250px; height:250px; flex-shrink:0; opacity:1 }
+.ft-wordmark { font-family:var(--disp); font-weight:400; font-size:18px; letter-spacing:.03em; color:var(--ivory) }
+.ft-wordmark .dot { color:var(--jade) }
+.ft-nav { display:flex; flex-wrap:wrap; gap:4px clamp(16px,2.2vw,28px); border-top:1px solid var(--line); padding-top:clamp(12px,1.8vh,18px) }
+.ft-nav a { font-family:var(--mono); font-size:9px; font-weight:400; letter-spacing:.08em; text-transform:uppercase; color:var(--mute-2); padding:0; transition:color .22s }
+.ft-nav a:hover { color:var(--jade) }
+.ft-right { display:flex; flex-direction:column; justify-content:space-between; gap:clamp(24px,4vh,40px) }
+.ft-thought { font-family:var(--disp); font-style:italic; font-weight:300; font-size:clamp(14px,1.45vw,18px); letter-spacing:-.010em; line-height:1.56; color:var(--mute); border-left:1px solid rgba(127,192,160,.35); padding-left:clamp(14px,1.8vw,20px) }
+.ft-thought em { color:var(--jade-hi); font-style:italic }
+.ft-cta { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--abyss); background:var(--jade); padding:12px 20px; align-self:flex-start; position:relative; overflow:hidden; isolation:isolate; transition:gap .28s var(--e1) }
+.ft-cta::before { content:''; position:absolute; inset:0; z-index:-1; background:var(--jade-hi); transform:translateY(101%); transition:transform .34s var(--e1) }
+.ft-cta:hover { gap:13px } .ft-cta:hover::before { transform:translateY(0) }
+.ft-base { max-width:var(--maxw); margin:0 auto; display:flex; align-items:baseline; justify-content:space-between; gap:clamp(16px,3vw,40px); flex-wrap:wrap; padding:clamp(16px,2.5vh,24px) 0 clamp(24px,3.8vh,36px); position:relative; z-index:1 }
+.ft-copy { font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--mute-2); white-space:nowrap; flex-shrink:0 }
+.ft-disc { font-size:10px; line-height:1.6; color:var(--mute-2); font-weight:300; max-width:52ch }
+.ft-legal { display:flex; gap:clamp(12px,1.8vw,20px); flex-shrink:0 }
+.ft-legal a { font-family:var(--mono); font-size:8px; letter-spacing:.09em; text-transform:uppercase; color:var(--mute-2); transition:color .22s; white-space:nowrap }
+.ft-legal a:hover { color:var(--jade) }
+@media(max-width:820px){ .ft-body { grid-template-columns:1fr; gap:clamp(30px,5vh,44px) 0 } .ft-col-div { display:none } .ft-right { justify-content:flex-start } }
+@media(max-width:560px){ .ft-base { flex-direction:column; gap:10px } }
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after { animation:none!important; transition-duration:.001ms!important }
+  .grain { display:none!important }
+  .r { opacity:1!important; transform:none!important }
+  .dh-ghost, .dh-title, .dh-rule, .dh-sub, .dh-meta, .dh-kicker { animation:none!important; opacity:1!important; transform:none!important }
+}
+
+/* ════════ PRINT ════════ */
+@media print {
+  .grain, #prog, #nav, .clause-rail, footer, .cl-anchor, .toc-printbtn, #doc-notice, #glance { display:none !important }
+  html, body { background:#fff !important; color:#111 !important }
+  #doc-head { min-height:0; padding:24px 0; background:#fff !important; color:#111 }
+  #doc-head::before, .dh-ghost { display:none !important }
+  .dh-kicker, .dh-meta-label { color:#555 !important }
+  .dh-title { color:#111 !important; font-size:34px }
+  .dh-title em { color:#111 !important }
+  .dh-sub, .dh-meta-val { color:#333 !important }
+  #doc-toc { background:#fff !important; padding:18px 0 }
+  .toc-aside-h, .toc-aside-label { color:#111 !important }
+  .toc-link, .toc-n, .toc-arr { color:#333 !important }
+  #doc-body { background:#fff !important; padding:0 !important }
+  #doc-body::before { display:none }
+  .cl { break-inside:avoid; border-bottom:1px solid #ccc; padding:18px 0 }
+  .cl-num-large { -webkit-text-stroke:1px #ccc !important }
+  .cl-title, .cl-content p, .cl-content li { color:#111 !important }
+  .sub-cl, .em-block, .liab-map { background:#f4f4f4 !important; border-color:#999 !important }
+  .wrap, .body-inner, .toc-inner, .nt-inner, .gl-inner { max-width:100% !important }
+  a { color:#111 !important }
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"><div id="pf"></div></div>
+
+<!-- ════════ NAV ════════ -->
+<header id="nav" class="on-dark">
+  <a class="nav-brand" href="index.html" aria-label="Ayin">
+    <img src="assets/dark.svg" alt="" class="nav-logo-light" style="width:70px; height:70px; object-fit:contain;">
+    <img src="assets/light.svg" alt="" class="nav-logo-dark" style="width:70px; height:70px; object-fit:contain;">
+    <span class="nav-wm"><span class="dot"></span></span>
+  </a>
+  <div class="nav-right">
+    <button class="nav-print" id="navPrint" type="button" aria-label="Print this document">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6V2h8v4M4 11H2.5A1.5 1.5 0 0 1 1 9.5v-2A1.5 1.5 0 0 1 2.5 6h11A1.5 1.5 0 0 1 15 7.5v2a1.5 1.5 0 0 1-1.5 1.5H12M4 9h8v5H4V9Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+      Print
+    </button>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </div>
+</header>
+
+<!-- ════════ HEADER ════════ -->
+<section id="doc-head">
+  <span class="dh-ghost" aria-hidden="true">T</span>
+  <div class="dh-title-area">
+    <div class="dh-kicker">Governing terms</div>
+    <h1 class="dh-title">Terms<br>of <em>Service</em></h1>
+    <div class="dh-rule" aria-hidden="true"></div>
+    <p class="dh-sub">The conditions under which Ayin provides international advisory and compliance services. Read before engaging. Plain — deliberately.</p>
+  </div>
+  <div class="dh-meta r">
+    <div class="dh-meta-item"><span class="dh-meta-label">Service provider</span><span class="dh-meta-val">Ayin (ayin.group)</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-label">Governing law</span><span class="dh-meta-val">Confirmed per engagement</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-label">Document</span><span class="dh-meta-val">AYIN‑TOS · Rev. 3</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-label">Status</span><span class="dh-meta-val tag">In force — last reviewed 23 Jun 2026</span></div>
+  </div>
+</section>
+
+<!-- ════════ NOTICE ════════ -->
+<section id="doc-notice">
+  <div class="nt-inner r">
+    <div class="nt-mark" aria-hidden="true">!</div>
+    <div>
+      <div class="nt-label">Read this first</div>
+      <p class="nt-text">
+        <b>Ayin is not a law firm and does not provide legal advice.</b>
+        What Ayin provides is international advisory and compliance services — market access, platform standing, and cross-border advisory work, together with the documentation and representation that supports it. Nothing in these Terms, on this site, or in any engagement constitutes legal advice or creates a solicitor-client relationship. Where legal advice is required, engage qualified legal counsel. See also our <a href="disclaimer.html" style="color:var(--jade);border-bottom:1px solid var(--jade-20)">Disclaimer</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ AT A GLANCE ════════ -->
+<section id="glance">
+  <div class="gl-inner r">
+    <div class="gl-head">
+      <div>
+        <div class="gl-eyebrow">The short version — read this first</div>
+        <h2 class="gl-h">Six answers.<br><em>No fog.</em></h2>
+      </div>
+      <p class="gl-note">Everything below is the detail. Start here.</p>
+    </div>
+    <div class="gl-rows">
+      <div class="gl-row"><div class="gl-q">Is Ayin a law firm?</div><div class="gl-a"><span class="no">No.</span> Ayin is an advisory and compliance practice. We do not give legal advice or represent you before a court. See Clause 2.</div></div>
+      <div class="gl-row"><div class="gl-q">Who owns the work?</div><div class="gl-a"><span class="yes">You do</span> — entirely, on receipt of full payment for the engagement that produced it. See Clause 7.</div></div>
+      <div class="gl-row"><div class="gl-q">What's the most I could owe, or you could owe me?</div><div class="gl-a">Capped at <b>fees paid for the specific engagement</b> in almost every case — with narrow, named exceptions. See the Liability Map in Clause 10.</div></div>
+      <div class="gl-row"><div class="gl-q">Can either of us walk away?</div><div class="gl-a"><span class="yes">Yes.</span> Either party may end an engagement with <b>14 days' written notice.</b> See Clause 14.</div></div>
+      <div class="gl-row"><div class="gl-q">Do you guarantee a regulatory outcome?</div><div class="gl-a"><span class="no">No.</span> We build the standing and the record. What a regulator or platform concludes is theirs to decide. See Clause 9.</div></div>
+      <div class="gl-row"><div class="gl-q">Whose law governs a dispute?</div><div class="gl-a">Agreed per engagement, given your jurisdiction. <b>England &amp; Wales</b> applies by default where nothing else is specified. See Clause 18.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TOC ════════ -->
+<nav id="doc-toc" aria-label="Document contents">
+  <span class="folio">§ Terms · DOC-001</span>
+  <div class="toc-inner r">
+    <div class="toc-aside">
+      <span class="toc-aside-label">Contents</span>
+      <h2 class="toc-aside-h">The<br><em>record,</em><br>indexed.</h2>
+      <p class="toc-aside-note">19 clauses. Read before you engage.</p>
+      <button class="toc-printbtn" id="tocPrint" type="button">
+        <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M4 6V2h8v4M4 11H2.5A1.5 1.5 0 0 1 1 9.5v-2A1.5 1.5 0 0 1 2.5 6h11A1.5 1.5 0 0 1 15 7.5v2a1.5 1.5 0 0 1-1.5 1.5H12M4 9h8v5H4V9Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+        Print or save as PDF
+      </button>
+    </div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#cl-1" class="toc-link"><span class="toc-n">01</span><span class="toc-t">Definitions</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-2" class="toc-link"><span class="toc-n">02</span><span class="toc-t">Nature of services — what Ayin is and is not</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-3" class="toc-link"><span class="toc-n">03</span><span class="toc-t">Eligibility and authority to bind</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-4" class="toc-link"><span class="toc-n">04</span><span class="toc-t">Engagement and scope</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-5" class="toc-link"><span class="toc-n">05</span><span class="toc-t">Client responsibilities</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-6" class="toc-link"><span class="toc-n">06</span><span class="toc-t">Fees and payment</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-7" class="toc-link"><span class="toc-n">07</span><span class="toc-t">Intellectual property and ownership</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-8" class="toc-link"><span class="toc-n">08</span><span class="toc-t">Confidentiality and data handling</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-9" class="toc-link"><span class="toc-n">09</span><span class="toc-t">No guarantee of regulatory or platform outcome</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-10" class="toc-link"><span class="toc-n">10</span><span class="toc-t">Limitation of liability — the Liability Map</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-11" class="toc-link"><span class="toc-n">11</span><span class="toc-t">Indemnification</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-12" class="toc-link"><span class="toc-n">12</span><span class="toc-t">Independent contractor; no fiduciary duty</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-13" class="toc-link"><span class="toc-n">13</span><span class="toc-t">Force majeure</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-14" class="toc-link"><span class="toc-n">14</span><span class="toc-t">Term and termination</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-15" class="toc-link"><span class="toc-n">15</span><span class="toc-t">Notices and electronic communications</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-16" class="toc-link"><span class="toc-n">16</span><span class="toc-t">Assignment</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-17" class="toc-link"><span class="toc-n">17</span><span class="toc-t">Amendments</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-18" class="toc-link"><span class="toc-n">18</span><span class="toc-t">Governing law and dispute resolution</span><span class="toc-arr">→</span></a></li>
+      <li class="toc-item"><a href="#cl-19" class="toc-link"><span class="toc-n">19</span><span class="toc-t">General provisions</span><span class="toc-arr">→</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════════ CLAUSE RAIL ════════ -->
+<aside class="clause-rail" id="clauseRail" aria-hidden="true"></aside>
+
+<!-- ════════ BODY ════════ -->
+<section id="doc-body">
+  <span class="folio on-paper">§ Terms · DOC-001</span>
+  <div class="body-inner">
+
+    <div class="cl r" id="cl-1">
+      <div class="cl-num-col"><span class="cl-num">01</span><span class="cl-num-large" aria-hidden="true">01</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Definitions</h2><button class="cl-anchor" data-clause="cl-1" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>In these Terms, the following words carry the meanings set out below unless the context clearly requires otherwise.</p>
+        <ul>
+          <li><b>"Ayin"</b> means the international advisory and compliance practice operating under the name Ayin and reachable at ayin.group.</li>
+          <li><b>"Client"</b> means the individual, company, or other entity that engages Ayin under these Terms.</li>
+          <li><b>"Services"</b> means the market access, platform compliance, cross-border advisory, filing, documentation, and representation work described in any Scope of Work agreed between Ayin and the Client.</li>
+          <li><b>"Deliverables"</b> means the records, filings, dossiers, plans of action, correspondence, documentation templates, and any other materials produced by Ayin in the course of the Services.</li>
+          <li><b>"Scope of Work"</b> means the written document, proposal, or exchange of correspondence in which the specific Services and Deliverables for an engagement are agreed.</li>
+          <li><b>"Authority"</b> means any regulator, government body, customs authority, or platform (including a marketplace's seller-performance function) with jurisdiction or contractual standing over the Client's matter.</li>
+          <li><b>"Confidential Information"</b> means any non-public information disclosed by either party in connection with an engagement, including business strategy, operational data, supply-chain detail, personnel information, and the content of Deliverables.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-2">
+      <div class="cl-num-col"><span class="cl-num">02</span><span class="cl-num-large" aria-hidden="true">02</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Nature of services — what Ayin is and is not</h2><button class="cl-anchor" data-clause="cl-2" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">What Ayin provides</span>
+          <p>Ayin maps, clears, and holds standing across regulated markets and platforms — the work required for a product, an account, or a person to move legitimately into a new jurisdiction or to stay in good standing once there. This includes regime mapping, documentation and filings, Authority-facing correspondence and representation as an advisory agent (not legal counsel), Plan of Action drafting for platform matters, and ongoing maintenance of standing.</p>
+        </div>
+        <div class="sub-cl warn">
+          <span class="sub-cl-title">What Ayin does not provide</span>
+          <p><b>Ayin is not a law firm.</b> Ayin does not provide legal advice, legal representation in court or formal proceedings, or any form of regulated legal service. Nothing produced by Ayin constitutes legal advice, and no solicitor-client or attorney-client relationship is created by engaging Ayin's services.</p>
+          <p>Ayin does not provide assurance, certification, or any guarantee that a Client's product, account, or business is — or will be found to be — compliant with any law, regulation, platform policy, or Authority requirement.</p>
+        </div>
+        <div class="em-block">
+          <p>The work to get you through is what Ayin does. Whether an Authority is satisfied by it is a determination Ayin does not make and cannot warrant. See <span class="xref" data-jump="cl-9">Clause 9</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-3">
+      <div class="cl-num-col"><span class="cl-num">03</span><span class="cl-num-large" aria-hidden="true">03</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Eligibility and authority to bind</h2><button class="cl-anchor" data-clause="cl-3" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>By engaging Ayin, the individual signing the Scope of Work represents and warrants that they:</p>
+        <ul>
+          <li>Are at least 18 years of age and have full legal capacity to enter into a binding agreement.</li>
+          <li>Have the actual authority to bind the Client to these Terms — whether signing personally or on behalf of a company, partnership, or other entity.</li>
+          <li>Are not subject to any sanction, denial, or restriction that would make the engagement unlawful for either party to perform — see Clause 5 on sanctions screening.</li>
+        </ul>
+        <p>Where any of these representations is later found to be false, Ayin may terminate the engagement immediately under Clause 14 and the indemnification in Clause 11 applies.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-4">
+      <div class="cl-num-col"><span class="cl-num">04</span><span class="cl-num-large" aria-hidden="true">04</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Engagement and scope</h2><button class="cl-anchor" data-clause="cl-4" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Each engagement begins with an agreed Scope of Work. No obligation to provide Services arises until both parties have confirmed the scope in writing — including by email.</p>
+        <p>The Scope of Work will specify, at minimum: the nature of the Services to be provided; the Deliverables to be produced; the timeline and any milestones; the named Authorities or regimes in scope; and the fees payable.</p>
+        <p>Where a Client's business, product, account status, or regulatory environment changes materially during an engagement, either party may request a review of scope. Ayin reserves the right to adjust fees or timeline where the agreed scope has changed materially due to information not available at the time of agreement, including a regime change, a new Authority requirement, or a materially different starting position than represented.</p>
+        <p>Ayin reserves the right to decline any engagement at its sole discretion, including where Ayin reasonably considers the engagement to fall outside its competence, to require representations Ayin is not licensed to make, or to conflict with its values.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-5">
+      <div class="cl-num-col"><span class="cl-num">05</span><span class="cl-num-large" aria-hidden="true">05</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Client responsibilities</h2><button class="cl-anchor" data-clause="cl-5" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>The standing Ayin builds depends entirely on the accuracy and completeness of what the Client provides. The Client is responsible for:</p>
+        <ul>
+          <li>Providing accurate, complete, and timely information about the product, business, account history, supply chain, and the jurisdictions or platforms involved.</li>
+          <li>Notifying Ayin promptly of any material change to that information during the engagement, including a new enforcement action, a platform notice, or a change in ownership or supply source.</li>
+          <li>Ensuring that any document, invoice, certificate, or representation supplied to Ayin for use in a filing or appeal is genuine and accurate. <b>Ayin does not verify the authenticity of Client-supplied documents</b> and relies on the Client's warranty that they are true.</li>
+          <li>Confirming that the Client and its goods, funds, and counterparties are not subject to applicable trade sanctions, export controls, or denied-party restrictions in any jurisdiction relevant to the engagement.</li>
+          <li>Maintaining, operating, and updating the Deliverables after handover, as required by the Client's own ongoing obligations.</li>
+          <li>Obtaining independent legal advice wherever the Client requires confirmation that its practices comply with applicable law.</li>
+        </ul>
+        <p>Ayin's liability is reduced to the extent that delays, errors, rejections, or adverse Authority decisions result from the Client's failure to meet these responsibilities, including the provision of false or incomplete information.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-6">
+      <div class="cl-num-col"><span class="cl-num">06</span><span class="cl-num-large" aria-hidden="true">06</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Fees and payment</h2><button class="cl-anchor" data-clause="cl-6" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Fees are as agreed in the Scope of Work. Where not specified, Ayin's standard terms are payment within 14 days of invoice.</p>
+        <p>Ayin reserves the right to pause or suspend Services where payment is overdue by more than 14 days, following written notice to the Client. Suspension does not relieve the Client of payment obligations already accrued.</p>
+        <p>Where a Scope of Work provides for staged payments, Deliverables associated with each stage are released on receipt of payment for that stage. Any third-party fee — a regulatory filing fee, a notarisation cost, a translation cost, a courier charge — is passed through at cost and invoiced separately unless the Scope of Work states otherwise.</p>
+        <p>All fees are exclusive of applicable taxes unless stated otherwise. The Client is responsible for any taxes, duties, or withholding applicable in its own jurisdiction.</p>
+        <p>Fees paid for work already performed are non-refundable, except where Ayin has materially failed to deliver what was agreed in the Scope of Work. Where a Client's matter is declined by an Authority for reasons unrelated to the quality of Ayin's work — including a change in the Authority's own policy, a Client misrepresentation, or a pre-existing condition outside Ayin's knowledge — fees already earned for work performed remain payable.</p>
+        <p>Late payments may accrue interest at the statutory rate applicable in the governing jurisdiction, calculated from the due date until paid.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-7">
+      <div class="cl-num-col"><span class="cl-num">07</span><span class="cl-num-large" aria-hidden="true">07</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Intellectual property and ownership</h2><button class="cl-anchor" data-clause="cl-7" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">Deliverables</span>
+          <p>On receipt of full payment for an engagement, ownership of the Deliverables produced in that engagement transfers entirely to the Client. The Client may use, modify, maintain, and build on those Deliverables without restriction and without ongoing dependency on Ayin.</p>
+          <p>This is a deliberate structural choice. The record should belong to the business it was built for — not to a service provider it relies on to access it.</p>
+        </div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">Ayin's underlying methods</span>
+          <p>Ayin retains ownership of its frameworks, methodologies, templates, research tooling (including the Exposure Instrument and its scoring logic), and processes used to produce Deliverables. Transfer of a Deliverable does not transfer the underlying methodology used to create it. Ayin may use those methodologies freely in work for other clients, provided no Confidential Information of the Client is disclosed.</p>
+        </div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">Client materials</span>
+          <p>Any materials, documents, data, or information provided by the Client remain the Client's property. Ayin uses these solely for the purpose of providing the Services and returns or deletes them on request following completion of the engagement, subject to Ayin's own record-keeping obligations.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-8">
+      <div class="cl-num-col"><span class="cl-num">08</span><span class="cl-num-large" aria-hidden="true">08</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Confidentiality and data handling</h2><button class="cl-anchor" data-clause="cl-8" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Each party agrees to hold the other's Confidential Information in strict confidence and to use it solely for the purposes of the engagement. Neither party will disclose the other's Confidential Information to any third party without prior written consent, except:</p>
+        <ul>
+          <li>Where disclosure is required by law, regulation, court order, or a lawful Authority request — in which case the disclosing party will give the other as much notice as is legally permissible.</li>
+          <li>To professional advisers, sub-processors, or correspondent agents who are themselves bound by equivalent confidentiality obligations and are reasonably necessary to perform the Services.</li>
+          <li>Where the information has entered the public domain through no fault of the disclosing party.</li>
+        </ul>
+        <p>Ayin will not use Client information to publish case studies or identify the Client in any public-facing material without the Client's explicit written consent. Personal data is handled in accordance with Ayin's <a href="privacy.html" style="color:var(--jade-ink);border-bottom:1px solid rgba(21,97,74,.28)">Privacy Policy</a>.</p>
+        <p>Confidentiality obligations survive termination of the engagement for a period of five years, or indefinitely in respect of trade secrets and Authority-sensitive material.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-9">
+      <div class="cl-num-col"><span class="cl-num">09</span><span class="cl-num-large" aria-hidden="true">09</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">No guarantee of regulatory or platform outcome</h2><button class="cl-anchor" data-clause="cl-9" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Ayin does not guarantee, warrant, or represent that any product, account, or business will be approved, reinstated, certified, or found compliant by any Authority.</p>
+        <p>Outcomes are decided by regulators, customs authorities, courts, and platforms applying their own — often discretionary — standards. Ayin builds the strongest standing and the clearest record the facts support. What any Authority concludes is outside Ayin's control and outside the scope of anything Ayin can promise.</p>
+        <ul>
+          <li><b>Regulatory matters:</b> regime names, ceilings, and requirements described in any Deliverable or on this site reflect Ayin's current understanding and may change as legislation, guidance, or enforcement practice develops.</li>
+          <li><b>Platform matters:</b> marketplaces set and change their own enforcement policies unilaterally and without notice. A Plan of Action accepted today may not be accepted in an identical case tomorrow.</li>
+          <li><b>Timelines:</b> any timeline given for an Authority's response is an estimate based on typical practice, not a commitment by that Authority.</li>
+        </ul>
+        <p>Ayin recommends that Clients with material exposure take independent legal advice on the adequacy of their compliance posture, in addition to engaging Ayin for the infrastructure and representation work itself.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-10">
+      <div class="cl-num-col"><span class="cl-num">10</span><span class="cl-num-large" aria-hidden="true">10</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Limitation of liability</h2><button class="cl-anchor" data-clause="cl-10" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>To the fullest extent permitted by applicable law, Ayin's total aggregate liability to the Client for any and all claims arising out of or in connection with a given engagement — whether in contract, tort, statute, or otherwise — shall not exceed the total fees paid by the Client for that specific engagement in the twelve months preceding the claim.</p>
+        <p>A small number of matters are never subject to that cap. The map below sets out the line plainly, because a liability clause that hides its own exceptions in a single dense paragraph is not one either side can rely on.</p>
+
+        <div class="liab-map">
+          <div class="liab-caption">The liability map — what is capped, and what is not</div>
+          <div class="liab-grid">
+            <div class="liab-col cap">
+              <div class="liab-col-h"><span class="dot"></span>Capped at fees paid</div>
+              <div class="liab-fig">≤ engagement fees</div>
+              <div class="liab-list">
+                <div class="liab-item"><b>Ordinary errors or delay</b> in performing the Services.</div>
+                <div class="liab-item"><b>Loss of profit, revenue, or anticipated savings</b> arising from the engagement.</div>
+                <div class="liab-item"><b>Loss of business, contracts, or opportunities</b> connected to the matter.</div>
+                <div class="liab-item"><b>Regulatory fines, penalties, or enforcement actions</b> taken against the Client by any Authority.</div>
+                <div class="liab-item"><b>Indirect, consequential, or special loss</b> of any nature, foreseeable or not.</div>
+              </div>
+            </div>
+            <div class="liab-col unc">
+              <div class="liab-col-h"><span class="dot"></span>Never capped</div>
+              <div class="liab-fig">No ceiling</div>
+              <div class="liab-list">
+                <div class="liab-item"><b>Fraud or fraudulent misrepresentation</b> by either party.</div>
+                <div class="liab-item"><b>Death or personal injury</b> caused by negligence.</div>
+                <div class="liab-item"><b>Breach of confidentiality</b> under Clause 8, to the extent liability for it cannot lawfully be limited.</div>
+                <div class="liab-item"><b>Any liability that cannot lawfully be excluded or limited</b> in the governing jurisdiction.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="em-block">
+          <p>Ayin builds standing and representation. What an Authority concludes about a matter — or what a third party does with a Deliverable after handover — is outside Ayin's control and therefore outside the scope of Ayin's liability.</p>
+        </div>
+        <p>Both parties acknowledge that the fees charged reflect the allocation of risk in this Clause 10, and that Ayin would not provide the Services at the agreed fees without it.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-11">
+      <div class="cl-num-col"><span class="cl-num">11</span><span class="cl-num-large" aria-hidden="true">11</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Indemnification</h2><button class="cl-anchor" data-clause="cl-11" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>The Client agrees to indemnify, defend, and hold Ayin harmless from and against any third-party claim, loss, liability, fine, or expense (including reasonable legal fees) arising out of or in connection with:</p>
+        <ul>
+          <li>Any document, invoice, certificate, or representation supplied by the Client that is false, inaccurate, or misleading, where Ayin relied on it in good faith in performing the Services.</li>
+          <li>The Client's breach of Clause 3 (eligibility and authority to bind) or Clause 5 (Client responsibilities).</li>
+          <li>The Client's products, goods, conduct, or business practices independent of any advice or work product Ayin provided.</li>
+          <li>Any violation of applicable law, sanctions regime, or third-party right by the Client.</li>
+        </ul>
+        <p>Ayin agrees to indemnify the Client against third-party claims arising from Ayin's gross negligence or wilful misconduct in performing the Services, subject always to the cap in Clause 10 except where Clause 10 itself provides otherwise.</p>
+        <p>The indemnified party shall give the indemnifying party prompt written notice of any claim and reasonable cooperation in its defence; the indemnifying party controls the defence and any settlement, provided settlement does not impose non-monetary obligations on the indemnified party without its consent.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-12">
+      <div class="cl-num-col"><span class="cl-num">12</span><span class="cl-num-large" aria-hidden="true">12</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Independent contractor; no fiduciary duty</h2><button class="cl-anchor" data-clause="cl-12" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Ayin provides the Services as an independent contractor. Nothing in these Terms creates a partnership, joint venture, agency (except the limited advisory-agent capacity described in a Scope of Work for the specific purpose of Authority-facing correspondence), or employment relationship between the parties.</p>
+        <p>Ayin owes the Client the contractual obligations set out in these Terms and the applicable Scope of Work, and no broader fiduciary duty, unless a fiduciary relationship is expressly and separately agreed in writing.</p>
+        <p>Each party is responsible for its own taxes, insurance, and regulatory standing as an independent business.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-13">
+      <div class="cl-num-col"><span class="cl-num">13</span><span class="cl-num-large" aria-hidden="true">13</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Force majeure</h2><button class="cl-anchor" data-clause="cl-13" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Neither party is liable for any failure or delay in performance caused by events beyond its reasonable control, including but not limited to: natural disaster; war, invasion, or armed conflict; act of terrorism; pandemic or public health emergency; government action, sanction, or shutdown; sudden and material change to Authority policy or platform infrastructure; internet, telecommunications, or banking system outage; and labour disputes not involving the affected party's own workforce.</p>
+        <p>The affected party shall notify the other as soon as reasonably practicable and use reasonable efforts to mitigate the impact. If a force majeure event continues for more than 60 days, either party may terminate the affected engagement under Clause 14 without further liability beyond fees earned for work already performed.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-14">
+      <div class="cl-num-col"><span class="cl-num">14</span><span class="cl-num-large" aria-hidden="true">14</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Term and termination</h2><button class="cl-anchor" data-clause="cl-14" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Either party may terminate an engagement with 14 days' written notice. On termination:</p>
+        <ul>
+          <li>The Client shall pay for all work performed up to the date of termination, prorated where applicable.</li>
+          <li>Ayin shall deliver to the Client any Deliverables completed as of the date of termination.</li>
+          <li>Each party shall return or destroy the other's Confidential Information on request, subject to any legal obligation to retain it.</li>
+        </ul>
+        <p>Ayin may terminate an engagement immediately and without notice where the Client has acted fraudulently, provided materially false information, failed to pay an overdue invoice within 14 days of notice under Clause 6, or required Ayin to act in a manner Ayin reasonably considers unlawful or unethical.</p>
+        <p>A "Hold" engagement (ongoing standing maintenance) renews on its agreed annual term unless either party gives 30 days' written notice of non-renewal before the renewal date.</p>
+        <p>Clauses 1, 6, 7, 8, 9, 10, 11, 18, and 19 survive termination, together with any other clause which by its nature is intended to survive.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-15">
+      <div class="cl-num-col"><span class="cl-num">15</span><span class="cl-num-large" aria-hidden="true">15</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Notices and electronic communications</h2><button class="cl-anchor" data-clause="cl-15" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>Formal notices under these Terms — including notice of termination, breach, or dispute — must be in writing and sent to the email address or postal address on file for each party, and are deemed received the next business day after sending, absent evidence of non-delivery.</p>
+        <p>The parties consent to conducting business electronically. A Scope of Work, an amendment, or any other agreement under these Terms is validly executed by an exchange of emails or by an electronic or scanned signature, and carries the same legal effect as a handwritten signature and an original document, to the extent permitted by applicable law.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-16">
+      <div class="cl-num-col"><span class="cl-num">16</span><span class="cl-num-large" aria-hidden="true">16</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Assignment</h2><button class="cl-anchor" data-clause="cl-16" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>The Client may not assign, transfer, or subcontract its rights or obligations under these Terms without Ayin's prior written consent, not to be unreasonably withheld.</p>
+        <p>Ayin may assign these Terms, in whole or in part, to a successor in the event of a merger, acquisition, or sale of substantially all of its business, provided the successor assumes Ayin's obligations and the Client's confidentiality protections under Clause 8 remain intact.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-17">
+      <div class="cl-num-col"><span class="cl-num">17</span><span class="cl-num-large" aria-hidden="true">17</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Amendments</h2><button class="cl-anchor" data-clause="cl-17" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>These Terms may be updated from time to time. Where an update materially affects an ongoing engagement, Ayin will notify the Client directly and allow a 30-day review period before the new terms take effect for that engagement.</p>
+        <p>For new engagements, the Terms in force at the time of the Scope of Work agreement apply. The current version of these Terms is published at ayin.group/terms and carries a revision number and review date at the top of the document.</p>
+        <p>Continued engagement with Ayin following notification of updated Terms constitutes acceptance of those Terms.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-18">
+      <div class="cl-num-col"><span class="cl-num">18</span><span class="cl-num-large" aria-hidden="true">18</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">Governing law and dispute resolution</h2><button class="cl-anchor" data-clause="cl-18" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <p>The governing law of any engagement will be agreed between the parties and specified in the Scope of Work, taking into account the Client's jurisdiction and the nature of the Services.</p>
+        <p>Where not specified, these Terms and any dispute arising from them shall be governed by and construed in accordance with the laws of England and Wales, and the parties submit to the non-exclusive jurisdiction of the courts of England and Wales.</p>
+        <p>Before commencing formal proceedings, the parties agree to attempt in good faith to resolve any dispute through direct negotiation between senior representatives for a period of 30 days following written notice of the dispute. Where a Scope of Work specifies an alternative dispute resolution mechanism — such as mediation or arbitration — that mechanism applies in place of this clause for that engagement.</p>
+        <p>Nothing in this Clause 18 prevents either party from seeking urgent injunctive relief from a court of competent jurisdiction to protect Confidential Information or intellectual property pending resolution of a dispute.</p>
+      </div>
+    </div>
+
+    <div class="cl r" id="cl-19">
+      <div class="cl-num-col"><span class="cl-num">19</span><span class="cl-num-large" aria-hidden="true">19</span></div>
+      <div class="cl-content">
+        <div class="cl-title-row"><h2 class="cl-title">General provisions</h2><button class="cl-anchor" data-clause="cl-19" aria-label="Copy link to this clause"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5 9.5 6.5M6.8 4.3l1-1a2.5 2.5 0 1 1 3.5 3.5l-1.6 1.6M9.2 11.7l-1 1a2.5 2.5 0 1 1-3.5-3.5l1.6-1.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="cl-anchor-tip">Link copied</span></button></div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">Entire agreement</span>
+          <p>These Terms, together with the relevant Scope of Work, constitute the entire agreement between Ayin and the Client in respect of the Services described therein, superseding all prior representations, discussions, or agreements relating to the same subject matter.</p>
+        </div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">Severability</span>
+          <p>If any provision of these Terms is found unenforceable, that provision is read down to the minimum extent necessary to make it enforceable, or severed if it cannot be; the remaining provisions continue in full force.</p>
+        </div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">No waiver</span>
+          <p>A failure by either party to enforce a provision does not constitute a waiver of the right to enforce it subsequently. Any waiver must be in writing to be effective.</p>
+        </div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">No third-party beneficiaries</span>
+          <p>These Terms benefit only Ayin and the Client. No other person or entity has any right to enforce any term of this agreement.</p>
+        </div>
+        <div class="sub-cl">
+          <span class="sub-cl-title">Variation</span>
+          <p>No variation of these Terms shall be binding unless agreed in writing in accordance with Clause 17.</p>
+        </div>
+        <div class="cl-contact-note">
+          Questions about these Terms: <a href="mailto:hello@ayin.group">hello@ayin.group</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="ft-maxim">
+    <span class="ft-lat">Praemonitus, praemunitus</span>
+    <span class="ft-trn">Forewarned is forearmed</span>
+  </div>
+  <div class="ft-body">
+    <div class="ft-left">
+      <div class="ft-brand">
+        <img src="assets/footer.svg" alt="Ayin" class="ft-logo-img">
+        <span class="ft-wordmark"><span class="dot"></span></span>
+      </div>
+      <nav class="ft-nav" aria-label="Footer">
+        <a href="index.html#instrument">The instrument</a>
+        <a href="index.html#have">Do you have it</a>
+        <a href="index.html#ayin">The apparatus</a>
+        <a href="index.html#work">How we work</a>
+        <a href="codex.html">The Codex</a>
+      </nav>
+    </div>
+    <div class="ft-col-div" aria-hidden="true"></div>
+    <div class="ft-right">
+      <p class="ft-thought">Most of the work is invisible. A market that opens, an account that stays live, a move that completes — and <em>no one writes the article.</em></p>
+      <a href="index.html#intake" class="ft-cta">Tell us the crossing →</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <span class="ft-copy">© <span id="ftYear"></span> Ayin</span>
+    <p class="ft-disc">Ayin is an advisory and compliance practice, not a law firm. Nothing on this site constitutes legal advice. Regime names and ceilings are cited for illustration only.</p>
+    <div class="ft-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+
+/* ── PROGRESS ── */
+const pf = $('pf');
+addEventListener('scroll', () => {
+  const H = document.body.scrollHeight - innerHeight;
+  pf.style.width = (H > 0 ? Math.min(scrollY / H, 1) : 0) * 100 + '%';
+}, { passive:true });
+
+/* ── NAV register ── */
+const nav = $('nav');
+function navRegister(){
+  const docBody = $('doc-body');
+  if (!docBody) return;
+  const r = docBody.getBoundingClientRect();
+  const inPaper = r.top < 80 && r.bottom > 0;
+  if (inPaper){ nav.classList.add('on-paper'); nav.classList.remove('on-dark'); }
+  else        { nav.classList.add('on-dark');  nav.classList.remove('on-paper'); }
+}
+addEventListener('scroll', navRegister, { passive:true });
+navRegister();
+
+/* ── REVEAL ── */
+const ro = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+}), { threshold:.06, rootMargin:'0px 0px -28px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+
+/* ── PRINT ── */
+function doPrint(){ window.print(); }
+$('navPrint')?.addEventListener('click', doPrint);
+$('tocPrint')?.addEventListener('click', doPrint);
+
+/* ── CROSS-REFERENCE JUMPS ── */
+document.querySelectorAll('.xref').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    const t = document.getElementById(el.dataset.jump);
+    if (t) scrollTo({ top: t.getBoundingClientRect().top + scrollY - 96, behavior:'smooth' });
+  });
+});
+
+/* ── COPY LINK TO CLAUSE ── */
+document.querySelectorAll('.cl-anchor').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const id = btn.dataset.clause;
+    const url = location.origin + location.pathname + '#' + id;
+    try { await navigator.clipboard.writeText(url); } catch(e){ /* clipboard unavailable */ }
+    history.replaceState(null,'','#'+id);
+    btn.classList.add('copied');
+    setTimeout(()=>btn.classList.remove('copied'), 1600);
+  });
+});
+
+/* ── CLAUSE RAIL (scrollspy) ── */
+(function(){
+  const rail = $('clauseRail');
+  const clauses = [...document.querySelectorAll('#doc-body .cl')];
+  if (!rail || !clauses.length) return;
+  clauses.forEach(cl=>{
+    const num = cl.id.split('-')[1];
+    const title = cl.querySelector('.cl-title')?.textContent || '';
+    const dot = document.createElement('button');
+    dot.className = 'cr-dot';
+    dot.setAttribute('aria-label', 'Jump to clause ' + num);
+    dot.innerHTML = '<span class="cr-tip">' + num.padStart(2,'0') + ' · ' + title + '</span>';
+    dot.addEventListener('click', ()=>{
+      scrollTo({ top: cl.getBoundingClientRect().top + scrollY - 96, behavior:'smooth' });
+    });
+    rail.appendChild(dot);
+  });
+  const dots = [...rail.children];
+  const spy = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      const idx = clauses.indexOf(e.target);
+      if (e.isIntersecting) dots[idx]?.classList.add('active');
+      else dots[idx]?.classList.remove('active');
+    });
+  }, { rootMargin:'-45% 0px -45% 0px' });
+  clauses.forEach(cl=>spy.observe(cl));
+
+  const docBody = $('doc-body');
+  function railVis(){
+    const r = docBody.getBoundingClientRect();
+    rail.classList.toggle('show', r.top < innerHeight*0.6 && r.bottom > innerHeight*0.3);
+  }
+  addEventListener('scroll', railVis, { passive:true });
+  railVis();
+})();
+
+$('ftYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

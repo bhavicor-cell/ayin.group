@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071512">
+<title>EU Cosmetics Regulation 1223/2009 & the Responsible Person — The Codex — Ayin</title>
+<meta name="description" content="What the EU Cosmetics Regulation actually requires, who enforces it, and what it costs to get wrong — explained in plain language.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE4; --paper-2:#EAE3D8; --ground:#0C1F1A; --g1:#102822; --abyss:#071512;
+  --ivory:#EFE9DB; --ivory-2:#D8D1C0; --mute:rgba(239,233,219,.74); --mute-2:rgba(239,233,219,.46); --line:rgba(239,233,219,.10);
+  --ink:#16120B; --ink-soft:rgba(22,18,11,.66); --ink-faint:rgba(22,18,11,.38); --ink-line:rgba(22,18,11,.13); --ink-line2:rgba(22,18,11,.065);
+  --jade:#7FC0A0; --jade-hi:#A8DCC2; --jade-ink:#15614A; --jade-12:rgba(127,192,160,.12); --jade-20:rgba(127,192,160,.20); --jade-glow:rgba(127,192,160,.24);
+  --brass:#9A6010; --brass-hi:#C8963C;
+  --disp:'Spectral',Georgia,serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --e1:cubic-bezier(.2,.8,.2,1); --e2:cubic-bezier(.16,1,.3,1); --gut:clamp(24px,5vw,84px); --maxw:980px; --navh:70px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--abyss);scroll-behavior:smooth}
+body{font-family:var(--body);font-weight:300;line-height:1.7;font-size:16px;background:var(--abyss);color:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.r{opacity:0;transform:translateY(18px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
+.r.in{opacity:1;transform:none}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--navh);display:flex;align-items:center;padding:0 var(--gut);background:rgba(8,16,9,.86);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.nav-back{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);display:flex;align-items:center;gap:8px}
+.nav-back:hover{color:var(--jade-hi)}
+.nav-right{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--mute-2)}
+
+#hero{background:var(--abyss);padding:clamp(110px,16vh,150px) var(--gut) clamp(50px,7vh,70px);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 80% 20%,rgba(127,192,160,.06) 0%,transparent 60%)}
+.hero-inner{max-width:var(--maxw);margin:0 auto;position:relative;z-index:1}
+.hcode{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--jade);background:var(--jade-12);border:1px solid var(--jade-20);padding:6px 12px;display:inline-block;margin-bottom:20px}
+.htitle{font-family:var(--disp);font-weight:300;font-size:clamp(32px,5vw,56px);letter-spacing:-.03em;line-height:1.04;color:var(--ivory)}
+.htitle em{font-style:italic;color:var(--jade)}
+.hsub{margin-top:18px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.6vw,19px);color:var(--mute);max-width:62ch;line-height:1.5}
+.hmeta{display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);margin-top:clamp(32px,5vh,44px);padding-top:20px;border-top:1px solid var(--line)}
+.hm{display:flex;flex-direction:column;gap:5px}
+.hml{font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2)}
+.hmv{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+
+#body{background:var(--paper);color:var(--ink);padding:clamp(56px,8vh,84px) var(--gut) clamp(80px,12vh,120px)}
+.body-inner{max-width:var(--maxw);margin:0 auto}
+section.sec{margin-bottom:clamp(44px,6.5vh,64px)}
+.sec-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:16px;display:block}
+.sec-h{font-family:var(--disp);font-weight:400;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.018em;color:var(--ink);margin-bottom:18px}
+.sec p{font-size:15px;line-height:1.85;color:var(--ink-soft);margin-bottom:16px;max-width:68ch}
+.sec p:last-child{margin-bottom:0}
+.sec p b{color:var(--ink);font-weight:500}
+.sec ul{display:flex;flex-direction:column;gap:0;margin:8px 0}
+.sec li{font-size:14.5px;line-height:1.75;color:var(--ink-soft);padding:11px 0 11px 22px;border-bottom:1px solid var(--ink-line2);position:relative}
+.sec li:first-child{border-top:1px solid var(--ink-line2)}
+.sec li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:1px;background:var(--jade-ink);opacity:.55}
+.sec li b{color:var(--ink);font-weight:500}
+
+.qbox{border:1px solid var(--ink-line);background:var(--paper-2);padding:clamp(22px,3.2vw,30px)}
+.qbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:14px;display:block}
+.qbox ul{margin:0}
+.qbox li{font-size:14px;border-bottom:1px solid var(--ink-line2)}
+
+.authbox{display:flex;gap:16px;align-items:flex-start;border-left:2px solid var(--jade-ink);background:rgba(21,97,74,.04);padding:18px 22px}
+.authbox b{display:block;color:var(--ink);font-weight:500;margin-bottom:4px}
+.authbox p{margin:0;font-size:13.5px}
+
+.ledger{border:1px solid var(--ink-line);overflow:hidden;margin-top:6px}
+.ledger-cap{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);padding:14px 20px;border-bottom:1px solid var(--ink-line);background:var(--paper-2);display:flex;align-items:center;gap:10px}
+.ledger-cap::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--brass-hi)}
+.ledger-row{padding:16px 20px;border-bottom:1px solid var(--ink-line2);font-size:13.5px;line-height:1.7;color:var(--ink-soft)}
+.ledger-row:last-child{border-bottom:none}
+.ledger-row b{color:var(--ink);font-weight:500}
+.ledger-src{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--ink-faint)}
+
+.fitbox{background:var(--ground);color:var(--ivory);padding:clamp(26px,3.6vw,34px);position:relative;overflow:hidden}
+.fitbox::before{content:'';position:absolute;top:-1px;left:-1px;width:50%;height:1px;background:linear-gradient(90deg,var(--jade),transparent)}
+.fitbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade);margin-bottom:12px;display:block}
+.fitbox p{color:var(--mute);font-size:14.5px;line-height:1.75;margin-bottom:18px;max-width:62ch}
+.fitbox p b{color:var(--ivory);font-weight:500}
+.fit-cta{display:inline-flex;gap:14px;flex-wrap:wrap}
+.cta-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:13px 20px;transition:background .25s}
+.cta-btn:hover{background:var(--jade-hi)}
+.cta-link{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);border-bottom:1px solid var(--jade-20);align-self:center;padding-bottom:2px}
+
+.srcfoot{margin-top:clamp(40px,6vh,56px);padding-top:24px;border-top:1px solid var(--ink-line);display:flex;flex-direction:column;gap:10px}
+.srcfoot-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.srcfoot ol{padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.srcfoot li{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);line-height:1.6}
+.crosslinks{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+.xlink{font-family:var(--mono);font-size:10px;color:var(--jade-ink);border:1px solid rgba(21,97,74,.25);padding:8px 13px;transition:background .22s,color .22s}
+.xlink:hover{background:var(--jade-ink);color:var(--paper)}
+
+footer{background:var(--ground);color:var(--ivory);padding:32px var(--gut);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ft-copy{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2)}
+.ft-legal{display:flex;gap:16px}
+.ft-legal a{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2)}
+.ft-legal a:hover{color:var(--jade)}
+@media(prefers-reduced-motion:reduce){.r{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<header id="nav">
+  <a class="nav-back" href="codex.html">← The Codex</a>
+  <span class="nav-right">EU · 1223/2009</span>
+</header>
+
+<section id="hero">
+  <div class="hero-inner r">
+    <span class="hcode">EU · 1223/2009 · COSMETICS</span>
+    <h1 class="htitle">The EU Cosmetics Regulation<br>& the <em>Responsible Person.</em></h1>
+    <p class="hsub">No EU-established Responsible Person, no legal route onto the EU market — for any cosmetic product, regardless of where it's made.</p>
+    <div class="hmeta">
+      <div class="hm"><span class="hml">Jurisdiction</span><span class="hmv">European Union (+ Northern Ireland)</span></div>
+      <div class="hm"><span class="hml">Vertical</span><span class="hmv">Cosmetics &amp; personal care</span></div>
+      <div class="hm"><span class="hml">Stage</span><span class="hmv">Map → Clear</span></div>
+      <div class="hm"><span class="hml">Last reviewed</span><span class="hmv">23 Jun 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="body">
+  <div class="body-inner">
+
+    <section class="sec r">
+      <span class="sec-l">In thirty seconds</span>
+      <div class="qbox">
+        <span class="qbox-l">The plain version</span>
+        <ul>
+          <li>Regulation (EC) No 1223/2009 governs every cosmetic product placed on the EU market — and the UK GB market runs an equivalent regime under its own Responsible Person.</li>
+          <li>Every product needs a <b>Responsible Person</b> established in the EU who carries legal accountability for it. Without one, the product cannot legally be sold — full stop.</li>
+          <li>The Responsible Person must hold a <b>Product Information File (PIF)</b> with a safety assessment, and notify the product via the <b>CPNP</b> before it goes to market.</li>
+          <li>Enforcement is mostly <b>corrective</b>, not punitive — national authorities order withdrawal, recall, or a sales ban first. Fines exist but vary by member state and are secondary to getting the product off the shelf.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What it actually requires</span>
+      <h2 class="sec-h">Four things have to exist before a product can launch.</h2>
+      <ul>
+        <li><b>A Responsible Person</b> established in the EU — the manufacturer, an EU-established importer, or a designated agent who accepts the role in writing.</li>
+        <li><b>A Product Information File (PIF)</b> — including a signed safety assessment by a qualified assessor, kept for 10 years after the last batch is placed on the market and produced to authorities on request, in a language they can understand.</li>
+        <li><b>A CPNP notification</b> — submitted by the Responsible Person via the Cosmetic Products Notification Portal before the product is placed on the market, covering category, ingredients, and the RP's contact details.</li>
+        <li><b>Compliant labelling</b> — RP name and address, ingredient list (INCI), nominal content, durability, and any required warnings, in a language consumers in that market can read.</li>
+      </ul>
+      <p>If the product also touches the UK GB market post-Brexit, a separate UK-established Responsible Person and SCPN notification are required — the EU filing does not carry over.</p>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Who enforces it</span>
+      <div class="authbox">
+        <div>
+          <b>National competent authorities</b>
+          <p>Each EU member state designates its own authority (for example France's ANSM, Germany's BfArM) to police the market. They cooperate and share information, but enforcement action is taken at national level, against the product as it sits in that country.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What it costs to get wrong</span>
+      <h2 class="sec-h">Enforcement here runs through withdrawal, not a fixed fine ceiling.</h2>
+      <p>Unlike a flat-rate penalty regime, EU cosmetics enforcement is built around <b>corrective power</b> first: an authority can demand the product be brought into conformity, withdrawn, or recalled within a deadline — and the Responsible Person has the right to respond before action is taken, except where there's a serious risk to health. Monetary fines exist at member-state level and can run from low thousands into the millions of euros depending on the breach, but the more common and more commercially damaging consequence is simpler and faster than any fine: <b>the product comes off the shelf</b>, the marketplace listing gets pulled, and the brand loses the selling window it spent months building.</p>
+      <div class="ledger">
+        <div class="ledger-cap">What actually happens when it's missed</div>
+        <div class="ledger-row"><b>No Responsible Person on file</b> — the product is non-compliant from day one; authorities and marketplaces can both act on it independently, and a marketplace will typically suspend the listing faster than any regulator can move.<span class="ledger-src">EU RP requirement, Art. 4–5; marketplace cosmetics-compliance policies</span></div>
+        <div class="ledger-row"><b>PIF not available on request</b> — triggers the same corrective powers as a substantive safety failure, even if the product itself is fine; the authority cannot verify what it cannot see.<span class="ledger-src">Art. 11; Art. 10 PIF retention period</span></div>
+        <div class="ledger-row"><b>Mislabelled or untranslated label</b> — fines for labelling breaches specifically have run from the low thousands to into the millions of euros in the EU depending on severity; in the UK the typical range cited is materially lower, in the hundreds to low thousands of pounds.<span class="ledger-src">CIRS Group labelling compliance guidance, 2026</span></div>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Where Ayin fits</span>
+      <div class="fitbox">
+        <span class="fitbox-l">Map → Clear</span>
+        <p>This is one of the cleanest gates in the Codex to map quickly — Ayin can tell you within a short conversation whether you already have standing, what's missing, and what it costs to close the gap. <b>Appointing the Responsible Person and assembling the PIF is Clear-stage work</b>; once it's built, it's yours, entirely.</p>
+        <div class="fit-cta">
+          <a href="index.html#intake" class="cta-btn">Send this to Ayin →</a>
+          <a href="index.html#instrument" class="cta-link">Map your own crossing first →</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="crosslinks">
+      <a class="xlink" href="codex-ukca.html">→ The UK's parallel regime: UKCA Marking</a>
+      <a class="xlink" href="codex-mocra.html">→ The US equivalent: FDA MoCRA</a>
+      <a class="xlink" href="codex.html">→ Back to the full Codex</a>
+    </div>
+
+    <div class="srcfoot">
+      <span class="srcfoot-l">Sources</span>
+      <ol>
+        <li>Regulation (EC) No 1223/2009 of the European Parliament and of the Council (recast), EUR-Lex.</li>
+        <li>Cosmetic Products Enforcement Regulations 2013 (Great Britain &amp; Northern Ireland guidance), GOV.UK.</li>
+        <li>CIRS Group, "Understanding Labeling Requirements for Cosmetics in the EU and the UK," 2026.</li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span class="ft-copy">© <span id="ftYear"></span> Ayin — The Codex</span>
+  <div class="ft-legal">
+    <a href="index.html">Home</a>
+    <a href="codex.html">The Codex</a>
+    <a href="disclaimer.html">Disclaimer</a>
+  </div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }), { threshold:.06, rootMargin:'0px 0px -24px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+document.getElementById('ftYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071512">
+<title>Amazon Seller Performance & the Plan of Action — The Codex — Ayin</title>
+<meta name="description" content="What Amazon's Seller Performance policy actually requires, how the Plan of Action is judged, and what it costs to get wrong — explained in plain language.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE4; --paper-2:#EAE3D8; --ground:#0C1F1A; --g1:#102822; --abyss:#071512;
+  --ivory:#EFE9DB; --ivory-2:#D8D1C0; --mute:rgba(239,233,219,.74); --mute-2:rgba(239,233,219,.46); --line:rgba(239,233,219,.10);
+  --ink:#16120B; --ink-soft:rgba(22,18,11,.66); --ink-faint:rgba(22,18,11,.38); --ink-line:rgba(22,18,11,.13); --ink-line2:rgba(22,18,11,.065);
+  --jade:#7FC0A0; --jade-hi:#A8DCC2; --jade-ink:#15614A; --jade-12:rgba(127,192,160,.12); --jade-20:rgba(127,192,160,.20); --jade-glow:rgba(127,192,160,.24);
+  --brass:#9A6010; --brass-hi:#C8963C;
+  --disp:'Spectral',Georgia,serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --e1:cubic-bezier(.2,.8,.2,1); --e2:cubic-bezier(.16,1,.3,1); --gut:clamp(24px,5vw,84px); --maxw:980px; --navh:70px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--abyss);scroll-behavior:smooth}
+body{font-family:var(--body);font-weight:300;line-height:1.7;font-size:16px;background:var(--abyss);color:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.r{opacity:0;transform:translateY(18px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
+.r.in{opacity:1;transform:none}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--navh);display:flex;align-items:center;padding:0 var(--gut);background:rgba(8,16,9,.86);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.nav-back{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);display:flex;align-items:center;gap:8px}
+.nav-back:hover{color:var(--jade-hi)}
+.nav-right{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--mute-2)}
+
+#hero{background:var(--abyss);padding:clamp(110px,16vh,150px) var(--gut) clamp(50px,7vh,70px);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 80% 20%,rgba(127,192,160,.06) 0%,transparent 60%)}
+.hero-inner{max-width:var(--maxw);margin:0 auto;position:relative;z-index:1}
+.hcode{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--jade);background:var(--jade-12);border:1px solid var(--jade-20);padding:6px 12px;display:inline-block;margin-bottom:20px}
+.htitle{font-family:var(--disp);font-weight:300;font-size:clamp(32px,5vw,56px);letter-spacing:-.03em;line-height:1.04;color:var(--ivory)}
+.htitle em{font-style:italic;color:var(--jade)}
+.hsub{margin-top:18px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.6vw,19px);color:var(--mute);max-width:62ch;line-height:1.5}
+.hmeta{display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);margin-top:clamp(32px,5vh,44px);padding-top:20px;border-top:1px solid var(--line)}
+.hm{display:flex;flex-direction:column;gap:5px}
+.hml{font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2)}
+.hmv{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+
+#body{background:var(--paper);color:var(--ink);padding:clamp(56px,8vh,84px) var(--gut) clamp(80px,12vh,120px)}
+.body-inner{max-width:var(--maxw);margin:0 auto}
+section.sec{margin-bottom:clamp(44px,6.5vh,64px)}
+.sec-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:16px;display:block}
+.sec-h{font-family:var(--disp);font-weight:400;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.018em;color:var(--ink);margin-bottom:18px}
+.sec p{font-size:15px;line-height:1.85;color:var(--ink-soft);margin-bottom:16px;max-width:68ch}
+.sec p:last-child{margin-bottom:0}
+.sec p b{color:var(--ink);font-weight:500}
+.sec ul{display:flex;flex-direction:column;gap:0;margin:8px 0}
+.sec li{font-size:14.5px;line-height:1.75;color:var(--ink-soft);padding:11px 0 11px 22px;border-bottom:1px solid var(--ink-line2);position:relative}
+.sec li:first-child{border-top:1px solid var(--ink-line2)}
+.sec li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:1px;background:var(--jade-ink);opacity:.55}
+.sec li b{color:var(--ink);font-weight:500}
+
+.qbox{border:1px solid var(--ink-line);background:var(--paper-2);padding:clamp(22px,3.2vw,30px)}
+.qbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:14px;display:block}
+.qbox ul{margin:0}
+.qbox li{font-size:14px;border-bottom:1px solid var(--ink-line2)}
+
+.authbox{display:flex;gap:16px;align-items:flex-start;border-left:2px solid var(--jade-ink);background:rgba(21,97,74,.04);padding:18px 22px}
+.authbox b{display:block;color:var(--ink);font-weight:500;margin-bottom:4px}
+.authbox p{margin:0;font-size:13.5px}
+
+.ledger{border:1px solid var(--ink-line);overflow:hidden;margin-top:6px}
+.ledger-cap{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);padding:14px 20px;border-bottom:1px solid var(--ink-line);background:var(--paper-2);display:flex;align-items:center;gap:10px}
+.ledger-cap::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--brass-hi)}
+.ledger-row{padding:16px 20px;border-bottom:1px solid var(--ink-line2);font-size:13.5px;line-height:1.7;color:var(--ink-soft)}
+.ledger-row:last-child{border-bottom:none}
+.ledger-row b{color:var(--ink);font-weight:500}
+.ledger-src{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--ink-faint)}
+
+.fitbox{background:var(--ground);color:var(--ivory);padding:clamp(26px,3.6vw,34px);position:relative;overflow:hidden}
+.fitbox::before{content:'';position:absolute;top:-1px;left:-1px;width:50%;height:1px;background:linear-gradient(90deg,var(--jade),transparent)}
+.fitbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade);margin-bottom:12px;display:block}
+.fitbox p{color:var(--mute);font-size:14.5px;line-height:1.75;margin-bottom:18px;max-width:62ch}
+.fitbox p b{color:var(--ivory);font-weight:500}
+.fit-cta{display:inline-flex;gap:14px;flex-wrap:wrap}
+.cta-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:13px 20px;transition:background .25s}
+.cta-btn:hover{background:var(--jade-hi)}
+.cta-link{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);border-bottom:1px solid var(--jade-20);align-self:center;padding-bottom:2px}
+
+.srcfoot{margin-top:clamp(40px,6vh,56px);padding-top:24px;border-top:1px solid var(--ink-line);display:flex;flex-direction:column;gap:10px}
+.srcfoot-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.srcfoot ol{padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.srcfoot li{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);line-height:1.6}
+.crosslinks{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+.xlink{font-family:var(--mono);font-size:10px;color:var(--jade-ink);border:1px solid rgba(21,97,74,.25);padding:8px 13px;transition:background .22s,color .22s}
+.xlink:hover{background:var(--jade-ink);color:var(--paper)}
+
+footer{background:var(--ground);color:var(--ivory);padding:32px var(--gut);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ft-copy{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2)}
+.ft-legal{display:flex;gap:16px}
+.ft-legal a{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2)}
+.ft-legal a:hover{color:var(--jade)}
+@media(prefers-reduced-motion:reduce){.r{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<header id="nav">
+  <a class="nav-back" href="codex.html">← The Codex</a>
+  <span class="nav-right">Marketplace · Amazon POA</span>
+</header>
+
+<section id="hero">
+  <div class="hero-inner r">
+    <span class="hcode">MARKETPLACE · AMAZON · ACCOUNT STANDING</span>
+    <h1 class="htitle">Amazon Seller Performance<br>& the <em>Plan of Action.</em></h1>
+    <p class="hsub">Amazon's reviewers spend about as long on your appeal as it takes to read this paragraph twice. The first submission is the one that matters most.</p>
+    <div class="hmeta">
+      <div class="hm"><span class="hml">Jurisdiction</span><span class="hmv">Amazon marketplaces (policy, not statute)</span></div>
+      <div class="hm"><span class="hml">Vertical</span><span class="hmv">Marketplace seller accounts</span></div>
+      <div class="hm"><span class="hml">Stage</span><span class="hmv">Clear → Hold</span></div>
+      <div class="hm"><span class="hml">Last reviewed</span><span class="hmv">23 Jun 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="body">
+  <div class="body-inner">
+
+    <section class="sec r">
+      <span class="sec-l">In thirty seconds</span>
+      <div class="qbox">
+        <span class="qbox-l">The plain version</span>
+        <ul>
+          <li>A Plan of Action (POA) is the document Amazon uses to decide whether to restore selling privileges — it is judged as an operational document, not an apology.</li>
+          <li>Amazon requires three elements in every POA: a specific <b>root cause</b>, <b>corrective steps already completed</b> (not promised), and a <b>prevention framework</b> for the future.</li>
+          <li>A suspension freezes funds for up to <b>90 days</b> and tracks your account against an <b>Account Health Rating</b> scored 0–1,000 — Healthy (200–1,000), At Risk (100–199), Unhealthy (0–99, eligible for deactivation).</li>
+          <li>Each rejected appeal makes the next one harder — Amazon's review teams see the full appeal history, so one carefully built submission beats several rushed ones.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What it actually requires</span>
+      <h2 class="sec-h">Three parts, in a specific order, with no padding.</h2>
+      <ul>
+        <li><b>Root cause</b> — specific and operational, not defensive. "We don't know what caused this" is read as a non-answer; "FBA inventory from an unverified supplier entered the shipment because our pre-listing checklist had no supplier-verification step for that category" is the standard Amazon is actually asking for.</li>
+        <li><b>Corrective action already taken</b> — completed steps, described in the past tense, not a plan for next week. Documentation that supports the claim (invoices, supplier records, screenshots of the process change) carries more weight than the narrative alone.</li>
+        <li><b>Prevention framework</b> — the systemic change that stops recurrence, not a one-off fix to the single flagged ASIN.</li>
+        <li><b>Supporting evidence</b> — for authenticity and supply-chain matters specifically, invoices from an authorised distributor with a clear, traceable chain of custody are what separates a successful first appeal from an escalation.</li>
+      </ul>
+      <p>Format matters more than most sellers expect: scannable, specific, under a page where possible, with bullet points rather than long paragraphs — reviewers are moving fast, and a appeal that makes them hunt for the point gets rejected for it.</p>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Who enforces it</span>
+      <div class="authbox">
+        <div>
+          <b>Amazon Seller Performance</b>, with escalation routes through Brand Registry and Account Health support
+          <p>This is a private platform policy, not a statute — there is no regulator, court, or published case law to appeal to in the ordinary course. Amazon's own internal review teams make the call, working from your account's full appeal history and the specific policy clause cited in the suspension notice.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What it costs to get wrong</span>
+      <h2 class="sec-h">The cost isn't a fine. It's the 90 days, and the rank you don't get back.</h2>
+      <p>There's no monetary penalty in the regulatory sense — the consequence is operational and immediate: listings disabled, Buy Box removed, advertising stopped, and funds held for up to 90 days to cover potential refunds and chargebacks. With more than <b>9.7 million sellers</b> on the platform and what practitioners consistently describe as increasingly <b>AI-driven, automated enforcement</b>, the trend through 2025 and into 2026 has been toward more documentation requirements and more video-verification requests — even for sellers who did nothing wrong.</p>
+      <div class="ledger">
+        <div class="ledger-cap">What actually happens when it's missed</div>
+        <div class="ledger-row"><b>Generic or defensive first appeal</b> — practitioner data consistently shows first appeals that name a specific, operational root cause succeed at a meaningfully higher rate than ones that don't; a rejected first appeal is visible to Amazon on every subsequent one.<span class="ledger-src">Amazon Sellers Lawyer &amp; Sequence Commerce practitioner guidance, 2025–2026</span></div>
+        <div class="ledger-row"><b>Related-account suspension</b> — triggered by shared IP address, device, or warehouse location, correctly or not; opening a new account in response is treated as a related-account violation in itself and typically gets the new account suspended too.<span class="ledger-src">estorefactory.com, "Amazon Account Suspension 2026," March 2026</span></div>
+        <div class="ledger-row"><b>Section 3 (Code of Conduct) escalation</b> — the most severe category, covering fraud allegations and circumvention; recovery, where possible, routinely requires multiple documentation rounds and is the category most likely to end in a permanent ban if mishandled.<span class="ledger-src">Industry POA practitioner case data, 2025–2026</span></div>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Where Ayin fits</span>
+      <div class="fitbox">
+        <span class="fitbox-l">Clear → Hold</span>
+        <p>The work is in the <b>diagnosis</b>, not the writing — naming the actual root cause Amazon's notice is pointing at, then assembling the supply-chain proof that backs it. Ayin will not promise an outcome; no honest party can. <b>What we can promise is the strongest accurate appeal the facts support</b>, built once, correctly.</p>
+        <div class="fit-cta">
+          <a href="index.html#intake" class="cta-btn">Send this to Ayin →</a>
+          <a href="index.html#instrument" class="cta-link">Map your own crossing first →</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="crosslinks">
+      <a class="xlink" href="codex-mocra.html">→ Selling cosmetics in the US: FDA MoCRA</a>
+      <a class="xlink" href="codex.html">→ Back to the full Codex</a>
+    </div>
+
+    <div class="srcfoot">
+      <span class="srcfoot-l">Sources</span>
+      <ol>
+        <li>Amazon Seller Central, Account Health policy documentation.</li>
+        <li>estorefactory.com, "Amazon Account Suspension 2026: Appeal &amp; Reinstatement Guide," March 2026.</li>
+        <li>Sequence Commerce, "Amazon Seller Account Suspended? The 2026 Reinstatement Guide."</li>
+        <li>Amazon Sellers Lawyer, practitioner case-data publications, 2025–2026.</li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span class="ft-copy">© <span id="ftYear"></span> Ayin — The Codex</span>
+  <div class="ft-legal">
+    <a href="index.html">Home</a>
+    <a href="codex.html">The Codex</a>
+    <a href="disclaimer.html">Disclaimer</a>
+  </div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }), { threshold:.06, rootMargin:'0px 0px -24px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+document.getElementById('ftYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
