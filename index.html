@@ -5,21 +5,21 @@
   <link rel="icon" type="image/svg+xml" href="assets/dark.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0C1F1A">
-<title>Ayin | International Advisory &amp; Compliance</title>
+<title>Ayin — International Advisory &amp; Compliance</title>
 <meta name="description" content="Ayin moves regulated products and businesses across jurisdictions — and the people who cross with them. Market access, platform standing, and cross-border counsel.">
 <link rel="canonical" href="https://ayin.group/">
 <link rel="icon" type="image/svg+xml" href="assets/dark.svg">
 <link rel="apple-touch-icon" href="assets/dark.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ayin">
-<meta property="og:title" content="Ayin | International Advisory & Compliance">
+<meta property="og:title" content="Ayin — International Advisory & Compliance">
 <meta property="og:description" content="Market access, platform standing, and cross-border counsel — for the products and people who cross with them.">
 <meta property="og:url" content="https://ayin.group/">
 <meta property="og:image" content="https://ayin.group/assets/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ayin | International Advisory & Compliance">
+<meta name="twitter:title" content="Ayin — International Advisory & Compliance">
 <meta name="twitter:description" content="Market access, platform standing, and cross-border counsel — for the products and people who cross with them.">
 <meta name="twitter:image" content="https://ayin.group/assets/og-cover.png">
 <script type="application/ld+json">
@@ -106,6 +106,60 @@ em{font-style:italic}
 .cta-btn::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--jade-hi);transform:translateY(101%);transition:transform .4s var(--e1)}
 .cta-btn:hover{gap:17px}.cta-btn:hover::before{transform:translateY(0)}
 
+/* ════════ NAV — two registers, transparent by default ════════ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;padding:0 var(--gut) 0 22px;
+  transition:background .5s,border-color .5s,opacity .6s var(--e2),transform .6s var(--e2),backdrop-filter .5s;
+  border-bottom:1px solid transparent;opacity:0;transform:translateY(-8px);pointer-events:none}
+#nav.nav-scrim{background:linear-gradient(180deg,rgba(7,21,18,.5) 0%,rgba(7,21,18,.18) 100%);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#nav.nav-visible{opacity:1;transform:none;pointer-events:auto}
+.nav-brand{display:flex;align-items:center;gap:11px;z-index:2}
+.nav-logo{height:50px;width:auto;display:block;flex-shrink:0}
+.nav-wm{font-family:var(--disp);font-weight:400;font-size:22px;letter-spacing:.04em;transition:color .5s}
+
+.nav-center{flex:1;display:flex;align-items:center;justify-content:flex-end;margin-left:auto;margin-right:18px;
+  position:relative;height:34px;overflow:hidden;min-width:0}
+.nav-set{position:absolute;right:0;top:0;display:flex;align-items:center;gap:18px;height:34px;
+  transition:transform .45s var(--e2),opacity .35s var(--e2)}
+.nav-set a{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);
+  white-space:nowrap;transition:color .25s}
+.nav-set a:hover{color:var(--jade)}
+#nav.on-paper .nav-set a{color:var(--ink-soft)}
+#nav.on-paper .nav-set a:hover{color:var(--jade-ink)}
+.nav-set.primary{transform:translateX(0);opacity:1}
+.nav-set.primary.hidden{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full.shown{transform:translateX(0);opacity:1;pointer-events:auto}
+
+.nav-more{position:relative;width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  margin-right:14px;flex-shrink:0;cursor:pointer}
+.nav-more-lines{position:relative;width:16px;height:10px;display:block}
+.nav-more-lines i{position:absolute;left:0;right:0;height:1px;background:var(--mute);
+  transition:transform .35s var(--e2),opacity .35s,width .35s,background .35s}
+.nav-more-lines i:nth-child(1){top:0;width:100%}
+.nav-more-lines i:nth-child(2){top:4.5px;width:65%;left:auto;right:0}
+.nav-more-lines i:nth-child(3){top:9px;width:100%}
+#nav.on-paper .nav-more-lines i{background:var(--ink-soft)}
+.nav-more:hover .nav-more-lines i{width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(1){transform:translateY(4.5px) rotate(45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(2){opacity:0}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(3){transform:translateY(-4.5px) rotate(-45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade)}
+#nav.on-paper .nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade-ink)}
+
+.nav-cta{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;transition:background .3s,color .3s,border-color .5s;border:1px solid transparent}
+#nav.on-paper .nav-cta{color:var(--jade-ink);border-color:rgba(21,97,74,.3)}
+#nav.on-paper .nav-cta:hover{background:var(--jade-ink);color:var(--paper)}
+#nav.on-dark{background:transparent;border-color:transparent}
+#nav.on-dark .nav-cta{color:var(--jade);border-color:var(--jade-20)}
+#nav.on-dark .nav-cta:hover{background:var(--jade);color:var(--abyss)}
+
+@media(max-width:760px){
+  .nav-set.full{gap:12px}
+  .nav-set.full a:nth-child(n+5){display:none}
+}
+
+
 /* ════════ THE EYE — the one signature ════════ */
 .eye-mark{overflow:visible}
 .eye-blink{transform-origin:50% 50%;animation:blink 8.5s var(--e2) infinite}
@@ -114,18 +168,16 @@ em{font-style:italic}
 
 /* ════════ NAV — two registers ════════ */
 #nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;padding:0 var(--gut) 0 22px;
-  transition:background .5s,border-color .5s,opacity .6s var(--e2),transform .6s var(--e2);
+  transition:background .5s,border-color .5s,opacity .6s var(--e2),transform .6s var(--e2),backdrop-filter .5s;
   border-bottom:1px solid transparent;opacity:0;transform:translateY(-8px);pointer-events:none}
+#nav.nav-scrim{background:linear-gradient(180deg,rgba(7,21,18,.5) 0%,rgba(7,21,18,.18) 100%);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #nav.nav-visible{opacity:1;transform:none;pointer-events:auto}
 .nav-brand{display:flex;align-items:center;gap:11px;z-index:2}
 .nav-brand{display:flex;align-items:center;gap:11px;z-index:2}
 .nav-logo{height:50px;width:auto;display:block;flex-shrink:0}
 .ay-r1-logo{height:200px;width:auto;display:block;flex-shrink:0}
 .ft-brand-logo{height:150px;width:auto;display:block;flex-shrink:0}
-
-  .nav-links a:hover{color:var(--jade)}
-#nav.on-paper .nav-links a{color:var(--ink-soft)}
-#nav.on-paper .nav-links a:hover{color:var(--jade-ink)}
 
 .nav-wm{font-family:var(--disp);font-weight:400;font-size:22px;letter-spacing:.04em;transition:color .5s}
 .nav-cta{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;transition:background .3s,color .3s,border-color .5s;border:1px solid transparent}
@@ -136,7 +188,7 @@ em{font-style:italic}
 #nav.on-paper .eye-iris{stroke:var(--jade-ink)}
 #nav.on-paper .eye-pupil{fill:var(--jade-ink)}
 #nav.on-paper .eye-glint{fill:var(--ink)}
-#nav.on-dark{background:linear-gradient(180deg,rgba(7,21,18,.74) 0%,rgba(7,21,18,.56) 100%);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);border-color:rgba(127,192,160,.16)}
+#nav.on-dark{background:transparent;border-color:transparent}
 #nav.on-dark .nav-wm{color:var(--ivory)}
 #nav.on-dark .nav-cta{color:var(--jade);border-color:var(--jade-20)}
 #nav.on-dark .nav-cta:hover{background:var(--jade);color:var(--abyss)}
@@ -479,80 +531,83 @@ em{font-style:italic}
 }
 
 /* ═══════════════════════════════════════
-   §7 — MAP · CLEAR · HOLD — the engagement, as tiers
+   §7 — HOW WE WORK — Map · Clear · Hold, by engagement
 ═══════════════════════════════════════ */
-#work{background:var(--ground);border-top:1px solid var(--line);padding:clamp(72px,11svh,140px) var(--gut) clamp(80px,12svh,130px);position:relative;z-index:1}
-#work::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 22% 4%,rgba(127,192,160,.05) 0%,transparent 60%)}
-.wk-inner{max-width:var(--maxw);margin:0 auto;width:100%}
-.wk-head{padding-bottom:clamp(28px,4.5vh,48px)}
-.wk-eyebrow{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--jade);display:inline-flex;align-items:center;gap:14px;margin-bottom:clamp(12px,2vh,18px)}
-.wk-eyebrow::before{content:'';width:22px;height:1px;background:var(--jade);opacity:.55}
-.wk-h{font-family:var(--disp);font-weight:300;font-size:clamp(31px,4.4vw,62px);letter-spacing:-.034em;line-height:.98;color:var(--ivory)}
-.wk-h em{font-style:italic;color:var(--jade)}
-.wk-main{display:grid;grid-template-columns:auto 1fr;gap:0 clamp(22px,3vw,46px)}
-.wk-rail{position:relative;width:clamp(30px,3vw,44px);align-self:stretch;display:flex;align-items:center;justify-content:center}
-.wk-rail::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%);background:linear-gradient(180deg,var(--brass-hi) 0%,rgba(239,233,219,.12) 50%,var(--jade) 100%);opacity:.7}
-.wk-rail-label{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--mute-2);background:var(--ground);padding:10px 0;z-index:1;white-space:nowrap}
-.wk-rows{display:flex;flex-direction:column;gap:clamp(12px,2svh,22px)}
-.wrow{--off:0;margin-left:var(--off);width:calc(100% - var(--off));border:1px solid var(--line);position:relative;transition:background .4s,border-color .4s}
-.w-hold{--off:clamp(60px,22%,300px)}
-.w-clear{--off:clamp(30px,11%,150px)}
-.w-map{--off:0}
-.wrow:not(.w-clear):hover{background:rgba(127,192,160,.03)}
-.wrow-grid{display:grid;grid-template-columns:minmax(190px,.82fr) 1.4fr;align-items:stretch}
-.wrow-id{display:flex;align-items:center;gap:clamp(12px,1.4vw,20px);padding:clamp(24px,3.6svh,40px) clamp(18px,2vw,30px)}
-.wrow-n{font-family:var(--disp);font-weight:300;line-height:.82;letter-spacing:-.05em;flex-shrink:0}
-.w-map .wrow-n{font-size:clamp(30px,3.2vw,46px);color:var(--jade);opacity:.62}
-.w-clear .wrow-n{font-size:clamp(40px,4.4vw,66px);color:var(--jade-ink)}
-.w-hold .wrow-n{font-size:clamp(46px,5vw,78px);color:var(--jade-hi)}
-.wrow-name{font-family:var(--disp);letter-spacing:-.022em;line-height:1.02}
-.w-map .wrow-name{font-weight:300;font-size:clamp(17px,1.8vw,25px);color:var(--ivory)}
-.w-clear .wrow-name{font-weight:600;font-size:clamp(19px,2vw,30px);color:var(--jade-ink)}
-.w-hold .wrow-name{font-weight:400;font-size:clamp(18px,1.9vw,28px);color:var(--ivory-2)}
-.wrow-chev{display:none}
-.wrow-detail{display:grid;grid-template-rows:1fr;border-left:1px solid var(--line)}
-.w-clear .wrow-detail{border-left-color:var(--ink-line)}
-.wrow-detail-in{overflow:hidden;min-height:0;padding:clamp(24px,3.6svh,40px) clamp(18px,2vw,30px);display:flex;flex-direction:column;justify-content:center;gap:clamp(11px,1.7svh,17px)}
-.wrow-aim{font-family:var(--disp);font-style:italic;font-weight:300;line-height:1.46;letter-spacing:-.01em;font-size:clamp(13.5px,1.3vw,18px)}
-.w-map .wrow-aim{color:var(--jade-hi)}.w-hold .wrow-aim{color:var(--jade)}.w-clear .wrow-aim{color:var(--jade-ink)}
-.wrow-price{display:flex;align-items:baseline;gap:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;line-height:1.5}
-.wp-l{font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:8px;flex-shrink:0}
-.w-map .wp-l,.w-hold .wp-l{color:var(--mute-2)}.w-clear .wp-l{color:var(--ink-soft)}
-.w-map .wp-v,.w-hold .wp-v{color:var(--mute)}.w-clear .wp-v{color:var(--ink-soft)}
-.wp-v strong{font-weight:600}
-.w-map .wp-v strong,.w-hold .wp-v strong{color:var(--ivory-2)}
-.w-clear .wp-v strong{color:var(--jade-ink);font-size:11px}
-.w-clear{background:var(--paper);border-color:transparent}
-.w-clear::before{content:'';position:absolute;top:0;left:0;width:46%;height:2px;background:linear-gradient(90deg,var(--jade-ink),rgba(21,97,74,.2),transparent)}
-.wk-coda{margin-top:clamp(52px,8vh,88px);padding-top:clamp(28px,4.5vh,44px);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:clamp(24px,4vw,64px);flex-wrap:wrap}
-.wk-coda-q{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(18px,2.4vw,32px);letter-spacing:-.02em;line-height:1.28;color:var(--ivory)}
-.wk-coda-q em{color:var(--jade-hi)}
-.wk-coda-btn{display:inline-flex;align-items:center;gap:11px;flex-shrink:0;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:15px 28px;position:relative;overflow:hidden;isolation:isolate;transition:gap .3s var(--e1)}
-.wk-coda-btn::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--jade-hi);transform:translateY(101%);transition:transform .38s var(--e1)}
-.wk-coda-btn:hover{gap:16px}.wk-coda-btn:hover::before{transform:translateY(0)}
-@media(max-width:900px){
-  .wk-h{font-size:clamp(30px,8.5vw,42px)}
-  .wk-main{grid-template-columns:1fr;gap:clamp(18px,3svh,28px)}
-  .wk-rail{flex-direction:row;width:auto;align-self:auto;justify-content:flex-start;gap:12px}
-  .wk-rail::before{left:0;top:50%;bottom:auto;right:0;width:auto;height:1px;transform:translateY(-50%);background:linear-gradient(90deg,var(--jade),rgba(239,233,219,.12),var(--brass-hi))}
-  .wk-rail-label{writing-mode:horizontal-tb;transform:none;padding:0 12px 0 0}
-  .wk-rows{gap:0}
-  .wrow{--off:0!important;margin-left:0;width:100%;border-left:none;border-right:none;border-bottom:none}
-  .wrow:first-child{border-top:none}
-  .w-hold{padding-left:24px}.w-clear{padding-left:12px}
-  .wrow-grid{grid-template-columns:1fr;display:block}
-  .wrow-id{cursor:pointer;padding:clamp(20px,3vh,28px) 0}
-  .wrow-chev{display:block;margin-left:auto;font-family:var(--body);font-size:20px;color:var(--jade);transition:transform .4s var(--e2);flex-shrink:0}
-  .wrow.open .wrow-chev{transform:rotate(90deg)}
-  .wrow-detail{grid-template-rows:0fr;border-left:none;transition:grid-template-rows .42s var(--e2)}
-  .wrow.open .wrow-detail{grid-template-rows:1fr}
-  .wrow-detail-in{padding:0 0 clamp(20px,3vh,26px)}
-  .w-clear{padding-left:0}
-  .w-clear .wrow-detail-in,.w-clear .wrow-id{background:var(--paper);padding-left:14px;padding-right:14px}
-  .w-clear .wrow-name,.w-clear .wrow-n{color:var(--jade-ink)}
-  .wk-coda{flex-direction:column;gap:20px;align-items:flex-start}
+#work{background:var(--paper);position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(64px,8svh,96px) var(--gut) clamp(80px,10svh,116px)}
+#work::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 50% at 80% 0%,rgba(127,192,160,.07) 0%,transparent 60%)}
+.wk-inner{max-width:var(--maxw);margin:0 auto;width:100%;position:relative;z-index:1}
+
+.wk-head{display:flex;align-items:center;justify-content:space-between;gap:clamp(32px,4.5vw,64px);padding-bottom:clamp(36px,5vh,56px);flex-wrap:wrap;border-bottom:1px solid var(--ink-line);margin-bottom:clamp(40px,5.5vh,60px)}
+.wk-head-l{flex:0 0 auto;max-width:30ch}
+.wk-h{font-family:var(--disp);font-weight:300;font-size:clamp(28px,3.8vw,50px);letter-spacing:-.028em;line-height:1.22}
+.wk-h span{display:block}
+.wk-h .l1{color:var(--ink);font-weight:300}
+.wk-h .l2{color:color-mix(in srgb, var(--jade-ink) 86%, var(--ink) 14%);font-weight:500;font-style:italic}
+.wk-h .l3{color:color-mix(in srgb, var(--jade-ink) 38%, var(--ink) 62%);font-weight:300}
+.wk-head-r{flex:1 1 280px;font-family:var(--body);font-weight:400;font-size:clamp(14px,1.15vw,16.5px);line-height:1.68;color:var(--ink-soft);max-width:36ch;border-left:1px solid var(--ink-line);padding-left:24px}
+
+.wk-tabbar{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(64px,9vh,96px)}
+.wk-tabs{display:flex;gap:0;flex-wrap:wrap}
+.wk-tab{display:inline-flex;align-items:center;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:0 0 14px;margin-right:clamp(28px,3.8vw,48px);border-bottom:2px solid transparent;cursor:pointer;transition:color .25s,border-color .25s;background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap}
+.wk-tab:hover{color:var(--ink)}
+.wk-tab.active-tab{color:var(--jade-ink);border-bottom-color:var(--jade-ink)}
+.wk-tab.active-tab::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--jade-ink);margin-right:8px;box-shadow:0 0 6px rgba(21,97,74,.4)}
+.wk-trust{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;color:var(--ink-faint);display:flex;align-items:center;gap:9px}
+.wk-trust::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--jade-ink);flex-shrink:0}
+
+.wk-path{position:relative;display:flex;align-items:flex-start;gap:clamp(28px,3.4vw,52px)}
+.wk-station{flex:1;min-width:0;position:relative}
+
+.wk-roman{display:block;text-align:center;font-family:var(--disp);font-weight:300;font-size:clamp(100px,11.5vw,182px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(22,18,11,.14);user-select:none;pointer-events:none;position:relative;z-index:0;margin:0 0 -.5em}
+
+.wk-box{position:relative;z-index:1;background:var(--paper-2);border:1px solid var(--ink-line2);padding:clamp(26px,3.2vw,36px) clamp(22px,2.8vw,30px) clamp(28px,3.4vh,36px);cursor:pointer;opacity:.84;
+  transition:transform .4s var(--e2),box-shadow .4s var(--e2),border-color .4s,opacity .4s,background .4s}
+.wk-box::before{content:'';position:absolute;top:0;left:0;width:26%;height:3px;background:var(--jade-ink);opacity:.35;transition:width .45s var(--e2),opacity .4s,box-shadow .4s}
+.wk-stage-n{display:flex;align-items:center;font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:9px;transition:color .35s}
+.wk-stage-n::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--jade-ink);margin-right:8px;opacity:0;transform:scale(.4);transition:opacity .35s,transform .35s}
+.wk-stage-name{font-family:var(--disp);font-weight:400;font-size:clamp(20px,2vw,27px);letter-spacing:-.018em;color:var(--ink-soft);margin-bottom:clamp(16px,2.2vh,20px);transition:color .35s,font-weight .35s}
+.wk-aim{font-family:var(--body);font-weight:400;font-size:clamp(13px,1.05vw,15px);line-height:1.68;color:var(--ink-faint);letter-spacing:-.003em;min-height:4.6em;transition:color .35s,font-size .35s}
+.wk-get{font-family:var(--body);font-weight:400;font-size:clamp(12px,.96vw,13.5px);line-height:1.6;color:var(--ink-faint);margin-top:14px;padding-left:12px;border-left:1px solid var(--ink-line);transition:color .35s,border-color .35s}
+.wk-get b{font-weight:600}
+.wk-rule{height:1px;background:var(--ink-line);margin:clamp(18px,2.6vh,24px) 0 clamp(14px,2vh,18px)}
+.wk-fee-v{display:block;font-family:var(--disp);font-weight:600;font-size:clamp(17px,1.65vw,21px);color:var(--ink-soft);letter-spacing:-.015em;transition:color .35s,font-size .35s}
+.wk-fee-sub{display:block;margin-top:5px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(11px,.92vw,12.5px);color:var(--ink-faint);line-height:1.5;transition:color .35s}
+
+.wk-box:hover,
+.wk-box.active{
+  background:#FBF8F0;border-color:var(--jade-20);opacity:1;
+  transform:translateY(-16px) scale(1.025);
+  box-shadow:0 44px 76px -22px rgba(20,15,8,.28),0 1px 0 rgba(20,15,8,.05);
+  z-index:2;
 }
-@media(prefers-reduced-motion:reduce){.wrow-detail,.wrow-chev{transition:none!important}}
+.wk-box:hover::before,.wk-box.active::before{width:100%;opacity:1;box-shadow:0 0 14px rgba(21,97,74,.38)}
+.wk-box:hover .wk-stage-n,.wk-box.active .wk-stage-n{color:var(--jade-ink)}
+.wk-box:hover .wk-stage-n::before,.wk-box.active .wk-stage-n::before{opacity:1;transform:scale(1)}
+.wk-box:hover .wk-stage-name,.wk-box.active .wk-stage-name{color:var(--ink);font-weight:500}
+.wk-box:hover .wk-aim,.wk-box.active .wk-aim{color:var(--ink);font-size:clamp(14px,1.1vw,16px)}
+.wk-box:hover .wk-get,.wk-box.active .wk-get{color:var(--ink-soft);border-color:var(--jade-20)}
+.wk-box:hover .wk-get b,.wk-box.active .wk-get b{color:var(--ink)}
+.wk-box:hover .wk-fee-v,.wk-box.active .wk-fee-v{color:var(--ink);font-size:clamp(21px,2.1vw,26px)}
+.wk-box:hover .wk-fee-sub,.wk-box.active .wk-fee-sub{color:var(--ink-soft)}
+
+.wk-coda{margin-top:clamp(72px,9.5vh,100px);padding-top:clamp(28px,4vh,40px);border-top:1px solid var(--ink-line);display:flex;align-items:center;justify-content:space-between;gap:clamp(24px,4vw,64px);flex-wrap:wrap}
+.wk-coda-q{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,2.1vw,25px);letter-spacing:-.02em;line-height:1.32;color:var(--ink)}
+.wk-coda-q em{color:var(--jade-ink);font-style:italic}
+.wk-coda-btn{display:inline-flex;align-items:center;gap:11px;flex-shrink:0;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:15px 28px;position:relative;overflow:hidden;isolation:isolate;transition:gap .3s var(--e1),background .3s;cursor:pointer}
+.wk-coda-btn:hover{gap:16px;background:var(--jade-ink)}
+
+@media(max-width:920px){
+  #work{min-height:auto;padding:clamp(72px,12vh,100px) var(--gut) clamp(80px,13vh,110px)}
+  .wk-head{flex-direction:column;align-items:flex-start;gap:24px}
+  .wk-head-r{border-left:none;border-top:1px solid var(--ink-line);padding-left:0;padding-top:20px;max-width:none}
+  .wk-tabbar{flex-direction:column;align-items:flex-start;gap:20px;margin-bottom:clamp(72px,11vh,96px)}
+  .wk-path{flex-direction:column;gap:clamp(72px,14vh,96px);align-items:stretch}
+  .wk-roman{font-size:clamp(64px,17vw,82px)}
+  .wk-aim{min-height:0}
+  .wk-box{padding:clamp(28px,5vw,36px) clamp(24px,5vw,30px) clamp(30px,5.5vh,36px)}
+  .wk-box:hover,.wk-box.active{transform:translateY(-7px) scale(1.012)}
+  .wk-coda{flex-direction:column;align-items:flex-start;gap:24px;margin-top:clamp(56px,9vh,76px)}
+}
 
 /* ═══════════════════════════════════════
    §8 — INTAKE — the cleared table
@@ -675,24 +730,36 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 <header id="nav" class="on-dark">
   <a class="nav-brand" href="#hero" aria-label="Ayin — home">
     <img src="assets/dark.svg" alt="" class="nav-logo">
-    
   </a>
-  <div class="nav-links">
-    <a href="codex.html">Codex</a>
-    <a href="radar.html">Radar</a>
-    <a href="#instrument">Instrument</a>
+
+  <div class="nav-center">
+    <div class="nav-set primary" id="navSetPrimary">
+      <a href="codex.html">Codex</a>
+    </div>
+    <div class="nav-set full" id="navSetFull">
+      <a href="#instrument">Instrument</a>
+      <a href="#have">Do You Have It</a>
+      <a href="#work">How We Work</a>
+      <a href="codex.html">Codex</a>
+      <a href="radar.html">Radar</a>
+      <a href="founder.html">Founder</a>
+    </div>
   </div>
+
+  <button class="nav-more" id="navMore" aria-expanded="false" aria-label="More navigation">
+    <span class="nav-more-lines"><i></i><i></i><i></i></span>
+  </button>
+
   <a href="#intake" class="nav-cta">Ambition Begins</a>
-  
 </header>
 
 <!-- ═══════════ §1 — HERO ═══════════ -->
-<section id="hero" class="sec">
+<section id="hero" class="sec" data-nav="dark">
   <div class="h-mark-bg" aria-hidden="true">
     <img src="assets/dark.svg" alt="">
   </div>
   <div class="h-strip">
-    <div class="h-strip-l">Ayin | International Advisory &amp; Compliance</div>
+    <div class="h-strip-l">Ayin — International Advisory &amp; Compliance</div>
     <span class="h-strip-r">est. for regulated trade</span>
   </div>
   <div class="h-body">
@@ -717,7 +784,7 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 </section>
 
 <!-- ═══════════ §2 — INSTRUMENT ═══════════ -->
-<section id="instrument" class="sec">
+<section id="instrument" class="sec" data-nav="dark">
   <div class="in-grid">
     <div class="r in">
       <div class="console">
@@ -778,7 +845,7 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 </section>
 
 <!-- ═══════════ §3 — DO YOU HAVE IT ═══════════ -->
-<section id="have" class="sec">
+<section id="have" class="sec" data-nav="dark">
   <div class="wrap">
     <div class="hv-grid">
       <div class="hv-cols r" id="hvCols">
@@ -844,7 +911,7 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 </section>
 
 <!-- ═══════════ §4 — AYIN ═══════════ -->
-<section id="ayin" class="sec">
+<section id="ayin" class="sec" data-nav="light">
   <div class="ay-row r">
     <div class="ay-row-left">
       <img src="assets/B.svg" alt="Ayin" class="ay-logo">
@@ -888,7 +955,7 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 </section>
 
 <!-- ═══════════ §5 — IT'S MEANINGLESS ═══════════ -->
-<section id="done" class="sec">
+<section id="done" class="sec" data-nav="light">
   <div class="dn-wrap">
     <div class="dn-grid">
       <div class="dn-left r">
@@ -906,7 +973,7 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 </section>
 
 <!-- ═══════════ §6 — PHILOSOPHY + CODEX ═══════════ -->
-<section id="standard" class="sec">
+<section id="standard" class="sec" data-nav="dark">
   <h2 class="st-mon r">We take the work<br>we'd do <em>for ourselves.</em></h2>
   <div class="st-split r d2">
     <div class="st-l">
@@ -929,44 +996,67 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 
 
 <!-- ═══════════ §7 — MAP · CLEAR · HOLD ═══════════ -->
-<section id="work" class="sec">
+<!-- ═══════════ §7 — HOW WE WORK ═══════════ -->
+<section id="work" class="sec" data-nav="light">
   <div class="wk-inner">
+
     <div class="wk-head">
-      <span class="wk-eyebrow">How we work</span>
-      <h2 class="wk-h">Map. Clear. <em>Hold.</em></h2>
+      <div class="wk-head-l">
+        <h2 class="wk-h">
+          <span class="l1">Mapped free.</span>
+          <span class="l2">Cleared once.</span>
+          <span class="l3">Held, after.</span>
+        </h2>
+      </div>
+      <p class="wk-head-r">Every engagement moves the same way, no matter what you're crossing. What changes is the fee and the paperwork — never the order, and never whether you owe us anything before you've said yes.</p>
     </div>
-    <div class="wk-main">
-      <div class="wk-rail" aria-hidden="true"><span class="wk-rail-label">The crossing</span></div>
-      <div class="wk-rows">
-        <article class="wrow w-hold">
-          <div class="wrow-grid">
-            <div class="wrow-id"><span class="wrow-n">03</span><h3 class="wrow-name">Hold</h3><span class="wrow-chev">›</span></div>
-            <div class="wrow-detail"><div class="wrow-detail-in">
-              <p class="wrow-aim">Regimes move. We keep your standing current against the world as it changes — held against next year, not frozen at point of build.</p>
-              <div class="wrow-price"><span class="wp-l">Terms</span><span class="wp-v">A fixed annual commitment. <strong>Not a retainer.</strong></span></div>
-            </div></div>
-          </div>
-        </article>
-        <article class="wrow w-clear">
-          <div class="wrow-grid">
-            <div class="wrow-id"><span class="wrow-n">02</span><h3 class="wrow-name">Clear</h3><span class="wrow-chev">›</span></div>
-            <div class="wrow-detail"><div class="wrow-detail-in">
-              <p class="wrow-aim">The work to get you through — filings, documentation, representation, the build. When it's done, it's yours, entirely.</p>
-              <div class="wrow-price"><span class="wp-l">Terms</span><span class="wp-v">Engagements begin from <strong>$1,500</strong> — the crossing decides the rest.</span></div>
-            </div></div>
-          </div>
-        </article>
-        <article class="wrow w-map">
-          <div class="wrow-grid">
-            <div class="wrow-id"><span class="wrow-n">01</span><h3 class="wrow-name">Map</h3><span class="wrow-chev">›</span></div>
-            <div class="wrow-detail"><div class="wrow-detail-in">
-              <p class="wrow-aim">Every gate your case requires, named — with the regime and the authority behind each, and exactly where your gap is.</p>
-              <div class="wrow-price"><span class="wp-l">Terms</span><span class="wp-v">Often short for small teams. <strong>No charge.</strong></span></div>
-            </div></div>
-          </div>
-        </article>
+
+    <div class="wk-tabbar">
+      <div class="wk-tabs" id="wkTabs"></div>
+      <span class="wk-trust">Nothing is owed until you tell us to proceed</span>
+    </div>
+
+    <div class="wk-path" id="wkPath">
+      <div class="wk-station" data-i="0">
+        <span class="wk-roman" aria-hidden="true">I</span>
+        <div class="wk-box">
+          <span class="wk-stage-n">Diagnosis</span>
+          <h3 class="wk-stage-name">Map</h3>
+          <p class="wk-aim" id="aim0"></p>
+          <p class="wk-get" id="get0"></p>
+          <div class="wk-rule"></div>
+          <span class="wk-fee-v" id="pv0"></span>
+          <span class="wk-fee-sub" id="ps0"></span>
+        </div>
+      </div>
+
+      <div class="wk-station" data-i="1">
+        <span class="wk-roman" aria-hidden="true">II</span>
+        <div class="wk-box">
+          <span class="wk-stage-n">Resolution</span>
+          <h3 class="wk-stage-name">Clear</h3>
+          <p class="wk-aim" id="aim1"></p>
+          <p class="wk-get" id="get1"></p>
+          <div class="wk-rule"></div>
+          <span class="wk-fee-v" id="pv1"></span>
+          <span class="wk-fee-sub" id="ps1"></span>
+        </div>
+      </div>
+
+      <div class="wk-station" data-i="2">
+        <span class="wk-roman" aria-hidden="true">III</span>
+        <div class="wk-box">
+          <span class="wk-stage-n">Maintenance</span>
+          <h3 class="wk-stage-name">Hold</h3>
+          <p class="wk-aim" id="aim2"></p>
+          <p class="wk-get" id="get2"></p>
+          <div class="wk-rule"></div>
+          <span class="wk-fee-v" id="pv2"></span>
+          <span class="wk-fee-sub" id="ps2"></span>
+        </div>
       </div>
     </div>
+
     <div class="wk-coda">
       <p class="wk-coda-q">What protects your worst day is what <em>opens your best ones.</em></p>
       <a href="#intake" class="wk-coda-btn">Begin the mapping →</a>
@@ -975,7 +1065,7 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 </section>
 
 <!-- ═══════════ §8 — INTAKE ═══════════ -->
-<section id="intake" class="sec">
+<section id="intake" class="sec" data-nav="light">
   <div class="it-grid">
     <div class="it-left r">
       <h2 class="it-h">Tell us the <em>Ambition.</em></h2>
@@ -1269,7 +1359,7 @@ function compute(){
   // not a generic catch-all, whenever we have one.
   let codexLinks=[];
   if(dom==='market'){
-    if(cat==='cos' && mkts.includes('eu')) codexLinks.push(['codex-eu-cosmetics.html','EU Cosmetics Reg. 1223/2009']);
+    if(cat==='cos' && mkts.includes('eu')) codexLinks.push(['eu-cosmetics-market-entry.html','Selling cosmetics in the EU — start here']);
     if(cat==='cos' && mkts.includes('us')) codexLinks.push(['codex-mocra.html','FDA MoCRA']);
     if(cat==='ele' && mkts.includes('uk')) codexLinks.push(['codex-ukca.html','UKCA Marking']);
     if(chan==='amz') codexLinks.push(['codex-amazon-poa.html','Amazon Plan of Action']);
@@ -1443,30 +1533,142 @@ function renderRoute(i){
 ROUTES.forEach((r,i)=>{ const b=document.createElement('button'); b.className='app-chip'+(i===0?' active':''); b.type='button'; b.textContent=r.chip; b.addEventListener('click',()=>renderRoute(i)); appChips.appendChild(b); });
 renderRoute(0);
 
+/* ═══════════ §7 — HOW WE WORK ═══════════ */
+(function(){
+  const DATA = {
+    market: { tab:'Market Access',
+      aim:[
+        'Every regulation your product has to clear, named — which authority, which document, and exactly what is missing today.',
+        'We file it. Responsible Person appointment, lab dossiers, the label — built and submitted until the product is legally standing in market.',
+        'Regulations move every year. We re-file what changes and tell you before an old approval quietly expires.'
+      ],
+      get:[
+        '<b>You get:</b> a written gap report, yours to keep whether you hire us or not.',
+        '<b>You get:</b> a market-ready compliance file, the day we are done.',
+        '<b>You get:</b> one annual check. Not a monthly bill.'
+      ],
+      price:[['No charge','Sent within one business day'],['From $2,500','Fixed scope per market, quoted before you commit'],['From $750 / yr','Fixed annual commitment, not a retainer']]
+    },
+    platform: { tab:'Platform Compliance',
+      aim:[
+        'The real reason behind the suspension or flag, not the form-letter reason the platform gave you.',
+        'We build the Plan of Action and the evidence behind it, written to be accepted once, not contested twice.',
+        'Account health, watched against the policy as it shifts, so the next flag never becomes a suspension.'
+      ],
+      get:[
+        '<b>You get:</b> a root-cause memo, in writing, before any appeal is filed.',
+        '<b>You get:</b> a filed appeal, with your account back to selling as the goal.',
+        '<b>You get:</b> a standing check. Not a standing bill.'
+      ],
+      price:[['No charge','Sent within one business day'],['From $1,400','Flat fee, scoped to severity'],['From $450 / mo','Cancel any month, no contract']]
+    },
+    border: { tab:'Cross-Border Advisory',
+      aim:[
+        'What moving you, your income, or your residency actually triggers, across both countries, named plainly, before you book a flight.',
+        'The structure, the treaty position, the paperwork, built so the move holds if either country ever asks.',
+        'Reviewed every year against new treaties, new residency tests, and your own changing circumstances.'
+      ],
+      get:[
+        '<b>You get:</b> a written position, in plain language, no legalese.',
+        '<b>You get:</b> a position you can hand to your accountant, anywhere.',
+        '<b>You get:</b> one review a year. Nothing in between, unless you ask.'
+      ],
+      price:[['No charge','A scoping call, thirty minutes'],['From $3,500','Scoped to your move and both jurisdictions'],['From $1,200 / yr','Fixed annual commitment']]
+    }
+  };
+  const ORDER=['market','platform','border'];
+  const tabsEl=$('wkTabs');
+  if(!tabsEl) return;
+  const stations=[...document.querySelectorAll('#wkPath .wk-station')];
+  let wkActiveTab='market', wkActiveIdx=1;
+
+  function wkRender(){
+    const d=DATA[wkActiveTab];
+    d.aim.forEach((t,i)=>$('aim'+i).textContent=t);
+    d.get.forEach((t,i)=>$('get'+i).innerHTML=t);
+    d.price.forEach((p,i)=>{ $('pv'+i).textContent=p[0]; $('ps'+i).textContent=p[1]; });
+    [...tabsEl.children].forEach(b=>b.classList.toggle('active-tab', b.dataset.k===wkActiveTab));
+    stations.forEach((s,i)=>s.querySelector('.wk-box').classList.toggle('active', i===wkActiveIdx));
+  }
+  ORDER.forEach(k=>{
+    const b=document.createElement('button');
+    b.className='wk-tab'; b.type='button'; b.dataset.k=k;
+    b.textContent=DATA[k].tab;
+    b.addEventListener('click',()=>{wkActiveTab=k;wkActiveIdx=1;wkRender();});
+    tabsEl.appendChild(b);
+  });
+  stations.forEach((s,i)=>{
+    s.querySelector('.wk-box').addEventListener('click',()=>{
+      wkActiveIdx=i;
+      stations.forEach((s2,j)=>s2.querySelector('.wk-box').classList.toggle('active', j===i));
+    });
+  });
+  wkRender();
+})();
+
 /* ═══════════ NAV register + progress ═══════════ */
 const pf=$('pf'), nav=$('nav');
-function paperZones(){
-  const z=[]; const ids=['have','ayin','done','intake'];
-  ids.forEach(id=>{ const el=$(id); if(el) z.push([el.offsetTop, el.offsetTop+el.offsetHeight]); });
-  return z;
+const navLogo=document.querySelector('.nav-logo');
+
+function bandsSnapshot(){
+  // Every element carrying data-nav, in document order, with its top offset.
+  // Sub-bands (like .ay-divider) sit inside a parent section and correctly
+  // override it for their own scroll range because they appear later in
+  // the list and we always take the LAST band whose top <= probe.
+  return [...document.querySelectorAll('[data-nav]')]
+    .map(el=>({ top: el.getBoundingClientRect().top + scrollY, mode: el.dataset.nav }))
+    .sort((a,b)=>a.top-b.top);
 }
-let zones=[];
+let bands=[];
+
+function modeAt(probe){
+  let mode='dark';
+  for(const b of bands){ if(b.top - 60 <= probe) mode=b.mode; else break; }
+  return mode;
+}
+
 function onScroll(){
   const H=document.body.scrollHeight-innerHeight;
   pf.style.width=(H>0?Math.min(scrollY/H,1):0)*100+'%';
   const probe=scrollY+34;
+
   const instrument=$('instrument');
   const showNav=instrument?scrollY>=instrument.offsetTop-80:scrollY>80;
   nav.classList.toggle('nav-visible',showNav);
-  const onPaper=zones.some(z=>probe>=z[0]-60 && probe<z[1]-60);
-  if(onPaper){ nav.classList.add('on-paper'); nav.classList.remove('on-dark'); }
-  else { nav.classList.add('on-dark'); nav.classList.remove('on-paper'); }
+
+  const mode=modeAt(probe); // 'dark' or 'light'
+  const onPaper = mode==='light';
+  nav.classList.toggle('on-paper', onPaper);
+  nav.classList.toggle('on-dark', !onPaper);
+
+  const heroEl=$('hero');
+  const inHero = heroEl ? probe < (heroEl.offsetTop + heroEl.offsetHeight) : false;
+  nav.classList.toggle('nav-scrim', inHero);
+  if(navLogo) navLogo.src = onPaper ? 'assets/dark.svg' : 'assets/light.svg';
 }
-function recalc(){ zones=paperZones(); onScroll(); }
+function recalc(){ bands=bandsSnapshot(); onScroll(); }
 addEventListener('scroll',onScroll,{passive:true});
 addEventListener('resize',recalc,{passive:true});
 addEventListener('load',recalc);
 recalc();
+
+
+/* drawer */
+
+(function(){
+  const btn=$('navMore'), setP=$('navSetPrimary'), setF=$('navSetFull');
+  if(!btn||!setP||!setF) return;
+  btn.addEventListener('click',()=>{
+    const open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded', open?'false':'true');
+    setP.classList.toggle('hidden', !open);
+    setF.classList.toggle('shown', !open);
+  });
+  setF.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    btn.setAttribute('aria-expanded','false'); setP.classList.remove('hidden'); setF.classList.remove('shown');
+  }));
+})();
+
 
 /* reveal */
 const ro=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }),{threshold:.08,rootMargin:'0px 0px -32px 0px'});
