@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#071512">
 <title>Privacy Policy — Ayin</title>
 <meta name="description" content="How Ayin handles the information you share. Plainly stated — no fog.">
+<link rel="icon" type="image/svg+xml" href="assets/dark.svg">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +30,10 @@
   --brass:    #9A6010; --brass-hi: #C8963C; --brass-12: rgba(200,150,60,.13);
   --disp: 'Spectral', Georgia, serif; --body: 'Hanken Grotesk', system-ui, sans-serif; --mono: 'IBM Plex Mono', ui-monospace, monospace;
   --e1: cubic-bezier(.2,.8,.2,1); --e2: cubic-bezier(.16,1,.3,1);
-  --gut: clamp(24px,5vw,84px); --maxw: 1100px; --pad: clamp(80px,11vh,140px); --navh:85px;
+  --gut: clamp(24px,5vw,84px);
+  --maxw: 1320px;
+  --pad: clamp(80px,11vh,140px);
+  --navh: 85px;
 }
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
 html { background:var(--abyss); scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:var(--jade-dim) var(--ground) }
@@ -50,22 +54,67 @@ a { color:inherit; text-decoration:none } button { font-family:inherit; color:in
 .r.in { opacity:1; transform:none }
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.32s}
 
-/* ── NAV ── */
-#nav { position:fixed; top:0; left:0; right:0; z-index:100; height:var(--navh); display:flex; align-items:center; padding:0 var(--gut) 0 clamp(12px,1.2vw,18px); transition:background .5s, border-color .5s; border-bottom:1px solid transparent }
-#nav.on-dark  .nav-logo-light { display:none } #nav.on-dark  .nav-logo-dark  { display:block }
-#nav.on-paper .nav-logo-light { display:block } #nav.on-paper .nav-logo-dark  { display:none }
-.nav-brand { display:flex; align-items:center; gap:10px; z-index:2 }
-.nav-wm { font-family:var(--disp); font-weight:400; font-size:23px; letter-spacing:.03em; transition:color .5s }
-.nav-wm .dot { transition:color .5s }
-.nav-right { margin-left:auto; display:flex; align-items:center; gap:10px }
-.nav-back, .nav-print { font-family:var(--mono); font-size:10.5px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; padding:10px 16px; transition:background .3s, color .3s, border-color .5s; border:1px solid transparent; display:inline-flex; align-items:center; gap:7px }
-#nav.on-paper .nav-wm { color:var(--ink) } #nav.on-paper .nav-wm .dot { color:var(--jade-ink) }
-#nav.on-paper .nav-back, #nav.on-paper .nav-print { color:var(--jade-ink); border-color:rgba(29,91,69,.3) }
-#nav.on-paper .nav-back:hover, #nav.on-paper .nav-print:hover { background:var(--jade-ink); color:var(--paper) }
-#nav.on-dark { background:rgba(8,16,9,.86); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-color:var(--line) }
-#nav.on-dark .nav-wm { color:var(--ivory) } #nav.on-dark .nav-wm .dot { color:var(--jade) }
-#nav.on-dark .nav-back, #nav.on-dark .nav-print { color:var(--jade); border-color:var(--jade-20) }
-#nav.on-dark .nav-back:hover, #nav.on-dark .nav-print:hover { background:var(--jade); color:var(--abyss) }
+/* ════════ NAV — two registers ════════ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;padding:0 var(--gut) 0 22px;
+  transition:background .5s,border-color .5s,opacity .6s var(--e2),transform .6s var(--e2),backdrop-filter .5s;
+  border-bottom:1px solid transparent;opacity:0;transform:translateY(-8px);pointer-events:none}
+#nav.nav-scrim{background:linear-gradient(180deg,rgba(7,21,18,.5) 0%,rgba(7,21,18,.18) 100%);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#nav.nav-visible{opacity:1;transform:none;pointer-events:auto}
+.nav-brand{display:flex;align-items:center;gap:11px;z-index:2}
+.nav-logo{height:50px;width:auto;display:block;flex-shrink:0}
+.nav-wm{font-family:var(--disp);font-weight:400;font-size:22px;letter-spacing:.04em;transition:color .5s}
+.nav-cta{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;transition:background .3s,color .3s,border-color .5s;border:1px solid transparent}
+#nav.on-paper .nav-wm{color:var(--ink)}
+#nav.on-paper .nav-cta{color:var(--jade-ink);border-color:rgba(21,97,74,.3)}
+#nav.on-paper .nav-cta:hover{background:var(--jade-ink);color:var(--paper)}
+#nav.on-dark{background:transparent;border-color:transparent}
+#nav.on-dark .nav-wm{color:var(--ivory)}
+#nav.on-dark .nav-cta{color:var(--jade);border-color:var(--jade-20)}
+#nav.on-dark .nav-cta:hover{background:var(--jade);color:var(--abyss)}
+
+.nav-center{flex:1;display:flex;align-items:center;justify-content:flex-end;margin-left:auto;margin-right:18px;
+  position:relative;height:34px;overflow:hidden;min-width:0}
+.nav-set{position:absolute;right:0;top:0;display:flex;align-items:center;gap:18px;height:34px;
+  transition:transform .45s var(--e2),opacity .35s var(--e2)}
+.nav-set a{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);
+  white-space:nowrap;transition:color .25s}
+.nav-set a:hover{color:var(--jade)}
+#nav.on-paper .nav-set a{color:var(--ink-soft)}
+#nav.on-paper .nav-set a:hover{color:var(--jade-ink)}
+.nav-set.primary{transform:translateX(0);opacity:1}
+.nav-set.primary.hidden{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full.shown{transform:translateX(0);opacity:1;pointer-events:auto}
+
+.nav-more{position:relative;width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  margin-right:14px;flex-shrink:0;cursor:pointer}
+.nav-more-lines{position:relative;width:16px;height:10px;display:block}
+.nav-more-lines i{position:absolute;left:0;right:0;height:1px;background:var(--mute);
+  transition:transform .35s var(--e2),opacity .35s,width .35s,background .35s}
+.nav-more-lines i:nth-child(1){top:0;width:100%}
+.nav-more-lines i:nth-child(2){top:4.5px;width:65%;left:auto;right:0}
+.nav-more-lines i:nth-child(3){top:9px;width:100%}
+#nav.on-paper .nav-more-lines i{background:var(--ink-soft)}
+.nav-more:hover .nav-more-lines i{width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(1){transform:translateY(4.5px) rotate(45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(2){opacity:0}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(3){transform:translateY(-4.5px) rotate(-45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade)}
+#nav.on-paper .nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade-ink)}
+
+.nav-print{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);
+  background:none;border:1px solid var(--line);padding:9px 13px;margin-right:12px;display:inline-flex;align-items:center;gap:6px;
+  transition:color .25s,border-color .25s,background .25s}
+#nav.on-dark .nav-print:hover{color:var(--jade);border-color:var(--jade-20);background:rgba(127,192,160,.05)}
+#nav.on-paper .nav-print{color:var(--ink-soft);border-color:var(--ink-line)}
+#nav.on-paper .nav-print:hover{color:var(--jade-ink);border-color:rgba(21,97,74,.3);background:rgba(21,97,74,.04)}
+
+@media(max-width:760px){
+  .nav-set.full{gap:12px}
+  .nav-set.full a:nth-child(n+5){display:none}
+  .nav-print span{display:none}
+}
 
 /* ── HEADER ── */
 #doc-head { position:relative; background:var(--abyss); min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 var(--gut) clamp(56px,9vh,96px); overflow:hidden }
@@ -209,9 +258,7 @@ footer::before { content:''; position:absolute; inset:0; pointer-events:none; ba
 .ft-col-div { background:linear-gradient(180deg, transparent 0%, var(--line) 15%, var(--line) 85%, transparent 100%) }
 .ft-left { display:flex; flex-direction:column; gap:clamp(20px,3.2vh,30px) }
 .ft-brand { display:flex; align-items:center; gap:11px }
-.ft-logo-img { width:250px; height:250px; flex-shrink:0; opacity:1 }
-.ft-wordmark { font-family:var(--disp); font-weight:400; font-size:18px; letter-spacing:.03em; color:var(--ivory) }
-.ft-wordmark .dot { color:var(--jade) }
+.ft-brand-logo{height:150px;width:auto;display:block;flex-shrink:0}
 .ft-nav { display:flex; flex-wrap:wrap; gap:4px clamp(16px,2.2vw,28px); border-top:1px solid var(--line); padding-top:clamp(12px,1.8vh,18px) }
 .ft-nav a { font-family:var(--mono); font-size:9px; font-weight:400; letter-spacing:.08em; text-transform:uppercase; color:var(--mute-2); transition:color .22s }
 .ft-nav a:hover { color:var(--jade) }
@@ -260,22 +307,38 @@ footer::before { content:''; position:absolute; inset:0; pointer-events:none; ba
 <div id="prog" aria-hidden="true"><div id="pf"></div></div>
 
 <header id="nav" class="on-dark">
-  <a class="nav-brand" href="index.html" aria-label="Ayin">
-    <img src="assets/dark.svg" alt="" class="nav-logo-light" style="width:70px; height:70px; object-fit:contain;">
-    <img src="assets/light.svg" alt="" class="nav-logo-dark" style="width:70px; height:70px; object-fit:contain;">
-    <span class="nav-wm"><span class="dot"></span></span>
+  <a class="nav-brand" href="index.html" aria-label="Ayin — home">
+    <img src="assets/dark.svg" alt="" class="nav-logo">
   </a>
-  <div class="nav-right">
-    <button class="nav-print" id="navPrint" type="button" aria-label="Print this document">
-      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6V2h8v4M4 11H2.5A1.5 1.5 0 0 1 1 9.5v-2A1.5 1.5 0 0 1 2.5 6h11A1.5 1.5 0 0 1 15 7.5v2a1.5 1.5 0 0 1-1.5 1.5H12M4 9h8v5H4V9Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
-      Print
-    </button>
-    <a href="index.html" class="nav-back">← Back to site</a>
+
+  <div class="nav-center">
+    <div class="nav-set primary" id="navSetPrimary">
+      <a href="codex.html">Codex</a>
+    </div>
+    <div class="nav-set full" id="navSetFull">
+      <a href="index.html#instrument">Instrument</a>
+      <a href="index.html#have">Do You Have It</a>
+      <a href="index.html#work">How We Work</a>
+      <a href="codex.html">Codex</a>
+      <a href="radar.html">Radar</a>
+      <a href="founder.html">Founder</a>
+    </div>
   </div>
+
+  <button class="nav-more" id="navMore" aria-expanded="false" aria-label="More navigation">
+    <span class="nav-more-lines"><i></i><i></i><i></i></span>
+  </button>
+
+  <button class="nav-print" id="navPrint" type="button" aria-label="Print this document">
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6V2h8v4M4 11H2.5A1.5 1.5 0 0 1 1 9.5v-2A1.5 1.5 0 0 1 2.5 6h11A1.5 1.5 0 0 1 15 7.5v2a1.5 1.5 0 0 1-1.5 1.5H12M4 9h8v5H4V9Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+    <span>Print</span>
+  </button>
+
+  <a href="index.html#intake" class="nav-cta">Ambition Begins</a>
 </header>
 
 <!-- ════════ HEADER ════════ -->
-<section id="doc-head">
+<section id="doc-head" data-nav="dark">
   <span class="dh-ghost" aria-hidden="true">P</span>
   <div class="dh-title-area">
     <div class="dh-kicker">Data handling</div>
@@ -348,7 +411,7 @@ footer::before { content:''; position:absolute; inset:0; pointer-events:none; ba
 <aside class="clause-rail" id="clauseRail" aria-hidden="true"></aside>
 
 <!-- ════════ BODY ════════ -->
-<section id="doc-body">
+<section id="doc-body" data-nav="light">
   <span class="folio on-paper">§ Privacy · DOC-002</span>
   <div class="body-inner">
 
@@ -616,14 +679,13 @@ footer::before { content:''; position:absolute; inset:0; pointer-events:none; ba
 <!-- ════════ FOOTER ════════ -->
 <footer>
   <div class="ft-maxim">
-    <span class="ft-lat">Vigilantibus non dormientibus jura subveniunt</span>
-    <span class="ft-trn">The law aids the vigilant — not the sleeping</span>
+    <span class="ft-lat">Praemonitus, praemunitus</span>
+    <span class="ft-trn">Forewarned is forearmed</span>
   </div>
   <div class="ft-body">
     <div class="ft-left">
       <div class="ft-brand">
-        <img src="assets/footer.svg" alt="Ayin" class="ft-logo-img">
-        <span class="ft-wordmark"><span class="dot"></span></span>
+        <img src="assets/A.svg" alt="" class="ft-brand-logo">
       </div>
       <nav class="ft-nav" aria-label="Footer">
         <a href="index.html#instrument">The instrument</a>
@@ -631,6 +693,7 @@ footer::before { content:''; position:absolute; inset:0; pointer-events:none; ba
         <a href="index.html#ayin">The apparatus</a>
         <a href="index.html#work">How we work</a>
         <a href="codex.html">The Codex</a>
+        <a href="founder.html">Who's behind this</a>
       </nav>
     </div>
     <div class="ft-col-div" aria-hidden="true"></div>
@@ -641,9 +704,10 @@ footer::before { content:''; position:absolute; inset:0; pointer-events:none; ba
   </div>
   <div class="ft-base">
     <span class="ft-copy">© <span id="ftYear"></span> Ayin</span>
-    <p class="ft-disc">Ayin is an advisory and compliance practice, not a law firm. Nothing on this site constitutes legal advice.</p>
+    <p class="ft-disc">Ayin is an advisory and compliance practice, not a law firm. Nothing on this site constitutes legal advice. Regime names and ceilings are cited for illustration only.</p>
     <div class="ft-legal">
       <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
       <a href="disclaimer.html">Disclaimer</a>
       <a href="accessibility.html">Accessibility</a>
     </div>
@@ -660,17 +724,56 @@ addEventListener('scroll', () => {
   pf.style.width = (H > 0 ? Math.min(scrollY / H, 1) : 0) * 100 + '%';
 }, { passive:true });
 
+/* ═══════════ NAV register (index-style multi-band) ═══════════ */
 const nav = $('nav');
-function navRegister(){
-  const docBody = $('doc-body');
-  if (!docBody) return;
-  const r = docBody.getBoundingClientRect();
-  const inPaper = r.top < 80 && r.bottom > 0;
-  if (inPaper){ nav.classList.add('on-paper'); nav.classList.remove('on-dark'); }
-  else        { nav.classList.add('on-dark');  nav.classList.remove('on-paper'); }
+const navLogo = document.querySelector('.nav-logo');
+
+function bandsSnapshot(){
+  return [...document.querySelectorAll('[data-nav]')]
+    .map(el=>({ top: el.getBoundingClientRect().top + scrollY, mode: el.dataset.nav }))
+    .sort((a,b)=>a.top-b.top);
 }
-addEventListener('scroll', navRegister, { passive:true });
-navRegister();
+let bands = [];
+function modeAt(probe){
+  let mode='dark';
+  for(const b of bands){ if(b.top - 60 <= probe) mode=b.mode; else break; }
+  return mode;
+}
+function onScroll(){
+  const probe = scrollY + 34;
+  const showNav = scrollY > 40;
+  nav.classList.toggle('nav-visible', showNav);
+
+  const mode = modeAt(probe);
+  const onPaper = mode === 'light';
+  nav.classList.toggle('on-paper', onPaper);
+  nav.classList.toggle('on-dark', !onPaper);
+
+  const headEl = $('doc-head');
+  const inHead = headEl ? probe < (headEl.offsetTop + headEl.offsetHeight) : false;
+  nav.classList.toggle('nav-scrim', inHead);
+  if (navLogo) navLogo.src = onPaper ? 'assets/dark.svg' : 'assets/light.svg';
+}
+function recalc(){ bands = bandsSnapshot(); onScroll(); }
+addEventListener('scroll', onScroll, { passive:true });
+addEventListener('resize', recalc, { passive:true });
+addEventListener('load', recalc);
+recalc();
+
+/* drawer */
+(function(){
+  const btn=$('navMore'), setP=$('navSetPrimary'), setF=$('navSetFull');
+  if(!btn||!setP||!setF) return;
+  btn.addEventListener('click',()=>{
+    const open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded', open?'false':'true');
+    setP.classList.toggle('hidden', !open);
+    setF.classList.toggle('shown', !open);
+  });
+  setF.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    btn.setAttribute('aria-expanded','false'); setP.classList.remove('hidden'); setF.classList.remove('shown');
+  }));
+})();
 
 const ro = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
