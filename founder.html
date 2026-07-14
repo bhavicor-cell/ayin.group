@@ -66,7 +66,9 @@
   --e1:cubic-bezier(.2,.8,.2,1); --e2:cubic-bezier(.16,1,.3,1);
   --gut:clamp(24px,5vw,84px); --maxw:1320px;
   --measure:34em;
-  --pad:clamp(96px,13vh,170px);
+  --w-prose:36em;
+  --w-grid:900px;
+  --w-flow:1000px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--ground);scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--jade-dim) var(--ground)}
@@ -140,29 +142,26 @@ em{font-style:italic}
 }
 
 /* ════════ CHAPTER RAIL — the spine of the record ════════ */
-#rail{position:fixed;left:clamp(14px,2vw,32px);top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:2px;
+#rail{position:fixed;right:clamp(14px,2vw,32px);top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:18px;
   opacity:0;transition:opacity .6s var(--e2);pointer-events:none}
 #rail.show{opacity:1;pointer-events:auto}
-.rl{display:flex;align-items:center;gap:10px;padding:5px 0;position:relative}
-.rl-n{font-family:var(--disp);font-weight:300;font-size:11px;width:20px;text-align:right;color:var(--mute-2);transition:color .4s;flex-shrink:0}
-.rl-dash{width:12px;height:1px;background:var(--faint);transition:width .4s var(--e1),background .4s;flex-shrink:0}
-.rl-t{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute-2);opacity:0;transform:translateX(-6px);transition:opacity .35s,transform .35s var(--e1),color .4s;white-space:nowrap}
-.rl:hover .rl-t{opacity:1;transform:none}
-.rl.on .rl-n{color:var(--jade)}
-.rl.on .rl-dash{width:24px;background:var(--jade)}
-.rl.on .rl-t{opacity:1;transform:none;color:var(--jade)}
+.rl{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0;position:relative;text-align:center;width:auto;cursor:pointer}
+.rl-n{font-family:var(--disp);font-weight:300;font-size:11px;color:var(--mute-2);transition:color .4s,transform .4s;width:auto;flex-shrink:0}
+.rl-dash{display:none}
+.rl-t{display:none}
+.rl::after{content:attr(data-label);position:absolute;bottom:100%;right:0;font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--jade);white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;pointer-events:none;margin-bottom:8px}
+.rl:hover::after{opacity:1;transform:translateY(0)}
+.rl.on .rl-n{color:var(--jade);transform:scale(1.35)}
 #rail.rail-paper .rl-n{color:var(--ink-faint)}
-#rail.rail-paper .rl-dash{background:var(--ink-line)}
-#rail.rail-paper .rl-t{color:var(--ink-faint)}
-#rail.rail-paper .rl.on .rl-n,#rail.rail-paper .rl.on .rl-t{color:var(--jade-ink)}
-#rail.rail-paper .rl.on .rl-dash{background:var(--jade-ink)}
+#rail.rail-paper .rl::after{color:var(--jade-ink)}
+#rail.rail-paper .rl.on .rl-n{color:var(--jade-ink);transform:scale(1.35)}
 @media(max-width:1180px){#rail{display:none}}
 
 /* ════════ SHARED APPARATUS ════════ */
 .sec{position:relative;z-index:1}
 .folio{display:none; position:absolute;top:clamp(78px,9vh,100px);right:var(--gut);font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2);pointer-events:none;z-index:3}
 .folio.on-paper{color:var(--ink-faint)}
-.chap{max-width:920px;margin:0 auto;padding:var(--pad) var(--gut)}
+.chap{max-width:var(--w-flow);margin:0 auto;padding:var(--pad) var(--gut)}
 .chap-head{display:flex;align-items:baseline;gap:16px;margin-bottom:clamp(40px,6vh,64px)}
 .chap-roman{font-family:var(--disp);font-weight:200;font-size:clamp(30px,3.4vw,46px);line-height:1;color:var(--jade);flex-shrink:0}
 .chap-head.on-paper .chap-roman{color:var(--jade-ink)}
@@ -172,7 +171,7 @@ em{font-style:italic}
 .chap-head.on-paper::after{background:var(--ink-line)}
 
 /* prose — the voice itself, set in the serif */
-.prose{max-width:var(--measure)}
+.prose{max-width:var(--w-prose)}
 .prose p{font-family:var(--disp);font-weight:300;font-size:clamp(16.5px,1.35vw,19.5px);line-height:1.78;letter-spacing:.002em;color:var(--ivory-2);margin-bottom:1.5em}
 .prose p:last-child{margin-bottom:0}
 .prose p b{font-weight:500;color:var(--ivory)}
@@ -239,7 +238,7 @@ em{font-style:italic}
 ═══════════════════════════════════════ */
 #c2{background:var(--paper)}
 #c2::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 82% 20%,rgba(127,192,160,.06) 0%,transparent 60%)}
-.thread{position:relative;max-width:760px}
+.thread{position:relative;max-width:var(--w-grid)}
 .thread::before{content:'';position:absolute;left:5px;top:14px;bottom:14px;width:1px;background:linear-gradient(180deg,var(--jade-ink),rgba(21,97,74,.18) 70%,transparent)}
 .th-node{position:relative;padding:0 0 clamp(40px,6vh,58px) clamp(34px,4vw,52px)}
 .th-node:last-child{padding-bottom:0}
@@ -291,7 +290,7 @@ em{font-style:italic}
 #c5{background:var(--ground)}
 #c5::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 20% 70%,rgba(127,192,160,.05) 0%,transparent 62%)}
 .casc-lead{font-family:var(--disp);font-weight:300;font-size:clamp(18px,1.7vw,23px);font-style:italic;color:var(--mute);margin-bottom:clamp(34px,5vh,52px);max-width:34em}
-.casc{display:flex;flex-direction:column;margin-bottom:clamp(44px,7vh,68px);max-width:860px}
+.casc{display:flex;flex-direction:column;margin-bottom:clamp(44px,7vh,68px);max-width:var(--w-grid)}
 .casc-row{display:flex;align-items:baseline;gap:clamp(10px,1.6vw,18px);flex-wrap:wrap;padding:clamp(16px,2.4vh,22px) 0;border-top:1px solid var(--line-2);position:relative}
 .casc-row:first-child{border-top:1px solid var(--line)}
 .casc-row:last-child{border-bottom:1px solid var(--line)}
@@ -452,17 +451,16 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 
 <!-- ════════ CHAPTER RAIL ════════ -->
 <nav id="rail" aria-label="Chapters">
-  <a class="rl" href="#c1" data-c="c1"><span class="rl-n">I</span><span class="rl-dash"></span><span class="rl-t">The question</span></a>
-  <a class="rl" href="#c2" data-c="c2"><span class="rl-n">II</span><span class="rl-dash"></span><span class="rl-t">The thread</span></a>
-  <a class="rl" href="#c3" data-c="c3"><span class="rl-n">III</span><span class="rl-dash"></span><span class="rl-t">The gap</span></a>
-  <a class="rl" href="#c4" data-c="c4"><span class="rl-n">IV</span><span class="rl-dash"></span><span class="rl-t">ORR</span></a>
-  <a class="rl" href="#c5" data-c="c5"><span class="rl-n">V</span><span class="rl-dash"></span><span class="rl-t">The pattern</span></a>
-  <a class="rl" href="#c6" data-c="c6"><span class="rl-n">VI</span><span class="rl-dash"></span><span class="rl-t">The order</span></a>
-  <a class="rl" href="#c7" data-c="c7"><span class="rl-n">VII</span><span class="rl-dash"></span><span class="rl-t">Ayin</span></a>
-  <a class="rl" href="#c8" data-c="c8"><span class="rl-n">VIII</span><span class="rl-dash"></span><span class="rl-t">Asked</span></a>
-  <a class="rl" href="#c9" data-c="c9"><span class="rl-n">IX</span><span class="rl-dash"></span><span class="rl-t">The letter</span></a>
+  <a class="rl" href="#c1" data-c="c1" data-label="The question"><span class="rl-n">I</span></a>
+  <a class="rl" href="#c2" data-c="c2" data-label="The thread"><span class="rl-n">II</span></a>
+  <a class="rl" href="#c3" data-c="c3" data-label="The gap"><span class="rl-n">III</span></a>
+  <a class="rl" href="#c4" data-c="c4" data-label="ORR"><span class="rl-n">IV</span></a>
+  <a class="rl" href="#c5" data-c="c5" data-label="The pattern"><span class="rl-n">V</span></a>
+  <a class="rl" href="#c6" data-c="c6" data-label="The order"><span class="rl-n">VI</span></a>
+  <a class="rl" href="#c7" data-c="c7" data-label="Ayin"><span class="rl-n">VII</span></a>
+  <a class="rl" href="#c8" data-c="c8" data-label="Asked"><span class="rl-n">VIII</span></a>
+  <a class="rl" href="#c9" data-c="c9" data-label="The letter"><span class="rl-n">IX</span></a>
 </nav>
-
 <!-- ═══════════ HERO ═══════════ -->
 <section id="hero" class="sec" data-nav="dark">
   <div class="h-wm" aria-hidden="true"><img src="assets/light.svg" alt=""></div>
