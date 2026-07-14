@@ -5,7 +5,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/dark.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0C1F1A">
-<title>What Actually Happened — Krutarth E. · Ayin</title>
+<title>Founder · Ayin</title>
 <meta name="description" content="The founder of Ayin and ORR, in his own words. Not a résumé — an account of how chemistry, environment, policy, regulatory affairs and the shop floor became one practice.">
 <link rel="canonical" href="https://ayin.group/founder.html">
 <meta property="og:type" content="article">
@@ -439,15 +439,15 @@ footer::before{content:'';position:absolute;inset:0;pointer-events:none;backgrou
 
 <!-- ════════ CHAPTER RAIL ════════ -->
 <nav id="rail" aria-label="Chapters">
-  <a class="rl" href="#c1" data-c="c1" aria-label="I — The question"><span class="rl-n">I</span></a>
-  <a class="rl" href="#c2" data-c="c2" aria-label="II — The thread"><span class="rl-n">II</span></a>
-  <a class="rl" href="#c3" data-c="c3" aria-label="III — The gap"><span class="rl-n">III</span></a>
-  <a class="rl" href="#c4" data-c="c4" aria-label="IV — ORR"><span class="rl-n">IV</span></a>
-  <a class="rl" href="#c5" data-c="c5" aria-label="V — The pattern"><span class="rl-n">V</span></a>
-  <a class="rl" href="#c6" data-c="c6" aria-label="VI — The order"><span class="rl-n">VI</span></a>
-  <a class="rl" href="#c7" data-c="c7" aria-label="VII — Ayin"><span class="rl-n">VII</span></a>
-  <a class="rl" href="#c8" data-c="c8" aria-label="VIII — Asked"><span class="rl-n">VIII</span></a>
-  <a class="rl" href="#c9" data-c="c9" aria-label="IX — The letter"><span class="rl-n">IX</span></a>
+  <button class="rl" data-c="c1" aria-label="I — The question"><span class="rl-n">I</span></button>
+  <button class="rl" data-c="c2" aria-label="II — The thread"><span class="rl-n">II</span></button>
+  <button class="rl" data-c="c3" aria-label="III — The gap"><span class="rl-n">III</span></button>
+  <button class="rl" data-c="c4" aria-label="IV — ORR"><span class="rl-n">IV</span></button>
+  <button class="rl" data-c="c5" aria-label="V — The pattern"><span class="rl-n">V</span></button>
+  <button class="rl" data-c="c6" aria-label="VI — The order"><span class="rl-n">VI</span></button>
+  <button class="rl" data-c="c7" aria-label="VII — Ayin"><span class="rl-n">VII</span></button>
+  <button class="rl" data-c="c8" aria-label="VIII — Asked"><span class="rl-n">VIII</span></button>
+  <button class="rl" data-c="c9" aria-label="IX — The letter"><span class="rl-n">IX</span></button>
 </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
@@ -848,7 +848,13 @@ recalc();
 const ro=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }),{threshold:.08,rootMargin:'0px 0px -32px 0px'});
 document.querySelectorAll('.r').forEach(el=>ro.observe(el));
 
-/* thread dots light as they arrive */
+/* rail buttons — scroll without writing hash to URL */
+document.querySelectorAll('#rail .rl').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const t=$(btn.dataset.c);
+    if(t) scrollTo({top:t.getBoundingClientRect().top+scrollY-40,behavior:'smooth'});
+  });
+});
 const to=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); to.unobserve(e.target); } }),{threshold:.3});
 document.querySelectorAll('.th-node').forEach(el=>to.observe(el));
 
