@@ -621,12 +621,14 @@ const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting
 document.querySelectorAll('.r').forEach(el => ro.observe(el));
 
 const nav = $('nav'), heroEl = $('hero');
+   const navLogo = document.querySelector('.nav-logo');
 function onScroll(){
   const H = document.body.scrollHeight - innerHeight;
   pf.style.width = (H > 0 ? Math.min(scrollY / H, 1) : 0) * 100 + '%';
   nav.classList.toggle('nav-visible', scrollY > 40);
   const inHero = heroEl ? scrollY < (heroEl.offsetTop + heroEl.offsetHeight - 60) : false;
   nav.classList.toggle('nav-scrim', inHero);
+   if(navLogo) navLogo.src = onPaper ? 'assets/dark.svg' : 'assets/light.svg';
 }
 addEventListener('scroll', onScroll, { passive:true });
 addEventListener('resize', onScroll, { passive:true });
