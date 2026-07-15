@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071512">
+<title>RoHS & WEEE for Electronics — The Codex — Ayin</title>
+<link rel="icon" type="image/svg+xml" href="assets/dark.svg">
+<meta name="description" content="Substance restrictions and producer take-back obligations that travel with every electronics shipment into the EU and UK — what RoHS restricts, what WEEE requires, and where they diverge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE4; --paper-2:#EAE3D8; --ground:#0C1F1A; --g1:#102822; --abyss:#071512;
+  --ivory:#EFE9DB; --ivory-2:#D8D1C0; --mute:rgba(239,233,219,.74); --mute-2:rgba(239,233,219,.46); --line:rgba(239,233,219,.10);
+  --ink:#16120B; --ink-soft:rgba(22,18,11,.66); --ink-faint:rgba(22,18,11,.38); --ink-line:rgba(22,18,11,.13); --ink-line2:rgba(22,18,11,.065);
+  --jade:#7FC0A0; --jade-hi:#A8DCC2; --jade-ink:#15614A; --jade-12:rgba(127,192,160,.12); --jade-20:rgba(127,192,160,.20); --jade-glow:rgba(127,192,160,.24);
+  --brass:#9A6010; --brass-hi:#C8963C;
+  --disp:'Spectral',Georgia,serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --e1:cubic-bezier(.2,.8,.2,1); --e2:cubic-bezier(.16,1,.3,1); --gut:clamp(24px,5vw,84px); --maxw:980px; --navh:70px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--abyss);scroll-behavior:smooth}
+body{font-family:var(--body);font-weight:300;line-height:1.7;font-size:16px;background:var(--abyss);color:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.r{opacity:0;transform:translateY(18px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
+.r.in{opacity:1;transform:none}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;padding:0 var(--gut) 0 22px;
+  transition:background .5s,border-color .5s,opacity .6s var(--e2),transform .6s var(--e2),backdrop-filter .5s;
+  border-bottom:1px solid transparent;opacity:0;transform:translateY(-8px);pointer-events:none}
+#nav.nav-scrim{background:linear-gradient(180deg,rgba(7,21,18,.5) 0%,rgba(7,21,18,.18) 100%);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#nav.nav-visible{opacity:1;transform:none;pointer-events:auto}
+.nav-brand{display:flex;align-items:center;gap:11px;z-index:2}
+.nav-logo{height:50px;width:auto;display:block;flex-shrink:0}
+.nav-center{flex:1;display:flex;align-items:center;justify-content:flex-end;margin-left:auto;margin-right:18px;
+  position:relative;height:34px;overflow:hidden;min-width:0}
+.nav-set{position:absolute;right:0;top:0;display:flex;align-items:center;gap:18px;height:34px;
+  transition:transform .45s var(--e2),opacity .35s var(--e2)}
+.nav-set a{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);
+  white-space:nowrap;transition:color .25s}
+.nav-set a:hover{color:var(--jade)}
+#nav.on-paper .nav-set a{color:var(--ink-soft)}
+#nav.on-paper .nav-set a:hover{color:var(--jade-ink)}
+.nav-set.primary{transform:translateX(0);opacity:1}
+.nav-set.primary.hidden{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full.shown{transform:translateX(0);opacity:1;pointer-events:auto}
+.nav-more{position:relative;width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  margin-right:14px;flex-shrink:0;cursor:pointer}
+.nav-more-lines{position:relative;width:16px;height:10px;display:block}
+.nav-more-lines i{position:absolute;left:0;right:0;height:1px;background:var(--mute);
+  transition:transform .35s var(--e2),opacity .35s,width .35s,background .35s}
+.nav-more-lines i:nth-child(1){top:0;width:100%}
+.nav-more-lines i:nth-child(2){top:4.5px;width:65%;left:auto;right:0}
+.nav-more-lines i:nth-child(3){top:9px;width:100%}
+#nav.on-paper .nav-more-lines i{background:var(--ink-soft)}
+.nav-more:hover .nav-more-lines i{width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(1){transform:translateY(4.5px) rotate(45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(2){opacity:0}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(3){transform:translateY(-4.5px) rotate(-45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade)}
+#nav.on-paper .nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade-ink)}
+.nav-cta{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;transition:background .3s,color .3s,border-color .5s;border:1px solid transparent}
+#nav.on-paper .nav-cta{color:var(--jade-ink);border-color:rgba(21,97,74,.3)}
+#nav.on-paper .nav-cta:hover{background:var(--jade-ink);color:var(--paper)}
+#nav.on-dark{background:transparent;border-color:transparent}
+#nav.on-dark .nav-cta{color:var(--jade);border-color:var(--jade-20)}
+#nav.on-dark .nav-cta:hover{background:var(--jade);color:var(--abyss)}
+@media(max-width:760px){.nav-set.full{gap:12px}.nav-set.full a:nth-child(n+5){display:none}}
+
+#hero{background:var(--abyss);padding:clamp(110px,16vh,150px) var(--gut) clamp(50px,7vh,70px);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 80% 20%,rgba(127,192,160,.06) 0%,transparent 60%)}
+.hero-inner{max-width:var(--maxw);margin:0 auto;position:relative;z-index:1}
+.hcode{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--jade);background:var(--jade-12);border:1px solid var(--jade-20);padding:6px 12px;display:inline-block;margin-bottom:20px}
+.htitle{font-family:var(--disp);font-weight:300;font-size:clamp(32px,5vw,56px);letter-spacing:-.03em;line-height:1.04;color:var(--ivory)}
+.htitle em{font-style:italic;color:var(--jade)}
+.hsub{margin-top:18px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.6vw,19px);color:var(--mute);max-width:62ch;line-height:1.5}
+.hmeta{display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);margin-top:clamp(32px,5vh,44px);padding-top:20px;border-top:1px solid var(--line)}
+.hm{display:flex;flex-direction:column;gap:5px}
+.hml{font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2)}
+.hmv{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+
+#body{background:var(--paper);color:var(--ink);padding:clamp(56px,8vh,84px) var(--gut) clamp(80px,12vh,120px)}
+.body-inner{max-width:var(--maxw);margin:0 auto}
+section.sec{margin-bottom:clamp(44px,6.5vh,64px)}
+.sec-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:16px;display:block}
+.sec-h{font-family:var(--disp);font-weight:400;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.018em;color:var(--ink);margin-bottom:18px}
+.sec p{font-size:15px;line-height:1.85;color:var(--ink-soft);margin-bottom:16px;max-width:68ch}
+.sec p:last-child{margin-bottom:0}
+.sec p b{color:var(--ink);font-weight:500}
+.sec ul{display:flex;flex-direction:column;gap:0;margin:8px 0}
+.sec li{font-size:14.5px;line-height:1.75;color:var(--ink-soft);padding:11px 0 11px 22px;border-bottom:1px solid var(--ink-line2);position:relative}
+.sec li:first-child{border-top:1px solid var(--ink-line2)}
+.sec li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:1px;background:var(--jade-ink);opacity:.55}
+.sec li b{color:var(--ink);font-weight:500}
+
+.qbox{border:1px solid var(--ink-line);background:var(--paper-2);padding:clamp(22px,3.2vw,30px)}
+.qbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:14px;display:block}
+.qbox ul{margin:0}
+.qbox li{font-size:14px;border-bottom:1px solid var(--ink-line2)}
+
+.verdict{display:flex;gap:14px;align-items:flex-start;border-left:2px solid var(--jade-ink);background:rgba(21,97,74,.045);padding:16px 20px;margin-top:16px}
+.verdict-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--jade-ink);flex-shrink:0;padding-top:2px}
+.verdict p{margin:0;font-size:14px;line-height:1.7;max-width:none}
+
+/* two-regime comparison — RoHS vs WEEE, since they're distinct but constantly confused */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink-line);border:1px solid var(--ink-line);margin-top:6px}
+.compare-col{background:var(--paper-2);padding:20px 22px}
+.compare-col b{display:block;font-family:var(--disp);font-size:17px;color:var(--ink);margin-bottom:4px}
+.compare-col span.tag{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:10px}
+.compare-col p{font-size:13.5px;color:var(--ink-soft);margin:0;line-height:1.65}
+@media(max-width:700px){.compare{grid-template-columns:1fr}}
+
+/* substance list */
+.subgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--ink-line);border:1px solid var(--ink-line);margin-top:6px}
+.subcell{background:var(--paper-2);padding:14px 14px;text-align:center}
+.subcell b{display:block;font-family:var(--disp);font-size:14px;color:var(--ink)}
+.subcell span{display:block;font-family:var(--mono);font-size:8.5px;color:var(--ink-faint);margin-top:3px}
+
+.ledger{border:1px solid var(--ink-line);overflow:hidden;margin-top:6px}
+.ledger-cap{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);padding:14px 20px;border-bottom:1px solid var(--ink-line);background:var(--paper-2);display:flex;align-items:center;gap:10px}
+.ledger-cap::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--brass-hi)}
+.ledger-row{padding:16px 20px;border-bottom:1px solid var(--ink-line2);font-size:13.5px;line-height:1.7;color:var(--ink-soft)}
+.ledger-row:last-child{border-bottom:none}
+.ledger-row b{color:var(--ink);font-weight:500}
+.ledger-src{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--ink-faint)}
+
+.fitbox{background:var(--ground);color:var(--ivory);padding:clamp(26px,3.6vw,34px);position:relative;overflow:hidden}
+.fitbox::before{content:'';position:absolute;top:-1px;left:-1px;width:50%;height:1px;background:linear-gradient(90deg,var(--jade),transparent)}
+.fitbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade);margin-bottom:12px;display:block}
+.fitbox p{color:var(--mute);font-size:14.5px;line-height:1.75;margin-bottom:18px;max-width:62ch}
+.fitbox p b{color:var(--ivory);font-weight:500}
+.fit-cta{display:inline-flex;gap:14px;flex-wrap:wrap}
+.cta-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:13px 20px;transition:background .25s}
+.cta-btn:hover{background:var(--jade-hi)}
+.cta-link{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);border-bottom:1px solid var(--jade-20);align-self:center;padding-bottom:2px}
+
+.srcfoot{margin-top:clamp(40px,6vh,56px);padding-top:24px;border-top:1px solid var(--ink-line);display:flex;flex-direction:column;gap:10px}
+.srcfoot-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.srcfoot ol{padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.srcfoot li{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);line-height:1.6}
+.crosslinks{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+.xlink{font-family:var(--mono);font-size:10px;color:var(--jade-ink);border:1px solid rgba(21,97,74,.25);padding:8px 13px;transition:background .22s,color .22s}
+.xlink:hover{background:var(--jade-ink);color:var(--paper)}
+
+footer{position:relative;z-index:1;background:var(--ground);color:var(--ivory);padding:0 var(--gut);overflow:hidden;border-top:1px solid var(--line)}
+footer::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 80% at 0% 100%,rgba(127,192,160,.06) 0%,transparent 58%)}
+.ft-maxim{max-width:var(--maxw);margin:0 auto;padding:clamp(36px,5.5vh,56px) 0 clamp(28px,4vh,40px);border-bottom:1px solid var(--line);text-align:center;position:relative;z-index:1}
+.ft-lat{display:block;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(26px,3.8vw,50px);letter-spacing:-.012em;line-height:1.3;color:var(--ivory)}
+.ft-trn{display:block;margin-top:9px;font-family:var(--mono);font-size:8px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--jade);opacity:.7}
+.ft-body{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 clamp(44px,6vw,88px);padding:clamp(36px,5.5vh,56px) 0;border-bottom:1px solid var(--line);position:relative;z-index:1}
+.ft-col-div{background:linear-gradient(180deg,transparent 0%,var(--line) 15%,var(--line) 85%,transparent 100%)}
+.ft-left{display:flex;flex-direction:column;gap:clamp(20px,3.2vh,30px)}
+.ft-brand{display:flex;align-items:center;gap:11px}
+.ft-brand-logo{height:150px;width:auto;display:block;flex-shrink:0}
+.ft-nav{display:flex;flex-wrap:wrap;gap:4px clamp(16px,2.2vw,28px);border-top:1px solid var(--line);padding-top:clamp(12px,1.8vh,18px)}
+.ft-nav a{font-family:var(--mono);font-size:9px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2);transition:color .22s}
+.ft-nav a:hover{color:var(--jade)}
+.ft-right{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(24px,4vh,40px)}
+.ft-thought{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(14px,1.45vw,18px);letter-spacing:-.01em;line-height:1.56;color:var(--mute);border-left:1px solid rgba(127,192,160,.35);padding-left:clamp(14px,1.8vw,20px)}
+.ft-thought em{color:var(--jade-hi);font-style:italic}
+.ft-cta{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:12px 20px;align-self:flex-start;position:relative;overflow:hidden;isolation:isolate;transition:gap .28s var(--e1)}
+.ft-cta::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--jade-hi);transform:translateY(101%);transition:transform .34s var(--e1)}
+.ft-cta:hover{gap:13px}.ft-cta:hover::before{transform:translateY(0)}
+.ft-base{max-width:var(--maxw);margin:0 auto;display:flex;align-items:baseline;justify-content:space-between;gap:clamp(16px,3vw,40px);flex-wrap:wrap;padding:clamp(16px,2.5vh,24px) 0 clamp(24px,3.8vh,36px);position:relative;z-index:1}
+.ft-copy{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2);white-space:nowrap;flex-shrink:0}
+.ft-disc{font-size:10px;line-height:1.6;color:var(--mute-2);font-weight:300;max-width:52ch}
+.ft-legal{display:flex;gap:clamp(12px,1.8vw,20px);flex-shrink:0}
+.ft-legal a{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute-2);transition:color .22s;white-space:nowrap}
+.ft-legal a:hover{color:var(--jade)}
+@media(max-width:820px){.ft-body{grid-template-columns:1fr;gap:clamp(30px,5vh,44px) 0}.ft-col-div{display:none}.ft-right{justify-content:flex-start}}
+@media(max-width:560px){.ft-base{flex-direction:column;gap:10px}}
+@media(prefers-reduced-motion:reduce){.r{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<header id="nav" class="on-dark">
+  <a class="nav-brand" href="index.html" aria-label="Ayin — home">
+    <img src="assets/dark.svg" alt="" class="nav-logo">
+  </a>
+  <div class="nav-center">
+    <div class="nav-set primary" id="navSetPrimary"><a href="codex.html">The Codex</a></div>
+    <div class="nav-set full" id="navSetFull">
+      <a href="index.html#instrument">Instrument</a>
+      <a href="index.html#have">Do You Have It</a>
+      <a href="index.html#work">How We Work</a>
+      <a href="codex.html">Codex</a>
+      <a href="radar.html">Radar</a>
+      <a href="founder.html">Founder</a>
+    </div>
+  </div>
+  <button class="nav-more" id="navMore" aria-expanded="false" aria-label="More navigation">
+    <span class="nav-more-lines"><i></i><i></i><i></i></span>
+  </button>
+  <a href="index.html#intake" class="nav-cta">Ambition Begins</a>
+</header>
+
+<section id="hero">
+  <div class="hero-inner r">
+    <span class="hcode">EU/UK · 2011/65/EU · 2012/19/EU</span>
+    <h1 class="htitle">RoHS & WEEE:<br>Two Rules, <em>One Product.</em></h1>
+    <p class="hsub">Substance restrictions and producer take-back obligations that travel with every shipment — and are governed by two entirely different mechanisms most sellers assume are one.</p>
+    <div class="hmeta">
+      <div class="hm"><span class="hml">Jurisdiction</span><span class="hmv">EU (27 states) + UK, separate national registers</span></div>
+      <div class="hm"><span class="hml">Vertical</span><span class="hmv">Electronics & electrical equipment</span></div>
+      <div class="hm"><span class="hml">Stage</span><span class="hmv">Map → Clear</span></div>
+      <div class="hm"><span class="hml">Last reviewed</span><span class="hmv">15 Jul 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="body">
+  <div class="body-inner">
+
+    <section class="sec r">
+      <span class="sec-l">In thirty seconds</span>
+      <div class="qbox">
+        <span class="qbox-l">The plain version</span>
+        <ul>
+          <li><b>RoHS</b> (Directive 2011/65/EU) restricts what's <b>inside</b> the product — ten hazardous substances capped by weight, checked once at design and manufacturing.</li>
+          <li><b>WEEE</b> (Directive 2012/19/EU) governs what happens <b>after</b> the product is discarded — producer registration, take-back financing, and recycling, checked continuously for as long as you sell.</li>
+          <li>They're both directives, not regulations — meaning each of the 27 EU member states implements its own national scheme, register, and enforcement body. There is no single EU-wide registration for either.</li>
+          <li>Since 2018, essentially <b>all</b> electrical and electronic equipment falls under WEEE's scope — the old ten-category list was opened up, so "my product type isn't listed" is rarely a real exemption anymore.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Two regimes, constantly confused</span>
+      <div class="compare">
+        <div class="compare-col">
+          <span class="tag">Substance restriction</span>
+          <b>RoHS</b>
+          <p>Checked once, at design and manufacturing. Restricts ten substances by weight in homogeneous materials. Compliance is a technical file and a declaration of conformity — a design question, not an ongoing operational one.</p>
+        </div>
+        <div class="compare-col">
+          <span class="tag">Producer responsibility</span>
+          <b>WEEE</b>
+          <p>Ongoing, for as long as you place products on the market. Requires registration in every country you sell into, regular reporting of volumes placed, and financing of collection and recycling — an operational and financial commitment, not a one-time design check.</p>
+        </div>
+      </div>
+      <div class="verdict" style="margin-top:16px">
+        <span class="verdict-l">Verdict</span>
+        <p>Being RoHS-compliant says nothing about your WEEE status, and vice versa. Sellers frequently discover this the hard way — a product with a clean RoHS technical file gets flagged or delisted for having no WEEE producer registration in the country it's being sold into.</p>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">RoHS — what's restricted</span>
+      <h2 class="sec-h">Ten substances, capped by weight, in every homogeneous material.</h2>
+      <div class="subgrid">
+        <div class="subcell"><b>Lead</b><span>0.1%</span></div>
+        <div class="subcell"><b>Mercury</b><span>0.1%</span></div>
+        <div class="subcell"><b>Cadmium</b><span>0.01%</span></div>
+        <div class="subcell"><b>Hex. chromium</b><span>0.1%</span></div>
+        <div class="subcell"><b>PBB</b><span>0.1%</span></div>
+        <div class="subcell"><b>PBDE</b><span>0.1%</span></div>
+        <div class="subcell"><b>DEHP</b><span>0.1%</span></div>
+        <div class="subcell"><b>BBP</b><span>0.1%</span></div>
+        <div class="subcell"><b>DBP</b><span>0.1%</span></div>
+        <div class="subcell"><b>DIBP</b><span>0.1%</span></div>
+      </div>
+      <p style="margin-top:16px">The first six substances were restricted from the original 2011 recast; the four phthalates (DEHP, BBP, DBP, DIBP) were added by Directive 2015/863 and have applied since <b>22 July 2019</b> for most equipment, with medical devices and monitoring/control instruments given until 2021. Thresholds are 0.1% by weight per homogeneous material for every substance except cadmium, capped at 0.01%.</p>
+      <p><b>Exemptions exist</b> where substitution isn't yet technically or scientifically feasible — lead in certain solders, glass, ceramics, and high-reliability alloys, for instance — but each exemption is narrow, tied to a specific application and product category, and carries its own expiry date. The Commission reviews Annex III exemptions roughly every five years, and 2026 has brought a wave of narrowed lead exemptions specifically, with several split into more specific sub-entries and shorter validity windows rather than outright removal.</p>
+      <div class="verdict">
+        <span class="verdict-l">The trap</span>
+        <p>A RoHS exemption is not the same as being outside RoHS's scope. If your product is in scope, a specific material or component may still qualify for an exemption — but only if it matches the exact wording, category, and concentration limit in the Annex, and only until that exemption's expiry date. Relying on an exemption that's expired, or that doesn't match your exact application, is treated the same as having no exemption at all.</p>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">WEEE — what it actually requires</span>
+      <h2 class="sec-h">Registration, reporting, and financing — repeated in every country you sell into.</h2>
+      <p>If you manufacture, import, or sell electrical or electronic equipment into an EU member state — including as a marketplace seller using a fulfilment service — you are classified as a <b>producer</b> under WEEE. That triggers three ongoing obligations, in every country where you place products:</p>
+      <ul>
+        <li><b>Register</b> with the national WEEE authority — Stiftung EAR in Germany, the CdC RAEE registry in Italy, and equivalent bodies elsewhere. There is no single EU-wide register; registering in one country does not cover another.</li>
+        <li><b>Report regularly</b> the types and volumes of equipment placed on that market, in the format each national register specifies.</li>
+        <li><b>Finance take-back and recycling</b> — usually by joining a Producer Responsibility Organisation (PRO), which handles collection and treatment on your behalf for a fee tied to product category and weight. Setting up your own take-back system is technically possible but rarely practical given the national coverage it requires.</li>
+      </ul>
+      <p>Non-EU sellers with no established presence in a given member state must appoint a <b>WEEE Authorised Representative</b> in that country. Germany's national law, for instance, explicitly requires this for any company without a German establishment selling into that market.</p>
+      <div class="verdict">
+        <span class="verdict-l">Verdict</span>
+        <p>WEEE compliance is not a single action — it's a standing operational relationship with a PRO (or a representative) in every market you sell into, renewed and reported on an ongoing basis, not a box checked once at launch.</p>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What's changing</span>
+      <h2 class="sec-h">Both regimes are under active revision in 2026.</h2>
+      <p>The European Commission published its evaluation of the WEEE Directive on <b>2 July 2025</b>, identifying persistent shortcomings: a collection rate stuck around 40% of e-waste actually collected and recycled, fragmented national EPR schemes, inconsistent treatment standards, and enforcement gaps specifically around online and distance sellers. A formal revision proposal is expected via the broader EU Circular Economy Act, potentially converting WEEE from a directive into a directly applicable regulation — which would replace 27 separate national schemes with one harmonised system, similar in spirit to how GPSR replaced the old product safety directive.</p>
+      <p>On the RoHS side, no new substances have been added to the restricted list as of mid-2026, but the Commission has been actively tightening existing exemptions — particularly lead-related ones — through delegated directives, most recently a draft published <b>8 July 2026</b> proposing further revisions to Annexes III and IV, open for feedback until early August 2026.</p>
+      <div class="verdict">
+        <span class="verdict-l">Verdict</span>
+        <p>Don't build compliance processes around today's fragmented WEEE landscape as if it's permanent — a shift toward a single EU-wide regulation is realistically on the horizon, and RoHS exemptions your product currently relies on should be checked against their specific expiry dates, not assumed to renew automatically.</p>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What it costs to get it wrong</span>
+      <div class="ledger">
+        <div class="ledger-cap">Two regimes, two different failure modes</div>
+        <div class="ledger-row"><b>RoHS non-compliance</b> — a product containing a restricted substance above threshold, with no valid exemption, cannot legally bear CE marking and cannot be placed on the EU market. Market surveillance authorities can order withdrawal or recall; national penalties vary by member state.<span class="ledger-src">Directive 2011/65/EU, Art. 4</span></div>
+        <div class="ledger-row"><b>No WEEE registration in a given country</b> — the product is non-compliant in that specific market even if it's registered elsewhere; national authorities and marketplaces both act on this independently, and marketplace delisting is typically the faster consequence.<span class="ledger-src">Directive 2012/19/EU, national implementing law</span></div>
+        <div class="ledger-row"><b>Marketplace enforcement</b> — platforms increasingly require WEEE registration numbers and RoHS documentation directly in seller onboarding; missing either can trigger listing suspension independent of any regulator taking action.<span class="ledger-src">Practitioner reporting, national WEEE registers</span></div>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Where Ayin fits</span>
+      <div class="fitbox">
+        <span class="fitbox-l">Map → Clear</span>
+        <p>Confirming which RoHS exemptions your product actually qualifies for — and mapping which countries you need a live WEEE registration in before you're already selling there — is exactly the kind of gate that's fast to check now and slow to unwind later. <b>Ayin can map this against your actual product line and sales markets in a short conversation.</b></p>
+        <div class="fit-cta">
+          <a href="index.html#intake" class="cta-btn">Send this to Ayin →</a>
+          <a href="index.html#instrument" class="cta-link">Map your own crossing first →</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="crosslinks">
+      <a class="xlink" href="codex-ukca.html">→ The UK's parallel regime: UKCA Marking</a>
+      <a class="xlink" href="codex-eu-gpsr.html">→ The safety net underneath: EU GPSR</a>
+      <a class="xlink" href="codex.html">→ Back to the full Codex</a>
+    </div>
+
+    <div class="srcfoot">
+      <span class="srcfoot-l">Sources</span>
+      <ol>
+        <li>Directive 2011/65/EU of the European Parliament and of the Council on the restriction of the use of certain hazardous substances in electrical and electronic equipment (RoHS), and amending Directive 2015/863, EUR-Lex.</li>
+        <li>Directive 2012/19/EU of the European Parliament and of the Council on waste electrical and electronic equipment (WEEE), EUR-Lex.</li>
+        <li>European Commission, evaluation of Directive 2012/19/EU published 2 July 2025; European Commission Call for Evidence on WEEE revision, August–November 2025.</li>
+        <li>European Commission, draft Delegated Directive amending RoHS Annexes III and IV, published 8 July 2026.</li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="ft-maxim">
+    <span class="ft-lat">Praemonitus, praemunitus</span>
+    <span class="ft-trn">Forewarned is forearmed</span>
+  </div>
+  <div class="ft-body">
+    <div class="ft-left">
+      <div class="ft-brand"><img src="assets/A.svg" alt="" class="ft-brand-logo"></div>
+      <nav class="ft-nav" aria-label="Footer">
+        <a href="index.html#instrument">The instrument</a>
+        <a href="index.html#have">Do you have it</a>
+        <a href="index.html#ayin">The apparatus</a>
+        <a href="index.html#work">How we work</a>
+        <a href="codex.html">The Codex</a>
+        <a href="founder.html">Who's behind this</a>
+      </nav>
+    </div>
+    <div class="ft-col-div" aria-hidden="true"></div>
+    <div class="ft-right">
+      <p class="ft-thought">Most of the work is invisible. A market that opens, an account that stays live, a move that completes — and <em>no one writes the article.</em></p>
+      <a href="index.html#intake" class="ft-cta">Tell us the crossing →</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <span class="ft-copy">© <span id="ftYear"></span> Ayin</span>
+    <p class="ft-disc">Ayin is an advisory and compliance practice, not a law firm. Nothing on this site constitutes legal advice. Regime names and ceilings are cited for illustration only.</p>
+    <div class="ft-legal">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }), { threshold:.06, rootMargin:'0px 0px -24px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+document.getElementById('ftYear').textContent = new Date().getFullYear();
+
+(function(){
+  const nav = document.getElementById('nav');
+  const heroEl = document.getElementById('hero');
+  const bodyEl = document.getElementById('body');
+  const navLogo = nav.querySelector('.nav-logo');
+  function onScroll(){
+    nav.classList.toggle('nav-visible', scrollY > 40);
+    const probe = scrollY + 60;
+    const inHero = heroEl ? probe < (heroEl.offsetTop + heroEl.offsetHeight) : false;
+    nav.classList.toggle('nav-scrim', inHero);
+    const onPaper = bodyEl ? probe >= bodyEl.offsetTop : false;
+    nav.classList.toggle('on-paper', onPaper);
+    nav.classList.toggle('on-dark', !onPaper);
+    if (navLogo) navLogo.src = onPaper ? 'assets/dark.svg' : 'assets/light.svg';
+  }
+  addEventListener('scroll', onScroll, { passive:true });
+  addEventListener('resize', onScroll, { passive:true });
+  onScroll();
+})();
+
+(function(){
+  const btn=document.getElementById('navMore'), setP=document.getElementById('navSetPrimary'), setF=document.getElementById('navSetFull');
+  if(!btn||!setP||!setF) return;
+  btn.addEventListener('click',()=>{
+    const open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded', open?'false':'true');
+    setP.classList.toggle('hidden', !open);
+    setF.classList.toggle('shown', !open);
+  });
+  setF.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    btn.setAttribute('aria-expanded','false'); setP.classList.remove('hidden'); setF.classList.remove('shown');
+  }));
+})();
+</script>
+</body>
+</html>

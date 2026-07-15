@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071512">
+<title>The EU AI Act, Plainly — The Codex — Ayin</title>
+<link rel="icon" type="image/svg+xml" href="assets/dark.svg">
+<meta name="description" content="Regulation (EU) 2024/1689, chapter by chapter, article by article — translated into plain English. A reading companion, not a substitute for the official text.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE4; --paper-2:#EAE3D8; --ground:#0C1F1A; --g1:#102822; --abyss:#071512;
+  --ivory:#EFE9DB; --ivory-2:#D8D1C0; --mute:rgba(239,233,219,.74); --mute-2:rgba(239,233,219,.46); --line:rgba(239,233,219,.10);
+  --ink:#16120B; --ink-soft:rgba(22,18,11,.66); --ink-faint:rgba(22,18,11,.38); --ink-line:rgba(22,18,11,.13); --ink-line2:rgba(22,18,11,.065);
+  --jade:#7FC0A0; --jade-hi:#A8DCC2; --jade-ink:#15614A; --jade-12:rgba(127,192,160,.12); --jade-20:rgba(127,192,160,.20); --jade-glow:rgba(127,192,160,.24);
+  --brass:#9A6010; --brass-hi:#C8963C;
+  --disp:'Spectral',Georgia,serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --e1:cubic-bezier(.2,.8,.2,1); --e2:cubic-bezier(.16,1,.3,1); --gut:clamp(20px,4vw,64px); --maxw:1320px; --navh:70px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--abyss);scroll-behavior:smooth}
+body{font-family:var(--body);font-weight:300;line-height:1.7;font-size:16px;background:var(--abyss);color:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.r{opacity:0;transform:translateY(16px);transition:opacity .8s var(--e2),transform .8s var(--e2)}
+.r.in{opacity:1;transform:none}
+
+/* ════════ NAV ════════ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;padding:0 var(--gut) 0 22px;
+  transition:background .5s,border-color .5s,opacity .6s var(--e2),transform .6s var(--e2),backdrop-filter .5s;
+  border-bottom:1px solid transparent;opacity:0;transform:translateY(-8px);pointer-events:none}
+#nav.nav-scrim{background:linear-gradient(180deg,rgba(7,21,18,.5) 0%,rgba(7,21,18,.18) 100%);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#nav.nav-visible{opacity:1;transform:none;pointer-events:auto}
+.nav-brand{display:flex;align-items:center;gap:11px;z-index:2}
+.nav-logo{height:50px;width:auto;display:block;flex-shrink:0}
+.nav-center{flex:1;display:flex;align-items:center;justify-content:flex-end;margin-left:auto;margin-right:18px;
+  position:relative;height:34px;overflow:hidden;min-width:0}
+.nav-set{position:absolute;right:0;top:0;display:flex;align-items:center;gap:18px;height:34px;
+  transition:transform .45s var(--e2),opacity .35s var(--e2)}
+.nav-set a{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);
+  white-space:nowrap;transition:color .25s}
+.nav-set a:hover{color:var(--jade)}
+.nav-set.primary{transform:translateX(0);opacity:1}
+.nav-set.primary.hidden{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full.shown{transform:translateX(0);opacity:1;pointer-events:auto}
+.nav-more{position:relative;width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  margin-right:14px;flex-shrink:0;cursor:pointer}
+.nav-more-lines{position:relative;width:16px;height:10px;display:block}
+.nav-more-lines i{position:absolute;left:0;right:0;height:1px;background:var(--mute);
+  transition:transform .35s var(--e2),opacity .35s,width .35s,background .35s}
+.nav-more-lines i:nth-child(1){top:0;width:100%}
+.nav-more-lines i:nth-child(2){top:4.5px;width:65%;left:auto;right:0}
+.nav-more-lines i:nth-child(3){top:9px;width:100%}
+.nav-more:hover .nav-more-lines i{width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(1){transform:translateY(4.5px) rotate(45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(2){opacity:0}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(3){transform:translateY(-4.5px) rotate(-45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade)}
+.nav-cta{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;transition:background .3s,color .3s,border-color .5s;border:1px solid transparent;color:var(--jade);border-color:var(--jade-20)}
+.nav-cta:hover{background:var(--jade);color:var(--abyss)}
+@media(max-width:760px){.nav-set.full{gap:12px}.nav-set.full a:nth-child(n+5){display:none}}
+
+/* ════════ HERO — dark throughout, this is a reference tool ════════ */
+#hero{background:var(--abyss);padding:clamp(108px,15vh,148px) var(--gut) clamp(40px,6vh,56px);position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 80% 20%,rgba(127,192,160,.06) 0%,transparent 60%)}
+.hero-inner{max-width:var(--maxw);margin:0 auto;position:relative;z-index:1}
+.hcode{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--jade);background:var(--jade-12);border:1px solid var(--jade-20);padding:6px 12px;display:inline-block;margin-bottom:20px}
+.htitle{font-family:var(--disp);font-weight:300;font-size:clamp(30px,4.4vw,50px);letter-spacing:-.028em;line-height:1.08;color:var(--ivory)}
+.htitle em{font-style:italic;color:var(--jade)}
+.hsub{margin-top:16px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(14.5px,1.5vw,18px);color:var(--mute);max-width:68ch;line-height:1.5}
+.hnote{margin-top:14px;font-family:var(--mono);font-size:10.5px;color:var(--mute-2);max-width:60ch;line-height:1.6}
+
+/* ════════ LAYOUT — sticky chapter rail + reading column ════════ */
+#reader{background:var(--paper);color:var(--ink)}
+.reader-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:0 clamp(30px,4vw,56px);padding:clamp(36px,5vh,52px) var(--gut) clamp(70px,10vh,100px);align-items:start}
+@media(max-width:920px){.reader-grid{grid-template-columns:1fr}}
+
+/* chapter rail */
+#toc{position:sticky;top:calc(var(--navh) + 20px);align-self:start;max-height:calc(100svh - var(--navh) - 40px);overflow-y:auto;padding-right:8px}
+#toc::-webkit-scrollbar{width:4px} #toc::-webkit-scrollbar-thumb{background:var(--ink-line)}
+.toc-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:block}
+.toc-item{display:block;font-family:var(--mono);font-size:10.5px;line-height:1.5;color:var(--ink-soft);padding:7px 0 7px 12px;border-left:2px solid transparent;transition:color .2s,border-color .2s}
+.toc-item:hover{color:var(--jade-ink)}
+.toc-item.active{color:var(--jade-ink);border-color:var(--jade-ink);font-weight:500}
+@media(max-width:920px){
+  #toc{position:relative;top:0;max-height:none;overflow:visible;border:1px solid var(--ink-line);background:var(--paper-2);padding:16px 18px;margin-bottom:32px}
+  .toc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px 16px}
+}
+
+/* reading column */
+.chapter{margin-bottom:clamp(46px,6.5vh,64px);scroll-margin-top:calc(var(--navh) + 16px)}
+.chapter-num{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:8px;display:block}
+.chapter-h{font-family:var(--disp);font-weight:500;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.018em;color:var(--ink);margin-bottom:clamp(20px,3vh,28px);padding-bottom:14px;border-bottom:1px solid var(--ink-line)}
+
+.art{margin-bottom:clamp(26px,3.6vh,36px);scroll-margin-top:calc(var(--navh) + 16px)}
+.art:last-child{margin-bottom:0}
+.art-h{font-family:var(--disp);font-weight:500;font-size:17px;color:var(--ink);margin-bottom:9px}
+.art-h span{font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--jade-ink);margin-right:9px;letter-spacing:.04em}
+.art p{font-size:14.5px;line-height:1.82;color:var(--ink-soft);margin-bottom:12px;max-width:74ch}
+.art p:last-child{margin-bottom:0}
+.art p b{color:var(--ink);font-weight:500}
+.art ul{margin:10px 0;display:flex;flex-direction:column;gap:0}
+.art li{font-size:14px;line-height:1.7;color:var(--ink-soft);padding:9px 0 9px 20px;border-bottom:1px solid var(--ink-line2);position:relative;max-width:74ch}
+.art li:first-child{border-top:1px solid var(--ink-line2)}
+.art li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:1px;background:var(--jade-ink);opacity:.55}
+.art li b{color:var(--ink);font-weight:500}
+
+.note{border-left:2px solid var(--brass-hi);background:rgba(200,150,60,.06);padding:12px 16px;margin:14px 0;font-size:13.5px;color:var(--ink-soft);max-width:70ch}
+.note b{color:var(--ink);font-weight:500}
+
+/* back-to-top + quick jump */
+.jumpbar{position:fixed;bottom:22px;right:22px;z-index:50;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.jump-btn{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--paper);background:var(--jade-ink);padding:9px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .3s,transform .3s}
+.jump-btn.show{opacity:1;transform:none;pointer-events:auto}
+
+/* fitbox / crosslinks / sources — same as template */
+.fitbox{background:var(--ground);color:var(--ivory);padding:clamp(24px,3.4vw,32px);position:relative;overflow:hidden;margin-top:clamp(30px,4.5vh,44px)}
+.fitbox::before{content:'';position:absolute;top:-1px;left:-1px;width:50%;height:1px;background:linear-gradient(90deg,var(--jade),transparent)}
+.fitbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade);margin-bottom:12px;display:block}
+.fitbox p{color:var(--mute);font-size:14px;line-height:1.75;margin-bottom:16px;max-width:66ch}
+.fitbox p b{color:var(--ivory);font-weight:500}
+.fit-cta{display:inline-flex;gap:14px;flex-wrap:wrap}
+.cta-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:13px 20px;transition:background .25s}
+.cta-btn:hover{background:var(--jade-hi)}
+.cta-link{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);border-bottom:1px solid var(--jade-20);align-self:center;padding-bottom:2px}
+
+.srcfoot{margin-top:clamp(36px,5.5vh,48px);padding-top:22px;border-top:1px solid var(--ink-line);display:flex;flex-direction:column;gap:10px}
+.srcfoot-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.srcfoot ol{padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.srcfoot li{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);line-height:1.6}
+.crosslinks{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px}
+.xlink{font-family:var(--mono);font-size:10px;color:var(--jade-ink);border:1px solid rgba(21,97,74,.25);padding:8px 13px;transition:background .22s,color .22s}
+.xlink:hover{background:var(--jade-ink);color:var(--paper)}
+
+footer{position:relative;z-index:1;background:var(--ground);color:var(--ivory);padding:0 var(--gut);overflow:hidden;border-top:1px solid var(--line)}
+footer::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 80% at 0% 100%,rgba(127,192,160,.06) 0%,transparent 58%)}
+.ft-maxim{max-width:var(--maxw);margin:0 auto;padding:clamp(36px,5.5vh,56px) 0 clamp(28px,4vh,40px);border-bottom:1px solid var(--line);text-align:center;position:relative;z-index:1}
+.ft-lat{display:block;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(26px,3.8vw,50px);letter-spacing:-.012em;line-height:1.3;color:var(--ivory)}
+.ft-trn{display:block;margin-top:9px;font-family:var(--mono);font-size:8px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--jade);opacity:.7}
+.ft-body{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 clamp(44px,6vw,88px);padding:clamp(36px,5.5vh,56px) 0;border-bottom:1px solid var(--line);position:relative;z-index:1}
+.ft-col-div{background:linear-gradient(180deg,transparent 0%,var(--line) 15%,var(--line) 85%,transparent 100%)}
+.ft-left{display:flex;flex-direction:column;gap:clamp(20px,3.2vh,30px)}
+.ft-brand{display:flex;align-items:center;gap:11px}
+.ft-brand-logo{height:150px;width:auto;display:block;flex-shrink:0}
+.ft-nav{display:flex;flex-wrap:wrap;gap:4px clamp(16px,2.2vw,28px);border-top:1px solid var(--line);padding-top:clamp(12px,1.8vh,18px)}
+.ft-nav a{font-family:var(--mono);font-size:9px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2);transition:color .22s}
+.ft-nav a:hover{color:var(--jade)}
+.ft-right{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(24px,4vh,40px)}
+.ft-thought{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(14px,1.45vw,18px);letter-spacing:-.01em;line-height:1.56;color:var(--mute);border-left:1px solid rgba(127,192,160,.35);padding-left:clamp(14px,1.8vw,20px)}
+.ft-thought em{color:var(--jade-hi);font-style:italic}
+.ft-cta{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:12px 20px;align-self:flex-start;position:relative;overflow:hidden;isolation:isolate;transition:gap .28s var(--e1)}
+.ft-cta::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--jade-hi);transform:translateY(101%);transition:transform .34s var(--e1)}
+.ft-cta:hover{gap:13px}.ft-cta:hover::before{transform:translateY(0)}
+.ft-base{max-width:var(--maxw);margin:0 auto;display:flex;align-items:baseline;justify-content:space-between;gap:clamp(16px,3vw,40px);flex-wrap:wrap;padding:clamp(16px,2.5vh,24px) 0 clamp(24px,3.8vh,36px);position:relative;z-index:1}
+.ft-copy{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2);white-space:nowrap;flex-shrink:0}
+.ft-disc{font-size:10px;line-height:1.6;color:var(--mute-2);font-weight:300;max-width:52ch}
+.ft-legal{display:flex;gap:clamp(12px,1.8vw,20px);flex-shrink:0}
+.ft-legal a{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute-2);transition:color .22s;white-space:nowrap}
+.ft-legal a:hover{color:var(--jade)}
+@media(max-width:820px){.ft-body{grid-template-columns:1fr;gap:clamp(30px,5vh,44px) 0}.ft-col-div{display:none}.ft-right{justify-content:flex-start}}
+@media(max-width:560px){.ft-base{flex-direction:column;gap:10px}}
+@media(prefers-reduced-motion:reduce){.r{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<header id="nav" class="on-dark">
+  <a class="nav-brand" href="index.html" aria-label="Ayin — home">
+    <img src="assets/dark.svg" alt="" class="nav-logo">
+  </a>
+  <div class="nav-center">
+    <div class="nav-set primary" id="navSetPrimary"><a href="codex.html">The Codex</a></div>
+    <div class="nav-set full" id="navSetFull">
+      <a href="index.html#instrument">Instrument</a>
+      <a href="index.html#have">Do You Have It</a>
+      <a href="index.html#work">How We Work</a>
+      <a href="codex.html">Codex</a>
+      <a href="radar.html">Radar</a>
+      <a href="founder.html">Founder</a>
+    </div>
+  </div>
+  <button class="nav-more" id="navMore" aria-expanded="false" aria-label="More navigation">
+    <span class="nav-more-lines"><i></i><i></i><i></i></span>
+  </button>
+  <a href="index.html#intake" class="nav-cta">Ambition Begins</a>
+</header>
+
+<section id="hero">
+  <div class="hero-inner r">
+    <span class="hcode">EU · 2024/1689 · REFERENCE SERIES</span>
+    <h1 class="htitle">The EU AI Act,<br><em>Plainly.</em></h1>
+    <p class="hsub">The full regulation, chapter by chapter, article by article — translated into plain English. No jargon, no legal Latin, no filler.</p>
+    <p class="hnote">A reading companion, not a substitute for the official text. Use the index to jump straight to the chapter you need.</p>
+  </div>
+</section>
+
+<section id="reader">
+  <div class="reader-grid">
+
+    <nav id="toc" aria-label="Chapter index">
+      <span class="toc-l">Chapters</span>
+      <div class="toc-grid">
+        <a class="toc-item" data-c="ch1" href="#ch1">I — General Provisions</a>
+        <a class="toc-item" data-c="ch2" href="#ch2">II — Prohibited Practices</a>
+        <a class="toc-item" data-c="ch3" href="#ch3">III — High-Risk Systems</a>
+        <a class="toc-item" data-c="ch4" href="#ch4">IV — Transparency</a>
+        <a class="toc-item" data-c="ch5" href="#ch5">V — General-Purpose AI</a>
+        <a class="toc-item" data-c="ch6" href="#ch6">VI — Innovation Support</a>
+        <a class="toc-item" data-c="ch7" href="#ch7">VII — Governance</a>
+        <a class="toc-item" data-c="ch8" href="#ch8">VIII — EU Database</a>
+        <a class="toc-item" data-c="ch9" href="#ch9">IX — Enforcement</a>
+        <a class="toc-item" data-c="ch10" href="#ch10">X — Codes of Conduct</a>
+        <a class="toc-item" data-c="ch11" href="#ch11">XI — Delegated Powers</a>
+        <a class="toc-item" data-c="ch12" href="#ch12">XII — Penalties</a>
+        <a class="toc-item" data-c="ch13" href="#ch13">XIII — Final Provisions</a>
+      </div>
+    </nav>
+
+    <div id="content">
+
+      <div class="chapter r" id="ch1">
+        <span class="chapter-num">Chapter I</span>
+        <h2 class="chapter-h">General Provisions</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 1</span>Subject Matter</h3>
+          <p>This law exists to make AI safer for people while still letting the AI industry grow. It protects health, safety, fundamental rights, democracy, the rule of law, and the environment from AI-related harm — without shutting down innovation.</p>
+          <p>To do that, it sets out: rules for placing AI on the market and using it; a list of banned AI practices; specific rules for high-risk AI systems and the people who build or use them; transparency rules for certain AI systems; rules for general-purpose AI models; a system of market monitoring and enforcement; and support measures for smaller companies and startups.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 2</span>Scope</h3>
+          <p>This law reaches further than most people expect. It applies to:</p>
+          <ul>
+            <li>Anyone who builds and places an AI system on the EU market, or puts one into service in the EU — <b>whether that company is based in the EU or not.</b> Being based outside the EU does not exempt you.</li>
+            <li>Anyone who uses ("deploys") an AI system and is based or located in the EU.</li>
+            <li>Anyone — even outside the EU — <b>whose AI system's output is used inside the EU.</b></li>
+            <li>Importers and distributors of AI systems.</li>
+            <li>Manufacturers who sell a physical product with an embedded AI system under their own brand.</li>
+            <li>EU-based legal representatives appointed by non-EU providers.</li>
+            <li>People located in the EU who are affected by an AI system, regardless of nationality or residency — <b>physical presence in the EU at the time of impact is what triggers protection.</b></li>
+          </ul>
+          <p>Some carve-outs exist. High-risk systems that are safety components of products already regulated by other EU product laws are only subject to a narrow slice of this Act. This Act doesn't apply to pure national security, defence, or military use; to non-EU public authorities or international organizations acting under law-enforcement cooperation agreements (provided fundamental rights are safeguarded); to existing liability rules for intermediary services; or to AI used purely for scientific research — though once something built for research is placed on the market, the exemption ends.</p>
+          <p>Purely personal, non-professional use by individuals is outside scope. Open-source AI released for free, with full transparency, is largely exempt — unless it's classified high-risk or falls under the transparency or systemic-risk rules.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 3</span>Definitions — selected key terms</h3>
+          <ul>
+            <li><b>AI system</b> — a machine-based system that operates with some independence, may keep adapting after deployment, and generates outputs — predictions, content, recommendations, decisions — that can affect real or virtual environments, based on the goals it's given.</li>
+            <li><b>Provider</b> — whoever builds an AI system (or has it built) and places it on the market or puts it into service under their own name or brand, whether they charge for it or not.</li>
+            <li><b>Deployer</b> — whoever uses an AI system under their own authority, except for purely personal, non-professional use.</li>
+            <li><b>Placing on the market</b> — the first time a system becomes available on the EU market. <b>Putting into service</b> — supplying it for its first real use.</li>
+            <li><b>High-risk AI system</b> — defined in Chapter III: broadly, systems used in employment, education, law enforcement, migration, credit scoring, and critical infrastructure, where a wrong decision seriously harms people.</li>
+            <li><b>General-purpose AI model</b> — a model, often trained on huge amounts of data, capable of competently performing a wide range of distinct tasks and buildable into many downstream products — think large language models.</li>
+            <li><b>Systemic risk</b> — a risk tied to a general-purpose AI model's very high capability or wide reach, the kind that could cascade across the whole EU market or society.</li>
+            <li><b>Deep fake</b> — AI-generated or altered image, audio, or video that looks like a real person, object, place, or event but isn't authentic.</li>
+          </ul>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 4</span>AI Literacy</h3>
+          <p>Providers and deployers must take reasonable steps to make sure their own staff — and anyone else operating the AI system on their behalf — actually understand it: how it works, what its limits are, and who it affects.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch2">
+        <span class="chapter-num">Chapter II</span>
+        <h2 class="chapter-h">Prohibited AI Practices</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 5</span>Banned AI Practices</h3>
+          <p>Eight categories of AI use are flatly prohibited, regardless of who's doing it or why:</p>
+          <ul>
+            <li>Subliminal or manipulative AI that distorts a person's behavior below their conscious awareness, likely to cause significant harm.</li>
+            <li>Exploiting vulnerabilities — age, disability, or a specific social or economic situation — to distort someone's behavior in a way likely to cause significant harm.</li>
+            <li>Social scoring — evaluating or ranking people based on behavior or characteristics, then treating them worse in unrelated contexts, or disproportionately to what they actually did.</li>
+            <li>Predictive policing based purely on profiling — assessing someone's risk of committing a crime based solely on personality traits, with no objective facts tying them to actual criminal activity.</li>
+            <li>Untargeted scraping of faces from the internet or CCTV footage to build or expand facial recognition databases.</li>
+            <li>Emotion recognition in workplaces and schools — banned except for genuine medical or safety reasons.</li>
+            <li>Biometric categorization to infer protected traits — race, political opinions, religion, sexual orientation, and similar — from biometric data.</li>
+            <li>Real-time remote facial recognition in public spaces by police — banned, with narrow exceptions: finding specific crime victims, preventing an imminent terrorist threat, or locating a suspect in a serious listed crime. Even then, it requires prior judicial or independent authorization, strict time and location limits, and a mandatory fundamental-rights impact assessment. No legal decision can be based on the identification alone.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch3">
+        <span class="chapter-num">Chapter III</span>
+        <h2 class="chapter-h">High-Risk AI Systems</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 6</span>Classification Rules</h3>
+          <p>An AI system counts as high-risk in two situations: first, if it's a safety component of a product (or is itself a product) already covered by EU product safety law — machinery, toys, medical devices, cars — that legally requires third-party safety certification. Second, if it falls into one of the use-case categories in Annex III (employment, education, law enforcement, and so on).</p>
+          <div class="note">There's an important carve-out even within Annex III: a system isn't high-risk if it only performs a narrow procedural task, merely improves the result of work a human already finished, checks for deviations from an established human pattern without replacing judgment, or performs a preparatory step before a real decision. <b>But this carve-out disappears entirely if the system profiles individuals</b> — profiling always makes it high-risk.</div>
+          <p>If a provider decides their Annex III system isn't actually high-risk, they still have to document that reasoning and register it — regulators can ask to see the assessment.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 7</span>Updating the High-Risk List</h3>
+          <p>The European Commission can add or remove use-cases from the high-risk list based on: how the system is used, how many people it affects, how severe the potential harm is, how easily a person could opt out, and whether existing law already protects people adequately.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 8</span>General Compliance</h3>
+          <p>High-risk systems must meet every requirement in this section, judged against their intended purpose and the current state of the art.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 9</span>Risk Management System</h3>
+          <p>Every high-risk AI system needs an ongoing risk management process across its whole lifecycle: identify foreseeable risks to health, safety, and fundamental rights; estimate and evaluate them, including realistic misuse; roll in learnings from real-world monitoring; take targeted action on what's found. Testing must confirm consistent performance before market entry, and providers must specifically consider whether the system could adversely affect anyone under 18 or other vulnerable groups.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 10</span>Data and Data Governance</h3>
+          <p>Training, validation, and testing data must be managed deliberately: how it was collected, why, how it was cleaned and labeled, whether it's representative of the people the system will affect. Providers must actively check for bias that could harm health and safety or lead to unlawful discrimination, and fix what they find. In tightly controlled circumstances, providers may process sensitive personal data specifically to detect and correct bias, subject to strict safeguards.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 11</span>Technical Documentation</h3>
+          <p>Before a high-risk system goes to market, the provider must produce full technical documentation proving it meets every requirement — detailed enough for regulators to assess compliance. Small companies and startups can use a simplified template.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 12</span>Record-Keeping</h3>
+          <p>High-risk systems must automatically log events throughout their operation, so behavior can be traced later — for spotting problems, supporting investigations, and post-market monitoring.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 13</span>Transparency Toward Deployers</h3>
+          <p>The system must be transparent enough that deployers can understand its output and use it properly — clear instructions covering purpose, accuracy and robustness, known risks, how to interpret results, and built-in human oversight measures.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 14</span>Human Oversight</h3>
+          <p>High-risk systems must be built so real people can actually oversee them — understanding limits, watching for blind over-reliance, correctly interpreting output, able to override or stop it entirely. For remote biometric identification specifically, no action can be taken on a match unless at least two qualified people independently verify it.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 15</span>Accuracy, Robustness, and Cybersecurity</h3>
+          <p>High-risk systems need to perform reliably throughout their life, resist errors and unexpected situations, and be secure against attacks that try to manipulate training data, poison the model, or exploit technical vulnerabilities. Expected accuracy levels must be stated clearly in the instructions for use.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 16</span>Provider Obligations</h3>
+          <p>Providers of high-risk systems must: ensure compliance with all requirements above; label the system with name and contact details; run a quality management system; keep required documentation and logs; complete the proper conformity assessment before market entry; issue a formal EU declaration of conformity; affix CE marking; register the system in the EU database; take corrective action if problems surface; meet accessibility standards.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 17</span>Quality Management System</h3>
+          <p>The internal operating system for compliance — regulatory strategy, design and development control, testing procedures, data management, risk management, post-market monitoring, incident reporting, and clear internal accountability. Scales to the size of the provider.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 18–20</span>Documentation, Logs, and Corrective Action</h3>
+          <p>Providers must keep technical documentation and quality-system records for <b>ten years</b> after market entry. Automatically generated logs must be kept for at least <b>six months</b>. If a provider believes their system isn't compliant, they must immediately fix, withdraw, or recall it — and tell distributors, deployers, importers, and their authorized representative.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 21–22</span>Cooperating with Authorities; Authorised Representatives</h3>
+          <p>Providers must hand over documentation to regulators on request, in a language they understand, including access to system logs. Non-EU providers must appoint an EU-based authorized representative before their product reaches the EU market.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 23–24</span>Importers and Distributors</h3>
+          <p>Importers must verify the system went through proper conformity assessment, has full documentation, bears CE marking, and has an EU authorized representative before placing it on the market — and hold it back if they suspect non-compliance or counterfeiting. Distributors carry a similar verification duty.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 25</span>Responsibility Along the Value Chain</h3>
+          <p>If a distributor, importer, or third party puts their own brand on someone else's high-risk system, substantially modifies it, or repurposes a non-high-risk system into a high-risk one — <b>they become the "provider" for legal purposes and inherit all provider obligations.</b> The original provider must still cooperate and share necessary information.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 26</span>Deployer Obligations</h3>
+          <p>Deployers must use the system per its instructions, assign human oversight to genuinely competent people, monitor operation, and suspend use immediately if risk is suspected — informing the provider and relevant authority. Employers must tell workers and representatives before deploying a high-risk system at the workplace. Public-sector deployers of Annex III systems must register their use in the EU database before using it.</p>
+          <p>Real-time or after-the-fact biometric identification by law enforcement carries extra rules: post-event biometric ID searches generally need judicial or independent authorization, are limited to specific criminal investigations, and can never be used as an untargeted surveillance tool.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 27</span>Fundamental Rights Impact Assessment</h3>
+          <p>Before deploying certain high-risk systems, public bodies and specific private entities (banks, insurers) must assess the impact on fundamental rights first — who's affected, what could go wrong, what will be done if it does. Results must be reported to the relevant regulator.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 28–39</span>Notified Bodies</h3>
+          <p>Each EU country must set up an authority responsible for vetting and monitoring the independent bodies ("notified bodies") that certify high-risk AI systems — genuinely independent, technically competent, properly resourced. Countries share information about notified bodies with the Commission and each other.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 40–42</span>Standards and Presumption of Conformity</h3>
+          <p>If a provider follows official EU-harmonized technical standards, their system is presumed to meet the legal requirements those standards cover. Where no standard exists yet, the Commission can issue "common specifications" as a stopgap.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 43</span>Conformity Assessment</h3>
+          <p>Most high-risk systems can be <b>self-certified</b> by the provider through internal checks. Biometric systems generally require independent third-party assessment. Any substantial modification later triggers a fresh assessment.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 44–49</span>Certificates, Declarations, CE Marking, Registration</h3>
+          <p>Certificates from notified bodies are valid for four to five years depending on system type, and can be suspended or withdrawn if the system stops complying. Providers must issue a written EU declaration of conformity and affix CE marking before market entry. Except for a narrow set of law-enforcement and migration systems (registered in a secured, non-public part of the database), high-risk systems must be registered in a public EU database before reaching the market.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch4">
+        <span class="chapter-num">Chapter IV</span>
+        <h2 class="chapter-h">Transparency Obligations</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 50</span>Transparency for Certain AI Systems</h3>
+          <p>Even AI that isn't high-risk carries disclosure duties:</p>
+          <ul>
+            <li>If a person is interacting with an AI system (like a chatbot), they must be told, unless it's obvious from context.</li>
+            <li>AI-generated audio, image, video, or text must be marked in a machine-readable way as artificially generated — with narrow exceptions for minor editing assistance.</li>
+            <li>People exposed to emotion-recognition or biometric-categorization systems must be informed.</li>
+            <li>Deep fakes must be labeled as artificially generated or manipulated, unless clearly satire, art, or fiction — a lighter disclosure suffices there. AI-generated text published on matters of public interest must also be disclosed, unless a human editor takes responsibility for it.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch5">
+        <span class="chapter-num">Chapter V</span>
+        <h2 class="chapter-h">General-Purpose AI Models</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 51</span>Classifying Systemic Risk</h3>
+          <p>A general-purpose AI model carries "systemic risk" if it has high-impact capabilities — presumed once training computation exceeds <b>10²⁵ floating-point operations</b> — or if the Commission decides, case by case, that its capability or reach is equivalent.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 52</span>Notification Procedure</h3>
+          <p>Providers whose model crosses that threshold must notify the Commission within two weeks. They can argue their specific model is an exception, but the Commission can reject that and classify it as systemic-risk anyway.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 53</span>Obligations for All General-Purpose AI Model Providers</h3>
+          <p>Every provider must: keep up-to-date technical documentation of the model, including training and evaluation; give downstream developers enough information to use it safely and meet their own obligations; maintain a policy for complying with EU copyright law, including honoring rights-holders' opt-outs from data mining; and publish a sufficiently detailed public summary of training content. Providers releasing models under genuinely open free licenses are exempt from some duties — except copyright compliance — unless the model carries systemic risk.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 54</span>Authorised Representatives</h3>
+          <p>Non-EU providers of general-purpose AI models must appoint an EU-based representative before entering the EU market, similarly to Article 22.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 55</span>Extra Obligations for Systemic-Risk Models</h3>
+          <p>Providers of systemic-risk models must additionally: run standardized model evaluations, including adversarial ("red-team") testing; actively assess and mitigate systemic risks at EU level; track and report serious incidents to the Commission; maintain strong cybersecurity for the model and its infrastructure.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 56</span>Codes of Practice</h3>
+          <p>Until formal harmonized standards exist, the EU AI Office will facilitate voluntary codes of practice that providers can rely on to demonstrate compliance with the general-purpose AI model rules.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch6">
+        <span class="chapter-num">Chapter VI</span>
+        <h2 class="chapter-h">Measures Supporting Innovation</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 57–61</span>Regulatory Sandboxes and Real-World Testing</h3>
+          <p>Every EU country must run at least one AI regulatory sandbox — a supervised space to develop and test AI systems under regulatory guidance before full market launch, with legal certainty and reduced compliance friction. Complying in good faith with sandbox guidance shields participants from fines. High-risk systems can also be tested in real-world conditions outside a sandbox, under strict conditions: a registered testing plan, informed consent from test subjects, time limits (generally six months, extendable), and the ability to fully reverse the system's outputs.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 62–63</span>Support for SMEs; Simplified Compliance</h3>
+          <p>Small businesses and startups get priority sandbox access, reduced conformity-assessment fees, dedicated guidance channels, and standardized templates. Microenterprises can meet the quality-management-system requirement in a simplified form.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch7">
+        <span class="chapter-num">Chapter VII</span>
+        <h2 class="chapter-h">Governance</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 64–69</span>The AI Office, the Board, and Expert Bodies</h3>
+          <p>The European Commission runs this system through the AI Office, which builds EU-wide expertise and directly supervises general-purpose AI models. A European Artificial Intelligence Board, made up of one representative per country, coordinates enforcement and advises the Commission. An advisory forum of industry, civil society, and academic stakeholders feeds in outside expertise, and a scientific panel of independent experts supports technical enforcement, including flagging models that may pose systemic risk.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 70</span>National Competent Authorities</h3>
+          <p>Each country must designate its own notifying authority and market surveillance authority, give them proper funding and technically qualified staff, and publish how to contact them.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch8">
+        <span class="chapter-num">Chapter VIII</span>
+        <h2 class="chapter-h">EU Database</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 71</span>The EU Database</h3>
+          <p>The Commission maintains a public, searchable database of registered high-risk AI systems. Providers and — for public-sector use — deployers must submit their registration data before market entry or use. A narrow set of law-enforcement and migration-related systems is kept in a secure, non-public section.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch9">
+        <span class="chapter-num">Chapter IX</span>
+        <h2 class="chapter-h">Monitoring, Information Sharing, Enforcement</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 72</span>Post-Market Monitoring</h3>
+          <p>Providers must actively collect and analyze real-world performance data on their high-risk systems throughout their lifetime, to catch problems and confirm continued compliance.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 73</span>Reporting Serious Incidents</h3>
+          <p>Serious incidents — death, serious harm to health, serious disruption of critical infrastructure, breaches of fundamental-rights law, serious property or environmental damage — must be reported to the relevant authority, generally within <b>15 days</b>, shortened to <b>2 days</b> for widespread infringements and <b>10 days</b> if someone died.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 74–84</span>Market Surveillance Powers</h3>
+          <p>National market surveillance authorities can demand documentation, access training data and even source code under specific conditions, run remote or on-site inspections, and order corrective action, withdrawal, or recall of non-compliant systems. Special surveillance rules apply to systems tied to financial services, law enforcement, and general-purpose AI models built and deployed by the same provider (which fall under the AI Office directly). A formal EU-level safeguard procedure resolves disagreements between countries or with the Commission over whether a national enforcement action was justified.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 85–87</span>Remedies</h3>
+          <p>Any person can file a complaint with a market surveillance authority over a suspected breach of this law. Anyone affected by certain high-risk AI decisions has a right to a clear explanation of the AI system's role. Whistleblower protections under existing EU law extend to people reporting breaches of this Act.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 88–94</span>Enforcement Against General-Purpose AI Model Providers</h3>
+          <p>The Commission — acting through the AI Office — has exclusive power to enforce the general-purpose AI model rules. It can demand documentation, run its own evaluations (including with independent experts), and require providers to take mitigation measures, restrict market availability, or withdraw a model entirely.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch10">
+        <span class="chapter-num">Chapter X</span>
+        <h2 class="chapter-h">Codes of Conduct and Guidelines</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 95–96</span>Voluntary Codes and Commission Guidance</h3>
+          <p>Providers of AI systems that aren't high-risk are encouraged — not required — to voluntarily adopt some of the same safeguards, through codes of conduct addressing things like environmental sustainability, AI literacy, and inclusive design. The Commission will also issue practical guidance on applying this Regulation, paying particular attention to the needs of SMEs and startups.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch11">
+        <span class="chapter-num">Chapter XI</span>
+        <h2 class="chapter-h">Delegated Powers</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 97–98</span></h3>
+          <p>The Commission can update technical details of this Regulation — like the high-risk list, technical documentation requirements, or systemic-risk thresholds — through delegated acts, subject to five-year renewable authorization and oversight by the European Parliament and Council.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch12">
+        <span class="chapter-num">Chapter XII</span>
+        <h2 class="chapter-h">Penalties</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 99</span>Fines</h3>
+          <ul>
+            <li>Breaching the banned-practices list (Article 5) — up to <b>€35 million or 7%</b> of global annual turnover, whichever is higher.</li>
+            <li>Breaching most other provider, importer, distributor, or deployer obligations — up to <b>€15 million or 3%</b> of turnover.</li>
+            <li>Giving false or misleading information to authorities — up to <b>€7.5 million or 1%</b> of turnover.</li>
+          </ul>
+          <p>Smaller companies get the lower of the two figures in each case, and regulators must weigh proportionality, intent, and cooperation when setting the actual amount.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 100</span>Fines on EU Institutions</h3>
+          <p>The European Data Protection Supervisor can fine EU institutions themselves for breaches — up to €1.5 million for banned practices, €750,000 for other breaches.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 101</span>Fines for General-Purpose AI Model Providers</h3>
+          <p>The Commission can fine general-purpose AI model providers up to <b>3% of global turnover or €15 million</b>, whichever is higher, for breaching the model-specific rules or obstructing the Commission's evaluations.</p>
+        </div>
+      </div>
+
+      <div class="chapter r" id="ch13">
+        <span class="chapter-num">Chapter XIII</span>
+        <h2 class="chapter-h">Final Provisions</h2>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 102–110</span>Amendments to Other EU Laws</h3>
+          <p>A series of technical amendments align this Regulation with existing EU product-safety laws covering aviation, vehicles, machinery, marine equipment, and rail — folding AI-specific safety requirements into those existing frameworks rather than creating conflicting parallel rules.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 111</span>Transition for Existing Systems</h3>
+          <p>AI systems already on the market get transition time: large-scale government IT systems until the end of 2030; other high-risk systems only need to comply if significantly redesigned after August 2026 (public-sector high-risk systems get until 2030 regardless); and general-purpose AI models already on the market before August 2025 have until August 2027 to fully comply.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 112</span>Review</h3>
+          <p>The Commission will keep reviewing this Regulation — assessing annually whether the high-risk and banned-practice lists need updating, and running a fuller review roughly every four years, including whether a dedicated EU AI agency is eventually needed.</p>
+        </div>
+
+        <div class="art">
+          <h3 class="art-h"><span>Art. 113</span>Entry Into Force</h3>
+          <p>The Regulation entered into force twenty days after publication. Most of it applies from <b>2 August 2026</b>. But the general provisions and banned practices (Chapters I–II) applied earlier, from <b>2 February 2025</b>; the governance structure, general-purpose AI model rules, and penalty framework applied from <b>2 August 2025</b>; and the high-risk product-safety integration rules (Article 6(1)) apply last, from <b>2 August 2027</b>.</p>
+        </div>
+      </div>
+
+      <div class="fitbox r">
+        <span class="fitbox-l">Map → Clear</span>
+        <p>This reference covers what the Act says. Working out which articles actually bind your specific product — and which role you play under them — is a different exercise. <b>Ayin can walk your fact pattern through it in a short conversation.</b></p>
+        <div class="fit-cta">
+          <a href="index.html#intake" class="cta-btn">Send this to Ayin →</a>
+          <a href="codex-ai-act-filter.html" class="cta-link">Read the shorter briefing first →</a>
+        </div>
+      </div>
+
+      <div class="crosslinks">
+        <a class="xlink" href="codex-ai-act-filter.html">→ The practical briefing: The AI Act Is Not a Checklist</a>
+        <a class="xlink" href="codex-dpdp-not-just-big-tech.html">→ India's parallel regime: the DPDP Act</a>
+        <a class="xlink" href="codex.html">→ Back to the full Codex</a>
+      </div>
+
+      <div class="srcfoot">
+        <span class="srcfoot-l">Sources</span>
+        <ol>
+          <li>Regulation (EU) 2024/1689 of the European Parliament and of the Council (the Artificial Intelligence Act), EUR-Lex — full text, Articles 1–113 and accompanying Annexes.</li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="jumpbar">
+  <button class="jump-btn" id="jumpTop" type="button">↑ Back to index</button>
+</div>
+
+<footer>
+  <div class="ft-maxim">
+    <span class="ft-lat">Praemonitus, praemunitus</span>
+    <span class="ft-trn">Forewarned is forearmed</span>
+  </div>
+  <div class="ft-body">
+    <div class="ft-left">
+      <div class="ft-brand"><img src="assets/A.svg" alt="" class="ft-brand-logo"></div>
+      <nav class="ft-nav" aria-label="Footer">
+        <a href="index.html#instrument">The instrument</a>
+        <a href="index.html#have">Do you have it</a>
+        <a href="index.html#ayin">The apparatus</a>
+        <a href="index.html#work">How we work</a>
+        <a href="codex.html">The Codex</a>
+        <a href="founder.html">Who's behind this</a>
+      </nav>
+    </div>
+    <div class="ft-col-div" aria-hidden="true"></div>
+    <div class="ft-right">
+      <p class="ft-thought">Most of the work is invisible. A market that opens, an account that stays live, a move that completes — and <em>no one writes the article.</em></p>
+      <a href="index.html#intake" class="ft-cta">Tell us the crossing →</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <span class="ft-copy">© <span id="ftYear"></span> Ayin</span>
+    <p class="ft-disc">Ayin is an advisory and compliance practice, not a law firm. Nothing on this site constitutes legal advice. Regime names and ceilings are cited for illustration only.</p>
+    <div class="ft-legal">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }), { threshold:.04, rootMargin:'0px 0px -20px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+$('ftYear').textContent = new Date().getFullYear();
+
+/* nav register */
+(function(){
+  const nav = $('nav');
+  const heroEl = $('hero');
+  const readerEl = $('reader');
+  const navLogo = nav.querySelector('.nav-logo');
+  function onScroll(){
+    nav.classList.toggle('nav-visible', scrollY > 40);
+    const probe = scrollY + 60;
+    const inHero = heroEl ? probe < (heroEl.offsetTop + heroEl.offsetHeight) : false;
+    nav.classList.toggle('nav-scrim', inHero);
+    nav.classList.add('on-dark');
+    if (navLogo) navLogo.src = 'assets/light.svg';
+  }
+  addEventListener('scroll', onScroll, { passive:true });
+  addEventListener('resize', onScroll, { passive:true });
+  onScroll();
+})();
+
+(function(){
+  const btn=$('navMore'), setP=$('navSetPrimary'), setF=$('navSetFull');
+  if(!btn||!setP||!setF) return;
+  btn.addEventListener('click',()=>{
+    const open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded', open?'false':'true');
+    setP.classList.toggle('hidden', !open);
+    setF.classList.toggle('shown', !open);
+  });
+  setF.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    btn.setAttribute('aria-expanded','false'); setP.classList.remove('hidden'); setF.classList.remove('shown');
+  }));
+})();
+
+/* chapter scrollspy for the TOC rail */
+const chapters = [...document.querySelectorAll('.chapter')];
+const tocLinks = [...document.querySelectorAll('.toc-item')];
+function spy(){
+  const probe = scrollY + innerHeight * 0.3;
+  let current = chapters[0]?.id;
+  for(const ch of chapters){
+    if(ch.offsetTop <= probe) current = ch.id;
+  }
+  tocLinks.forEach(l => l.classList.toggle('active', l.dataset.c === current));
+  $('jumpTop').classList.toggle('show', scrollY > 600);
+}
+addEventListener('scroll', spy, { passive:true });
+spy();
+
+$('jumpTop').addEventListener('click', () => {
+  const t = $('toc');
+  if(t) scrollTo({ top: 0, behavior:'smooth' });
+});
+</script>
+</body>
+</html>

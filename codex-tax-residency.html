@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071512">
+<title>Tax Residency Tie-Breaker Rules — The Codex — Ayin</title>
+<link rel="icon" type="image/svg+xml" href="assets/dark.svg">
+<meta name="description" content="When two countries both think you live there, a treaty — not a feeling — decides. How Article 4 tie-breakers actually work, and what to prove at each step.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE4; --paper-2:#EAE3D8; --ground:#0C1F1A; --g1:#102822; --abyss:#071512;
+  --ivory:#EFE9DB; --ivory-2:#D8D1C0; --mute:rgba(239,233,219,.74); --mute-2:rgba(239,233,219,.46); --line:rgba(239,233,219,.10);
+  --ink:#16120B; --ink-soft:rgba(22,18,11,.66); --ink-faint:rgba(22,18,11,.38); --ink-line:rgba(22,18,11,.13); --ink-line2:rgba(22,18,11,.065);
+  --jade:#7FC0A0; --jade-hi:#A8DCC2; --jade-ink:#15614A; --jade-12:rgba(127,192,160,.12); --jade-20:rgba(127,192,160,.20); --jade-glow:rgba(127,192,160,.24);
+  --brass:#9A6010; --brass-hi:#C8963C;
+  --disp:'Spectral',Georgia,serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --e1:cubic-bezier(.2,.8,.2,1); --e2:cubic-bezier(.16,1,.3,1); --gut:clamp(24px,5vw,84px); --maxw:980px; --navh:70px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--abyss);scroll-behavior:smooth}
+body{font-family:var(--body);font-weight:300;line-height:1.7;font-size:16px;background:var(--abyss);color:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.r{opacity:0;transform:translateY(18px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
+.r.in{opacity:1;transform:none}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;padding:0 var(--gut) 0 22px;
+  transition:background .5s,border-color .5s,opacity .6s var(--e2),transform .6s var(--e2),backdrop-filter .5s;
+  border-bottom:1px solid transparent;opacity:0;transform:translateY(-8px);pointer-events:none}
+#nav.nav-scrim{background:linear-gradient(180deg,rgba(7,21,18,.5) 0%,rgba(7,21,18,.18) 100%);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#nav.nav-visible{opacity:1;transform:none;pointer-events:auto}
+.nav-brand{display:flex;align-items:center;gap:11px;z-index:2}
+.nav-logo{height:50px;width:auto;display:block;flex-shrink:0}
+.nav-center{flex:1;display:flex;align-items:center;justify-content:flex-end;margin-left:auto;margin-right:18px;
+  position:relative;height:34px;overflow:hidden;min-width:0}
+.nav-set{position:absolute;right:0;top:0;display:flex;align-items:center;gap:18px;height:34px;
+  transition:transform .45s var(--e2),opacity .35s var(--e2)}
+.nav-set a{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);
+  white-space:nowrap;transition:color .25s}
+.nav-set a:hover{color:var(--jade)}
+#nav.on-paper .nav-set a{color:var(--ink-soft)}
+#nav.on-paper .nav-set a:hover{color:var(--jade-ink)}
+.nav-set.primary{transform:translateX(0);opacity:1}
+.nav-set.primary.hidden{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full{transform:translateX(14px);opacity:0;pointer-events:none}
+.nav-set.full.shown{transform:translateX(0);opacity:1;pointer-events:auto}
+.nav-more{position:relative;width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  margin-right:14px;flex-shrink:0;cursor:pointer}
+.nav-more-lines{position:relative;width:16px;height:10px;display:block}
+.nav-more-lines i{position:absolute;left:0;right:0;height:1px;background:var(--mute);
+  transition:transform .35s var(--e2),opacity .35s,width .35s,background .35s}
+.nav-more-lines i:nth-child(1){top:0;width:100%}
+.nav-more-lines i:nth-child(2){top:4.5px;width:65%;left:auto;right:0}
+.nav-more-lines i:nth-child(3){top:9px;width:100%}
+#nav.on-paper .nav-more-lines i{background:var(--ink-soft)}
+.nav-more:hover .nav-more-lines i{width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(1){transform:translateY(4.5px) rotate(45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(2){opacity:0}
+.nav-more[aria-expanded="true"] .nav-more-lines i:nth-child(3){transform:translateY(-4.5px) rotate(-45deg);width:100%}
+.nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade)}
+#nav.on-paper .nav-more[aria-expanded="true"] .nav-more-lines i{background:var(--jade-ink)}
+.nav-cta{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;transition:background .3s,color .3s,border-color .5s;border:1px solid transparent}
+#nav.on-paper .nav-cta{color:var(--jade-ink);border-color:rgba(21,97,74,.3)}
+#nav.on-paper .nav-cta:hover{background:var(--jade-ink);color:var(--paper)}
+#nav.on-dark{background:transparent;border-color:transparent}
+#nav.on-dark .nav-cta{color:var(--jade);border-color:var(--jade-20)}
+#nav.on-dark .nav-cta:hover{background:var(--jade);color:var(--abyss)}
+@media(max-width:760px){.nav-set.full{gap:12px}.nav-set.full a:nth-child(n+5){display:none}}
+
+#hero{background:var(--abyss);padding:clamp(110px,16vh,150px) var(--gut) clamp(50px,7vh,70px);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 80% 20%,rgba(127,192,160,.06) 0%,transparent 60%)}
+.hero-inner{max-width:var(--maxw);margin:0 auto;position:relative;z-index:1}
+.hcode{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--jade);background:var(--jade-12);border:1px solid var(--jade-20);padding:6px 12px;display:inline-block;margin-bottom:20px}
+.htitle{font-family:var(--disp);font-weight:300;font-size:clamp(32px,5vw,56px);letter-spacing:-.03em;line-height:1.04;color:var(--ivory)}
+.htitle em{font-style:italic;color:var(--jade)}
+.hsub{margin-top:18px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.6vw,19px);color:var(--mute);max-width:62ch;line-height:1.5}
+.hmeta{display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);margin-top:clamp(32px,5vh,44px);padding-top:20px;border-top:1px solid var(--line)}
+.hm{display:flex;flex-direction:column;gap:5px}
+.hml{font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-2)}
+.hmv{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+
+#body{background:var(--paper);color:var(--ink);padding:clamp(56px,8vh,84px) var(--gut) clamp(80px,12vh,120px)}
+.body-inner{max-width:var(--maxw);margin:0 auto}
+section.sec{margin-bottom:clamp(44px,6.5vh,64px)}
+.sec-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:16px;display:block}
+.sec-h{font-family:var(--disp);font-weight:400;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.018em;color:var(--ink);margin-bottom:18px}
+.sec p{font-size:15px;line-height:1.85;color:var(--ink-soft);margin-bottom:16px;max-width:68ch}
+.sec p:last-child{margin-bottom:0}
+.sec p b{color:var(--ink);font-weight:500}
+.sec ul{display:flex;flex-direction:column;gap:0;margin:8px 0}
+.sec li{font-size:14.5px;line-height:1.75;color:var(--ink-soft);padding:11px 0 11px 22px;border-bottom:1px solid var(--ink-line2);position:relative}
+.sec li:first-child{border-top:1px solid var(--ink-line2)}
+.sec li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:1px;background:var(--jade-ink);opacity:.55}
+.sec li b{color:var(--ink);font-weight:500}
+
+.qbox{border:1px solid var(--ink-line);background:var(--paper-2);padding:clamp(22px,3.2vw,30px)}
+.qbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade-ink);margin-bottom:14px;display:block}
+.qbox ul{margin:0}
+.qbox li{font-size:14px;border-bottom:1px solid var(--ink-line2)}
+
+.verdict{display:flex;gap:14px;align-items:flex-start;border-left:2px solid var(--jade-ink);background:rgba(21,97,74,.045);padding:16px 20px;margin-top:16px}
+.verdict-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--jade-ink);flex-shrink:0;padding-top:2px}
+.verdict p{margin:0;font-size:14px;line-height:1.7;max-width:none}
+
+/* the tie-breaker ladder — sequential, stop at first resolution */
+.ladder{display:flex;flex-direction:column;border:1px solid var(--ink-line);margin-top:6px}
+.rung{padding:16px 20px 16px 20px;border-bottom:1px solid var(--ink-line2)}
+.rung:last-child{border-bottom:none}
+.rung-top{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.rung-n{font-family:var(--disp);font-style:italic;font-weight:300;font-size:19px;color:var(--jade-ink);flex-shrink:0;width:22px}
+.rung-name{font-family:var(--disp);font-weight:500;font-size:16px;color:var(--ink)}
+.rung p{margin:0 0 0 36px;font-size:13.5px;color:var(--ink-soft);max-width:64ch}
+
+/* worked example box */
+.example{border-left:2px solid var(--brass-hi);background:rgba(200,150,60,.06);padding:18px 20px;margin-top:16px}
+.example-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:10px;display:block}
+.example p{font-size:13.5px;color:var(--ink-soft);margin-bottom:10px;max-width:66ch}
+.example p:last-child{margin-bottom:0}
+.example p b{color:var(--ink);font-weight:500}
+
+.ledger{border:1px solid var(--ink-line);overflow:hidden;margin-top:6px}
+.ledger-cap{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);padding:14px 20px;border-bottom:1px solid var(--ink-line);background:var(--paper-2);display:flex;align-items:center;gap:10px}
+.ledger-cap::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--brass-hi)}
+.ledger-row{padding:16px 20px;border-bottom:1px solid var(--ink-line2);font-size:13.5px;line-height:1.7;color:var(--ink-soft)}
+.ledger-row:last-child{border-bottom:none}
+.ledger-row b{color:var(--ink);font-weight:500}
+.ledger-src{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--ink-faint)}
+
+.fitbox{background:var(--ground);color:var(--ivory);padding:clamp(26px,3.6vw,34px);position:relative;overflow:hidden}
+.fitbox::before{content:'';position:absolute;top:-1px;left:-1px;width:50%;height:1px;background:linear-gradient(90deg,var(--jade),transparent)}
+.fitbox-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jade);margin-bottom:12px;display:block}
+.fitbox p{color:var(--mute);font-size:14.5px;line-height:1.75;margin-bottom:18px;max-width:62ch}
+.fitbox p b{color:var(--ivory);font-weight:500}
+.fit-cta{display:inline-flex;gap:14px;flex-wrap:wrap}
+.cta-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:13px 20px;transition:background .25s}
+.cta-btn:hover{background:var(--jade-hi)}
+.cta-link{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--jade);border-bottom:1px solid var(--jade-20);align-self:center;padding-bottom:2px}
+
+.srcfoot{margin-top:clamp(40px,6vh,56px);padding-top:24px;border-top:1px solid var(--ink-line);display:flex;flex-direction:column;gap:10px}
+.srcfoot-l{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.srcfoot ol{padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.srcfoot li{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);line-height:1.6}
+.crosslinks{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+.xlink{font-family:var(--mono);font-size:10px;color:var(--jade-ink);border:1px solid rgba(21,97,74,.25);padding:8px 13px;transition:background .22s,color .22s}
+.xlink:hover{background:var(--jade-ink);color:var(--paper)}
+
+footer{position:relative;z-index:1;background:var(--ground);color:var(--ivory);padding:0 var(--gut);overflow:hidden;border-top:1px solid var(--line)}
+footer::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 80% at 0% 100%,rgba(127,192,160,.06) 0%,transparent 58%)}
+.ft-maxim{max-width:var(--maxw);margin:0 auto;padding:clamp(36px,5.5vh,56px) 0 clamp(28px,4vh,40px);border-bottom:1px solid var(--line);text-align:center;position:relative;z-index:1}
+.ft-lat{display:block;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(26px,3.8vw,50px);letter-spacing:-.012em;line-height:1.3;color:var(--ivory)}
+.ft-trn{display:block;margin-top:9px;font-family:var(--mono);font-size:8px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--jade);opacity:.7}
+.ft-body{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 clamp(44px,6vw,88px);padding:clamp(36px,5.5vh,56px) 0;border-bottom:1px solid var(--line);position:relative;z-index:1}
+.ft-col-div{background:linear-gradient(180deg,transparent 0%,var(--line) 15%,var(--line) 85%,transparent 100%)}
+.ft-left{display:flex;flex-direction:column;gap:clamp(20px,3.2vh,30px)}
+.ft-brand{display:flex;align-items:center;gap:11px}
+.ft-brand-logo{height:150px;width:auto;display:block;flex-shrink:0}
+.ft-nav{display:flex;flex-wrap:wrap;gap:4px clamp(16px,2.2vw,28px);border-top:1px solid var(--line);padding-top:clamp(12px,1.8vh,18px)}
+.ft-nav a{font-family:var(--mono);font-size:9px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-2);transition:color .22s}
+.ft-nav a:hover{color:var(--jade)}
+.ft-right{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(24px,4vh,40px)}
+.ft-thought{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(14px,1.45vw,18px);letter-spacing:-.01em;line-height:1.56;color:var(--mute);border-left:1px solid rgba(127,192,160,.35);padding-left:clamp(14px,1.8vw,20px)}
+.ft-thought em{color:var(--jade-hi);font-style:italic}
+.ft-cta{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--abyss);background:var(--jade);padding:12px 20px;align-self:flex-start;position:relative;overflow:hidden;isolation:isolate;transition:gap .28s var(--e1)}
+.ft-cta::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--jade-hi);transform:translateY(101%);transition:transform .34s var(--e1)}
+.ft-cta:hover{gap:13px}.ft-cta:hover::before{transform:translateY(0)}
+.ft-base{max-width:var(--maxw);margin:0 auto;display:flex;align-items:baseline;justify-content:space-between;gap:clamp(16px,3vw,40px);flex-wrap:wrap;padding:clamp(16px,2.5vh,24px) 0 clamp(24px,3.8vh,36px);position:relative;z-index:1}
+.ft-copy{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2);white-space:nowrap;flex-shrink:0}
+.ft-disc{font-size:10px;line-height:1.6;color:var(--mute-2);font-weight:300;max-width:52ch}
+.ft-legal{display:flex;gap:clamp(12px,1.8vw,20px);flex-shrink:0}
+.ft-legal a{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute-2);transition:color .22s;white-space:nowrap}
+.ft-legal a:hover{color:var(--jade)}
+@media(max-width:820px){.ft-body{grid-template-columns:1fr;gap:clamp(30px,5vh,44px) 0}.ft-col-div{display:none}.ft-right{justify-content:flex-start}}
+@media(max-width:560px){.ft-base{flex-direction:column;gap:10px}}
+@media(prefers-reduced-motion:reduce){.r{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<header id="nav" class="on-dark">
+  <a class="nav-brand" href="index.html" aria-label="Ayin — home">
+    <img src="assets/dark.svg" alt="" class="nav-logo">
+  </a>
+  <div class="nav-center">
+    <div class="nav-set primary" id="navSetPrimary"><a href="codex.html">The Codex</a></div>
+    <div class="nav-set full" id="navSetFull">
+      <a href="index.html#instrument">Instrument</a>
+      <a href="index.html#have">Do You Have It</a>
+      <a href="index.html#work">How We Work</a>
+      <a href="codex.html">Codex</a>
+      <a href="radar.html">Radar</a>
+      <a href="founder.html">Founder</a>
+    </div>
+  </div>
+  <button class="nav-more" id="navMore" aria-expanded="false" aria-label="More navigation">
+    <span class="nav-more-lines"><i></i><i></i><i></i></span>
+  </button>
+  <a href="index.html#intake" class="nav-cta">Ambition Begins</a>
+</header>
+
+<section id="hero">
+  <div class="hero-inner r">
+    <span class="hcode">OECD · MODEL ART. 4 · CROSS-BORDER</span>
+    <h1 class="htitle">When Two Countries Both<br>Think You <em>Live There.</em></h1>
+    <p class="hsub">A treaty — not a feeling, and not a preference — decides. How Article 4 tie-breaker tests actually work, in the order they're applied, and what you need to prove at each step.</p>
+    <div class="hmeta">
+      <div class="hm"><span class="hml">Jurisdiction</span><span class="hmv">Global — via bilateral tax treaties (OECD Model)</span></div>
+      <div class="hm"><span class="hml">Vertical</span><span class="hmv">Cross-border individuals, remote employees, relocating founders</span></div>
+      <div class="hm"><span class="hml">Stage</span><span class="hmv">Map → Hold</span></div>
+      <div class="hm"><span class="hml">Last reviewed</span><span class="hmv">15 Jul 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="body">
+  <div class="body-inner">
+
+    <section class="sec r">
+      <span class="sec-l">In thirty seconds</span>
+      <div class="qbox">
+        <span class="qbox-l">The plain version</span>
+        <ul>
+          <li>Each country sets its own domestic test for tax residency — day counts, permanent homes, economic ties. When two countries' domestic tests both claim you in the same year, you're a <b>dual resident</b>, and both could tax your worldwide income unless a treaty resolves it.</li>
+          <li>Most bilateral tax treaties follow the <b>OECD Model Convention, Article 4(2)</b>, which resolves dual residency through a strict, sequential ladder of tests — you work through them in order and stop the moment one produces a clear answer.</li>
+          <li>Being a treaty resident of one country <b>doesn't change your domestic status</b> in the other — a US company remains a domestic corporation regardless of its treaty residence; a dual-resident individual generally must actively notify the tax authority they're relying on the treaty position, not just assume it applies.</li>
+          <li>Claiming treaty residency doesn't automatically exempt you from every domestic obligation — a recent Korean Supreme Court case found that asserting treaty tie-breaker residency did <b>not</b>, on its own, exempt a taxpayer from foreign-account reporting duties for years before a specific legislative exemption took effect.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">The tie-breaker ladder</span>
+      <h2 class="sec-h">A sequence, not a menu — stop at the first test that resolves it.</h2>
+      <div class="ladder">
+        <div class="rung">
+          <div class="rung-top"><span class="rung-n">1</span><span class="rung-name">Permanent home</span></div>
+          <p>Is there a dwelling available for your continuous use in one country, or both? Any form of dwelling qualifies — owned, rented, or otherwise occupied — but a hotel room or short-term rental lacking the indicia of permanence doesn't count. If a permanent home exists in only one country, that settles it. If it exists in both — or in neither — move to the next test.</p>
+        </div>
+        <div class="rung">
+          <div class="rung-top"><span class="rung-n">2</span><span class="rung-name">Center of vital interests</span></div>
+          <p>Where are your personal and economic ties actually strongest? Spouse and children, primary employment or business oversight, main bank accounts and investment management, club and community memberships, even where you're registered to vote. This is a comparative weighing exercise, not a checklist with a pass mark.</p>
+        </div>
+        <div class="rung">
+          <div class="rung-top"><span class="rung-n">3</span><span class="rung-name">Habitual abode</span></div>
+          <p>If neither prior test resolves it, this asks where you actually have the <b>habit</b> of living — examined through the pattern and frequency of your presence over time, not a single year's day count in isolation.</p>
+        </div>
+        <div class="rung">
+          <div class="rung-top"><span class="rung-n">4</span><span class="rung-name">Nationality</span></div>
+          <p>If habitual abode still doesn't resolve it — you have one in both countries, or in neither — residency falls to whichever country you're a national of.</p>
+        </div>
+        <div class="rung">
+          <div class="rung-top"><span class="rung-n">5</span><span class="rung-name">Mutual agreement</span></div>
+          <p>If you're a national of both countries, or of neither, the two tax authorities must resolve it directly through a competent-authority procedure — a formal negotiation between the governments themselves, with no guaranteed timeline.</p>
+        </div>
+      </div>
+
+      <div class="example">
+        <span class="example-l">Worked example</span>
+        <p>A French national owns a house in France, where her spouse and children live, her primary bank accounts sit, and her driver's license is registered. She also rents a condo in California and spends eight months of the year there for a work project — long enough to cross the US Substantial Presence Test and become a US tax resident under domestic law. France separately treats her as a resident because her family and main home are there.</p>
+        <p><b>She's now a dual resident.</b> Step one — permanent home — doesn't resolve it; she has one in both countries (the French house, the rented California condo). Step two — center of vital interests — does: her spouse, children, primary financial accounts, and legal registration are all clearly in France. The tie-breaker assigns her treaty residence to France, even though she physically spent more of the year in California.</p>
+      </div>
+
+      <div class="verdict" style="margin-top:16px">
+        <span class="verdict-l">Verdict</span>
+        <p>Physical presence and day counts matter enormously for triggering domestic residency tests in the first place — but once you're a genuine dual resident, the tie-breaker doesn't simply hand the win to whichever country you spent more days in. Center of vital interests can override a pure presence count.</p>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Treaty residence doesn't erase domestic status</span>
+      <h2 class="sec-h">Winning the tie-breaker changes tax liability — not your legal classification at home.</h2>
+      <p>A common misreading: assuming that a favorable tie-breaker result makes the "losing" country's domestic claim disappear entirely. It doesn't. A corporation that's a dual resident of the US and a treaty jurisdiction remains a <b>domestic US corporation</b> regardless of where its treaty residence lands — the tie-breaker only determines which country has primary taxing rights under the treaty, not the entity's underlying legal status.</p>
+      <p>For individuals, the same caution applies in reverse: dual residents who want to compute their US tax liability as if they were nonresident aliens, based on a treaty tie-breaker favoring the other country, generally must <b>proactively notify</b> the US tax authority that this is the position they're taking. Fail to notify, and the default is continued treatment as a US resident for tax computation purposes — the treaty position doesn't apply itself.</p>
+      <div class="verdict">
+        <span class="verdict-l">The trap</span>
+        <p>A recent case from Korea's tax authority made the same point from the other direction: a taxpayer who simply asserted dual-residency status under a treaty tie-breaker, without more, was found by the Supreme Court <b>not</b> to be automatically exempt from a separate domestic reporting obligation for foreign financial accounts — for years before a specific legislative exemption was enacted. Treaty residence and domestic compliance obligations are related but distinct questions; winning one doesn't automatically resolve the other unless the law says so explicitly.</p>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Proving it</span>
+      <h2 class="sec-h">A tax residency certificate is the document that makes the claim usable.</h2>
+      <p>Once you know where you're actually resident, you typically need to <b>prove</b> it — to claim treaty benefits, reduce withholding tax on cross-border dividends, interest, or royalties, and to satisfy banks and counterparties under FATCA and CRS reporting regimes. A Tax Residency Certificate (TRC), issued by your home tax authority, is the standard document for this. In the US, this means filing Form 8802 and paying the applicable user fee, after which the IRS issues Form 6166 as the certificate itself.</p>
+      <ul>
+        <li><b>Employers, take note</b> — a senior remote employee with authority to bind the company can create a permanent establishment for the employer in the employee's country of tax residency, dragging corporate income tax into a jurisdiction the company never planned to operate in. This risk sits entirely separate from the employee's own personal tie-breaker analysis.</li>
+      </ul>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">What it costs to get it wrong</span>
+      <div class="ledger">
+        <div class="ledger-cap">Where the exposure actually sits</div>
+        <div class="ledger-row"><b>Unresolved dual residency</b> — both countries may attempt to tax the same worldwide income; without a formal treaty position and notification, double taxation is the default outcome, not an edge case.<span class="ledger-src">OECD Model Convention, Article 4(2)</span></div>
+        <div class="ledger-row"><b>Assuming treaty residence covers all obligations</b> — separate domestic reporting duties (foreign account disclosure, information returns) may survive a favorable tie-breaker result unless a specific exemption says otherwise.<span class="ledger-src">Korean Supreme Court precedent on treaty tie-breaker vs. reporting obligations</span></div>
+        <div class="ledger-row"><b>No notification filed</b> — failing to formally notify the relevant tax authority of a treaty position generally means continuing to be treated under default domestic rules, regardless of what the treaty analysis actually supports.<span class="ledger-src">US tax residency guidance, dual-resident notification requirement</span></div>
+      </div>
+    </section>
+
+    <section class="sec r">
+      <span class="sec-l">Where Ayin fits</span>
+      <div class="fitbox">
+        <span class="fitbox-l">Map → Hold</span>
+        <p>Working through where your actual center of vital interests sits — and confirming whether a favorable tie-breaker position needs to be formally elected, not just assumed — is exactly the kind of analysis worth doing deliberately, especially before a relocation rather than after one. <b>Ayin can walk your specific situation through the treaty ladder in a short conversation.</b></p>
+        <div class="fit-cta">
+          <a href="index.html#intake" class="cta-btn">Send this to Ayin →</a>
+          <a href="index.html#instrument" class="cta-link">Map your own crossing first →</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="crosslinks">
+      <a class="xlink" href="codex-customs-classification.html">→ A related cross-border gate: Customs Classification & Certificates of Origin</a>
+      <a class="xlink" href="codex-dpdp-not-just-big-tech.html">→ India's parallel extraterritorial regime: the DPDP Act</a>
+      <a class="xlink" href="codex.html">→ Back to the full Codex</a>
+    </div>
+
+    <div class="srcfoot">
+      <span class="srcfoot-l">Sources</span>
+      <ol>
+        <li>OECD Model Tax Convention on Income and on Capital, Article 4(2) — tie-breaker rules for dual residents.</li>
+        <li>IRS, "Information on residency for tax purposes," and instructions for Form 8802 / Form 6166.</li>
+        <li>Chambers and Partners, "Reporting Obligations for Foreign Financial Accounts and the Tie-Breaker Rule under Tax Treaties," 2025–2026, discussing recent Korean Supreme Court precedent.</li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="ft-maxim">
+    <span class="ft-lat">Praemonitus, praemunitus</span>
+    <span class="ft-trn">Forewarned is forearmed</span>
+  </div>
+  <div class="ft-body">
+    <div class="ft-left">
+      <div class="ft-brand"><img src="assets/A.svg" alt="" class="ft-brand-logo"></div>
+      <nav class="ft-nav" aria-label="Footer">
+        <a href="index.html#instrument">The instrument</a>
+        <a href="index.html#have">Do you have it</a>
+        <a href="index.html#ayin">The apparatus</a>
+        <a href="index.html#work">How we work</a>
+        <a href="codex.html">The Codex</a>
+        <a href="founder.html">Who's behind this</a>
+      </nav>
+    </div>
+    <div class="ft-col-div" aria-hidden="true"></div>
+    <div class="ft-right">
+      <p class="ft-thought">Most of the work is invisible. A market that opens, an account that stays live, a move that completes — and <em>no one writes the article.</em></p>
+      <a href="index.html#intake" class="ft-cta">Tell us the crossing →</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <span class="ft-copy">© <span id="ftYear"></span> Ayin</span>
+    <p class="ft-disc">Ayin is an advisory and compliance practice, not a law firm. Nothing on this site constitutes legal advice. Regime names and ceilings are cited for illustration only.</p>
+    <div class="ft-legal">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }), { threshold:.06, rootMargin:'0px 0px -24px 0px' });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+document.getElementById('ftYear').textContent = new Date().getFullYear();
+
+(function(){
+  const nav = document.getElementById('nav');
+  const heroEl = document.getElementById('hero');
+  const bodyEl = document.getElementById('body');
+  const navLogo = nav.querySelector('.nav-logo');
+  function onScroll(){
+    nav.classList.toggle('nav-visible', scrollY > 40);
+    const probe = scrollY + 60;
+    const inHero = heroEl ? probe < (heroEl.offsetTop + heroEl.offsetHeight) : false;
+    nav.classList.toggle('nav-scrim', inHero);
+    const onPaper = bodyEl ? probe >= bodyEl.offsetTop : false;
+    nav.classList.toggle('on-paper', onPaper);
+    nav.classList.toggle('on-dark', !onPaper);
+    if (navLogo) navLogo.src = onPaper ? 'assets/dark.svg' : 'assets/light.svg';
+  }
+  addEventListener('scroll', onScroll, { passive:true });
+  addEventListener('resize', onScroll, { passive:true });
+  onScroll();
+})();
+
+(function(){
+  const btn=document.getElementById('navMore'), setP=document.getElementById('navSetPrimary'), setF=document.getElementById('navSetFull');
+  if(!btn||!setP||!setF) return;
+  btn.addEventListener('click',()=>{
+    const open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded', open?'false':'true');
+    setP.classList.toggle('hidden', !open);
+    setF.classList.toggle('shown', !open);
+  });
+  setF.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    btn.setAttribute('aria-expanded','false'); setP.classList.remove('hidden'); setF.classList.remove('shown');
+  }));
+})();
+</script>
+</body>
+</html>
